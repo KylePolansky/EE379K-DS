@@ -1,0 +1,582 @@
+Supplementary Material for “Tensor Belief Propagation”
+
+Andrew Wrigley 1 Wee Sun Lee 2 Nan Ye 3
+
+Appendix (Supplementary Material)
+Proof of Consistency
+
+To prove consistency of the algorithm, we introduce a few
+lemmas.
+Lemma 1. Let X1,n, . . . , Xm,n be random variables such
+p→ µi as n → ∞. Let Xi,n ∈ [0, M ] and µi ∈
+that Xi,n
+i µi and
+
+[0, M ] for i = 1, . . . , m. Then (cid:80)
+(cid:81)
+
+p→ (cid:80)
+
+i Xi,n
+
+p→(cid:81)
+
+i Xi,n
+
+i µi.
+
+
+
+i Xi,n
+
+m ) ≤ δ
+
+i Xi,n −(cid:80)
+
+p→ µi, for any  > 0, and any δ > 0,
+Proof. Since Xi,n
+there exists an Ni such that for n > Ni, P (|Xi,n − µi| >
+m ) ≤ δ
+m. Let N = max{N1, . . . , Nm}, and assume n >
+N. Then for every i, P (|Xi,n − µi| > 
+m. By the
+union bound, with probability at least 1 − δ, for every i,
+i µi| ≤ .
+i µi| > ) ≤ δ. It
+
+|Xi,n − µi| ≤ , which implies |(cid:80)
+Hence when n > N, p(|(cid:80)
+i Xi,n −(cid:80)
+follows that(cid:80)
+p→(cid:80)
+To show that(cid:81)
+p→(cid:81)
+
+i µi.
+i µi, it sufﬁces to show this for
+m = 2. The proof then follows by mathematical induction.
+For any  > 0 and δ > 0, there exists N1 and N2 such
+that for any n > max{N1, N2}, we have P (|X1,n − µ1| >
+2. By the union
+3M ) < δ
+bound, with probability at least 1 − δ, |X1,n − µ1| ≤ 
+and |X2,n − µ1| ≤ 
+3M . Let s1, s2 ∈ {−1, 1} and assume
+3M ≤ M (the result in the case 
+3M > M holds trivially).
+Then, with probability at least 1 − δ,
+(cid:17)(cid:16)
+
+2 and P (|X2,n − µ2| > 
+
+3M ) < δ
+
+i Xi,n
+
+|X1,nX2,n − µ1µ2|
+≤ max
+s1
+3M
+
+µ1 +
+
+µ2 +
+
+(cid:12)(cid:12)(cid:12)
+
+
+
+
+
+s1,s2
+
+3M
+
+(cid:17) − µ1µ2
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+s2
+3M
+s1s22
+9M 2
+
+(cid:12)(cid:12)(cid:12)(cid:16)
+(cid:12)(cid:12)(cid:12)(cid:12) µ1s2
+
+3M
+
++
+
+µ2s1
+3M
+
++
+
+= max
+s1,s2
+≤ ,
+
+1Australian National University, Canberra, Australia.
+2National University of Singapore, Singapore.
+3Queensland
+University of Technology, Brisbane, Australia. Correspondence
+to: Andrew Wrigley <andrew.wrigley@anu.edu.au>, Wee Sun
+Lee <leews@comp.nus.edu.sg>, Nan Ye <n.ye@qut.edu.au>.
+
+Proceedings of the 34 th International Conference on Machine
+Learning, Sydney, Australia, PMLR 70, 2017. Copyright 2017
+by the author(s).
+
+where we have used µ1, µ2 ≤ M and 
+
+3M ≤ M.
+
+p→ 0.
+
+In the following, given two sequences of random variables
+{Xn} and {Yn}, we shall use Xn
+p→ Yn to denote Xn −
+Yn
+Lemma 2. For any random vectors Xn, Yn, Y , if Xn
+p→ Y as n → ∞.
+Yn and Yn
+
+p→ Y as n → ∞, then Xn
+
+p→
+
+2
+
+2 ) < δ
+
+Proof. For any  > 0 and δ > 0, there exists an N such
+that for any n > N, we have P (|Xn − Yn| > 
+2 ) < δ
+and P (|Yn − Y | > 
+2. Using the union bound, with
+probability at least 1 − δ, we have |Xn − Yn| ≤ 
+2 and
+|Yn − Y | ≤ 
+2. Hence with probability at least 1− δ, |Xn −
+Y | ≤ . Thus Xn
+Lemma 3. Let Xn is a random variable, and Yn =
+random variables in
+1
+n
+[0, M ] for some constant M. Let the expectation of Yn
+be Xn. Then Yn
+
+i=1 Yn,i where Yn,i are i.i.d.
+p→ Xn as n → ∞.
+
+p→ Y as n → ∞.
+
+(cid:80)n
+
+Proof. When Xn = x, we have P (|Yn − x| ≤  | Xn =
+x) ≤ 1 − 2e−2n2/M 2 according to Hoeffding’s inequality.
+Since this holds for any x, we have P (|Yn − Xn| ≤ ) ≤
+1 − 2e−2n2/M 2. It follows that Yn
+
+p→ Xn.
+
+Proof. (Proof of consistency) It sufﬁces to show that at the
+beginning of each iteration, all the estimated messages are
+consistent.
+Initially, none of the messages have been estimated, and it
+is vacuously true that all messages that have been estimated
+so far are consistent.
+For the inductive case, it sufﬁces to show that the message
+estimated at each iteration is consistent. Speciﬁcally, let
+˜m(K)
+t→s(xs) be the estimate of the true message mt→s(xs)
+p→ mt→s(xs)
+using K samples, we show that ˜m(K)
+as K → ∞.
+By the inductive assumption, ˜m(K)
+u→t(xt) is consistent for
+each u ∈ N (t) \ {s}, where N (t) is the set of neighbours
+for t. To simplify notation, we denote the true messages in
+{mu→t(xt) : u ∈ N (t)\{s}} by m1(xt), . . . , ml(xt) and
+denote their estimates by ˜m(K)
+
+(xt), . . . , ˜m(K)
+
+t→s(xs)
+
+(xt).
+
+1
+
+l
+
+Tensor Belief Propagation
+
+for θ > 1. Speciﬁcally, to solve (1) we solve
+
+2xy = θ
+1
+θ
+
+x2 + y2 =
+
+which yields
+
+x =
+
+y =
+
+or
+
+x =
+
+y =
+
+1
+2
+
+1
+2
+
+1
+2
+
+1
+2
+
+(cid:32)(cid:114)
+(cid:32)(cid:114)
+(cid:32)
+(cid:114)
+(cid:32)
+(cid:114)
+
+−
+
+−
+
+θ +
+
+θ +
+
+±
+
+∓
+
+1
+θ
+
+1
+θ
+
+θ +
+
+θ +
+
+1
+θ
+
+1
+θ
+
+− θ
+
+− θ
+
+,
+
+(cid:33)
+(cid:33)
+(cid:33)
+(cid:33)
+
+− θ
+
+,
+
+− θ
+
+θ
+
+(cid:114) 1
+(cid:114) 1
+(cid:114) 1
+(cid:114) 1
+
+θ
+
+θ
+
+±
+
+∓
+
+θ
+
+(2) is solved analogously.
+solution and weight each rank-1 term equally.
+
+In each case, we use the ﬁrst
+
+Parameters for BP, MF, TRW, Gibbs
+
+The following parameters were used for the existing ap-
+proximate inference algorithms within the libDAI package:
+• Loopy BP: Update schedule sequential using a ran-
+dom sequence; maximum 104 iterations; tolerance for
+convergence 10−12
+
+• Mean-ﬁeld: Maximum 104 iterations; tolerance for
+
+convergence 10−12
+
+• Tree-reweighted BP: Sequential updates using a ran-
+dom sequence; tree sample size of 104 used to set
+weights; tolerance for convergence 10−12
+
+• Gibbs: Burn-in 100 passes; restart chain with random
+initialisation every 1000 passes; record one sample per
+pass (pass = cycle once over all variables); running
+time limited as indicated in text.
+
+t
+
+Let ˜Φ(K)
+(xt) be the estimate of the initial clique potential
+at the node. Each multiplication of factors to form the ini-
+tial clique potential is done by sampling. Lemma 3 shows
+that each multiplication converges to its expected value.
+The expected value is in turn the product of two numbers,
+one of which may be a previously computed random vari-
+able. Lemma 1 shows that the product converges to the
+true value, and Lemma 2 chains the two process together to
+show that the estimate of the estimate for the initial clique
+potential converges.
+
+1
+
+(xt) be the estimate of ˜Φ(K)
+
+Let ˜v(K)
+tained in the algorithm, and ˜v(K)
+˜v(K)
+j−1(xt) ˜m(K)
+˜m(K)
+
+(xt) ob-
+(xt) be the estimate of
+(xt) for 2 ≤ j ≤ l. Then we have
+xt\xs
+
+t→s(xs) =(cid:80)
+
+(xt) ˜m(K)
+
+˜v(K)
+l
+
+(xt).
+
+1
+
+j
+
+j
+
+t
+
+1
+
+1
+
+The random variable ˜v(K)
+(xt) is the average of K i.i.d.
+random variables with expected value ˜Φt(xt) ˜m(K)
+(xt).
+By the construction of ˜v1 and the assumption that each
+rank-1 tensor value is in [0, M ], we have that each of the
+It fol-
+K random variables are in the range of [0, M 2].
+lows from Lemma 3 that ˜v(K)
+(xt)
+as K → ∞. Since we also have ˜m(K)
+p→ m1(xt)
+and ˜Φ(K)
+(xt), it follows from Lemma 1 and
+p→ Φt(xt)m1(xt).
+Lemma 2 that ˜v(K)
+
+p→ ˜Φt(xt) ˜m(K)
+
+p→ Φ(K)
+t
+(xt)
+
+(xt)
+
+(xt)
+
+(xt)
+
+1
+
+1
+
+1
+
+t
+
+1
+
+p→
+Using induction, we can similarly show that ˜v(K)
+Φt(xt)m1(xt) . . . ml(xt). Summing over xt \ xs on both
+t→s(xs) →
+sides and applying Lemma 1 again, we have ˜m(K)
+mt→s(xs). Since this holds for any xs, the convergence
+holds for all xs.
+
+(xt)
+
+l
+
+Decomposition for Ising models
+
+In the case of Ising models, and any pairwise MRFs with
+Ising potentials of the form φij(xi, xj) = exp(wijxixj),
+the 2 × 2 potential tables are in general rank-2 of the form
+
+(cid:18)θ
+
+1
+θ
+
+(cid:19)
+
+1
+θ
+θ
+
+,
+
+θ = exp(wij).
+
+For tables of this particular form, we note there is a nat-
+ural rank-2 decomposition that one can compute quickly
+by assuming terms in the decomposition are symmetric, by
+
+solving(cid:18)θ
+
+1
+θ
+
+1
+θ
+θ
+for θ ≤ 1, and
+
+(cid:19)
+
+(cid:19)
+
+1
+θ
+θ
+
+(cid:18)x
+
+(cid:19)
+
+y
+
+(cid:18)x
+
+(cid:19)
+
+y
+
+(cid:18)y
+
+(cid:19)
+
+x
+
+(cid:18)x
+
+(cid:19)
+
+y
+
+⊗
+
+⊗
+
++
+
++
+
+=
+
+=
+
+(cid:18)y
+
+(cid:19)
+
+x
+
+(cid:18)y
+
+(cid:19)
+
+x
+
+(cid:18)x
+
+(cid:19)
+
+y
+
+(cid:18)y
+
+(cid:19)
+
+x
+
+⊗
+
+⊗
+
+(cid:18)θ
+
+1
+θ
+
+(1)
+
+(2)
+
+Supplementary Results
+
+Additional results on the Ising model with different grid sizes and different interaction strengths are shown here.
+
+Tensor Belief Propagation
+
+Ising models: Effect of model size N on marginal error. 100: sample size K = 100, 100000: sample size K = 100000. Gibbs running
+time matches the running time of TBP with K = 100000.
+
+Ising models: Effect of interaction strength on performance of approximate inference algorithms. Gibbs sampling matches TBP (100000)
+runtime.
+
+46810121416Ising grid width0.00.10.20.30.40.5Marginal errorAttractive interactionsTBP (100)TBP (100000)MFBPTRWGibbs46810121416Ising grid width0.00.10.20.30.40.5Marginal errorMixed interactionsTBP (100)TBP (100000)MFBPTRWGibbs0.51.01.52.02.53.03.54.0Interaction strength0.00.10.20.30.40.5Marginal errorAttractive interactionsTBP (100)TBP (100000)MFBPGibbsTRW0.51.01.52.02.53.03.54.0Interaction strength0.00.10.20.30.40.5Marginal errorMixed interactionsTBP (100)TBP (100000)MFBPGibbsTRWDistribution of estimated marginals
+
+Tensor Belief Propagation
+
+To give an indication of the variance of the estimates, we show histograms of the marginal estimates on the Ising models.
+
+Estimated values of P (Xi = 1) for 500 runs of tensor propagation for small versus large multiplication sample size K. Each histogram
+shows marginal estimates for a single node in the 10 × 10 Ising model grouped into 20 bins. Nodes shown are from the upper-left 3 × 3
+corner of the grid. Solid red vertical lines indicate the true marginal and dashed green vertical lines show the mean of the 500 marginal
+estimates. The two mixed plots use the same Ising model instance, as do the two attractive plots.
+
+Mixed, K = 100Mixed, K = 10000Attractive, K = 100Attractive, K = 10000

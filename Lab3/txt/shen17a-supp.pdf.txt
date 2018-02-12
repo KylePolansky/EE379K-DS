@@ -1,0 +1,1471 @@
+A. Technical Lemmas
+
+Support Recovery of Hard Thresholding Pursuit
+
+The following lemma is a characterization of the co-coercivity of the objective function F (x). A similar result was obtained
+in Nguyen et al. (2014, Corollary 8) but we present a reﬁned analysis which is essential for our purpose.
+
+Lemma 9. For a given support set Ω, assume that the continuous function F (x) is M|Ω|-RSS and is mK-RSC for some
+sparsity level K. Then, for all vectors w and w′ with |supp (w − w′) ∪ Ω| ≤ K, we have
+
+k∇ΩF (w′) − ∇ΩF (w)k2 ≤ 2M|Ω|(cid:0)F (w′) − F (w) − h∇F (w), w′ − wi(cid:1).
+
+Proof. We deﬁne an auxiliary function
+
+For all vectors x and y, we have
+
+G(x) def= F (x) − h∇F (w), xi .
+
+k∇G(x) − ∇G(y)k = k∇F (x) − ∇F (y)k ≤ M|supp(x−y)| kx − yk ,
+
+which is equivalent to
+
+G(x) − G(y) − h∇G(y), x − yi ≤
+
+Mr
+2 kx − yk2 ,
+
+(7)
+
+where r = |supp (x − y)|. On the other hand, due to the RSC property of F (x), we obtain
+
+G(x) − G(w) = F (x) − F (w) − h∇F (w), x − wi ≥
+
+kx − wk2 ≥ 0,
+provided that |supp (x − w)| ≤ K. For the given support set Ω, we pick x = w′ − 1
+M|Ω|∇ΩG(w′). Clearly, for such a
+choice of x, we have supp (x − w) = supp (w − w′) ∪ Ω. Hence, by assuming that |supp (w − w′) ∪ Ω| is not larger
+than K, we get
+
+2
+
+m|supp(x−w)|
+
+G(w) ≤ G(cid:18)w′ −
+
+1
+
+M|Ω| ∇ΩG(w′)(cid:19)
+
+(7)
+
+≤ G(w′) +(cid:28)∇G(w′),−
+= G(w′) −
+
+1
+
+2M|Ω| k∇ΩG(w′)k2 .
+
+1
+
+M|Ω| ∇ΩG(w′)(cid:29) +
+
+1
+
+2M|Ω| k∇ΩG(w′)k2
+
+Now expanding ∇ΩG(w′) and rearranging the terms give the desired result.
+Lemma 10 (Lemma 1 in Wang et al. (2016)). Let u and z be two distinct vectors and let W = supp (u)∩ supp (z). Also,
+let U be the support set of the top r (in magnitude) elements in u. Then, the following holds for all r ≥ 1:
+
+hu, zi ≤s(cid:24)|W|
+
+r (cid:25)kuUk · kzWk .
+
+Lemma 11. Suppose that F (x) is mK -restricted strongly convex and MK -restricted smooth for some sparsity level K >
+0. Then for all η > 0, all vectors x, x′ ∈ Rd and for any Hessian matrix H of F (x), we have
+if |supp (x) ∪ supp (x′)| ≤ K,
+
+|hx, (I − ηH)x′i| ≤ ρkxk · kx′k ,
+
+and
+
+where
+
+k((I − ηH)x)Sk ≤ ρkxk ,
+
+if |S ∪ supp (x)| ≤ K,
+
+ρ = max(cid:8) |ηmK − 1| , |ηMK − 1|(cid:9).
+
+Support Recovery of Hard Thresholding Pursuit
+
+Proof. Since H is a Hessian matrix, we always have a decomposition H = A⊤A for some matrix A. Denote T =
+supp (x) ∪ supp (y). By simple algebra, we have
+
+|hx, (I − ηH)x′i| = |hx, x′i − η hAx, Ax′i|
+
+ζ1= |hx, x′i − η hAT x, AT x′i|
+
+= (cid:12)(cid:12)(cid:12)Dx, (I − ηA⊤
+≤ (cid:13)(cid:13)(cid:13)
+
+T AT )x′E(cid:12)(cid:12)(cid:12)
+T AT(cid:13)(cid:13)(cid:13) · kxk · kx′k
+
+I − ηA⊤
+
+ζ2
+
+≤ max{|ηmK − 1| ,|ηMK − 1|} · kxk · kx′k .
+
+Here, ζ1 follows from the fact that supp (x) ∪ supp (y) = T and ζ2 holds because the RSC and RSS properties imply that
+the singular values of any Hessian matrix restricted on an K-sparse support set are lower and upper bounded by mK and
+MK , respectively.
+For some index set S subject to |S ∪ supp (x)| ≤ K, let x′ = ((I − ηH)x)S. We immediately obtain
+
+indicating
+
+kx′k2 = hx′, (I − ηH)xi ≤ ρkx′k · kxk ,
+
+k((I − ηH)x)Sk ≤ ρkxk .
+
+Lemma 12. Suppose that F (x) is mK -restricted strongly convex and MK -restricted smooth for some sparsity level K >
+0. For all η > 0, all vectors x, x′ ∈ Rd and support set T such that |supp (x − x′) ∪ T| ≤ K, the following holds:
+
+where ρ is given in Lemma 11.
+
+k(x − x′ − η∇F (x) + η∇F (x′))Tk ≤ ρkx − x′k
+
+Proof. In fact, for any two vectors x and x′, there always exists a quantity θ ∈ [0, 1], such that
+
+∇F (x) − ∇F (x′) = ∇2F (θx + (1 − θ)x′) (x − x′).
+
+Let H = ∇2F (θx + (1 − θ)x′). We write
+
+k(x − x′ − η∇F (x) + η∇F (x′))Tk = k(x − x′ − ηH(x − x′))Tk
+
+= k((I − ηH)(x − x′))Tk
+≤ ρkx − x′k ,
+
+where the last inequality applies Lemma 11.
+
+Lemma 13. Suppose that x is a k-sparse vector and let b = x − η∇F (x). Let T be the support set that contains the k
+largest absolute values of b. Assume that the function F (x) is M2k-restricted smooth, then we have the following:
+
+F (bT ) ≤ F (x) −
+
+1 − ηM2k
+
+2η
+
+kbT − xk2 .
+
+Proof. The RSS condition implies that
+
+F (bT ) − F (x) ≤ h∇F (x), bT − xi +
+1
+2η kbT − xk2 +
+
+≤ −
+
+M2k
+2 kbT − xk2
+M2k
+2 kbT − xk2 ,
+
+where the second inequality is due to the fact that
+
+Support Recovery of Hard Thresholding Pursuit
+
+implying
+
+kbT − bk2 = kbT − x + η∇F (x)k2
+≤ kx − x + η∇F (x)k2
+= kη∇F (x)k2 ,
+
+2η h∇F (x), bT − xi ≤ − kbT − xk2 .
+
+Lemma 14. Suppose that F (x) is mK -RSC. Then for any vectors x and x′ with kx − x′k0 ≤ K, the following holds:
+
+kx − x′k ≤s 2 max{F (x) − F (x′), 0}
+
+mK
+
++
+
+2 k∇T F (x′)k
+
+mK
+
+where T = supp (x − x′).
+
+Proof. The RSC property immediately implies
+
+F (x) − F (x′) ≥ h∇F (x′), x − x′i +
+
+mK
+2 kx − x′k2
+
+≥ − k∇T F (x′)k · kx − x′k +
+
+mK
+2 kx − x′k2 .
+
+Discussing the sign of F (x) − F (x′) and solving the above quadratic inequality completes the proof.
+Lemma 15. Assume that F (x) is mk+s-RSC and M2k-RSS. Suppose that for all t ≥ 0, xt is k-sparse and the following
+
+holds:
+
+where 0 < µ < 1, τ ≥ 0 and ¯x is an arbitrary s-sparse signal. Then,
+
+F (xt+1) − F (¯x) ≤ µ(cid:0)F (xt) − F (¯x)(cid:1) + τ,
+
+(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) ≤r 2M
+
+m
+
+(√µ)t(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13) +
+
+Proof. The RSS property implies that
+
+3
+
+m k∇k+sF (¯x)k +s 2τ
+
+m(1 − µ)
+
+.
+
+Hence,
+
+F (x0) − F (¯x) ≤ (cid:10)∇F (¯x), x0 − ¯x(cid:11) +
+
+M
+
+2
+
+≤
+
+2 (cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13)
+≤ M(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13)
+
+2
+
++
+
++
+
+M
+
+2
+
+2 (cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13)
+1
+2M k∇k+sF (¯x)k2 +
+1
+2M k∇k+sF (¯x)k2 .
+
+M
+
+2
+
+2 (cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13)
+
+F (xt) − F (¯x) ≤ µtM(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13)
+
+2
+
++
+
+1
+2M k∇k+sF (¯x)k2 +
+
+τ
+
+1 − µ
+
+.
+
+By Lemma 14, we have
+
+Support Recovery of Hard Thresholding Pursuit
+
++
+
+τ
+
+1 − µ
+
++
+
+2
+m k∇k+sF (¯x)k
+
+(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) ≤r 2
+≤r 2M
+
+m
+
+2M
+
+msµtM kx0 − ¯xk2 + k∇k+sF (¯x)k2
+(√µ)t(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13) +r 1
+m k∇k+sF (¯x)k +s 2τ
+(√µ)t(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13) +
+
+2
+
++
+
+≤r 2M
+
+m
+
+mM k∇k+sF (¯x)k
+
+m(1 − µ)
+m k∇k+sF (¯x)k +s 2τ
+3
+
+.
+
+m(1 − µ)
+
+Lemma 16. Let ¯x ∈ Rd be an s-sparse vector supported on S. For a k-sparse vector x supported on Q with k ≥ s, let
+b = x− η∇F (x) and let T = supp (b, k). Suppose that the function F (x) is m2k+s-RSC and M2k+s-RSS. Then we have
+
+(cid:13)(cid:13)¯xS\T(cid:13)(cid:13) ≤ νρkx − ¯xk + νη k∇T ∆SF (¯x)k ,
+
+where ν =p1 + s/k and ρ is given by Lemma 11.
+Proof. We note the fact that the support sets T\S and S\T are disjoint. Moreover, the set T\S contains |T\S| number of
+top |T| elements of b. Hence, we have
+
+(8)
+
+That is,
+
+where the second inequality follows from the fact that ax + by ≤ √a2 + b2px2 + y2 and we applied Lemma 12 for the
+
+last inequality.
+
+Note that the above holds also for T = S. Since ¯x is supported on S, the left hand side reads as
+
+s (cid:13)(cid:13)bS\T(cid:13)(cid:13) .
+
+(cid:13)(cid:13)bT \S(cid:13)(cid:13) ≥s|T\S|
+
+1
+
+2
+
+1
+
+2
+
+.
+
+≥
+
+|S\T|(cid:13)(cid:13)bS\T(cid:13)(cid:13)
+s − |T ∩ S| (cid:13)(cid:13)bS\T(cid:13)(cid:13) ≥r k
+
+|T\S|(cid:13)(cid:13)bT \S(cid:13)(cid:13)
+|S\T|(cid:13)(cid:13)bS\T(cid:13)(cid:13) =s k − |T ∩ S|
+(cid:13)(cid:13)bT \S(cid:13)(cid:13) =(cid:13)(cid:13)(cid:13)
+
+,
+
+(x − ¯x − η∇F (x))T \S(cid:13)(cid:13)(cid:13)
+(x − ¯x − η∇F (x))S\T + ¯xS\T(cid:13)(cid:13)(cid:13)
+≥ (cid:13)(cid:13)¯xS\T(cid:13)(cid:13) −(cid:13)(cid:13)(cid:13)
+(x − ¯x − η∇F (x))S\T(cid:13)(cid:13)(cid:13)
+(cid:13)(cid:13)¯xS\T(cid:13)(cid:13) ≤r s
+k (cid:13)(cid:13)(cid:13)
+(x − ¯x − η∇F (x))T \S(cid:13)(cid:13)(cid:13)
+≤ ν(cid:13)(cid:13)(cid:13)
+(x − ¯x − η∇F (x) + η∇F (¯x))T ∪Q∪S(cid:13)(cid:13)(cid:13)
+
+≤ νρ2k+s kx − ¯xk + νη k∇T ∆SF (¯x)k ,
+
++(cid:13)(cid:13)(cid:13)
+
+.
+
+≤ ν k(x − ¯x − η∇F (x))T ∆Sk
+≤ ν k(x − ¯x − η∇F (x) + η∇F (¯x))T ∆Sk + νη k∇T ∆SF (¯x)k
+
+(x − ¯x − η∇F (x))S\T(cid:13)(cid:13)(cid:13)
+
++ νη k∇T ∆SF (¯x)k
+
+while the right hand side reads as
+
+(cid:13)(cid:13)bS\T(cid:13)(cid:13) = (cid:13)(cid:13)(cid:13)
+Denote ν =p1 + s/k. In this way, we arrive at
+
+Lemma 17. Consider the HTP algorithm with exact solutions. Assume (A1). Then
+
+Support Recovery of Hard Thresholding Pursuit
+
+where
+
+2
+
+(cid:13)(cid:13)∇S t+1\S t F (xt)(cid:13)(cid:13)
+
+≥ 2mζ(cid:0)F (xt) − F (¯x)(cid:1) ,
+(cid:12)(cid:12)St+1\St(cid:12)(cid:12)
+
+.
+
+|St+1\St| + |S\St|
+
+ζ =
+
+Proof. The lemma holds clearly for either St+1 = St or F (xt) ≤ F (¯x). Hence, in the following we only prove the result
+by assuming St+1 6= St and F (xt) > F (¯x). Due to the RSC property, we have
+mk+s
+
+2
+
+which implies
+
+By invoking Lemma 10 with u = ∇F (xt) and z = −¯x therein, we have
+
+F (¯x) − F (xt) −(cid:10)∇F (xt), ¯x − xt(cid:11) ≥
+(cid:13)(cid:13)¯x − xt(cid:13)(cid:13)
+
+(cid:10)∇F (xt),−¯x(cid:11) ≥
+
+2
+
+2
+
+,
+
+2
+
+mk+s
+
+(cid:13)(cid:13)¯x − xt(cid:13)(cid:13)
++ F (xt) − F (¯x)
+≥p2mk+s(cid:13)(cid:13)¯x − xt(cid:13)(cid:13)pF (xt) − F (¯x).
++ 1(cid:13)(cid:13)∇S t+1\S t F (xt)(cid:13)(cid:13) ·(cid:13)(cid:13)¯xS\S t(cid:13)(cid:13)
++ 1(cid:13)(cid:13)∇S t+1\S t F (xt)(cid:13)(cid:13) ·(cid:13)(cid:13)(¯x − xt)S\S t(cid:13)(cid:13)
++ 1(cid:13)(cid:13)∇S t+1\S t F (xt)(cid:13)(cid:13) ·(cid:13)(cid:13)¯x − xt(cid:13)(cid:13) .
+
+(cid:10)∇F (xt),−¯x(cid:11) ≤s |S\St|
+|St+1\St|
+=s |S\St|
+|St+1\St|
+≤s |S\St|
+|St+1\St|
+
+It is worth mentioning that the ﬁrst inequality above holds because ∇F (xt) is supported on St and St+1\St contains the
+(cid:12)(cid:12)St+1\St(cid:12)(cid:12) number of largest (in magnitude) elements of ∇F (xt). Therefore, we obtain the result.
+
+B. Proofs for Section 2
+
+B.1. Proof for Prop. 1
+
+Proof. Due to the RSS property, we have
+
+F (bt+1
+
+S t+1 ) − F (xt) ≤ (cid:10)∇F (xt), bt+1
+
+2
+
+M
+
+2
+
+M
+
+bt+1
+
+S t+1∩S t − xt
+
+2 (cid:13)(cid:13)bt+1
+S t+1 − xt(cid:11) +
+S t+1 − xt(cid:13)(cid:13)
+2 (cid:16)(cid:13)(cid:13)(cid:13)
+S t+1\S t(cid:13)(cid:13)(cid:13)
+S t+1\S tE +
+ζ1= D∇S t+1\S tF (xt), bt+1
+2(cid:17)
++(cid:13)(cid:13)(cid:13)
+S t\S t+1(cid:13)(cid:13)(cid:13)
++(cid:13)(cid:13)bt+1
+S t+1∩S t(cid:13)(cid:13)
+S t+1\S tE + M(cid:13)(cid:13)(cid:13)
+S t+1\S t(cid:13)(cid:13)(cid:13)
+≤ D∇S t+1\S tF (xt), bt+1
+ζ3= − η(1 − ηM )(cid:13)(cid:13)∇S t+1\S t F (xt)(cid:13)(cid:13)
+
+bt+1
+
+xt
+
+ζ2
+
+2
+
+2
+
+2
+
+.
+
+Above, we observe that ∇F (xt) is supported on St and we simply docompose the support set St+1 ∪ St into three
+mutually disjoint sets, and hence ζ1 holds. To see why ζ2 holds, we note that for any set Ω ⊂ St, bt+1
+Ω. Hence,
+bt+1
+S t\S t+1 and any element in bt+1
+S t+1∩S t = xt
+S t\S t+1 is not larger than that in
+bt+1
+bt+1
+where we use the fact
+
+S t+1∩S t . Moreover, since xt
+
+S t\S t+1 = bt+1
+
+Ω = xt
+
+xt
+
+S t+1\S t (recall that St+1 is obtained by hard thresholding), we have (cid:13)(cid:13)(cid:13)
+that(cid:12)(cid:12)St\St+1(cid:12)(cid:12) =(cid:12)(cid:12)St+1\St(cid:12)(cid:12). Therefore, ζ2 holds. Finally, we write bt+1
+
+S t\S t+1(cid:13)(cid:13)(cid:13) ≤ (cid:13)(cid:13)(cid:13)
+
+S t+1\S t(cid:13)(cid:13)(cid:13)
+
+S t+1\S t = −η∇S t+1\S t F (xt) and obtain ζ3.
+
+Since xt+1 is a minimizer of F (x) over the support set St+1, it immediately follows that
+
+Support Recovery of Hard Thresholding Pursuit
+
+Now we invoke Lemma 17 and pick η ≤ 1/M ,
+
+F (xt+1) − F (xt) ≤ F (bt+1
+
+S t+1 ) − F (xt) ≤ −η(1 − ηM )(cid:13)(cid:13)∇S t+1\S t F (xt)(cid:13)(cid:13)
+
+2
+
+.
+
+F (xt+1) − F (xt) ≤ η(ηM − 1) ·
+
+2m
+
+1 + s(cid:0)F (xt) − F (¯x)(cid:1) ,
+
+F (xt+1) − F (¯x) ≤ β(cid:0)F (xt) − F (¯x)(cid:1) ,
+
+which gives
+
+where β = 1 − 2mη(1−ηM)
+
+1+s
+
+.
+
+B.2. Proof for Prop. 2
+
+Proof. This is a direct result by combining Prop. 1 and Lemma 15.
+
+B.3. Proof for Lemma 3
+
+Proof. Let xt
+
+∗ = arg minsupp(x)⊂S t F (x). Since xt and xt
+
+∗ are both supported on St, we apply Lemma 9 and obtain
+
+2
+
+(cid:13)(cid:13)∇S tF (xt)(cid:13)(cid:13)
+
+2
+
+= (cid:13)(cid:13)∇S tF (xt) − ∇S t F (xt
+∗)(cid:13)(cid:13)
+≤ 2M(cid:0)F (xt) − F (xt
+≤ 2M ǫ.
+
+∗) −(cid:10)∇F (xt
+∗) = 0 and F (xt) ≤ F (xt
+
+∗), xt − xt
+∗(cid:11)(cid:1)
+
+∗) + ǫ.
+
+Above, the second inequality uses the fact that ∇S t F (xt
+
+B.4. Proof for Prop. 4
+
+Proof. We have by Lemma 16 that
+
+2
+m k∇k+sF (¯x)k ,
+where ρ = 1 − ηm. On the other hand, Lemma 18 together with Lemma 3 shows that
+
+(cid:13)(cid:13)¯xS t+1(cid:13)(cid:13) ≤
+
+√2ρ(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) +
+(cid:13)(cid:13)xt+1 − ¯x(cid:13)(cid:13) ≤ κ(cid:13)(cid:13)¯xS t+1(cid:13)(cid:13) +
+√2κρ(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) +
+(cid:13)(cid:13)xt+1 − ¯x(cid:13)(cid:13) ≤
+
+1
+m k∇kF (¯x)k +
+
+1
+m
+
+√2M ǫ.
+
+3κ
+m k∇k+sF (¯x)k +
+
+√2M ǫ
+
+m
+
+Therefore,
+
+We need to ensure
+
+Let η = η′/M with η′ < 1. Then, the above holds provided that
+
+√2κ(1 − ηm) < 1.
+
+1
+√2
+By induction and picking proper η′ to make √2κ(1 − ηm) < √2/4, we have
+
+and η′ > κ −
+
+κ < 1 +
+
+1
+√2
+
+.
+
+(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) ≤ (√2(κ − η′))t(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13) +
+
+6κ
+m k∇k+sF (¯x)k +
+
+4√M ǫ
+
+m
+
+.
+
+Support Recovery of Hard Thresholding Pursuit
+
+B.5. Proof for Prop. 5
+
+Proof. Our proof in this part is inspired by Yuan et al. (2016). Let xt
+
+∗ = arg minsupp(x)⊂S t F (x). Then
+
+2
+
+2η
+
++ ǫ,
+
+on St−1. Hence,
+
+F (xt) − F (xt−1) ≤ F (xt
+≤ F (bt
+≤ −
+
+∗) − F (xt−1) + ǫ
+S t) − F (xt−1) + ǫ
+1 − ηM
+(cid:13)(cid:13)bt
+S t − xt−1(cid:13)(cid:13)
+where the last inequality follows from Lemma 13. Now we bound the term(cid:13)(cid:13)bt
+S t − xt−1(cid:13)(cid:13)
+= (cid:13)(cid:13)xt−1
+S t∩S t−1 − η∇S t F (xt−1) − xt−1(cid:13)(cid:13)
+= (cid:13)(cid:13)(cid:13)−xt−1
+S t−1\S t − η∇S t F (xt−1)(cid:13)(cid:13)(cid:13)
+S t−1\S t(cid:13)(cid:13)(cid:13)
+= (cid:13)(cid:13)(cid:13)
++ η2(cid:13)(cid:13)∇S tF (xt−1)(cid:13)(cid:13)
+≥ η2(cid:13)(cid:13)∇S t\S t−1 F (xt−1)(cid:13)(cid:13)
+
+(cid:13)(cid:13)bt
+S t − xt−1(cid:13)(cid:13)
+
+We thus have
+
+xt−1
+
+2
+
+2
+
+2
+
+2
+
+2
+
+2
+
+.
+
+2
+
+. Note that xt−1 is supported
+
+Denote ξ =(cid:13)(cid:13)∇S t−1 F (xt−1)(cid:13)(cid:13). We claim that
+
+which, combined with Lemma 3, immediately shows
+
+F (xt) − F (xt−1) ≤ −
+
+(cid:13)(cid:13)∇S t\S t−1F (xt−1)(cid:13)(cid:13)
+F (xt) − F (xt−1) ≤ −
+
++ ǫ.
+
+2
+
+2
+
+(1 − ηM )η
+
+(cid:13)(cid:13)∇S t\S t−1 F (xt−1)(cid:13)(cid:13)
+≥ m(cid:0)F (xt−1) − F (¯x)(cid:1) − 2ξ2,
+(1 − ηM )ηm
+
+2
+
+2
+
+(cid:0)F (xt−1) − F (¯x)(cid:1) + 2ǫ.
+
+(9)
+
+Using Lemma 15 completes the proof.
+
+2
+
+m
+
+cases.
+
+To show (9), we consider two exhausitive cases: (cid:12)(cid:12)St\St−1(cid:12)(cid:12) ≥ s and (cid:12)(cid:12)St\St−1(cid:12)(cid:12) < s, and prove that (9) holds for both
+Case I.(cid:12)(cid:12)St\St−1(cid:12)(cid:12) ≥ s. Due to the RSC property, we have
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+≤ F (¯x) − F (xt−1) −(cid:10)∇F (xt−1), ¯x − xt−1(cid:11)
+≤ F (¯x) − F (xt−1) +
+= F (¯x) − F (xt−1) +
+= F (¯x) − F (xt−1) +
+
+2m(cid:13)(cid:13)∇S t−1 F (xt−1)(cid:13)(cid:13)
+
+1
+2m
+
+ξ2.
+
+m
+
+m
+
++
+
++
+
+1
+
+1
+
+2
+
+2
+
+2
+
+2
+
+Therefore, we get
+
+2
+
+2
+
+2
+
+1
+
+1
+
++
+
++
+
++
+
+m
+
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+(cid:13)(cid:13)∇S\S t−1 F (xt−1)(cid:13)(cid:13)
+S t\S t−1(cid:13)(cid:13)(cid:13)
+
+2m(cid:13)(cid:13)∇S∪S t−1 F (xt−1)(cid:13)(cid:13)
+2m(cid:13)(cid:13)∇S\S t−1 F (xt−1)(cid:13)(cid:13)
+2m(cid:13)(cid:13)∇S\S t−1 F (xt−1)(cid:13)(cid:13)
+≥ 2m(cid:0)F (xt−1) − F (¯x)(cid:1) − ξ2.
+≥(cid:13)(cid:13)(cid:13)
+
+S\S t−1(cid:13)(cid:13)(cid:13)
+
+(cid:13)(cid:13)(cid:13)
+
+bt
+
+bt
+
+2
+
+2
+
+,
+
+Since St contains the k largest absolute values of bt, and(cid:12)(cid:12)St\St−1(cid:12)(cid:12) ≥ s ≥(cid:12)(cid:12)S\St−1(cid:12)(cid:12), we have
+
+2
+
+which immediately implies (9) by noting the fact
+
+2
+
+m
+
+−η∇S\S t−1 F (xt−1).
+Case II.(cid:12)(cid:12)St\St−1(cid:12)(cid:12) < s. Again, we use the RSC property to obtain
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+≤ F (¯x) − F (xt−1) −(cid:10)∇F (xt−1), ¯x − xt−1(cid:11)
+≤ F (¯x) − F (xt−1) +
+= F (¯x) − F (xt−1) +
+= F (¯x) − F (xt−1) +
+
+m
+
+m
+
++
+
++
+
++
+
+1
+
+2
+
+2
+
+2
+
+1
+
+m
+
+4 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+4 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+4 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+m(cid:13)(cid:13)∇(S t\S t−1)∩SF (xt−1)(cid:13)(cid:13)
+4 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+m(cid:13)(cid:13)∇S t\S t−1 F (xt−1)(cid:13)(cid:13)
+
+1
+m
+
+m
+
++
+
++
+
+1
+
+2
+
+2
+
+2
+
+ξ2.
+
++
+
++
+
+≤ F (¯x) − F (xt−1) +
+
+2
+
+2
+
+1
+
+1
+
++
+
+m(cid:13)(cid:13)∇S∪S t−1 F (xt−1)(cid:13)(cid:13)
+m(cid:13)(cid:13)∇S\S t−1 F (xt−1)(cid:13)(cid:13)
+m(cid:13)(cid:13)∇S\(S t∪S t−1)F (xt−1)(cid:13)(cid:13)
+m(cid:13)(cid:13)∇S\(S t∪S t−1)F (xt−1)(cid:13)(cid:13)
+
+1
+
+1
+m
+2
+
+2
+
+ξ2
+
+1
+m
+2
+
++
+
+ξ2
+
+(10)
+
+We consider the term(cid:13)(cid:13)∇S\(S t∪S t−1)F (xt−1)(cid:13)(cid:13)
+Since St contains the k largest absolute values of bt, we know that any component in bt
+subject to Ω ∩ St = ∅. In particular,
+
+bt
+S\(S t∪S t−1) = −η∇S\(S t∪S t−1)F (xt−1).
+
+above. Actually, we have
+
+Ω is not larger than that in bt
+S t
+
+Support Recovery of Hard Thresholding Pursuit
+
+that bt
+
+S t\S t−1 = −η∇S t\S t−1 F (xt−1) and bt
+
+S\S t−1 =
+
+Note that(cid:12)(cid:12)St\St−1(cid:12)(cid:12) < s implies(cid:12)(cid:12)(St ∩ St−1)\S(cid:12)(cid:12) ≥ k − 2s. Therefore,
+
+2
+
+2
+
+2
+
+.
+
+s
+
+bt
+
+2s
+
+xt−1
+
+(S t∩S t−1)\S(cid:13)(cid:13)(cid:13)
+
+bt
+|(St ∩ St−1)\S|
+
+(cid:13)(cid:13)(cid:13)
+S\(S t∪S t−1)(cid:13)(cid:13)(cid:13)
+|S\(St ∪ St−1)| ≤ (cid:13)(cid:13)(cid:13)
+η2(cid:13)(cid:13)∇S\(S t∪S t−1)F (xt−1)(cid:13)(cid:13)
+(S t∩S t−1)\S − η∇(S t∩S t−1)\SF (xt−1)(cid:13)(cid:13)(cid:13)
+k − 2s(cid:13)(cid:13)(cid:13)
+(S t∩S t−1)\S(cid:13)(cid:13)(cid:13)
+k − 2s(cid:13)(cid:13)(cid:13)
+k − 2s(cid:13)(cid:13)(xt−1 − ¯x)(S t∩S t−1)\S(cid:13)(cid:13)
+k − 2s(cid:13)(cid:13)xt−1 − ¯x(cid:13)(cid:13)
+≤ F (¯x) − F (xt−1) +
+
+2sη2
+k − 2s
+
+2sη2
+k − 2s
+
+2sη2
+k − 2s
+
+xt−1
+
+ξ2.
+
+ξ2
+
+ξ2
+
+2s
+
+2s
+
+2s
+
+m
+
++
+
++
+
++
+
++
+
+2
+
+2
+
+2
+
+2
+
+≤
+
+≤
+
+=
+
+≤
+
+2
+
+Plugging the above into (10), we obtain
+
+2
+
+m
+
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+
+Picking k ≥ 2s + 8s
+
+η2m2 gives
+m
+
+1
+
++
+
+m(cid:13)(cid:13)∇S t\S t−1 F (xt−1)(cid:13)(cid:13)
+≤ F (¯x) − F (xt−1) +
+
+2
+
+4 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+
+1
+
+2
+
++
+
+2
+
+(k − 2s)η2m(cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
++ 1(cid:19) ξ2.
+
+m(cid:18) 2s
+k − 2s
+
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
+
+m
+
+2
+
+2 (cid:13)(cid:13)¯x − xt−1(cid:13)(cid:13)
++(cid:18) η2m
+
+4
+
+2
+
++
+
+1
+
+m(cid:19) ξ2.
+
+1
+
++
+
+m(cid:13)(cid:13)∇S t\S t−1 F (xt−1)(cid:13)(cid:13)
+
+Since η < 1/M , η2m2
+
+4 + 1 < 2. Therefore, by re-arranging the above inequality, we prove the claim (9).
+
+Support Recovery of Hard Thresholding Pursuit
+
+C. Proofs for Section 3
+
+The following result holds for all F (x).
+
+Lemma 18. Assume (A1) and (A2). For any k-sparse vector x and s-sparse vector ¯x, we have
+
+kx − ¯xk ≤ κk¯xTk +
+
+1
+m k∇T F (x) − ∇T F (¯x)k ,
+
+where T is the support set of x.
+
+Proof.
+
+k(x − ¯x)Tk2 = hx − ¯x − τ∇F (x) + τ∇F (¯x), (x − ¯x)Ti + τ h∇F (x) − ∇F (¯x), (x − ¯x)Ti
+
+≤ k(x − ¯x − τ∇F (x) + τ∇F (¯x))Tk · k(x − ¯x)Tk + τ k∇T F (x) − ∇T F (¯x)k · k(x − ¯x)Tk
+≤ kx − ¯x − τ∇T ∪SF (x) + τ∇T ∪SF (¯x)k · k(x − ¯x)Tk + τ k∇T F (x) − ∇T F (¯x)k · k(x − ¯x)Tk
+≤ ρkx − ¯xk · k(x − ¯x)Tk + τ k∇T F (x) − ∇T F (¯x)k · k(x − ¯x)Tk .
+
+Dividing both sides by k(x − ¯x)Tk gives
+
+On the other hand,
+
+Hence, we have
+
+k(x − ¯x)Tk ≤ ρkx − ¯xk + τ k∇T F (x) − ∇T F (¯x)k .
+
+kx − ¯xk ≤ k(x − ¯x)Tk + k(x − ¯x)Tk
+
+≤ ρkx − ¯xk + τ k∇T F (x) − ∇T F (¯x)k + k¯xTk .
+
+kx − ¯xk ≤
+
+1
+
+1 − ρ k¯xTk +
+
+τ
+
+1 − ρ k∇T F (x) − ∇T F (¯x)k .
+
+Picking τ = 1/M completes the proof.
+
+In view of the exact (HTP3), we have
+
+(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) ≤ κ(cid:13)(cid:13)¯xS t(cid:13)(cid:13) +
+
+1
+m k∇kF (¯x)k .
+
+(11)
+
+Now we present the crucial lemma. It is inspired by Bouchot et al. (2016) but we show a more general result.
+
+Lemma 19. Consider the HTP algorithm. Assume (A1) and (A2). Further assume that the sequence of {xt}t≥0 satisﬁes
+
+for positive α, φ, γ, ψ and 0 < β < 1. Suppose that at the n-th iteration (n ≥ 0), Sn contains the indices of top p (in
+magnitude) elements of ¯x. Then, for any integer 1 ≤ q ≤ s − p, there exists an integer r ≥ 1 determined by
+
+(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) ≤ α · βt(cid:13)(cid:13)x0 − ¯x(cid:13)(cid:13) + φ,
+(cid:13)(cid:13)xt − ¯x(cid:13)(cid:13) ≤ γ(cid:13)(cid:13)¯xS t(cid:13)(cid:13) + ψ,
+√2 |¯xp+q| > αγ · βr−1(cid:13)(cid:13)¯x{p+1,...,s}(cid:13)(cid:13) + θ
+
+where
+
+such that Sn+r contains the indices of top p + q elements of ¯x provided that θ ≤ √2λ¯xmin for some λ ∈ (0, 1).
+
+θ = αψ + φ +
+
+1
+m k∇2F (¯x)k ,
+
+Support Recovery of Hard Thresholding Pursuit
+
+Proof. Without loss of generality, we presume that the elements in ¯x are in descending order by their magnitude, i.e.,
+|¯x1| ≥ |¯x2| ≥ ··· ≥ |¯xs|. We aim at deriving a condition under which [p + q] ⊂ Sn+r. To this end, it sufﬁces to enforce
+
+On one hand, for any j ∈ [p + q],
+
+On the other hand, for all i ∈ S,
+
+j
+
+(cid:12)(cid:12)bn+r
+
+i
+
+j
+
+min
+
+(cid:12)(cid:12) .
+
+(cid:12)(cid:12) > max
+
+j∈[p+q](cid:12)(cid:12)bn+r
+
+i∈S (cid:12)(cid:12)bn+r
+(cid:12)(cid:12) = (cid:12)(cid:12)(cid:12)(cid:0)xn+r−1 − η∇F (xn+r−1)(cid:1)j(cid:12)(cid:12)(cid:12)
+≥ |¯xj| −(cid:12)(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)j(cid:12)(cid:12)(cid:12)
+≥ |¯xp+q| −(cid:12)(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)j(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)bn+r
+(cid:12)(cid:12) =(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)i(cid:12)(cid:12) .
+
+i
+
+(12)
+
+.
+
+Hence, we know that to guarantee (12), it sufﬁces to ensure for all j ∈ [p + q] and i ∈ S that
+
+Note that the right-hand side is upper bounded as follows:
+
+1
+
+|¯xp+q| > (cid:12)(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)j(cid:12)(cid:12)(cid:12)
+√2(cid:12)(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)j(cid:12)(cid:12)(cid:12)
+≤ (cid:13)(cid:13)(cid:13)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1){j,i}(cid:13)(cid:13)(cid:13)
+≤ (cid:13)(cid:13)(cid:13)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1) + η∇F (¯x)(cid:1){j,i}(cid:13)(cid:13)(cid:13)
+≤ ρ(cid:13)(cid:13)xn+r−1 − ¯x(cid:13)(cid:13) + η k∇2F (¯x)k
+≤ ρα · βr−1 kxn − ¯xk + ρφ + η k∇2F (¯x)k .
+
++
+
++(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)i(cid:12)(cid:12) .
+√2(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)i(cid:12)(cid:12)
+
+1
+
++ η(cid:13)(cid:13)∇{j,i}F (¯x)(cid:13)(cid:13)
+
+Moreover,
+
+Put all together, we have
+
+1
+
+¯x[p](cid:13)(cid:13)(cid:13)
+kxn − ¯xk ≤ γ k¯xSnk + ψ ≤ γ(cid:13)(cid:13)(cid:13)
++ ψ = γ(cid:13)(cid:13)¯x{p+1,...,s}(cid:13)(cid:13) + ψ.
+√2(cid:12)(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)j(cid:12)(cid:12)(cid:12)
+√2(cid:12)(cid:12)(cid:0)xn+r−1 − ¯x − η∇F (xn+r−1)(cid:1)i(cid:12)(cid:12)
+≤ ραγ · βr−1(cid:13)(cid:13)¯x{p+1,...,s}(cid:13)(cid:13) + ραψ + ρφ + η k∇2F (¯x)k
+≤ αγ · βr−1(cid:13)(cid:13)¯x{p+1,...,s}(cid:13)(cid:13) + αψ + φ +
+
+1
+m k∇2F (¯x)k .
+
++
+
+1
+
+Therefore, when
+
+we always have (12). Note that the above holds as far as αψ + φ + 1
+
+√2|¯xp+q| > αγ · βr−1(cid:13)(cid:13)¯x{p+1,...,s}(cid:13)(cid:13) + αψ + φ +
+
+1
+m k∇2F (¯x)k ,
+
+m k∇2F (¯x)k is strictly smaller than √2|¯xs|.
+
+With Lemma 19, we show the following general theorem.
+
+Theorem 20. Assume same conditions as in Lemma 19. Then HTP successfully identiﬁes the support of ¯x using
+(cid:16) log 2
+2 log(1/β) + log(αγ/(1−λ))
+
+log(1/β) + 2(cid:17) s number of iterations.
+
+Support Recovery of Hard Thresholding Pursuit
+
+Proof. Without loss of generality, we presume that the elements in ¯x are in descending order by their magnitude, i.e.,
+|¯x1| ≥ |¯x2| ≥ ··· ≥ |¯xs|. We partition the support set [s] into K folds S1, S2, . . . , SK , where each Si is deﬁned as
+follows:
+
+Si = {si−1 + 1, . . . , si}, ∀ 1 ≤ i ≤ K.
+
+Here, s0 = 0 and for all 1 ≤ i ≤ K, the quantity si is inductively given by
+si = maxnq : si−1 + 1 ≤ q ≤ s and |¯xq| >
+
+1
+
+√2(cid:12)(cid:12)¯xsi−1+1(cid:12)(cid:12)o.
+
+In this way, we note that for any two index sets Si and Sj , Si ∩ Sj = ∅ if i 6= j. We also know by the deﬁnition of si that
+
+1
+
+|¯xsi+1| ≤
+
+√2(cid:12)(cid:12)¯xsi−1+1(cid:12)(cid:12) , ∀ 1 ≤ i ≤ K − 1.
+
+Now we show that after a ﬁnite number of iterations, say n, the union of the Si’s is contained in Sn. To this end, we prove
+that for all 0 ≤ i ≤ K,
+
+i
+
+[t=0
+
+St ⊂ Sn0+n1+···+ni
+
+(14)
+
+for some ni’s given below.
+We pick n0 = 0 and it is easy to verify that S0 ⊂ S0. Now suppose that (14) holds for i − 1. That is, the index set of the
+top si−1 elements of ¯x is contained in Sn0+···+ni−1 . Due to Lemma 19, (14) holds for i as long as ni satisﬁes
+
+(13)
+
+(15)
+
+where the second inequality follows from (13) and the last inequality follows from the deﬁnition of qi. Denote for simplicity
+
+Note that
+
+2
+
+(cid:13)(cid:13)¯x{si−1+1,...,s}(cid:13)(cid:13)
+
+√2|¯xsi| > αγ · βni−1(cid:13)(cid:13)¯x{si−1+1,...,s}(cid:13)(cid:13) + θ.
+= (cid:13)(cid:13)¯xSi(cid:13)(cid:13)
+≤ (¯xsi−1+1)2 |Si| + ··· + (¯xsr−1+1)2 |SK|
+≤ (¯xsi−1+1)2(cid:0)|Si| + 2−1 |Si+1| + ··· + 2i−K |SK|(cid:1)
+< 2(¯xsi )2(cid:0)|Si| + 2−1 |Si+1| + ··· + 2i−K |SK|(cid:1) ,
+
++ ··· +(cid:13)(cid:13)¯xSK(cid:13)(cid:13)
+
+2
+
+2
+
+Ti := |Si| + 2−1 |Si+1| + ··· + 2i−K |SK| .
+
+As we assume θ ≤ √2λ¯xmin, we get
+
+αγ · βni−1(cid:13)(cid:13)¯x{si−1+1,...,s}(cid:13)(cid:13) + θ < √2αγ |¯xsi| βni−1pTi + √2λ|¯xsi| .
+
+Picking
+
+ni = log1/β
+
+αγ√Ti
+1 − λ
+
++ 2
+
+guarantees (15). It remains to calculate the total number of iterations. In fact, we have
+
+Support Recovery of Hard Thresholding Pursuit
+
+n = n0 + n1 + . . . nK
+
+=
+
+ζ1
+
+≤
+
+ζ2
+
+≤
+
+=
+
+1
+
+2 log(1/β)
+
+K
+
+2 log(1/β)
+
+K
+
+2 log(1/β)
+
+K
+
+Xi=1
+log  1
+log  2
+
+K
+
+K
+
+2 log(1/β)
+
+log
+
+log Ti + K ·
+
+log(αγ/(1 − λ))
+
+log(1/β)
+
++ 2K
+
+K
+
+K
+
+K
+
+log(1/β)
+
+Ti! +(cid:18) log(αγ/(1 − λ))
+|Si|! +(cid:18) log(αγ/(1 − λ))
++ 2(cid:19) K
+
+Xi=1
+Xi=1
++(cid:18) log(αγ/(1 − λ))
+2s
+K
++ 2(cid:19) s.
+log(αγ/(1 − λ))
+
+log(1/β)
+
+log(1/β)
+
++ 2(cid:19) K
++ 2(cid:19) K
+
+ζ3
+
++
+
+2 log(1/β)
+
+≤ (cid:18) log 2
+rangement, the coefﬁcient of |Si| isPi−1
+monotonically increasing with respect to r and 1 ≤ r ≤ s, ζ3 follows.
+Combining this theorem, Lemma 19 and speciﬁc results in Prop. 2, Prop. 4 and Prop. 5 gives the main theorems in Section 3.
+
+Above, ζ1 immediately follows by observing that the logarithmic function is concave. ζ2 uses the fact that after rear-
+j=0 2−j which is always smaller than 2. Finally, since the function r log(2s/r) is
+
+log(1/β)
+
+

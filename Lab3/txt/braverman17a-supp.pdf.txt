@@ -1,0 +1,1950 @@
+Clustering High Dimensional Dynamic Data Streams
+
+A Proofs of Section 3
+Proof of Lemma 2.2. Fix an i and consider a grid Gi. For each center zj, denote Xj,α the indicator random variable for the
+event that the distance to the boundary in dimension α of grid Gi is at most ∆/(2i+1d). Since in each dimension, if the
+center is close to a boundary, it contributes a factor at most 2 to the total number of close cells. It follows that the number
+of cells that have distance at most ∆/(2i+1d) to zj is at most,
+
+Deﬁning Yj,α = 2Xj,α, we obtain,
+
+E[N ] = E
+
+We have that P r[Xj,α = 1] ≤ 1/d and so we get,
+
+(cid:80)d
+
+N = 2
+
+(cid:34) d(cid:89)
+
+α=1 Xj,α .
+
+(cid:35)
+
+d(cid:89)
+
+Yj,α
+
+=
+
+E[Yj,α].
+
+α=1
+
+α=1
+
+E[Yj,α] ≤ E [1 + Xj,α] = 1 + E[Xj,α] ≤ 1 + 1/d.
+
+Thus E(N ) =(cid:81)d
+ˆA =(cid:80)
+
+α=1 E[Yj,α] ≤ (1+1/d)d ≤ e. Thus the expected number of center cells is at most (1+1/d)d|Z| ≤ e|Z|.
+By Markov’s inequality, the probability that we have more than e|Z|(L+1)/ρ center cells in each grid is at most ρ/(L+1).
+By a union bound, the probability that in any grid we have more than e|Z|(L + 1)/ρ center cells is at most ρ.
+√
+Proof of Lemma 3.4. Let L(cid:48) = L + 1. Note that for each point p ∈ P , |d(ci
+p, Z) − d(ci+1
+, Z))/πi,
+
+p, Z) − d(ci−1
+, Z)). We have that E( ˆA) = A. Let
+
+, Z))/πi and A =(cid:80)
+
+p, Z) − d(ci+1
+
+Xp := Ip∈S(d(ci
+
+p∈∪{C∈C}(d(ci
+
+, Z)| ≤ ∆
+
+d/2i. Denote
+
+p, Z) − d(ci+1
+
+where Ip∈S is the indicator function that p ∈ S. Then we have that V ar(Xp) ≤ ∆2d/(4iπi) and b := maxp |Xp| ≤
+√
+∆
+
+d/(2iπi). By Bernstein’s inequality,
+
+p∈S(d(ci
+
+p
+
+p
+
+p
+
+p
+
+(cid:104)| ˆA − A| > t
+
+P r
+
+(cid:105) ≤ 2e
+(cid:21)
+
+≤ 2e
+
+−
+
+t2
+
+2|P |∆2d/(4iπi)+2bt/3
+− 3×2i−1t2πi
+(βOPT+ t
+3 )∆
+
+√
+
+d .
+
+(7)
+
+(8)
+
+, Z).
+
+By setting t = OPT/L(cid:48), we have that
+
+(cid:20)
+
+Thus with probability 1−ρ/(L(cid:48)∆dk), ˆA is an OPT/L(cid:48) additive approximation to the sum(cid:80)
+
+ρ ≤ ρ
+
+| ˆA − A| >
+
+L(cid:48)∆dk .
+
+≤ 2e
+
+OPT
+L(cid:48)
+
+− ln 2L(cid:48)∆dk
+
+P r
+
+p∈P d(ci
+
+p, Z)−d(ci+1
+
+p
+
+For each C ∈ Hi, let(cid:99)|C| be the returned frequency of C. Let H(cid:48)
+
+B Proof of Theorem 3.6
+Before we prove this theorem, we ﬁrst present Lemma B.1 and Lemma B.2. In Algorithm 1, for each level i ∈ [0, L], let Hi
+be the set of cells in Gi whose frequencies are returned by HEAVY-HITTER in the RetrieveFrequency procedure.
+i be the set of cells in Gi whose frequencies are returned by
+a K-set in the RetrieveFrequency procedure. Then Hi and H(cid:48)
+Lemma B.1. Let L(cid:48) = L + 1. Fix , ρ ∈ (0, 1/2). Let Z∗ ⊂ [∆]d be a set of optimal k-centers for the k-median problem of
+the input point set. For each i ∈ [0, L], if at most ekL(cid:48)/ρ cells C in Gi satisfy d(C, Z∗) ≤ ∆/(2i+1d), then with probability
+1 − ρ/L(cid:48), the following two statements hold:
+
+i are complements in Gi.
+
+(cid:12)(cid:12)(cid:12)(cid:80)C∈Hi
+2. (cid:80)C∈H(cid:48)
+
+1.
+
+i
+
+((cid:99)|C| − |C|)(cid:0)d(c(C), Z) − d(c(CP ), Z)(cid:1)(cid:12)(cid:12)(cid:12) ≤ OPT
+
+2L(cid:48)
+
+|C|diam(C) ≤ βOPT for β = 3d3/2
+
+for every Z ⊂ [∆]d.
+
+Proof of Lemma B.1. Let L(cid:48) = L + 1. Fix a value i ∈ [0, L] and then W = ∆/2i is the width of a cell in Gi. Since at most
+ekL(cid:48)/ρ cells in Gi satisfy d(C, Z∗) ≤ W/(2d), then of the remaining cells, at most 2kL(cid:48)/ρ cells can contain more than
+ρdOPT/(W kL(cid:48)) points. This is because each such cells contribute at least ρdOPT
+to the cost which sums to
+OPT. Therefore, at most (e + 2)L(cid:48)k/ρ cells contain more than ρdOPT/(W kL(cid:48)) points.
+The number of cells in grid Gi is at most N = (1 + 2i)d (and perhaps as few as 2id, depending on the random vector
+v), so HEAVY-HITTER receives cells of at most N types. Enumerating all cells C ∈ Gi such that |Cj| ≥ |Cj+1|, deﬁne
+fj = |Cj|. Algorithm 1 sets k(cid:48) = (e + 2)L(cid:48)k/ρ, and the additive error of the estimator of fi of HEAVY-HITTER is given
+
+2d = ρOPT
+2kL(cid:48)
+
+W kL(cid:48) W
+
+(cid:113)
+
+j=k(cid:48)+1 f 2
+
+Clustering High Dimensional Dynamic Data Streams
+
+j . We know that for all j > k(cid:48) the value fj ≤ ρdOPT/(W kL(cid:48)). Moreover, the sum(cid:80)N
+
+by (cid:48)(cid:113)(cid:80)N
+j=k(cid:48)+1 fj ≤
+error becomes (cid:48)(cid:112)2ρ/(kL(cid:48))dOPT/W .
+2dOPT/W because each point is at distance at least W/(2d) to a point of Z∗. Under these two restraints, the grouping of
+maximal error is with fj = ρdOPT/(W kL(cid:48)) for k(cid:48) < j ≤ k(cid:48) + 2kL(cid:48)/ρ and fj = 0 for j > k(cid:48) + 2kL(cid:48)/ρ. Then the additive
+|fj − ˆfj| ≤ (cid:48)(cid:112)2ρ/(kL(cid:48))dOPT/W for every j. Therefore to ensure total error over all k(cid:48) cells is bounded by OPT/(2L(cid:48)),
+The error from a single cell Cj is at most |fj − ˆfj|√
+For the second claim, we must bound(cid:80)C∈H(cid:48)
+we set (cid:48) ≤ 
+then |fj − fj(cid:48)| ≤ 2(cid:48)(cid:112)2ρ/(kL(cid:48))dOPT/W . Since the sum may swap up to k(cid:48) indices, the difference is bounded by
+2k(cid:48)(cid:48)(cid:112)2ρ/(kL(cid:48))dOPT/W . By setting (cid:48) ≤ (cid:113)
+know that(cid:80)N
+j=k(cid:48)+1 fj ≤ 2dOPT/W , and so(cid:80)C∈H(cid:48)
+(cid:80)C∈H(cid:48)
+
+|C|. Hi consists of the top k(cid:48) cells when ordered by value of ˆfj. This
+may differ from the top k(cid:48) cells when ordered by value of fj, but if j and j(cid:48) change orders between these two orderings
+
+8(2+e)2kd3L(cid:48)3 . Setting δ = ρ/L(cid:48), the above bound holds with probability at least 1 − ρ/L(cid:48).
+
+8(2+e)2dkL(cid:48) , we can ensure that the difference is at most dOPT/W . We
+dW . Therefore
+
+|C| ≤ 3dOPT/W . For all cells C ∈ Gi, diam(C) =
+
+dW , and HEAVY-HITTER gaurantees with probability 1 − δ that
+
+|C|diam(C) ≤ 3d3/2OPT.
+
+√
+
+ρ
+
+ρ
+
+i
+
+i
+
+i
+
+ρ
+
+2
+
+ln 1
+
++ 24d4L(cid:48)3k
+
+ρ cells of Gi contain a point of Si,o.
+
+Lemma B.2. Let L(cid:48) = L + 1. In Algorithm 1, ﬁxing , ρ ∈ (0, 1/2), o ∈ O and i ∈ [0, L], if OPT/2 ≤ o ≤ OPT, then
+with probability 1 − ρ/(L(cid:48)∆kd), at most (2+e)L(cid:48)k
+Proof. Similar to the proof of Lemma B.1, there are at most k(cid:48) = (2+e)L(cid:48)k/ρ cells C in Gi that satisfy |C| ≥ ρdOPT/(W k)
+and/or d(C, Z∗) ≤ W/(2d). Considering the other cells, together they contain at most 2dOPT/W points. So by a Chernoff
+bound, with probability 1 − ρ/(L(cid:48)∆kd) at most O(2dπi,oOPT/(W ρ)) ≤ 24d4L(cid:48)3k ln 1
+ρ /2 points are sampled. The claim
+follows since each non-empty cell must contain at least one point.
+Proof of Theorem 3.6. Let L(cid:48) = L + 1. W.l.o.g. we assume ρ ≥ ∆−d, since otherwise we store the entire set of points and
+the theorem is proved. By Lemma 2.2, with probability at least 1 − ρ, for every level i ∈ [0, L], at most ekL(cid:48)/ρ cells C in
+Gi satisfy d(C, Z∗) ≤ ∆/(2i+1d). Conditioning on this event, we will show 1) in the query phase, if o∗ ≤ OPT, then with
+probability at least 1 − 4ρ, S is the desired coreset; 2) there exists o ≤ OPT in the guesses O = {1, 2, 4, . . . , ∆d+1} such
+that with probability 1 − 4ρ, none of the K-set structures return Nil. 1) and 2) guarantee the correctness of the algorithm.
+Note that one can always rescale ρ to ρ/9 to achieve the correct probability bound. Finally, we will bound the space, update
+time and query time of the algorithm.
+To show 1), we ﬁrst note that the coreset size is at most O(KL) as desired. Then by Lemma 3.2, we only need to show
+that with probability at least 1 − 4ρ, for any k-set Z ⊂ [∆]d and any level i ∈ [−1, L],
+
+where the value of each (cid:99)|C| is returned by RetrieveFrequency. For each level i, we denote Ci as the set of cells
+C ∈ Gi\Ci,(cid:99)|C| = |Si ∩ C|/πi(o∗). Fix a k-set Z ⊂ [∆]d, we rewrite the cost as,
+
+that gets frequency from a HEAVY-HITTER instances in the RetrieveFrequency procedure, and Si = {p ∈ C :
+C (cid:54)∈ Ci, ho∗,i(p) = 1} be the set of points sampled in the rest of cells. Since KSo∗,i does not return Fail, then for each
+
+L(cid:48)
+
+,
+
+|cost(Gi, Z) −(cid:100)cost(Gi, Z)| ≤ OPT
+
+(cid:99)|C|(cid:0)d(c(C), Z) − d(c(CP ), Z)(cid:1) +
+
+(cid:88)
+
+C∈Ci
+
+where CP is the parent cell of C in grid Gi−1. By Lemma B.1 we have that, with probability at least 1 − ρ/L(cid:48), for every
+Z ⊂ [∆]d,
+
+(cid:100)cost(Gi, Z) =
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:88)
+and that,(cid:80)C∈Gi\Ci
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:88)
+
+ρ/(L(cid:48)∆kd),
+
+(d(ci
+
+C∈Ci
+
+p∈Si
+
+(cid:99)|C|(cid:0)d(c(C), Z) − d(c(CP ), Z)(cid:1) − (cid:88)
+
+C∈Ci
+
+p, Z) − d(ci−1
+
+p
+
+, Z)))/πi − (cid:88)
+
+C∈Gi\Ci
+
+, Z)))/πi(o∗),
+
+p
+
+p∈Si
+
+(d(ci
+
+p, Z) − d(ci−1
+
+(cid:88)
+|C|(cid:0)d(c(C), Z) − d(c(CP ), Z)(cid:1)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ OPT
+|C|(cid:0)d(c(C), Z) − d(c(CP ), Z)(cid:1)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ OPT
+
+2L(cid:48)
+
+2L(cid:48)
+
+,
+
+.
+
+|C|diam(C) ≤ 3d3/2OPT. Conditioning on this event, by Lemma 3.4, with probability at least 1 −
+
+Clustering High Dimensional Dynamic Data Streams
+
+By a union bound, we show with probability at least 1 − 4ρ, for any k-set Z ⊂ [∆]d and any level i ∈ [−1, L],
+
+|cost(Gi, Z) −(cid:100)cost(Gi, Z)| ≤ OPT
+
+,
+
+L(cid:48)
+
+as desired.
+To show 2), we will consider some OPT/2 ≤ o ≤ OPT. By Lemma B.2 with probablity at least 1 − ρ/∆kd, the total
+number of cells occupied by sample points in each level is upper bounded by K = (2+e)L(cid:48)k
+ρ. Thus by the
+guarantee of the K-Set structure, with probability at least 1 − ρ, none of the KSo,0, KSo,1 . . . , KSo,L will return Fail.
+The memory requirement of the algorithm is determined by the L instances of HEAVY-HITTER and the dL2 instances
+N ≤ (1 + ∆/W )d ≤ ∆d and m is the maximum number of elements active in the stream. Since we require that at most
+one point exists at each location at the same time, we have that m ≤ N. The parameters are set to k(cid:48) = (2 + e)Lk/ρ,
+(cid:48) =
+bits. For each
+K-Set data structure, it requires
+
+of K-set. By Theorem 3.5, each instance of HEAVY-HITTER requires O(cid:0)(k(cid:48) + 1
+(cid:16)
+
+δ log m(cid:1) bits of space. Here
+
+, and δ = ρ/L. This translates to a space bound of O
+
+(cid:17) d4L5k
+
++ 24d4L(cid:48)3k
+
+dL + log 1
+ρ
+
+(cid:48)2 ) log N
+
+(cid:113)
+
+8(2+e)2kd3L3
+
+(cid:16)
+
+(cid:17)
+
+ln 1
+
+ρ2
+
+2
+
+
+
+ρ
+
+ρ
+
+(cid:18) d5L4k
+
+(cid:19)
+
+O(KdL log(KL/ρ)) = O
+
+2 +
+
+dkL2
+
+ρ
+
+log
+
+dkL
+ρ
+
+(cid:16) d6L6k
+
+(cid:17)
+
+ρ
+
+ρ
+
+ρ
+
+2ρ
+
+(cid:17)
+
+(cid:17)
+
+(cid:17)
+
+2 + d2kL4
+
+log dkL
+
+2 + d3kL5
+
+2 + d3kL5
+
+(cid:16)(cid:16) d7kL7
+
+(cid:17)
+(cid:16)(cid:16) d7kL7
+
+bits of space. In total, there are O(dL2) K-Set instances and thus all K-Set instances cost O
+log dkL
+ρ
+bits of space. By the same argument as in the ofﬂine case, the last paragraph of the proof of Theorem 3.3, the size of the
+coreset is at most O((k(cid:48) + K)L) = O(d4kL4−2 + kL2/ρ) points. Finally, to derandomize the fully random functions, we
+use Nissan’s pseudorandom generator (Nisan, 1992) in a similar way used in (Indyk, 2000b). But our pseudo-random bits
+only need to fool the sampling part of the algorithm rather than whole algorithm. We consider an augmented streaming al-
+gorithm A that does exactly the same as in CoreSet but with all the HEAVY-HITTER operations removed. Thus all K-set
+instances will have identical distribution with the ones in algorithm CoreSet. A uses O(KdL log(KL/ρ)) bits of space.
+To fool this algorithm, using Nissan’s pseudo-random generator, the length of random seed to generate the hash functions
+we need is of size O(KdL log(KL/ρ) log(|O|∆d)) = O
+. This random seed is thus sufﬁcient
+log dkL
+ρ
+ρ + d5kL6
+to be used in Algorithm CoreSet. Thus the total space used in the algorithm is O
+bits.
+Regarding the update time, for the HEAVY-HITTER operations, it requires O(L log N ) = O(dL2) time. For the K-
+set operations, it requires |O|LO(log(KL/ρ)) = dL2 log(dkL/(ρ)) time. The de-randomized hash operation takes
+O(dL) more time per update. The ﬁnal query time is dominated by the HEAVY-HITTER data structure, which requires
+poly(d, k, L, 1/) time.
+C Full Construction of Positively Weighted Coreset
+In this section, we will introduce a modiﬁcation to our previous coreset construction, which leads to a coreset with all
+positively weighted points. The high level idea is as follows. When considering the estimate of the number of points in
+a cell, the estimate is only accurate when it truly contains a large number of points. However, in the construction of the
+previous section, we sample from each cell of each level, even though some of the cells contain a single point. For those
+cells, we cannot adjust their weights from negative to positive, since doing so would introduce large error. In this section,
+we introduce an ending level to each point. In other words, the number of points of a cell is estimated by sampling only if
+it contains many points. Thus, the estimates will be accurate enough and allow us to rectify the weights to be all positive.
+This section is organized as follows. We reformulate the telescope sum in Subsection 4.1, provide a different construction
+(still with negative weights) in Subsection 4.2, modify our different construction to output non-negative weights in Sub-
+section 4.3, and move this construction into to the streaming setting in Subsection 4.4. For simplicity of presentation, we
+will use λ1, λ2, . . . to denote some ﬁxed positive universal constants.
+C.1 Reformulation of the Telescope Sum
+Deﬁnition C.1. A heavy cell identiﬁcation scheme H is a map H : G → {heavy, non-heavy} such that, h(C−1) =heavy
+and for cell C ∈ Gi for i ∈ [0, L]
+1. if |C| ≥ 2iρdOPT
+2. If H(C) = non-heavy, then H(C(cid:48)) = non-heavy for every subsell C(cid:48) of C.
+3. For every cell C in level L, H(C) = non-heavy.
+
+k(L+1)∆ then H(C) = heavy;
+
+4. For each i ∈ [0, L], |{C ∈ Gi : H(C) = heavy}| ≤ λ1kL
+
+ρ
+
+, where λ1 ≤ 10 is a positive universal constant.
+
+Clustering High Dimensional Dynamic Data Streams
+
+The output for a cell not speciﬁed by the above conditions can be arbitrary. We call a cell heavy if it is identiﬁed heavy
+by H. Note that a heavy cell does not necessarily contain a large number of points, but the total number of these cells is
+always bounded.
+
+In the sequel, heavy cells are deﬁned by an arbitrary ﬁxed identiﬁcation scheme unless otherwise speciﬁed.
+Deﬁnition C.2. Fix a heavy cell identiﬁcation scheme H. For level i ∈ [−1, L], let C(p, i) ∈ Gi be the cell in Gi containing
+p. The ending level l(p) of a point p ∈ P is the largest level i such that H(C(p, i)) =heavy, and H(C(p, i+1)) =non-heavy.
+Note that the ending level is uniquely deﬁned if a heavy cell identiﬁcation scheme is ﬁxed. We now rewrite the telescope
+sum for p as follows,
+
+where c−1
+
+d(p, Z) =(cid:80)l(p)
+
+i=0
+
+(cid:0)d(ci
+
+p = 0 and cL
+
+p = p. For arbitrary k-centers Z ⊂ [∆]d, we write,
+p, Z) − d(ci−1
+
+p , Z) − d(cl(p)
+
+p
+
+p
+
+, Z) + d(0, Z)
+
+Let Pl be all the points with ending level l(p) = l. We now present the following lemmas.
+Lemma C.3. Let Pi be the set of points with ending level i. Let Z∗ ⊂ [∆]d be a set of optimal k-centers for the k-
+median problem of the input point set. Assume that for each i ∈ [−1, L], at most ek(L + 1)/ρ cells C in Gi satisfy
+d(C, Z∗) ≤ ∆/(2i+1d). Then
+
+(cid:1) + cL
+
+p − ci−1
+
+p
+
+p − cl(p)
+
+p
+
+,
+
+(cid:0)ci
+
+p =
+
+l(p)(cid:88)
+, Z)(cid:1) + d(cL
+
+i=0
+
+|Pi| · ∆
+
+√
+2i ≤ λ2d3/2OPT,
+
+d
+
+where λ2 > 0 is a universal constant.
+Before we prove this lemma, we ﬁrst introduce the following lemmas to bound the cells with a large number of points.
+Lemma C.4. Assume that for each i ∈ [0, L], at most ek(L + 1)/ρ cells C in Gi satisfy d(C, Z∗) ≤ ∆/(2i+1d). Then for
+any r > 0 there are at most (e+2r)k(L+1)
+
+cells that satisfy |C| ≥ 2iρdOPT
+rk(L+1)∆ .
+
+ρ
+
+rW kL(cid:48) W
+
+2d = ρOPT
+
+Proof of Lemma C.4. Let L(cid:48) = L + 1. Fix a value i ∈ [0, L] and then W = ∆/2i is the width of a cell in Gi. Since at most
+ekL/ρ cells in Gi satisfy d(C, Z∗) ≤ W/(2d), then of the remaining cells, each contribute at least ρdOPT
+2rkL(cid:48) to the
+cost, and the cost of these cells is at most OPT. Therefore there can be at most 2rL(cid:48)k/ρ cells such that d(C, Z∗) > W/(2d).
+Along with the at most ekL(cid:48)/ρ cells (by the assumption) such that d(C, Z∗) ≤ W/(2d), there are at most (e + 2r)L(cid:48)k/ρ
+cells that contain at least ρdOPT/(rW kL(cid:48)) points.
+Lemma C.5. Assume that for each i ∈ [0, L], at most ek(L + 1)/ρ cells C in Gi satisfy d(C, Z∗) ≤ ∆/(2i+1d). Then for
+i ∈ [−1, L], the points of Pi can be partitioned to at most k(cid:48) = 2(e+6)k(L+1)
+groups, G1, G2, . . . , Gk(cid:48), such that for each
+j ∈ [k(cid:48)], there exists a C ∈ Gi, such that Gj ∈ C, |Gj| < 5 2i−1ρdOPT
+k(L+1)∆ .
+Proof of Lemma C.5. Let L(cid:48) = L + 1. For each heavy cell in Gi, if the number of points falling into its non-heavy subcells
+(in Gi+1) is less than 2i−1ρdOPT
+kL(cid:48)∆ , we group all these subcells into a single group. Let the groups formed this way be called
+type I, and by Property 4 of Deﬁnition 4.1 there are at most (e + 4)kL(cid:48)/ρ type I groups.
+For each of the remaining heavy cells in Gi, we group its subcells into groups such that each group contains a number
+of points in the interval
+. This can be done since each non-heavy subcell contains less than
+2i+1ρdOPT
+(otherwise we
+would have formed a type I group). Let the groups formed this way be called type II. By the assumption of of Lemma C.3,
+at most ekL(cid:48)
+2i+2d from an optimal center of Z∗. Since each type II group
+contains at least 2i−1ρdOPT
+points, by the same argument as in Lemma C.4, the number of type II groups further than
+distance ∆
+
+(cid:104) 2i−1ρdOPT
+kL(cid:48)∆ , 5 2i−1ρdOPT
+points, and the total number of points contained in them is at least 2i−1ρdOPT
+
+ρ of these non-heavy subcells are within distance ∆
+
+2i+2d from an optimal center is at most 8kL(cid:48)
+
+ρ . We conclude that,
+
+= 4 2i−1ρdOPT
+
+(cid:17)
+
+kL(cid:48)∆
+
+kL(cid:48)∆
+
+kL(cid:48)∆
+
+kL(cid:48)∆
+
+kL(cid:48)∆
+
+ρ
+
+k(cid:48) ≤ (e + 4)kL(cid:48)
+
++
+
+(e + 8)kL(cid:48)
+
+.
+
+ρ
+
+ρ
+
+Clustering High Dimensional Dynamic Data Streams
+
+in Gi. Let G1, G2, . . . Gk(cid:48) be group of points satisfying Lemma C.5. Thus,(cid:80)
+
+Proof of Lemma C.3. Let L(cid:48) = L+1. Fix a value i ∈ [−1, L] and then W = ∆/2i is the upper bound of the width of a cell
+√
+2i ≤
+d
+
+2i ≤(cid:80)
+
+2i+1ρdOPT
+
+j∈[k(cid:48)]
+
+· ∆
+
+kL(cid:48)∆
+
+p∈Pl
+
+√
+
+∆
+
+d
+
+λ(cid:48)kL(cid:48)
+
+ρ
+
+· 2i+1ρdOPT
+
+kL(cid:48)∆
+
+√
+2i ≤ λ2d3/2OPT for some universal constants λ(cid:48) and λ2.
+
+d
+
+∆
+
+(cid:99)|Ci| by the exact number of points in |Ci|, then the new weighted set is an (/2)-coreset. For each C ∈ G, let bC be the new
+
+Proof of Proposition C.10. First notice that the weighted set satisﬁes the about condition is an -coreset. If we replace each
+value returned by the algorithm, and bq is the new value of a point q ∈ S. The error of the cost introduced is at most,
+
+By the procedure, the new value of a cell is always smaller than its original value, thus
+√
+2i =
+
+− bp
+
+A =
+
+d
+
+p∈Si−1
+
+i=0
+
+i=0
+
+Let
+
+A =
+
+gi =
+
+where
+
+C∈Gi:heavy
+
+C∈Gi: heavy
+
+C∈Gi: heavy
+
+ (cid:88)
+L(cid:88)
+|(cid:99)|C| − bC| +
+ (cid:88)
+L(cid:88)
+(cid:88)
+(cid:99)|C| − bC +
+ (cid:88)
+(cid:99)|C| − bC +
+ (cid:88)
+(cid:12)(cid:12)(cid:12)|C| −(cid:99)|C|(cid:12)(cid:12)(cid:12) +
+(cid:88)
+(cid:12)(cid:12)(cid:12). Then,
+(cid:12)(cid:12)(cid:12)bC −(cid:80)C∈Gi+1:heavy(cid:99)|C| − |Si∩C|
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)bC −(cid:99)|C| +(cid:99)|C| − |C| − (cid:88)
+(cid:12)(cid:12)(cid:12)(cid:99)|C| − |C|(cid:12)(cid:12)(cid:12) +
+≤(cid:12)(cid:12)(cid:12)bC −(cid:99)|C|(cid:12)(cid:12)(cid:12) +
+(cid:88)
+ (cid:88)
+(cid:88)
+L(cid:88)
+i−1(cid:88)
+
+Thus fi ≤ OPT/L by choosing appropriate λ6.
+
+Since g−1 = f−1 = 0, thus
+
+√
+∆
+2i +
+
+C(cid:48)∈Gi+1:heavy
+
+C∈Gi:heavy
+
+C∈Gi−1
+
+p∈Si−1
+
+sC =
+
+Then
+
+πi−1
+
+fi =
+
+gi =
+
+sC
+
+πi
+
+d
+
+1
+
+gi ≤ fi + 3
+
+2j−ifj, and
+
+gi ≤ L(cid:88)
+
+C(cid:48)∈Gi−1:heavy
+
+C(cid:48)∈Gi+1:heavy
+
+− bp
+
+ ∆
+(cid:19)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:19) ∆
+ ∆
+
+√
+
+d
+
+.
+
+2i
+
+− bp
+
+p∈Si−1
+
+πi−1
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:18) 1
+(cid:88)
+(cid:18) 1
+(cid:88)
+(cid:12)(cid:12)(cid:12)(cid:12)|Si−1 ∩ C(cid:48)|
+
+πi−1
+
+πi−1
+
+πi−1
+
+1
+
+p∈Si−1
+
+− |Pi−1 ∩ C(cid:48)|
+
+√
+
+2i
+
+d
+
+.
+
+L(cid:88)
+
+i=0
+
+gi,
+
+ ∆
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+√
+
+2i
+
+d
+
+.
+
+Now consider heavy cell C ∈ Gi,
+
+((cid:99)|C(cid:48)| − |C(cid:48)|) −
+(cid:12)(cid:12)(cid:12)(cid:99)|C(cid:48)| − |C(cid:48)|(cid:12)(cid:12)(cid:12) +
+ ∆
+
+− bp
+
+2
+
+d
+
+√
+2i ≤ 1
+i(cid:88)
+
+3
+
+fi(1 +
+
+2j ) ≤ 4
+
+(cid:18)|Si ∩ C|
+(cid:12)(cid:12)(cid:12)(cid:12)|Si ∩ C|
+
+πi
+
+πi
+
+(cid:19)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12) .
+
+− |Pi ∩ C|
+
+− |Pi ∩ C|
+
+gi−1 +
+
+1
+2
+
+fi−1 + fi.
+
+L(cid:88)
+
+i=1
+
+fi ≤ 4OPT.
+
+let sC =
+
+(9)
+
+(10)
+
+j=0
+
+i=0
+
+i=0
+
+j=1
+
+Remark C.6. The multiset of centers of heavy cells with each assigned a weight of the number of points in the cell is a
+O(d3/2)-coreset. This can be easily seen by removing the term of d(cL
+, Z) from Equation (C.1) together with
+Lemma C.3, which bounds the error introduced by this operation.
+C.2 The New Construction (with arbitrary weights)
+For these heavy cells, we use HEAVY-HITTER algorithms to obtain accurate estimates of the number of points in these
+cells, thus providing a heavy cell identiﬁcation scheme. For the non-heavy cells, we only need to sample points from the
+bottom level, GL, but with a different probability for points with different ending levels. We present the following lemma
+that governs the correctness of sampling from the last level.
+√
+Lemma C.7. If a set of points Pi ⊂ P satisﬁes |Pi|∆
+
+d/(2i) ≤ βOPT for some β ≥ 2/(3(L + 1)), let Si be an
+
+p , Z)− d(cl(p)
+
+p
+
+Clustering High Dimensional Dynamic Data Streams
+
+independent sample from Pi such that p ∈ Si with probability
+√
+3a(L + 1)2∆
+
+(cid:32)
+
+πi ≥ min
+
+dβ
+
+ln
+
+2∆kd(L + 1)
+
+ρ
+
+, 1
+
+2i2o
+
+(cid:33)
+
+where 0 < o ≤ aOPT for some a > 0. Then for a ﬁxed set Z ⊂ [∆]d, with probability at least 1 − ρ/((L + 1)Deltakd),
+
+|(cid:80)
+
+p, Z) − d(p, Z))/πi −(cid:80)
+
+p∈Si
+
+(d(ci
+
+p∈Pi
+
+(d(ci
+
+p, Z) − d(p, Z))| ≤ OPT
+L+1 .
+
+Proof. The proof is identical to that of Lemma 3.4.
+
+d/(2i) ≤ βρ
+Lemma C.8. Consider a set of sets {Pi}L
+For each i ∈ [0, L], let Si be an independent sample from Pi with sampling probability
+√
+
+i=0 which satisﬁes |Pi|∆
+
+k(L+1) OPT for some β ≥ /(3(L + 1)).
+(cid:33)
+
+√
+
+log
+where 0 < o ≤ aOPT for some a > 0, then with probability at least 1 − δ,
+
+4aβk(L + 1)3∆
+
+d
+
+2
+δ
+
+, 1
+
+2i2ρo
+√
+2i ≤ ρOPT
+k(L + 1)2 .
+
+d
+
+− |Pi|
+
+πi ≥ min
+
+(cid:32)
+(cid:12)(cid:12)(cid:12)(cid:12)|Si ∩ Pi|
+(cid:20)(cid:12)(cid:12)(cid:12)(cid:12)|Pj ∩ Si|
+
+πi
+
+πi
+
+(cid:12)(cid:12)(cid:12)(cid:12) ∆
+(cid:12)(cid:12)(cid:12)(cid:12) > t
+(cid:21)
+
+Proof of Lemma C.8. The proof is simply by Bernstein inequality. Let t = 2iρOPT
+that V ar(Xp) ≤ 1/πi and b := maxp |Xp| ≤ 1/πi. By Bernstein’s inequality, for any j ∈ [k(cid:48)],
+
+dk(L+1)2∆
+
+√
+
+, Xp := Ip∈Si/πi, then we have
+
+P r
+
+− |Pj|
+
+≤ 2e
+
+−
+
+t2
+
+2|C|/πi+2bt/3 ≤ δ.
+
+We now describe the new construction. This essentially has the same gaurantee as the simpler construction from the
+previous section, however the beneﬁt here is that (as shown in the next subsection) it can be modiﬁed to output only
+
+positive weights. In the following paragraph, the estimations(cid:99)|C| are given as a blackbox. In proposition C.9 we specify the
+with ending level l(p) = l. For each heavy cell C, let (cid:99)|C| be an estimation of number of points of |C|, we also call
+(cid:99)|C| the value of cell C. For each non-heavy cell C(cid:48), let (cid:99)|C(cid:48)| = 0. Let S be a set samples of P constructed as follows:
+
+conditions these estimations must satisfy.
+Non-Negatively Weighted Construction Fix an arbitrary heavy cell identiﬁcation scheme H. Let Pl be all the points
+
+S = S−1 ∪ S0 ∪ S1,∪ . . . ∪ SL, where Sl is a set of i.i.d samples from Pl with probability πl. Here πl for l ∈ [−1, L]
+where λ3 > 0 and λ4 > 0 are universal
+is redeﬁned as,πl = min
+constants. Our coreset S is composed by all the sampled points in S and the cell centers of heavy cells, with each point p
+assigned a weight 1/πl(p) and for each cell center c of a heavy cell C ∈ Gi, the weight is,
+
+(cid:16) λ3d2∆L2
+
++ λ4d2kL3∆
+
+log 30kL2
+
+(cid:17)
+
+2l2o
+
+, 1
+
+ρ2
+
+log
+
+(cid:17)
+
+(cid:16) 2L∆dk
+wt(c) =(cid:99)|C| − (cid:88)
+
+2i2ρo
+
+ρ
+
+.
+
+(11)
+
+(cid:99)|C(cid:48)| − |Si ∩ C|
+
+πi
+
+C(cid:48):C(cid:48)∈Gi+1,C(cid:48)⊂C,
+
+C(cid:48) is heavy
+
+For each non-heavy cell C except for those in the bottom level, wt(c(C)) = 0. The weight of each point from S is the value
+of the corresponding cell in the bottom level.
+We now state the following proposition for a coreset construction, which immediately serves as an ofﬂine coreset construc-
+tion.
+Proposition C.9. Let H be an arbitrary heavy cell identiﬁcation scheme. Fix Ω(∆−d) ≤ ρ < 1 and for each heavy C ∈ Gi
+kL∆ , where λ5 > 0 is a
+universal constant. Let Sl be the set of i.i.d. samples of Pl with probability πl(o). If 0 < o ≤ OPT, then with probability
+
+in level i,(cid:99)|C| is an estimation of number of points in C with additive error at most
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ OPT.
+at least 1 − 4ρ, for every k-set Z ⊂ [∆]d,(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:88)
+
+wt(q)d(q, Z) −(cid:88)
+
+λ5Ld3/2 · 2iρdOPT
+
+d(p, Z)
+
+p∈P
+
+q∈S
+
+
+
+And the coreset size |S| is
+
+O
+
+Clustering High Dimensional Dynamic Data Streams
+
+(cid:20) d3L4k
+
+(cid:18)
+
+2
+
+d +
+
+1
+ρ
+
+log
+
+kL
+ρ
+
+(cid:19) OPT
+
+(cid:21)
+
+.
+
+o
+
+(cid:88)
+L−1(cid:88)
+L−1(cid:88)
+
+(cid:100)cost(Z) =
+
+Proof of Proposition C.9. Fix a k-set Z ⊂ [∆]d. First notice that,
+
+=
+
+q∈S
+
+wt(q)d(q, Z)
+
+(cid:99)|C| − (cid:88)
+(cid:99)|C|(d(c(C), Z) − d(c(CP ), Z)) +
+where we denote d(c(CP−1), Z) = 0 for convenience. Let cost(Z) =(cid:80)
+
+(cid:99)|C(cid:48)| − |Si ∩ C|
+(cid:88)
+
+C(cid:48):C(cid:48)∈Gi+1,C(cid:48)⊂C,
+
+C(cid:48) is heavy
+
+i=−1
+
+i=−1
+
+πi
+
+=
+
+C∈Gi:C heavy
+
+ (cid:88)
+ (cid:88)
+ (cid:88)
+L−1(cid:88)
+
+C∈Gi:C heavy
+
+cost of Z as
+
+ d(c(C), Z) +
+
+
+
+(12)
+
+d(p, Z)
+
+πi
+
+(cid:88)
+ ,
+
+p∈Si
+
+d(p, Z) − d(ci
+
+p, Z)
+
+p∈Si
+
+πi
+
+p∈P d(p, Z). Note that we can also write the true
+
+(cid:88)
+
+p∈Pi
+
+ .
+
+For A2, let
+
+(13)
+
+By Lemma C.3, for each i ∈ [−1, L − 1], |Pi|∆
+constants, with probability at least 1− ρ/(L + 1)∆dk, |A2i| ≤ OPT
+for every level i, and every k-set Z ⊂ [∆]d, |A2i| ≤ OPT
+1 − 3ρ, |A1 + A2| ≤ OPT for any k-set Z ⊂ [∆]d.
+The coreset size is the number of heavy cells plus the number of sampled points. The number of heavy cells is O(kL2/ρ).
+
+d/(2i) = λ2(d3/2OPT). Thus by Lemma C.7, and choosing appropriate
+2(L+1) . By the union bound, with probability at least 1− ρ,
+2(L+1). Thus |A2| ≤ OPT/2. In total, with probability at least
+
+cost(Z) =
+
+We have that,
+
+where
+
+and
+
+|C|(d(c(C), Z) − d(c(CP , Z))) +
+
+d(p, Z) − d(ci
+
+p, Z)
+
+i=−1
+
+C∈Gi:C heavy
+
+(cid:100)cost(Z) − cost(Z) = A1 + A2,
+ (cid:88)
+L−1(cid:88)
+(cid:88)
+L−1(cid:88)
+
+
+((cid:99)|C| − |C|)(d(c(C), Z) − d(c(CP , Z)))
+ .
+
+− (cid:88)
+
+d(p, Z) − d(ci
+
+d(p, Z) − d(ci
+
+C∈Gi:C heavy
+
+p, Z)
+
+p, Z)
+
+i=−1
+
+i=−1
+
+p∈Si
+
+πi
+
+p∈Pi
+
+A1 =
+
+A2 =
+
+ρ
+
+(cid:17)
+
+(cid:16) kL
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+((cid:99)|C| − |C|)(d(c(C), Z) − d(c(CP , Z)))
+ .
+
+√
+2i ≤ OPT
+
+− (cid:88)
+
+· 2iρdOPT
+kL∆
+
+d(p, Z) − d(ci
+
+· ∆
+
+p, Z)
+
+p, Z)
+
+d
+
+2
+
+.
+
+p∈Pi
+
+(cid:88)
+
+C∈Gi:C heavy
+
+
+
+λ5Ld3/2
+
+
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+|A1| ≤ L−1(cid:88)
+(cid:88)
+
+i=−1
+≤ L · k(cid:48) ·
+
+A2i =
+
+p∈Si
+
+d(p, Z) − d(ci
+
+πi
+
+√
+
+Let Z∗ ⊂ [∆]d be a set of optimal k-centers for the k-median problem of the input point set. By Lemma 2.2, with
+probability at most 1 − ρ, for each i ∈ [0, L], if at most ek(L + 1)/ρ cells C in Gi satisfy d(C, Z∗) ≤ ∆/(2i+1d).
+Conditioning on this event, we have that, by Lemma C.4 there are at most k(cid:48) = O
+heavy cells per level. Since for
+each C ∈ Gi,
+
+kL∆ , by choosing appropriate constant λ5 > 0 we have
+
+(cid:12)(cid:12)(cid:12)(cid:99)|C| − |C|(cid:12)(cid:12)(cid:12) ≤
+
+λ5Ld3/2 · 2iρdOPT
+
+The expected number of sampled points per level is at most,
+
+By a Chernoff bound, with probability at least 1 − ρ/∆dk, for every level i ∈ [0, L], the number of sampled points is,
+
+Clustering High Dimensional Dynamic Data Streams
+
+|Si| = O
+
+2 +
+
+d3L2k
+
+2ρ
+
+log
+
+|Si| ≤ O
+
+2 +
+
+d3L3k
+
+ρ2
+
+log
+
+(cid:18) d4L3k
+(cid:18) d4L3k
+(cid:20) d3L4k
+
+2
+
+(cid:18)
+
+|S| ≤ O
+
+d +
+
+1
+ρ
+
+log
+
+kL
+ρ
+
+o
+
+ρ
+
+(cid:18) kL
+(cid:19)(cid:19) OPT
+(cid:18) kL
+(cid:19)(cid:19) OPT
+(cid:21)
+(cid:19) OPT
+
+ρ
+
+o
+
+.
+
+.
+
+.
+
+o
+
+Thus the size of the coreset S is,
+
+and
+
+C.3 Ensuring Non-Negative Weights
+In this section, we will provide a procedure to rectify all the weights for the coreset constructed in the last sub-section. The
+idea is similar to the method used in (Indyk & Price, 2011). The procedure is shown in Algorithm 4.3.
+Proposition C.10. Let S be a weighted set constructed using the Non-Negatively Weighted Construction, i.e. each heavy
+
+cell C has value(cid:99)|C| and the set of sampled points S = S−1 ∪ S0 . . .∪ SL with each point in Sl has weight 1/πl. If for each
+heavy cell C ∈ Gi, |(cid:99)|C| − |C|| ≤
+kL∆ for some universal constant λ6 > 0 and for each i ∈ [−1, L] and any
+λ6Ld3/2 · 2iρdOPT
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:88)
+
+p, Z) − d(p, Z))
+
+k-set Z ⊂ [∆]d,
+
+wt(p)(d(ci
+
+(d(ci
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+
+
+p, Z) − d(p, Z)) − (cid:88)
+(cid:12)(cid:12)(cid:12)(cid:12)|Si ∩ C|
+(cid:12)(cid:12)(cid:12)(cid:12) ∆
+
+− |Pi ∩ C|
+
+p∈Pi
+
+p∈S
+≤ OPT
+2L
+
+,
+
+(cid:88)
+
+√
+2i ≤ OPT
+
+L
+
+d
+
+.
+
+πi
+
+C∈Gi: heavy
+
+Then on input(cid:100)|C1|,(cid:100)|C2|, . . . ,(cid:100)|Ck(cid:48)| and S, where k(cid:48) is the number of heavy cells, the coreset output by Algorithm 4.3 is a
+
+(4)-coreset.
+C.4 The Streaming Algorithm
+C.4.1 SAMPLING FROM SPARSE CELLS
+For the streaming algorithm, we can still use HEAVY-HITTER algorithms to ﬁnd the heavy cells. The major challenge
+is to do the sampling for each point from its ending level. We do this using a combination of hash functions and K-Set.
+In Algorithm C.4.1, we provide a procedure that recovers the set of points from cells with a small number of points and
+ignore all the heavy cells. The guarantee is,
+Theorem C.11. Given as input a set of dynamically updating streaming points P ⊂ [N ], a set of mutually disjoint cells
+C ⊂ [M ], whose union covers the region of P . Algorithm C.4.1 outputs all the points in cells with less than β points or
+output Fail. If with the promise that at most α cells from C contain a point of P , then the algorithm outputs Fail with
+probability at most δ. The algorithm uses O(αβ(log(M β) + log N ) log N log(log N αβ/δ) log(αβ/δ)) bits in the worst
+case.
+The high level idea of this algorithm is to hash the original set of points to a universe of smaller size. For cells with less
+points, the collision rate is much smaller than cells with more points. To recover one bit of a point, we update that bit and
+the cell ID and also its hash tag to the K-Set-data structure. If there are no other points with hash values colliding with
+this point, the count of that point is simply 1. If this is the case, we immediately recover the bit. By repeating the above
+procedure once for each bit, we can successfully recover the set of points with no colliding hash tags. For those points with
+colliding hash tags, we simply ignore them. Each point has a constant probability to collide with another point, thus not be
+in the output. By running the whole procedure O(log(αβ/)) times in parallel, we reduce the probability to roughly  for
+each point in cells with less than β points. To formally prove Theorem C.11, we ﬁrst prove the following lemma, which is
+the guarantee of Algorithm C.4.1.
+Lemma C.12. Given input a set of dynamically updating streaming points P ⊂ [N ], a set of mutually disjoint cells
+C ⊂ [M ], whose union covers the region of P . Algorithm C.4.1 outputs a set of points in cells with less than β points
+
+Clustering High Dimensional Dynamic Data Streams
+
+or output Fail. If with the promise that at most α cells from C contain a point of P , then the algorithm outputs Fail
+with probability at most δ. Conditioning on the event that the algorithm does not output Fail, each point p from cell
+with less than β points is in the output with marginal probability at least 0.9. The algorithm uses O(αβ(log(M β) +
+log N ) log N log(log N αβ/δ)) bits in the worst case.
+Proof. We prove this lemma by showing that (a) if a point p ∈ P contained in cell C, with |C ∩ P| ≤ β, then with
+probability at least 0.99, there are no other points p(cid:48) ∈ C ∩ P with H(p) = H(p(cid:48)), (b) conditioning on the event that the
+algorithm does not output Fail, then for any cell C ∈ C, if a point p ∈ C such that no other points in C ∩ P has the same
+hash value H(p), then p is in the output and (c) the algorithm outputs Fail with probability at most δ. The correctness of
+the algorithm follows by (a), (b) and (c).
+To show (a), consider any cell C ∈ C with |C| ≤ β, let p ∈ C with hash value H(p). Since H is 2-wise independent, the
+expected number of other points hashed to the same hash value H(p) is at most β/U = 1/100. By Markov’s inequality,
+with probability at least 0.99, no other point in C is hashed to H(p).
+To show (b), notice that if the algorithm does not output Fail, then for a given cell C, let c be its ID, and pj be the j-th
+bit of point p. Then (c, h, pj) has 1 count and (c, h, 1 − pj) has 0 count for each j ∈ [t], where t = (cid:100)log N(cid:101). Thus we can
+uniquely recover each bit of point p, hence the point p.
+For (c), since there are at most α cells, there are at most 2αU = O(αβ) many different updates for each KS structure.
+Therefore, with probability at most δ
+t , a single KS instance outputs Fail. By the union bound, with probability at least
+1 − δ, no KS instance outputs Fail.
+Finally, the space usage is dominated by the KS data structures. Since the input data to KS is from universe [M ] ×
+[U ] × {0, 1}, each KS structure uses space O(αβ(log(M β) + log N ) log(tαβ/δ)) bits of memory, the total space is
+O(αβ(log(M β) + log N ) log N log(tαβ/δ)).
+
+Proof of Theorem C.11. Each instance of SparseCellsSingle fails with probability at most δ/(4A), where A is the
+number independent SparseCellsSingle instances. By the union bound, with probability at least 1 − δ/4, none of
+them output Fail. Conditioning on this event, the random bits of the hash functions of each SparseCellsSingle in-
+stance are independent, thus by Lemma C.12 a ﬁxed point p ∈ C with |C| ≤ β is in the output with probability at least
+δ ≤ δ/(4αβ). Since there are at most αβ points in cells with less than β points, by the union bound we conclude
+10− log 4αβ
+that with probability at least 1 − δ/4, every point in cells with less than β points is in the output set S. In sum, with
+probability at least 1 − δ/2, S contains all the desired points.
+The other KS instance outputs Fail with probability at most δ/2. Thus if T is not Fail, then T contains the exact number
+of points of each cell. If any desired point is not in S, then |C| > |C ∩ S|, we output Fail. This happens with probability
+at most δ under the gaurantee of the KSstructure.
+Since each SparseCellsSingle instance uses O(αβ(log(M β) + log N ) log N log(tAαβ/δ)) bits of space, the ﬁnal
+space of the algorithm is O(αβ(log(M β) + log N ) log N log(tαβ/δ) log(αβ/δ)).
+
+Algorithm 4 SparseCells(N, M, α, β, δ): input the point sets P ⊂ [N ] and set of cells C ⊂ [M ] such that at most α
+cells containing a point, output the set of points in cells with less than β points.
+Let A ← log 4αβ
+δ ;
+Let R1, R2, . . . , RA be the results of independent instances of SparseCellsSingle(N, M, α, β, δ/(4A)) running in
+parallel;
+Let T be the results of another parallel KS structure with space parameter α and error δ/2 and with input as the cell IDs of
+points in P ;
+if any of the data structures returns Fail:
+Let S ← R1 ∪ R2 ∪ . . . RA;
+if ∃ set C ∈ T with |C| ≤ β and |C| (cid:54)= |C ∩ S|:
+
+/*T returns the exact counts of each cell*/
+
+return Fail;
+
+return Fail;
+
+return S;
+
+C.4.2 THE ALGORITHM
+With the construction of algorithm SparseCells, we now have all the tools for the streaming coreset construction. The
+streaming algorithm is composed by O(L) levels of HEAVY-HITTER instances, which serve as a heavy cell identiﬁer and
+
+Clustering High Dimensional Dynamic Data Streams
+
+Algorithm 5 SparseCellsSingle(N, M, α, β, δ): input the point sets P ⊂ [N ] and set of cells C ⊂ [M ] such that at
+most α cells containing a point, output the set of points in cells with less than β points.
+
+Initization:
+U ← 100β .
+t ← (cid:100)log N(cid:101);
+H : [N ] → [U ], 2-wise independent;
+t ;
+K-Set structures KS1, KS2, . . . KSt with space parameter 2αU and probability δ
+Update(p, op):
+c ← cell ID of p;
+for i ∈ [t]:
+
+/*op ∈ {Insert, Delete}*/
+
+/*A point p is represented as (p1, p2, . . . , pt)*/;
+
+pi ← the i-th bit of point p;
+KSi.update((c, H(p), pi), op);
+
+Query:
+if for any i ∈ [t], KSi returns Fail:
+
+return Fail;
+
+S ← ∅;
+for each (c, h, p1) in the output of KS1:
+if (c, h, pj) /∈ KSj for some j ∈ [t]:
+
+/*A checking step, may not happen at all*/;
+
+return Fail;
+
+Let s(c, h, pj) be the counts of (c, h, pj) in KSj;
+if s(c, h, pj) = 1 and s(c, h, 1 − pj) = 0 for each j ∈ [t]:
+
+p ← (p1, p2, . . . , pt);
+S ← S ∪ {p};
+
+return S
+
+by O(L) levels of SparseCells instances, which sample the points from their ending levels. The full algorithm is stated
+in Algorithm 6. The guarantee of the algorithm is stated in the following theorem.
+Theorem C.13. Fix , ρ ∈ (0, 1/2), positive integers k and ∆, Algorithm 6 makes a single pass over the streaming
+point set P ⊂ [∆]d, outputs a weighted set S with non-negative weights for each point, such that with probability at
+least 0.99, S is an -coreset for k-median of size O
+, where L = log ∆. The algorithm uses
+
+(cid:17)(cid:105)
+
+d + 1
+
+(cid:16)
+
+ρ log kL
+
+ρ
+
+2
+
+ρdL + 1
+
+bits in the worst case. For each update of the input, the algo-
+O
+rithm needs poly (d, 1/, L, log k) time to process and outputs the coreset in time poly(d, k, L, 1/, 1/ρ, log k) after one
+pass of the stream.
+
+ρ (log log dkL
+
+ρ log2 dkL
+
+ρ + L)
+
+(cid:104) d7L7k
+
+(cid:16)
+
+(cid:104) d3L4k
+(cid:105)
+
+2
+log2 dkL
+ρ
+
+(cid:17)
+
+Proof. W.l.o.g. assume ρ ≥ ∆−d, since otherwise we can store the entire set of points. In the sequel, we will prove the
+theorem with parameter O(ρ) and O(). It translates to ρ and  directly by scaling and with losing at most a constant factor
+in space and time bounds. By Lemma 2.2, with probability at least 1 − ρ, for every level i ∈ [0, L], at most ekL/ρ cells C
+in Gi satisfy d(C, Z∗) ≤ ∆/(2i+1d). We condition on this event for the following proof.
+(cid:113) ρ
+We ﬁrst show that the HEAVY-HITTER instances faithfully implement a heavy cell identiﬁcation scheme. First note that
+with probability at least 1 − ρ, all HEAVY-HITTER instances succeed. Conditioning on this event for the following proof.
+λ7kd3L3 and k(cid:48) = λ8kL/ρ, for appropriate positive universal
+As shown in the proof of Lemma B.1, by setting (cid:48) = 
+kL∆ for some universal constant λ9, which
+constants λ7, λ8, then the additive error to each cell is at most
+matches the requirement of Proposition C.10. For each cell C with at least 2iρdOPT/(k(L + 1)∆) points, by Lemma C.4
+it must be in the top (e + 2)k(L + 1)/ρ cells. For each cell C(cid:48) with at least 2i−1ρdOPT/(k(L + 1)∆) points, it must be in
+k(L+1)∆. Thus C is in the output
+2idOPT
+the top (e + 4)k(L + 1)/ρ cells. Since the additive error is
+k(L+1)∆ contradicts the error bound
+
+of the HEAVY-HITTER instances, since otherwise(cid:99)|C| ≤ 1
+
+λ7d3/2(L+1) · 2idOPT
+2idOPT
+k(L+1)∆ +
+
+λ9d3/2L · 2idOPT
+
+λ7d3/2(L+1) · 2idOPT
+
+k(L+1)∆ (cid:28) 1
+
+2
+
+2
+
+
+
+
+
+
+
+Clustering High Dimensional Dynamic Data Streams
+
+(cid:16)
+
+(cid:104) d3L4k
+
+(by choosing sufﬁciently large λ7). Thus the algorithm faithfully implements a heavy cell identiﬁcation scheme.
+Now we show that if there exists an o ≤ OPT such that no instance of SparseCells outputs Fail, then the result is a
+desired O()-coreset. This follows by Proposition C.9 and Proposition C.10. Then we note that the coreset size is upper
+bounded by O
+Next we show that there exists an OPT/2 ≤ o∗ ≤ OPT that with probability at least 1 − ρ, no SparseCells in-
+stance SCo∗,i outputs Fail. By Chernoff bound, with probability at least 1 − O(ρ), as also shown in the proof
+cells is occupied by a point. And at most
+of Proposition C.9, per level at most O
+
+(cid:17) OPT
+
+(cid:104) d3L4k
+
+as desired.
+
+ρ log kL
+
+(cid:17)(cid:105)
+
+d + 1
+
+d + 1
+
+(cid:16)
+
+(cid:105)
+
+2
+
+ρ
+
+ρ log kL
+
+ρ
+
+o
+
+2
+
+(cid:17)(cid:105)
+
+(cid:16)
+
+(cid:104) d3L2
+(cid:16)
+(cid:104) d5L4r2k
+
+(cid:16)
+
+2
+
+ρ + ρ
+
+kL log L
+
+ρd + log kL
+
+O
+fails with probability at most O(ρ/(dL)), with probability at least 1 − O(ρ), no nstance SCo∗,i fails.
+Lastly, we bound the space usage and update/query time. For the HEAVY-HITTER instances, the total space used
+is O
+bits, analogous to the proof of Theorem 3.6. Each SparseCells instance uses space
+
+points is sampled per light cell. Conditioned on this fact and that each instances
+
+(cid:17) d4L5k
+
+ρ
+
+dL + log 1
+ρ
+
+ρ2
+
+ρdL + r2(log r+L)
+
+2
+
+bits.
+O
+As a same argument in the proof of Theorem 3.6, the cost of de-randomization introduce an additional dL factor. Thus,
+the ﬁnal space bound is O
+bits. The query time and update time is similar to that of
+
+ρ . The total space bound is O
+
+ρdL + r2(log r+L)
+
+2
+
+ρ
+
+ρ
+
+ρdL + r2(log r+L)
+
+(cid:104) d6L6r2k
+
+(cid:16)
+
+, where r = log dkL
+
+(cid:17)(cid:105)
+(cid:104) d7L7r2k
+(cid:16)
+(cid:17)
+and poly(cid:0)d, L, 1
+
+2
+ , 1
+ρ , k
+
+ρ
+
+(cid:17)(cid:105)
+ , log k(cid:1).
+
+(cid:16)
+
+Theorem 3.6 thus poly
+
+d, L, 1
+
+(cid:17)(cid:105)
+
+D Synthetic Dataset
+
+Figure 2. 65536 points are drawn from a Gaussian Mixture distribution. The contours illustrate the PDF function.
+
+Clustering High Dimensional Dynamic Data Streams
+
+(cid:104) d3L4k
+
+Algorithm 6 PositiveCoreSet(S, k, ρ, ): construct a -coreset for dynamic stream S.
+Initization:
+Initialize a grid structure;
+√
+O ← {1, 2, 4, . . . ,
+α ← O
+d + 1
+For each o ∈ O and i ∈ [0, L], construct fully independent hash function ho,i
+P rho,i(ho,i[q] = 1) = πi(o); initialize SparseCells(∆d, (1 + 2i)d, α, β, O(ρ/(dL))) instances SCo,i;
+Initialize HEAVY-HITTER(∆d, 10Lk/ρ, (cid:48), ρ/L) instances, HH0, HH1, . . . , HHL−1, one for a level;
+
+d∆d+1}; L ← (cid:100)log ∆(cid:101); πi(o) ← min
+ρ log kL
+
+(cid:16) 2L∆dk
+(cid:113) ρ
++ λ4d2kL3∆
+λ7kd3L3 ; m ← 0;
+
+(cid:16) λ3d2∆L2
+(cid:17)(cid:105)
+
+log
+, (cid:48) ← 
+
+(cid:104) d3L2
+
+ρ + ρ
+
+kL log L
+
+ρ
+
+, β ← O
+
+ρd + log kL
+
+(cid:17)(cid:105)
+
+(cid:16)
+
+2l2o
+
+ρ
+
+2i2ρo
+
+(cid:17)
+
+2
+
+ρ
+
+2
+
+(cid:16)
+
+(cid:17)
+
+, 1
+
+;
+
+log 30kL2
+
+ρ2
+
+[∆]d → {0, 1} with
+
+:
+
+Update (S):
+for each update (op, q) ∈ S:
+
+/*op ∈ {Insert, Delete}*/
+
+/*Insert: +1, Delete:−1*/
+
+m ← m ± 1;
+for each i ∈ [0, L]:
+
+q ← the center of the cell contains q at level i;
+ci
+HHi.update(op, ci
+q);
+for each o ∈ [O]:
+
+if ho,i(q) == 1:
+
+SCo,i.update(op, ci
+
+q);
+
+Query:
+Let o∗ be the smallest o such that no instance of SCo,0, SCo,1, . . . , SCo,L returns Fail;
+S ← {};
+C−1 ← the cell of the entire space [∆]d; (cid:91)|C−1| ← m;
+for i ∈ [0, L − 1]:
+
+Ci ← HHi.query().top((e + 4)(L + 1)k/ρ);
+Remove cells C from Ci if CP (C) (cid:54)∈ Ci−1, where CP (C) is the parent cell of C in level i − 1;
+Bi ← SCo∗,i.query();
+Si ← {p ∈ Bi : C(p, i − 1) ∈ Ci−1 AND C(p, i) (cid:54)∈ Ci};
+Each point in Si receives weight 1/πi(o∗);
+S ← S ∪ Si;
+i∈[0,L] |Ci|;
+
+k(cid:48) ←(cid:80)
+(cid:110)(cid:100)|C1|,(cid:100)|C2|, . . .(cid:100)|Ck(cid:48)|(cid:111)
+R ← RectifyWeights((cid:100)|C1|,(cid:100)|C2|, . . .(cid:100)|Ck(cid:48)|, S);
+
+Let {C1,C2, . . .Ck(cid:48)} = ∪i∈[0,L]Ci ∪ {C−1} be the set of heavy cells;
+Let
+
+be the estimated frequency of each cell;
+
+return R.
+
+

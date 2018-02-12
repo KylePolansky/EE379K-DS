@@ -1,0 +1,2327 @@
+Multi-task Learning with Labeled and Unlabeled Tasks
+
+Supplementary Material
+
+Anastasia Pentina 1 Christoph H. Lampert 1
+
+1. Preliminaries
+In this section we list a few results from the literature that will be utilized in the proof of Theorem 1.
+Proposition 1 (Lemma 1 in (Ben-David et al., 2010)). Let d be the VC dimension of the hypothesis set H and S1, S2 be
+two i.i.d. samples of size n from D1 and D2 respectively. Then for any δ > 0 with probability at least 1 − δ:
+
+disc(D1, D2)≤ disc(S1, S2)+2
+
+2d log(2n) + log(2/δ)
+
+.
+
+n
+
+Lemma 1 (Theorem 1 in (Maurer, 2006)). Let X1, . . . , Xn be independent random variables taking values in the set X
+and f be a function f : X n → R. For any x = (x1, . . . , xn) ∈ X n and y ∈ X deﬁne:
+xy,k = (x1, . . . , xk−1, y, xk+1, . . . , xn)
+f )(x) = inf
+
+(cid:114)
+
+Then for t > 0:
+
+i=1
+
+(inf
+k
+
+n(cid:88)
+
+y∈X f (xy,k)
+(f − inf
+
+f )2.
+
+k
+
+∆+,f =
+
+Pr{f − E f ≥ t} ≤ exp
+
+(cid:18) −t2
+
+2(cid:107)∆+(cid:107)∞
+
+(cid:19)
+
+.
+
+(1)
+
+Lemma 2 (Corollary 6.10 in (McDiarmid, 1989)). Let W n
+(B1, . . . , Bn). Let bn
+
+1 = (b1, . . . , bn) be a vector of possible values of the random variables B1, . . . , Bn. Let
+ri(bi−1
+
+, Bi = bi} − inf
+
+{Wi : Bi−1
+
+{Wi : Bi−1
+
+, Bi = bi}.
+
+1 = bi−1
+
+1 = bi−1
+
+1
+
+1
+
+1
+
+0 be a martingale with respect to a sequence of random variables
+
+1 ) =(cid:80)n
+
+Let r2(bn
+
+i=1(ri(bi−1
+
+1
+
+) = sup
+bi
+
+))2 and (cid:98)R2 = supbn
+
+1
+
+(2)
+
+(3)
+
+Lemma 3 (Originally (Hoeffding, 1963); in this form Theorem 18 in (Tolstikhin et al., 2014)). Let {U1, . . . , Um} and
+{W1, . . . , Wm} be sampled uniformly from a ﬁnite set of d-dimensional vectors {v1, . . . , vN} ⊂ Rd with and without
+replacement respectively. Then for any continuous and convex function F : Rd → R the following holds:
+
+1IST Austria. Correspondence to: Anastasia Pentina <apentina@ist.ac.at>.
+
+i=1
+
+i=1
+
+Proceedings of the 34 th International Conference on Machine Learning, Sydney, Australia, PMLR 70, 2017. Copyright 2017 by the
+author(s).
+
+Ui
+
+(4)
+
+r2(bn
+
+1 ). Then
+
+{Wn − W0 > } < exp
+
+Pr
+Bn
+1
+
+bi
+
+(cid:18)
+
+− 22(cid:98)R2
+
+(cid:19)
+
+.
+
+(cid:34)
+
+(cid:32) m(cid:88)
+
+E
+
+F
+
+(cid:33)(cid:35)
+
+Wi
+
+≤ E
+
+F
+
+(cid:34)
+
+(cid:32) m(cid:88)
+
+(cid:33)(cid:35)
+
+Supplementary Material
+
+Lemma 4 (Part of Lemma 19 in (Tolstikhin et al., 2014)). Let x = (x1, . . . , xl) ∈ Rl. Then the following function is
+convex:
+
+F (x) = sup
+i=1...l
+
+xi.
+
+(5)
+
+2. Proof of Theorem 1
+We start with bounding the multi-task error by the errors on the source tasks, and transition to empirical quantities while
+keeping the effect of random sampling controlled.
+Fix a subset of labeled tasks I = {i1, . . . , ik}, a task (cid:104)Dt, ft(cid:105) and a weight vector α ∈ ΛI. Let h∗
+eri(h)).1 Writing (cid:96)(h, h(cid:48)) as shorthand for (cid:96)(h(x), h(cid:48)(x)), we have
+| erα(h) − ert(h)| =
+
+(cid:12)(cid:12) eri(h) − ert(h)(cid:12)(cid:12)
+
+i ∈ arg minh∈H(ert(h) +
+
+(6)
+
+αi
+
+(cid:12)(cid:12)(cid:12)(cid:88)
+≤(cid:88)
+
+i∈I
+
+i∈I
+
+(cid:12)(cid:12)(cid:12) ≤(cid:88)
+i )(cid:12)(cid:12) +(cid:12)(cid:12) E
+
+i∈I
+
+(cid:96)(h, h∗
+
+αi eri(h) − ert(h)
+
+(cid:18)(cid:12)(cid:12) eri(h) − E
+
+x∼Di
+
+αi
+
+(cid:96)(h, h∗
+
+i ) − E
+x∼Dt
+
+(cid:96)(h, h∗
+
+x∼Di
+
+i )(cid:12)(cid:12) +(cid:12)(cid:12) ert(h) − E
+
+(cid:96)(h, h∗
+
+x∼Dt
+
+i )(cid:12)(cid:12)(cid:19)
+
+= (∗)
+
+(7)
+
+We can bound each summand:
+
+| E
+x∼Di
+
+| eri(h) − E
+x∼Di
+i ) − E
+(cid:96)(h, h∗
+x∼Dt
+| ert(h) − E
+x∼Dt
+
+(cid:96)(h, h∗
+(cid:96)(h, h∗
+(cid:96)(h, h∗
+
+i )| ≤ eri(h∗)
+
+i )(cid:12)(cid:12) ≤ disc(Di, Dt)
+i )(cid:12)(cid:12) ≤ ert(h∗
+(cid:88)
+
+i )
+
+i∈I
+
+(∗) ≤(cid:88)
+
+i∈I
+
+T(cid:88)
+
+t=1
+
+1
+T
+
+(cid:80)T
+
+(cid:80)
+
+(cid:88)
+
+i∈I
+
+1
+T
+
+T(cid:88)
+(cid:80)T
+
+t=1
+
+where the ﬁrst and the last inequalities hold by the triangular inequality for (cid:96) and the second one follows from the deﬁnition
+of discrepancy. Therefore,
+
+αi(eri(h∗
+
+i ) + disc(Di, Dt) + ert(h∗
+
+i )) =
+
+αi(λit + disc(Di, Dt)).
+
+Consequently, assuming that every task t has its own weights αt we obtain that:
+
+T(cid:88)
+
+t=1
+
+T(cid:88)
+
+(cid:88)
+
+t=1
+
+i∈I
+
+ert(h) ≤ 1
+T
+
+erαt(ht) +
+
+1
+T
+
+αt
+
+i disc(Dt, Di) +
+
+T(cid:88)
+
+(cid:88)
+
+t=1
+
+i∈I
+
+1
+T
+
+αt
+
+iλti.
+
+We continue with bounding every expectation on the right hand side of (9) by its empirical counterpart.
+
+(8)
+
+(9)
+
+2.1. Bound 1
+T
+
+t=1
+
+i∈I αt
+
+i disc(Dt, Di)
+
+We apply Proposition 1 to every summand and combine the results using a union bound argument. We obtain that with
+probability at least 1 − δ/2 uniformly for all choices of I and α1, . . . , αT ∈ ΛI:
+
+i disc(Dt, Di) ≤ 1
+αt
+T
+
+αt
+
+i disc(St, Si) + 2
+
+2d log(2n) + log(4T 2/δ)
+
+n
+
+.
+
+(10)
+
+T(cid:88)
+
+(cid:88)
+
+t=1
+
+i∈I
+
+(cid:114)
+
+2.2. Bound 1
+T
+
+t=1 erαt(ht)
+
+Now we upper-bound the error term in two steps.
+
+1If the minimum is not attained, the same inequality follows by an argument of arbitrary close approximation.
+
+(cid:80)T
+
+t=1 erαt(ht) TO 1
+T
+
+2.2.1. RELATE 1
+T
+
+(cid:80)T
+
+t=1 ˜erαt(ht)
+
+Supplementary Material
+
+for
+
+(cid:98)erSu
+
+i
+
+(h) =
+
+1
+n
+
+(cid:96)(h(xi
+
+j), fi(xi
+
+j)).
+
+˜erα(h) =
+
+(h)
+
+(cid:88)
+
+i∈I
+
+i
+
+αi(cid:98)erSu
+n(cid:88)
+
+j=1
+
+We start with relating the multi-task error to the hypothetical empirical error, if the learner would receive labels for all
+examples in the selected labeled tasks:
+
+(11)
+
+(12)
+
+Clearly, if m = n this part is not necessary and we can avoid the resulting complexity terms.
+Because the choice of the tasks to label, I, their weights, α = (α1, . . . , αT ), and the predictors, h = (h1, . . . , hT ), all
+depend on the unlabeled data, we aim for a bound that is holds simultaneous for all choices of these quantities, under the
+condition that I and α depend only on the unlabeled samples, while h can be chosen based also on the labeled subsets.
+Our main tool is a reﬁned version of McDiarmid’s inequality, due to Maurer (Maurer, 2006) (Lemma 1), which allows us
+to make use of the internal structure of the weights, α, while deriving a large deviation bound.
+For any S = (Su
+
+1 , . . . , Su
+
+T ) deﬁne:
+
+Ψ(S) =
+
+sup
+
+I={i1,...,ik}
+
+sup
+
+α1,...,αn∈ΛI
+
+sup
+
+h1,...,hT
+
+1
+T
+
+T(cid:88)
+
+T(cid:88)
+
+t=1
+
+i=1
+
+i(eri(ht) −(cid:98)erSu
+
+i
+
+αt
+
+for
+
+g(α, h, S) =
+
+(cid:32)
+
+T(cid:88)
+
+n(cid:88)
+
+T(cid:88)
+
+1
+T n
+
+i=1
+
+j=1
+
+Lemma 1 we establish a bound on ∆+,Ψ(S) =(cid:80)
+
+For notational simplicity we will sometimes think of every Su
+
+t=1
+
+.
+
+j)))
+
+j), ft(xi
+
+i(eri(ht) − (cid:96)(ht(xi
+αt
+(cid:80)
+j(Ψ(S) − Ψij(S))2, with
+g(α, h, S \ {(xi
+
+sup
+
+i
+
+Ψij(S) = inf
+(x,y)
+
+sup
+α
+
+h
+
+(cid:33)
+
+(ht)) = sup
+
+I
+
+sup
+α
+
+sup
+
+g(α, h, S)
+
+(13)
+
+h
+
+(14)
+
+t as a set of pairs (xt
+
+i, yt
+
+i ), where yt
+
+i = ft(xt
+
+i). To apply
+
+j)} ∪ {(x, y)},
+
+j, yi
+
+(15)
+
+i.e. the possible smallest value for Ψ when changing only the data point (xi
+the (13) is attained2, i.e. Ψ(S) = g(α∗, h∗, S). Then:
+
+j). Let α∗, h∗ be the point where the sup in
+
+j, yi
+
+Ψij(S) ≥ inf
+
+(x,y)
+
+and therefore
+
+g(α∗, h∗, S \ {(xi
+
+j)} ∪ {(x, y)} )
+
+j, yi
+
+Ψ(S) − Ψij(S) ≤ g(α∗, h∗, S) − inf
+
+g(α∗, h∗, S \ {(xi
+
+j, yi
+
+(x,y)
+
+T(cid:88)
+
+t=1
+
+≤ sup
+
+(x,y)
+
+1
+T n
+
+i (−(cid:96)(h∗
+α∗t
+
+t (xi
+
+j), yi
+
+(16)
+
+(17)
+
+(18)
+
+α∗t
+i ,
+
+(cid:33)2
+
+α∗t
+
+i
+
+=
+
+1
+n
+
+,
+
+(19)
+
+j)} ∪ {(x, y)})
+T(cid:88)
+
+t (x), y)) ≤ 1
+j) + (cid:96)(h∗
+T n
+(cid:33)2
+
+(cid:32) T(cid:88)
+
+(cid:32) T(cid:88)
+
+t=1
+
+T(cid:88)
+
+α∗t
+
+i
+
+≤ 1
+T 2n
+
+where for the last inequality we use that (cid:96) is bounded in [0, 1]. Because also Ψ(S) − Ψij(S) ≥ 0, we obtain
+
+T(cid:88)
+
+n(cid:88)
+(Ψ(S) − Ψij(S))2 ≤ T(cid:88)
+
+n(cid:88)
+
+1
+
+T 2n2
+
+∆+,Ψ(S) =
+
+i=1
+
+j=1
+
+i=1
+
+j=1
+
+t=1
+
+i=1
+
+t=1
+
+2If the supremum is not attained the subsequent inequality still follows from an argument of arbitrarily close approximation.
+
+(remember that(cid:80)
+
+Supplementary Material
+
+i αi = 1 for any α ∈ ΛI). Therefore, according to Lemma 1 with probability at least 1 − δ/4:
+
+4
+log
+δ
+To bound ES Ψ(S) we use symmetrization and Rademacher variables, σij:
+
+Ψ(S) ≤ E Ψ(S) +
+
+n
+
+.
+
+E
+S
+
+Ψ(S) = E
+
+S
+
+sup
+
+I
+
+sup
+
+α1,...,αT ∈ΛI
+
+sup
+
+h1,...,hT
+
+(cid:114) 2
+(cid:32)
+T(cid:88)
+n(cid:88)
+(cid:32)
+T(cid:88)
+n(cid:88)
+T(cid:88)
+
+σijαt
+i
+
+j=1
+
+j=1
+
+i=1
+
+i=1
+
+1
+T n
+
+(cid:33)
+
+j), yi
+
+j))
+
+T(cid:88)
+i(eri(ht) − (cid:96)(ht(xi
+(cid:33)
+αt
+T(cid:88)
+
+t=1
+
+αt
+i(cid:96)(ht(xi
+
+j), yi
+j)
+
+σij
+T n
+
+t=1
+
+sup
+
+h1,...,hT
+
+T(cid:88)
+
+n(cid:88)
+
+≤ 2 E
+
+S
+
+≤ 2 E
+
+S
+
+≤ 2 E
+
+S
+
+E
+σ
+
+E
+σ
+
+E
+σ
+
+sup
+
+sup
+
+α1,...,αT ∈ΛI
+
+I
+
+1
+T
+
+T(cid:88)
+T(cid:88)
+
+t=1
+
+sup
+
+n(cid:88)
+
+sup
+α,h
+
+i=1
+
+j=1
+
+σijαi
+
+n
+
+(cid:96)(h(xi
+
+j), yi),
+
+αt∈Λ,ht
+
+i=1
+
+j=1
+
+n
+
+t=1
+
+(cid:96)(ht(xi
+
+j), yi
+j)
+
+(20)
+
+(21)
+
+(22)
+
+(23)
+
+(24)
+
+where line (23) is obtained from line (22) by dropping the assumption of a common sparsity pattern between the α-s. Note
+that the function inside the last sup is linear in α ∈ Λ, therefore supα can be reduced to the sup over the corners of the
+simplex, {(1, 0, . . . , 0), . . . , (0, . . . , 0, 1)}. At the same time, by Sauer’s lemma, the number of different choices of h on
+
+(cid:1)d. Therefore, the total number of different choices in (24) is bounded by T(cid:0) enT
+S is bounded by(cid:0) eT n
+(cid:33)2
+(cid:16) σijαi
+T(cid:88)
+n(cid:88)
+
+d
+for any choice of α and h, the norm of the T n-vector formed by the summands of (24) is bounded by 1/
+
+(cid:1)d. Furthermore,
+
+T(cid:88)
+
+n(cid:88)
+
+n, because
+
+(cid:17)2
+
+√
+
+d
+
+(cid:32) T(cid:88)
+n(cid:88)
+(cid:0)αi(cid:96)(h(xi
+j), yi)(cid:1)2 ≤ 1
+(cid:112)2(log T + d log(enT /d))
+
+n2
+
+j=1
+
+i=1
+
+.
+
+√
+
+n
+
+αi
+
+=
+
+1
+n
+
+.
+
+(25)
+
+(26)
+
+i=1
+
+j=1
+
+n
+
+(cid:96)(h(xi
+
+j), yi)
+
+=
+
+1
+n2
+
+i=1
+
+j=1
+
+Therefore, by Massart’s lemma:
+
+E
+σ
+
+sup
+α,h
+
+T(cid:88)
+
+n(cid:88)
+
+i=1
+
+j=1
+
+σilαi
+
+n
+
+(cid:96)(h(xi
+
+l), yi
+
+l ) ≤
+
+(cid:114)
+
+(cid:114) 2
+
+2.2.2. RELATE 1
+T
+
+Combining (20) and (26) we obtain that with probability at least 1 − δ/4 simultaneously for all choices of tasks to be
+labeled, I, weights α and hypotheses h:
+
+1
+T
+
+T(cid:88)
+(cid:80)T
+t=1(cid:98)erαt(ht) TO 1
+
+erαt(ht) ≤ 1
+T
+
+˜erαt(ht) +
+
+8(log T + d log(enT /d))
+
+T(cid:88)
+(cid:80)T
+T . This uniquely determines the chosen tasks I and the weights α1, . . . , αT ∈ ΛI, so
+
+t=1 ˜erαt(ht)
+
+(27)
+
+log
+
+4
+δ
+
+t=1
+
+t=1
+
++
+
+n
+
+n
+
+T
+
+.
+
+1 , . . . , Su
+
+Fix the unlabeled samples Su
+the only remaining source of randomness is the uncertainty which subsets of the selected tasks are labeled.
+For notational simplicity we pretend that exactly the ﬁrst k tasks were selected, i.e. I = {1, . . . , k}. The general case can
+be obtained by changing the indices in the proof from 1, . . . , k to i1, . . . , ik.
+To deal with the dependencies between the labeled data points we ﬁrst note that any random labeled subset Sl
+(¯si
+correspond to the unlabeled sample Su
+and (cid:96)(h, zi
+
+i =
+n) over n elements that
+). With this notation and writing Z = (Z1, . . . , Zk)
+
+m) can be described as the ﬁrst m elements of a random permutation Zi = (zi
+
+j) we deﬁne the following function
+
+j) = (cid:96)(h(¯xi
+
+j) = (xi
+zi
+j
+
+i , i.e. ¯si
+
+1, . . . , zi
+
+1, . . . , ¯si
+
+j = (¯xi
+
+j), ¯yi
+
+, yi
+zi
+j
+
+j, ¯yi
+
+T(cid:88)
+
+t=1
+
+˜erαt(ht) −(cid:98)erαt(ht) = sup
+
+k(cid:88)
+
+T(cid:88)
+
+(cid:16) 1
+
+n(cid:88)
+
+n
+
+j=1
+
+αt
+i
+
+1
+T
+
+h1,...,hT
+
+i=1
+
+t=1
+
+(cid:17)
+
+m(cid:88)
+
+j=1
+
+(cid:96)(ht, zi
+
+j) − 1
+m
+
+(cid:96)(ht, zi
+j)
+
+.
+
+(28)
+
+Φ(Z) = sup
+
+h1,...,hT
+
+1
+T
+
+Our main tool is McDiarmid’s inequality (Lemma 2) for martingales.
+
+Construct a martingale sequence
+
+Supplementary Material
+
+1, z1
+
+2, . . . , zk
+
+For this, we interpret Z = (z1
+n) as a sequence of kn dependent variables, z11, . . . , zkn. For the sake of no-
+tational consistency we will keep using double indices, with the convention that the sample index, j = 1, . . . , n, runs
+faster than the task index, i = 1, . . . , k. Segments of a sequence will be denoted by upper and lower double indices,
+ij = ∅ otherwise. We now create a martingale sequence using Doob’s
+ij = (zij, zi(j+1), . . . , z¯ı¯) for ij ≤ ¯ı¯ and z¯ı¯
+z¯ı¯
+construction (Doob, 1940):
+Wij = E
+
+{Φ(Z)| zij
+
+(29)
+
+11 }.
+
+Z
+
+where here and in the following when taking expectations over Z it is silently assumed that the expectation is taken only
+with respect to variables that are not conditioned on. Note that because of this convention, the expectations in (29) is only
+with respect to zi(j+1), . . . , zkn, so each Wij is a random variable of z11, . . . , zij. In particular, W00 = EZ Φ(Z) and
+Wkn = Φ(Z), and the in between sequence is a martingale with respect to z11, . . . , zkn:
+{Φ(Z)|zi(j−1)
+
+(cid:9) = E
+
+11}(cid:12)(cid:12) zi(j−1)
+
+} = Wi(j−1).
+
+{Φ(Z)| zij
+
+(cid:8) E
+
+} = E
+
+(30)
+
+11
+
+11
+
+{ Wij|zi(j−1)
+E
+Z
+
+11
+
+Z
+
+Z
+
+Z
+
+Upper-bound (cid:98)R2
+In order to apply Lemma 2 we need an upper bound on the coefﬁcient (cid:98)R2 deﬁned there.
+
+Let i ∈ {1, . . . , k} and j ∈ {1, . . . , n} be ﬁxed and let π = (π1, . . . , πk) be speciﬁc permutations of n elements for which
+we use the same index conventions as for Z. By σ and τ will denote elements in πin
+i(j+1), i.e. σ and τ do not occur in any
+of the ﬁrst j positions of the permutation πi. Then
+
+rij(πi(j−1)
+
+11
+
+) = sup
+σ∈πin
+
+i(j+1)
+
+= sup
+σ∈πin
+
+i(j+1)
+
+{ Wij : zi(j−1)
+
+= πi(j−1)
+
+11
+
+sup
+τ∈πin
+
+i(j+1)
+
+zkn
+i(j+1)
+
+{Φ(πi(j−1)
+
+11
+
+, zij = σ} − inf
+σ∈πin
+i(j+1))} − E
+
+, σ, zkn
+
+i(j+1)
+
+zkn
+i(j+1)
+
+{ Wij : zi(j−1)
+
+11
+
+, zij = σ}
+
+11
+
+= πi(j−1)
+
+i(j+1))}(cid:105)
+
+.
+
+{Φ(πi(j−1)
+
+11
+
+, τ, zkn
+
+(31)
+
+To analyze (31) further, recall that:
+i(j+1))} =
+
+{Φ(πi(j−1)
+
+, σ, zkn
+
+11
+
+E
+zkn
+i(j+1)
+
+Φ(πi(j−1)
+
+11
+
+, σ, πkn
+
+i(j+1)) × Pr( zkn
+
+i(j+1) = πkn
+
+i(j+1) |zi(j−1)
+
+11
+
+= πi(j−1)
+
+11
+
+∧ zij = σ ),
+
+11
+
+(cid:104) E
+(cid:88)
+
+πkn
+
+i(j+1)
+
+where here and in the following we use the convention that sums over parts of π run only over values that lead to valid
+permutations. Because the permutations of different task are independent, this is equal to
+
+Φ(πi(j−1)
+
+11
+
+, σ, πkn
+
+i(j+1) Pr( zin
+
+i(j+1) = πin
+
+i(j+1) |zi(j−1)
+
+i1
+
+= πi(j−1)
+
+i1
+
+∧ zij = σ ) Pr(zkn
+
+(i+1)1 = πkn
+
+(i+1)1)
+
+(32)
+
+(cid:88)
+
+=
+
+πkn
+
+i(j+1)
+
+We make the following observation: for any ﬁxed πij
+sum over all positions where τ can occur, and a sum over all conﬁguration for the entries that are not τ:
+
+i1, we can rephrase a summation over πin
+
+i(j+1) into a
+
+F (πin
+
+i(j+1)) =
+
+F (πi(l−1)
+
+i(j+1), τ, πin
+
+i(l+1))
+
+(33)
+
+i1 and any τ (cid:54)∈ πij
+n(cid:88)
+(cid:88)
+
+(cid:88)
+
+l=j+1
+
+πi(l−1)
+
+i(j+1)
+
+πin
+
+i(l+1)
+
+for any function F . Applying this to the summation in (32), we obtain
+
+Φ(πi(j−1)
+
+11
+
+, σ, πkn
+
+i(j+1)) Pr( zin
+
+i(j+1) = πin
+
+πkn
+
+i(j+1)
+
+× Pr(zkn
+
+(i+1)1 = πkn
+
+(i+1)1) =
+
+n(cid:88)
+
+(cid:88)
+
+i1
+
+i(j+1) |zi(j−1)
+(cid:88)
+
+Φ(πi(j−1)
+
+11
+
+= πi(j−1)
+
+i1
+
+∧ zij = σ )
+
+, σ, πi(l−1)
+
+i(j+1), τ, πkn
+
+i(l+1))
+
+l=j+1
+
+πi(l−1)
+
+i(j+1)
+
+πkn
+
+i(l+1)
+
+(cid:88)
+
+πin
+
+i(j+1)
+
+(cid:88)
+
+× Pr( zi(l−1)
+× Pr(zkn
+
+i(j+1) = πi(l−1)
+(i+1)1 = πkn
+
+i(j+1) ∧ zkn
+(i+1)1) = E
+l∼U n
+
+Supplementary Material
+i(l+1)|zi(j−1)
+Φ(Z|zi(j−1)
+
+i(l+1) = πkn
+
+11
+
+11
+
+E
+Z
+
+j+1
+
+= πi(j−1)
+= πi(j−1)
+
+11
+
+∧ zij = σ ∧ zil = τ )
+∧ zij = σ ∧ zil = τ ),
+
+11
+
+j+1 denotes the uniform distribution over the set {j + 1, . . . , n}. The analogue derivation can be applied to the
+
+where U n
+quantity in line (31) with σ and τ exchanged.
+For any Z denote by Zij↔il the permutation obtained by switching zij and zil. Then, due to the linearity of the expectation:
+
+rij(πi(j−1)
+
+11
+
+) = sup
+σ,τ
+
+{ E
+l∼U n
+
+j+1
+
+{Φ(Z) − Φ(Zij↔il)|zi(j−1)
+E
+Z
+
+11
+
+= πi(j−1)
+
+11
+
+, zij = σ, zil = τ ).
+
+(34)
+
+From the deﬁnition of Φ we see that Φ(Z) − Φ(Zij↔il) = 0 when j, l ∈ {1, . . . , m} or j, l ∈ {m + 1 . . . , n}. Since
+l > j in (34) this implies rij(πi(j−1)
+) = 0 for j ∈ {m + 1, . . . , n}. The only remaining cases are j ∈ {1, . . . , m} and
+l ∈ {m + 1, . . . , n}, for which we obtain
+
+11
+
+Φ(Z) − Φ(Zij↔il) ≤ sup
+
+h1,...,hT
+
+1
+T
+
+αt
+i
+
+1
+m
+
+(−(cid:96)(ht, zi
+
+j) + (cid:96)(ht, zi
+
+l )) ≤ 1
+T m
+
+αt
+i.
+
+where for the ﬁrst inequality we used that sup F − sup G ≤ sup(F − G) for any F, G, and for the second inequality we
+used that (cid:96) is bounded by [0, 1]. Consequently, rij(πi(j−1)
+m(cid:88)
+
+i in this case. Therefore3
+
+(cid:16) n − m
+
+(cid:17)2 k(cid:88)
+
+(cid:32) T(cid:88)
+
+) ≤ n−m
+n−j
+
+k(cid:88)
+
+n(cid:88)
+
+k(cid:88)
+
+(cid:33)2
+
+(cid:33)2
+
+t=1 αt
+
+T m
+
+11
+
+1
+
+(cid:0)rij(πi(j−1)
+
+11
+
+)(cid:1)2 ≤ 1
+
+(cid:98)R2 =
+
+(35)
+
+αt
+i
+
+αt
+i
+
+.
+
+≤ 1
+T 2m
+
+T 2m2
+
+j=1
+
+n − j
+
+i=1
+
+t=1
+
+i=1
+
+t=1
+
+(cid:80)T
+(cid:32) T(cid:88)
+
+T(cid:88)
+
+t=1
+
+T(cid:88)
+
+t=1
+
+i=1
+
+j=1
+
+Upper-bound EZ Φ(Z)
+
+The main tool here is Lemma 3. First we rewrite Φ(Z) in the following way:
+
+T(cid:88)
+k(cid:88)
+
+t=1
+
+i=1
+
+αt
+
+k(cid:88)
+i((cid:98)erSu
+(h) −(cid:98)erSl
+i((cid:98)erSu
+(h) −(cid:98)erSl
+
+i=1
+
+i
+
+i
+
+i
+
+i
+
+(h)).
+
+Φ(Z) =
+
+1
+T
+
+sup
+
+h
+
+Φt(Z) = sup
+h
+
+m αt
+
+T(cid:88)
+
+t=1
+
+Φt(Z)
+
+(h)) =
+
+1
+
+T m
+
+Note that even though H can be inﬁnitely large, we can identify a ﬁnite subset that represents all possible predictions of
+hypothesis in H on Su
+k . We denote their number by L ≤ 2kn and the corresponding hypotheses by h1, . . . , hL.
+Let t ∈ {1, . . . , T} be ﬁxed. For every i ∈ {1, . . . , k} deﬁne a set of n L-dimensional vectors, V t
+in}, where
+for every j ∈ {1, . . . , n}:
+
+i = {vt
+
+i1, . . . , vt
+
+(cid:0) ˜eri(h1) − (cid:96)(h1(xi
+
+j)(cid:1), . . . , αt
+
+i
+
+(cid:0) ˜eri(hL) − (cid:96)(hL(xi
+
+j), yi
+
+j)(cid:1)(cid:105)
+
+1 ∪ ··· ∪ Su
+(cid:104)
+
+vt
+ij =
+
+αt
+i
+
+j), yi
+
+.
+
+(36)
+
+With this notation, for every i ∈ {1, . . . , k} choosing a random subset Sl
+i uniformly without replacement.
+V t
+For every i ∈ {1, . . . , k}, let Ui = {ui1, . . . , uim} be sampled from V t
+
+i ⊂ Su
+
+i in that way. Then
+
+i corresponds to sampling m vectors from
+
+ k(cid:88)
+
+m(cid:88)
+
+i=1
+
+j=1
+
+ ,
+
+Φt(Z) = F
+
+uij
+
+(37)
+
+3We generously bound n−m
+
+n−j ≤ 1 in this step. By keeping the corresponding factor in the analysis one obtains that the constant B in
+
+the theorem can be improved at least by a factor of
+
+(n−m)2
+
+(n−0.5)(n−m−0.5) .
+
+E
+Z
+
+Φt(Z) = E
+
+U1,...,Uk
+
+F
+
+=
+
+E
+
+U1,...,Uk−1
+
+Supplementary Material
+
+m(cid:88)
+
+j=1
+
+F
+
+Uk
+
+i=1
+
+i=1
+
+j=1
+
+j=1
+
+uij
+
+(cid:104)
+
+(cid:16) k(cid:88)
+(cid:17)
+m(cid:88)
+ E
+(cid:104)
+(cid:16) k−1(cid:88)
+m(cid:88)
+ E
+k−1(cid:88)
+F
+k−1(cid:88)
+m(cid:88)
+ k(cid:88)
+F
+
+j=1
+
+i=1
+
+i=1
+
+ˆUk
+
+F
+
+m(cid:88)
+
+i=1
+
+j=1
+
+m(cid:88)
+
+j=1
+
+uij +
+
+ukj
+
+m(cid:88)
+
+j=1
+
+uij +
+
+ˆukj
+
+uij +
+
+ˆukj
+
+j=1
+
+m(cid:88)
+ .
+
+ˆuij
+
+≤
+
+E
+
+U1,...,Uk−1
+
+=
+
+E
+
+U1,...,Uk−1, ˆUk
+
+≤ ··· ≤ E
+
+ˆU1,..., ˆUk
+
+(cid:105)
+(cid:17)(cid:12)(cid:12)(cid:12)U1, . . . , Uk−1
+(cid:105)
+(cid:12)(cid:12)(cid:12)U1, . . . , Uk−1
+ .
+
+where ˆUk = {uki, . . . , ukm} is a set of m vectors sampled from V t
+
+k with replacement.
+
+Repeating the process k times, we obtain
+
+(38)
+
+(39)
+
+(40)
+
+(41)
+
+(42)
+
+(43)
+
+where the function F takes as input an L-dimensional vector and returns the value of its maximum component. We now
+bound EZ Φt(Z) by applying Lemma 3 k times:
+
+By Lemma 4 F (x) is a convex function. Thus F (const + x) is also convex and we can apply Lemma 3 with respect to Uk.
+
+Note that writing the conditioning in the above expressions is just for clarity of presentation, since the U1, . . . , Uk are
+actually independent of each other.
+Switching from the U sets by the ˆU sets in Φ corresponds to switching from random subsets Sl
+of m points sampled from Su
+
+i to random sets ˜Si consisting
+
+i uniformly with replacement. Therefore we obtain
+E
+Z
+
+Φt(Z) = E
+
+k) ≤ E
+
+1, . . . , Sl
+
+Φt(Sl
+
+˜S1,..., ˜Sk
+
+Sl
+
+1,...,Sl
+k
+
+Φt( ˜S1, . . . , ˜Sk),
+
+which allows us to continue analyzing EZ Φt(Z) in the standard way using Rademacher complexities and independent
+samples. Applying the common symmetrization trick and introducing Rademacher random variables σij we obtain
+
+m(cid:88)
+k(cid:88)
+We can rewrite this using the fact that (cid:96)(y, y(cid:48)) =(cid:74)y (cid:54)= y(cid:48)(cid:75) = 1−yy(cid:48)
+
+Φt( ˜S1, . . . , ˜Sk) ≤ 2 E
+
+sup
+
+j=1
+
+i=1
+
+:
+
+h
+
+σ
+
+2
+
+σijαt
+
+i(cid:96)(h(xi
+
+j), yi
+
+j).
+
+k(cid:88)
+
+m(cid:88)
+
+i=1
+
+j=1
+
+E
+σ
+
+sup
+
+h
+
+σijαt
+
+i(cid:96)(h(xi
+
+j), yi
+
+j) = E
+
+σ
+
+sup
+
+h
+
+k(cid:88)
+
+m(cid:88)
+
+i=1
+
+j=1
+
+1 − h(xi
+2
+
+j)yi
+j
+
+σijαt
+i
+
+k(cid:88)
+
+m(cid:88)
+
+i=1
+
+j=1
+
+=
+
+1
+2
+
+E
+σ
+
+sup
+
+h
+
+−σijyi
+
+jαt
+
+ih(xi
+j)
+
+Since −σijyi
+
+j has the same distribution as σij:
+
+k(cid:88)
+
+m(cid:88)
+
+i=1
+
+j=1
+
+=
+
+1
+2
+
+E
+σ
+
+sup
+a(h)∈A
+
+σijaij(h),
+
+Supplementary Material
+
+(cid:18) ekm
+
+(cid:19)d
+
+d
+
+|A| ≤
+
+.
+
+√
+
+m
+
+i=1
+
+(αt
+
+i)2.
+
+(cid:118)(cid:117)(cid:117)(cid:116) k(cid:88)
+i)2 ·(cid:112)2dm log(ekm/d).
+(cid:118)(cid:117)(cid:117)(cid:116) k(cid:88)
+T(cid:88)
+
+(cid:114)
+
+(αt
+
+i)2 ·
+
+(αt
+
+(cid:118)(cid:117)(cid:117)(cid:116) k(cid:88)
+
+i=1
+
+j), yi
+
+j) ≤ 1
+2
+T(cid:88)
+
+At the same time:
+
+(cid:118)(cid:117)(cid:117)(cid:116) k(cid:88)
+
+(cid:107)a(cid:107)2 =
+
+m(cid:88)
+
+(αt
+
+ih(xi
+
+j))2 =
+
+i=1
+
+j=1
+
+Therefore, by Massart’s lemma (Theorem 3.3 in (Mohri et al., 2012)):
+
+By applying this result for all t we obtain:
+
+k(cid:88)
+
+m(cid:88)
+
+i=1
+
+j=1
+
+E
+σ
+
+sup
+
+h
+
+σijαt
+
+i(cid:96)(h(xi
+
+T(cid:88)
+
+t=1
+
+(44)
+
+(45)
+
+(46)
+
+.
+
+(47)
+
+where aij(h) = αt
+
+ih(xi
+
+j) and A = {a(h) : h ∈ H}. According to Sauer’s lemma (Corollary 3.3 in (Mohri et al., 2012)):
+
+E
+Z
+
+Φ(Z) =
+
+1
+
+T m
+
+E
+Z
+
+Φt(Z) ≤ 1
+T m
+
+E
+˜S
+
+Φt( ˜S) ≤ 1
+T
+
+t=1
+
+t=1
+
+i=1
+
+2d log(ekm/d)
+
+m
+
+Combining (35) and (47) with Lemma 2 we obtain that for ﬁxed unlabeled samples Su
+1 − δ/4 for all choices of h1, . . . , hT :
+
+1 , . . . , Su
+
+T with probability at least
+
+˜erαt(ht) ≤ 1
+T
+
+(cid:107)α(cid:107)2,1
+
+1
+T
+
+2d log(ekm/d)
+
+m
+
++
+
+1
+T
+
+(cid:107)α(cid:107)1,2
+
+log(4/δ)
+
+2m
+
+.
+
+By further combining it with (27) we obtain that the following inequality holds uniformly in h1, . . . , hT ∈ H with prob-
+ability at least 1 − δ/2 over the sampling of the unlabeled training sets, Su
+i)i∈I,
+provided that the subset of labeled tasks, I ⊂ {1, . . . , T}, and the task weights, α1, . . . , αT ∈ ΛI, depend deterministically
+on the unlabeled training only.
+
+T , and labeled training sets, (Sl
+
+1 , . . . , Su
+
+(cid:114)
+
+(cid:114)
+
+T(cid:88)
+
+t=1
+
+(cid:98)erαt(ht) +
+
+T(cid:88)
+
+t=1
+
+(cid:98)erαt(ht)+
+(cid:114)
+
+1
+T
+
+erαt(ht) ≤ 1
+T
+
+(cid:107)α(cid:107)2,1
+
+2d log(ekm/d)
+
+m
+
++
+
+log(4/δ)
+
+2m
+
++
+
+8(log T + d log(enT /d))
+
+n
+
++
+
+log
+
+4
+δ
+
+.
+
+(48)
+
+n
+
+(cid:114)
+
+(cid:114)
+
+(cid:107)α(cid:107)1,2
+
+1
+T
+
+(cid:114) 2
+
+T(cid:88)
+
+t=1
+
+1
+T
+
+T(cid:88)
+
+t=1
+
+1
+T
+
+The statement of Theorem 1 follows by combining (9) with (10) and (48).
+
+References
+Ben-David, Shai, Blitzer, John, Crammer, Koby, Kulesza, Alex, Pereira, Fernando, and Vaughan, Jennifer Wortman. A
+
+theory of learning from different domains. Machine Learning, 2010.
+
+Doob, Joseph L. Regularity properties of certain families of chance variables. Transactions of the American Mathematical
+
+Society, 47(3), 1940.
+
+Hoeffding, Wassily. Probability inequalities for sums of bounded random variables. Journal of the American Statistical
+
+Association, 1963.
+
+Maurer, Andreas. Concentration inequalities for functions of independent variables. Random Structures and Algorithms,
+
+2006.
+
+McDiarmid, Colin. On the method of bounded differences. In Surveys in Combinatorics, 1989.
+
+Mohri, Mehryar, Rostamizadeh, Afshin, and Talwalkar, Ameet. Foundations of Machine Learning. The MIT Press, 2012.
+
+Tolstikhin, I., Blanchard, G., and Kloft, M. Localized complexities for transductive learning. In Workshop on Computa-
+
+tional Learning Theory (COLT), 2014.
+
+

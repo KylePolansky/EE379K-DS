@@ -1,0 +1,1060 @@
+Supplementary Material for ”Collect at Once, Use Effectively:
+Making Non-interactive Locally Private Learning Possible”
+
+1
+
+(Lemma
+
+1. Omitted Proofs in Section 3
+Lemma
+Let
+x1, x2,··· , xn ∼ i.i.d.D with µ = ED[x] and
+supp(D) ⊆ B(0, 1). Let G and {yi}n
+i=1 deﬁned in the
+above procedure. For each of group Sj ﬁxed, we have the
+following with probability 2/3:
+
+in Main Body).
+
+3
+
+(cid:13)(cid:13)(cid:13) 1
+
+|Sj|
+
+(cid:88)
+
+yi∈Sj
+
+yi − Gµ
+
+≤ O
+
+(1)
+
+(cid:13)(cid:13)(cid:13)1
+
+(cid:80)
+
+(cid:33)
+
+(cid:32)
+
+(cid:18)
+
+p log(nd)
+
+(cid:112)|Sj|
+(cid:19)
+
+=
+
+l=1
+
+l=1
+
+xi
+
+(2)
+
+√
+
+Id).
+
+i∈Sj
+
+|Sj|
+
+E[x2
+
+var(x1l)
+
+1
+|Sj|
+
+p log n
+|Sj|
+
+
+(cid:13)(cid:13)(cid:13)2
+
+d(cid:88)
+
+(cid:88)
+
+≤ 1
+|Sj|
+
+i∈Sj
+ri(cid:107)1 ≤ O
+
+ri ∼ N (0, 2 log(1.25/δ)
+
+According to Markov Inequality, we have
+
+i∈Sj
+1l] ≤ 1
+|Sj| .
+
+Proof. Apparently 1|Sj|
+So we have (cid:107) 1|Sj|
+bility 1
+sample of data.
+
+|Sj|2
+with proba-
+9. We then turn to bound the loss incurred by random
+
+(cid:80)
+E(cid:13)(cid:13)(cid:13)µ − 1
+d(cid:88)
+(cid:13)(cid:13)(cid:13)µ − 1
+(cid:13)(cid:13)(cid:13)2 ≥ 9
+Given x1, x2,··· , xn ﬁxed under this event, we can easily
+(cid:80)
+derive upper bounds on entries of G(µ − 1|Sj|
+xi):
+(cid:113) log d|Sj| with probability 1− 1
+for g ∼ N (0, Id) and q = µ − 1|Sj|
+xi, we have
+i∈Sj
+|gT q| ≤ 12
+9d. By union bound
+(cid:32)(cid:115)
+(cid:13)(cid:13)(cid:13)G(µ − 1
+we have the following with probability 2
+9:
+
+ ≤ 1
+(cid:80)
+
+(cid:88)
+
+(cid:88)
+
+≤ O
+
+(cid:33)
+
+|Sj|
+
+|Sj|
+
+i∈Sj
+
+i∈Sj
+
+xi)
+
+P
+
+xi
+
+(cid:13)(cid:13)(cid:13)1
+
+p log d
+|Sj|
+
+|Sj|
+
+9
+
+.
+
+i∈Sj
+
+Putting the two inequalities together using union bound, we
+get the result.
+Lemma 2 (Lemma 6 in Main Body). Under the assump-
+tions made in Section 3.2, given projection matrix Φ, with
+
+high probability over the randomness of private mecha-
+nism, we have
+
+(cid:19)
+
+(cid:18)(cid:114) m
+(cid:1) for any w ∈ C,
+
+n2
+
+(3)
+
+¯L(wpriv; ¯X, y) − ¯L( ˆw∗; ¯X, y) (cid:54) ˜O
+
+n2
+
+| ˆL(w; Z, v) − ¯L(w; ¯X, y)| (cid:54) O(cid:0)(cid:112) m
+
+Proof. Note, once we prove the uniform convergence of
+
+2n
+
+=
+
+2n
+
+1
+n
+
+2 +
+
+2 +
+
+2 +
+
+2 + 1
+
+1
+n
+1
+n
+
+|vT Z ¯w − yT ¯X ¯w|
+
+(cid:54) 1
+2n
+(cid:54) 1
+2n
+(cid:54) 1
+(cid:54) 1
+2n
+1
+n
+
+¯wT (Q − ¯X T ¯X) ¯w − 1
+n
+
+then the conclusion holds directly. Now, we will prove
+the uniform convergence. Note Z = ¯X + E, where
+E ∈ Rn×m, and each entry eij ∼ N (0, σ2), v = y + r,
+where r ∼ N (0, σ2In). Denote ¯w = ΦT w.
+
+(cid:0)vT Z ¯w − yT ¯X ¯w(cid:1)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)vT Z ¯w − yT ¯X ¯w(cid:12)(cid:12)
+(cid:13)(cid:13) ¯X T E(cid:13)(cid:13)F (cid:107) ¯w(cid:107)2
+(cid:1)(cid:107) ¯w(cid:107)2
+(cid:18)
+
+(cid:12)(cid:12)(cid:12) ˆL(w; Z, v) − ¯L(w; ¯X, y)
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12) 1
+(cid:13)(cid:13)Q − ¯X T ¯X(cid:13)(cid:13)2 (cid:107) ¯w(cid:107)2
+(cid:13)(cid:13)Q − ¯X T ¯X(cid:13)(cid:13)F (cid:107) ¯w(cid:107)2
+(cid:13)(cid:13)Z T Z − nσ2Im − ¯X T ¯X(cid:13)(cid:13)F (cid:107) ¯w(cid:107)2
+(cid:13)(cid:13)F (cid:107) ¯w(cid:107)2
+(cid:13)(cid:13)ET E − nσ2Im
+(cid:0)(cid:13)(cid:13)ET y(cid:13)(cid:13)2 +(cid:13)(cid:13) ¯X T r(cid:13)(cid:13)2 +(cid:13)(cid:13)ET r(cid:13)(cid:13)2
+(cid:13)(cid:13)ET E − nσ2Im
+(cid:13)(cid:13)2
+(cid:113) m log m
+(cid:13)(cid:13)F
+j=1((cid:80)m
+(cid:80)m
+(cid:80)m
+(cid:16) m(cid:107)qj(cid:107)2σ2
+j=1((cid:80)m
+(cid:80)m
+(cid:17)
+(cid:16) mσ2
+, as (cid:80)
+
+(cid:13)(cid:13)ET E − nσ2Im
+(cid:13)(cid:13) ¯X T E(cid:13)(cid:13)2
+(cid:80)m
+(cid:19)
+
+random projection, we know
+From the property of
+(cid:107) ¯w(cid:107)2
+(cid:54) 1 with high probability. Besides, as each en-
+try in E is i.i.d. Gaussian, and E[ET E] = nσ2Im,
+thus we have 1
+2n
+with high probability according to lemma 3, hence
+) with high prob-
+1
+2n
+ability.
+
+j ei)2), where
+As
+F = 1
+qj, ei are the j-th and i-th column of ¯X and E respec-
+tively. For each j ∈ [m],
+j ei)2 obeys Chi-
+square distribution (with some scaling), thus with high
+probability, 1
+. There-
+n2
+j ei)2) (cid:54)
+fore, by union bound, we have 1
+n2
+j (cid:107)qj(cid:107)2 =
+
+(cid:113) log m
+
+(cid:18) m(cid:80)
+
+j ei)2 (cid:54) O
+
+n2
+i=1(qT
+
+j(cid:107)qj(cid:107)2σ2
+n2
+
+(cid:54) O(σ
+
+i=1(qT
+
+i=1(qT
+
+i=1(qT
+
+(cid:54) O
+
+(cid:19)
+
+= O
+
+(cid:17)
+
+2 +
+
+1
+n2
+
+1
+n2
+
+O
+
+n2
+
+σ
+
+n
+
+n
+
+n
+
+n|vT Z ¯w − yT ¯X ¯w|
+
+Non-interactive Local DP Learning
+
+F
+
+(cid:54) n. Hence, there is 1
+
+(cid:13)(cid:13) ¯X(cid:13)(cid:13)2
+(cid:13)(cid:13) ¯ET y(cid:13)(cid:13)2
+
+(cid:18)(cid:113) mσ2
+(cid:19)
+(cid:13)(cid:13) ¯X T E(cid:13)(cid:13)F
+(cid:18)(cid:113) mσ2
+(cid:19)
+(cid:13)(cid:13) ¯ET r(cid:13)(cid:13)2
+(cid:13)(cid:13) ¯X T r(cid:13)(cid:13), according to matrix
+(cid:16) 1√
+(cid:17)
+
+with high probability. Using similar augument, we have
+1
+n
+with high probability. For 1
+n
+concentration inequality (Theorem 4.1.1 in (Tropp et al.,
+2015)), we have 1
+n
+
+(cid:18)(cid:113) mσ2
+(cid:19)
+(cid:13)(cid:13) ¯X T r(cid:13)(cid:13)2
+
+(cid:54) O
+
+(cid:54) O
+
+(cid:54) O
+
+(cid:54) O
+
+, 1
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+.
+
+Combine all these results together, we obtain the desired
+conclusion.
+Lemma 3 ((Vershynin, 2009)). Suppose x ∈ Rd be a ran-
+dom vector satisﬁes E[xxT ] = Id. Denote (cid:107)x(cid:107)φ1
+= M,
+where (cid:107)·(cid:107)ψ1
+represents Orlicz ψ1-norm. Let x1, . . . , xn be
+independent copies of x, then for every  ∈ (0, 1), we have
+
+(cid:32)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13) 1
+
+n
+
+n(cid:88)
+
+i=1
+
+Pr
+
+xixT
+
+i − Id
+
+Theorem 1 (Theorem 3 in Main Body). Under the assump-
+for β > 0,
+tion in this section, set m = Θ
+then with high probability , there is
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)2
+
+(cid:54) de−n2/4M 2
+
+> 
+
+(cid:33)
+(cid:17)
+(cid:16)(cid:112)n2 log d
+(cid:32)(cid:18) log d
+(cid:19)1/4(cid:33)
+
+n2
+
+L(wpriv) − L(w∗) = ˜O
+
+Proof. On one hand,
+
+L(wpriv) − L(w∗)
+=L(wpriv) − ¯L(wpriv) + ¯L(wpriv) − ¯L( ˆw∗)
+
++ ¯L( ˆw∗) − ¯L(w∗) + ¯L(w∗) − L(w∗)
+
+(cid:54)(cid:2)L(wpriv) − ¯L(wpriv) + ¯L(w∗) − L(w∗)(cid:3)
+(cid:11) −(cid:10)ΦT wpriv, ΦT xi
+(cid:11)|}
+(cid:11)|}]
+
+{|(cid:10)wpriv, xi
+{|(cid:104)w∗, xi(cid:105) −(cid:10)ΦT w∗, ΦT xi
+
++ ¯L(wpriv) − ¯L( ˆw∗)
+
+(cid:54)G[max
+
+i
+
++ max
++ [ ¯L(wpriv) − ¯L( ˆw∗)]
+
+i
+
+(cid:18)(cid:113) log d
+
+(cid:19)
+
+∀w ∈ C,∀x ∈ D. Therefore, the ﬁrst term in equation (4)
+is less than O
+
+From lemma 2, we know ¯L( ¯wpriv)− ¯L( ¯w∗) (cid:54) ˜O(cid:0)(cid:112) m
+
+(cid:1)
+
+m
+
+.
+
+holds with high probability. Combine these two inequali-
+ties, it is easy to determine the optimal m, then obtain the
+conclusion.
+
+n2
+
+Corollary 1 (Corollary 2 in Main Body). Algorithm LDP
+kernel mechanism satisﬁes (, δ)-LDP, and with high prob-
+ability, there is
+
+L ˆH ( ˆwpriv) − LH (f∗) (cid:54) ˜O
+
+|Φ(x)T f∗ − ( ˆΦ(x))T ˆwpriv| (cid:54) ˜O
+
+sup
+x∈X
+
+(cid:32)(cid:18) d
+(cid:32)(cid:18) d
+
+n2
+
+(cid:19)1/4(cid:33)
+(cid:19)1/8(cid:33)
+
+n2
+
+Proof. Algorithm satisﬁes local privacy is obvious. For
+excess risk, as L ˆH ( ˆwpriv) − LH (f∗) = L ˆH ( ˆwpriv) −
+L ˆH (g∗) + L ˆH (g∗) − LH (f∗), follow nearly the same
+proof of lemma 5 of sparse linear regression, we have
+L ˆH ( ˆwpriv) − L ˆH (g∗) (cid:54) ˜O
+. On the other hand,
+nearly borrow the proof of Lemma 17 in (Rubinstein et al.,
+2012) and property of RRF , we have
+
+(cid:18)(cid:113) dp
+
+(cid:19)
+
+n2
+
+L ˆH (g∗) − LH (f∗) (cid:54) ˜O
+(cid:17)
+
+(cid:16)√
+
+dn2
+
+Combine above two inequalities, and choose optimal dp as
+˜O
+, we obtain the ﬁrst inequality of the conclu-
+sion. Then combine lemma 7 in this paper, it is easy to
+obtaint the second inequality.
+
+(cid:32)(cid:115)
+
+(cid:33)
+
+d
+dp
+
+2
+
+=
+
+−(cid:107)ΦT (w−x)(cid:107)2
+
+(where G is the Lipschitz constant)
+On the other hand, for ∀w ∈ C,∀x ∈ D, there is
+
+|(cid:104)w, x(cid:105) −(cid:10)ΦT w, ΦT x(cid:11)|
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:107)ΦT (w+x)(cid:107)2
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:107)ΦT (w+x)(cid:107)2
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:107)ΦT (w−x)(cid:107)2
+(cid:18)(cid:113) log d
+ity, there is |(cid:104)w, x(cid:105) −(cid:10)ΦT w, ΦT x(cid:11)| (cid:54) O
+
+According to the results of random projection w.r.t. ad-
+ditive error (Dirksen, 2016), we know with high probabil-
+, for
+
+4
+−(cid:107)w+x(cid:107)2
+
+− (cid:107)w+x(cid:107)2
+
+(cid:12)(cid:12)(cid:12)(cid:12) +
+
+2−(cid:107)w−x(cid:107)2
+4
+
+(cid:19)
+
+(cid:54)
+
+4
+
+4
+
+2
+
+2
+
+2
+
+2
+
+2
+
+m
+
+−(cid:107)w−x(cid:107)2
+
+2
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+(4)
+
+2. Omitted contents and proofs in Section 4
+2.1. Relations between smooth generalized linear losses
+
+(SGLL) and generalized linear models (GLM)
+
+Note that a model is called GLM, if for x, w∗ ∈ Rd, label
+y with respect to x is given by a distribution which belongs
+to the exponential family:
+
+p(y|x, w∗) = exp
+
++ c(y, Φ)
+
+(5)
+
+(cid:18) yθ − b(θ)
+
+Φ
+
+(cid:19)
+
+where θ, Φ are parameters, and b(θ), c(y, Φ) are known
+functions. Besides, there is an one-to-one continuous dif-
+ferentiable transformation g(·) such that g(b(cid:48)(θ)) = xT w∗.
+According to the key equality g(b(cid:48)(θ)) = xT w∗, usually
+we can obtain smooth function θ = h1(xT w∗), b(θ) =
+h2(xT w∗),
+function
+
+and what’s more,
+
+univariate
+
+Non-interactive Local DP Learning
+
+γ
+
+approximation error, we know |(g(w)−ˆg(w))T (v−w)| (cid:54)
+2 . What’s more, as L(w) is convex and β-smooth, that
+is 0 (cid:54) L(v) − L(w) − g(w)T (v − w) (cid:54) β
+2 (cid:107)v − w(cid:107)2.
+Combined these inequalities, we obtain
+
+− γ
+
+2
+
+(cid:54) L(v) − L(w) − ˆg(w)T (v − w) (cid:54) β
+
+2 (cid:107)v − w(cid:107)2 + γ
+
+2
+
+⇐⇒0 (cid:54) L(v) − (L(w) − γ
+
+2 ) − ˆg(w)T (v − w) (cid:54) β
+
+2 (cid:107)v − w(cid:107)2 + γ
+
+.
+As L(v) − L(w) − ˆg(w)T (v − w) = L(v) − L(w) −
+g(w)T (v − w) + (g(w) − ˆg(w))T (v − w), and from the
+
+var
+
+(c2k − c1kzy)tkrk+1
+
+(cid:54) O
+
+(cid:34) p(cid:88)
+
+k=0
+
+hi(x)(i = 1, 2) satisﬁes the absolutely smooth prop-
+erty.
+For such GLM, if we consider optimizing the expected neg-
+ative logarithmic probability −E(x,y)∼D log p(x, y; w),
+once discarding unrelated terms to w, we obtain the new
+:= E(x,y)∼D(cid:96)(w; x, y), where
+population loss, L(w)
+(cid:96)(w; x, y) = −yh1(xT w)+h2(xT w), exactly the form of
+smooth generalized linear loss deﬁned in section 4. Hence
+our SGLL is a natural loss deﬁned by GLM with additional
+smoothness assumptions.
+
+2.2. Omitted proofs
+Lemma 4 (Lemma 8 in Main Body). Given any α > 0,
+α , p = (cid:100)k + eµ2(k; r)(cid:101), where c is a
+by setting k = c ln 1
+constant, we have
+
+(cid:54) α.
+
+(cid:13)(cid:13)(cid:13) ˆfp(x) − f (x)
+(cid:13)(cid:13)(cid:13)∞
+(cid:54) 2(cid:13)(cid:13)f (k)(cid:13)(cid:13)T
+
+(cid:13)(cid:13)(cid:13)∞
+
+over [−1, 1], and(cid:13)(cid:13)f (k)(cid:13)(cid:13)T
+(cid:13)(cid:13)(cid:13) ˆfp(x) − f (x)
+
+Proof. As f, f(cid:48),··· , f (k−1) are absolutely continuous
+(cid:54) µ1(k; r)µ2(k; r)k, according
+
+to the results in (Trefethen, 2008), we have
+
+πk(p − k)k
+(cid:54) 2µ1(k; r)
+
+πkek
+
+(6)
+
+It is easy to see there exists c > 0, such that the term (6) is
+less than α with chosen k, hence the conclusion holds.
+Lemma 5 (Lemma 9 in Main Body). For any γ > 0,
+γ , p = (cid:100)k + 2µ2(k; r)(cid:101), then algo-
+setting k = c ln 4r
+rithm 7 outputs a (γ, β, σ) stochastic oracle, where σ =
+˜O
+
+σ0 + γ + p2p+1(4r)p+1
+
+(cid:16)
+
+(cid:17)
+
+.
+
+p+2
+
+Proof. According to lemma 4, we know the approximation
+error, | ˆm(w; x, y) − m(w; x, y)| (cid:54) γ
+2r . For any ﬁxed
+(x, y), from the construction of stochastic inexact gradi-
+ent oracle, there is E[ ˜G(w; b)|x, y] = ˆG(w; x, y). Denote
+ˆg(w) = E(x,y)∼D[ ˆG(w; x, y)], thus we have
+
+(cid:20)(cid:13)(cid:13)(cid:13) ˜G(w; b) − ˆg(w)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+
+E
+
+=E
+
++ E
+
+(cid:20)(cid:13)(cid:13)(cid:13) ˜G(w; b) − ˆG(w; x, y)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+(cid:20)(cid:13)(cid:13)(cid:13) ˆG(w; x, y) − ˆg(w)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+(cid:19)2(cid:33)
+(cid:32)(cid:18) r(2rp)p+1
+
++ γ + σ0
+
+p+2
+
+For above two terms, combined with results given in lemma
+6, we we obtain
+
+(cid:20)(cid:13)(cid:13)(cid:13) ˜G(w; b) − g(w)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+
+E
+
+(cid:54) ˜O
+
+Note the function value oracles in the stochastic oracle
+deﬁnition (either Fγ,β,σ(·) or fγ,β,σ(·)) do not play any
+role in the optimization algorithm, hence we can set it as
+L(w) − γ
+Lemma 6. Based on above statements, we have
+
+2 , though we do not know how to calculate.
+
+(cid:18) p4p+2(4r)2p+2
+
+(cid:19)
+
+2p+4
+
+(cid:54) ˜O
+
+(cid:54) (γ + σ0)2
+
+E
+
+E
+
+(cid:20)(cid:13)(cid:13)(cid:13) ˜G(w; b) − ˆG(w; x, y)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+(cid:20)(cid:13)(cid:13)(cid:13) ˆG(w; x, y) − ˆg(w)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+var(tj) (cid:54) (cid:81)j(j+1)/2
+)2j(cid:17)
+(cid:16)
+(cid:80)p
+
+( p(p+1)
+
+˜O
+
+
+
+Proof. First, we calculate the variance of each tk,
+i=j(j−1)/2+1(var(wT zi) + (E[wT zi])2) (cid:54)
+.
+
+|bmk| (cid:54) max
+θ∈(0, 1
+2 )
+
+(cid:20) (1 − θ)1−θ
+
+Next, we upper bound the coefﬁcient ck (as it is the same
+for c1k and c2k, hence we use ck for short). Note ck =
+m=k ambmk, where am is the coefﬁcient of original
+function represented by Chebyshev basis, bmk is the co-
+efﬁcient of order k monomial in Chebyshev basis Tm(x),
+where 0 (cid:54) k (cid:54) m. According to the formula of Tm(x)
+given in (Qazi & Rahman, 2007) and well-known Stirling’s
+approximation, after some translation, we have
+
+(cid:18)√
+m2m(cid:1)
+(cid:54)O(cid:0)√
+(cid:1), thus ck = (cid:80)p
+we have am (cid:54) O(cid:0) 1
+var(cid:2)(c2k − c1kzy)tkrk+1(cid:3) (cid:54)r2k+2E(cid:104)
+(cid:18) p4k+2(4r)2p+2
+
+i(x)(i ∈
+Besides, from the absolutely smooth property of h(cid:48)
+{1, 2}) and the convergence results in (Trefethen, 2008),
+m=k ambmk (cid:54)
+
+((c2k − c1kzy)tk)2(cid:105)
+
+m2
+O (2p). Hence, there is
+
+θθ(1 − 2θ)1−2θ
+
+(cid:21)m(cid:19)
+
+(cid:19)
+
+m ·
+
+O
+
+As each (c2k−c1kzy)tkrk+1 is independent with each other
+(for different k), which leads to
+
+(cid:54)O
+
+(cid:35)
+
+2k+2
+
+(cid:18) p4p+2(4r)2p+2
+
+(cid:19)
+
+2p+2
+
+Non-interactive Local DP Learning
+
+2
+
+E
+
+(cid:18) p4p+2(4r)2p+2
+
+(cid:1). Therefore,
+Moreover, var(z0) (cid:54) O(cid:0) 1
+(cid:20)(cid:13)(cid:13)(cid:13) ˜G(w; b) − ˆG(w; x, y)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+(cid:20)(cid:13)(cid:13)(cid:13) ˆG(w; x, y) − ˆg(w)
+(cid:20)(cid:13)(cid:13)(cid:13) ˆG(w; x, y) − G(w; x, y) + G(w; x, y) − g(w) + g(w) − ˆg(w)
+(cid:13)(cid:13)(cid:13)2(cid:21)
+
+For second inequality in the conclusion, there is
+
+(cid:54) ˜O
+
+(cid:19)
+
+2p+4
+
+E
+
+References
+Dirksen, Sjoerd. Dimensionality reduction with subgaus-
+sian matrices: a uniﬁed theory. Foundations of Compu-
+tational Mathematics, 16(5):1367–1396, 2016.
+
+Qazi, MA and Rahman, QI. Some coefﬁcient estimates for
+polynomials on the unit interval. Serdica Mathematical
+Journal, 33(4):449p–474p, 2007.
+
+Rubinstein, B., Bartlett, P. L., Huang, L., and Taft, N.
+Learning in a large function space: Privacy-preserving
+mechanisms for svm learning. Journal of Privacy and
+Conﬁdentiality, 4(1):4, 2012.
+
+Trefethen, Lloyd N.
+
+Is gauss quadrature better than
+
+clenshaw–curtis? SIAM review, 50(1):67–87, 2008.
+
+Tropp, Joel A et al. An introduction to matrix concentra-
+tion inequalities. Foundations and Trends R(cid:13) in Machine
+Learning, 8(1-2):1–230, 2015.
+
+Vershynin, Roman. A note on sums of independent random
+
+matrices after ahlswede-winter. Lecture notes, 2009.
+
+(cid:54)E
+(cid:54)γ2 + σ2
+
+0 + 2σ0γ = (γ + σ0)2
+
+√
+
+Proposition 1. f (x) = ln(1 + e−x) is absolutely smooth
+with µ1(k; r) = r
+
+4kπ3, µ2(k; r) = rk
+e
+
+Proof. For any r, k > 0, the absolutely continuous of
+
+f (k)(rx) is obvious, now consider(cid:13)(cid:13)f (k+1)(rx)(cid:13)(cid:13)T :
+(cid:13)(cid:13)(cid:13)f (k+1)(cid:13)(cid:13)(cid:13)T
+
+(cid:90) 1
+(cid:13)(cid:13)(cid:13)f (k+2)(rx)
+(cid:13)(cid:13)(cid:13)∞
+(cid:54)πrk+2(cid:13)(cid:13)(cid:13)(cid:80)k+1
+j=1 (−1)k+jAk+1,j−1f j(1 − f )k+2−j(cid:13)(cid:13)(cid:13)∞
+k+1(cid:88)
+
+|f (k+2)(rx)|
+√
+1 − x2
+
+(cid:54)π
+
+−1
+
+dx
+
+=
+
+(cid:54)πrk+2
+
+Ak+1,j−1
+
+j=1
+
+(cid:54)π(k + 1)!rk+2
+(cid:54)√
+=r(cid:112)4π3(k + 1)
+
+4π3rk+2(k + 1)k+3/2e−k−1
+
+(cid:18) r(k + 1)
+
+(cid:19)k+1
+
+e
+
+(cid:16)
+
+2 , k = c ln 4r
+
+Theorem 2 (Theorem 6 in Main Body). For any α > 0,
+(cid:1)2cr ln(8r/α)+2(cid:0) 1
+γ , p = (cid:100)k + 2µ2(k; r)(cid:101), if n >
+set γ = α
+, using al-
+
+α )4r ln ln(8r/α)(cid:0) 4r
+
+O
+gorithms 6,7,8, then we have L(wpriv) − L(w∗) (cid:54) α.
+
+( 8r
+
+α22
+
+
+
+(cid:1)(cid:17)
+
+Proof. According to lemma 10 in main body, with
+a (γ, β, σ) stochastic oracle, SIGM algorithm con-
+to have
+verges with rate O
+
+(cid:16) σ√
+(cid:17)
+(cid:17) (cid:54) α, it sufﬁces if n > O
+(cid:16) σ√
+(cid:16)
+(cid:1)2cr ln(8r/α)+2(cid:0) 1
+α )4r ln ln(8r/α)(cid:0) 4r
+(cid:16) p2p+1(4r)p+1
+(cid:17)
+
+(cid:16) p4p+2(4r)2p+2
+
+according to lemma 5 (ignoring negligi-
+
+, as σ =
+
+In order
+
+(cid:1)(cid:17)
+
+n + γ
+
+n + γ
+
+(cid:17)
+
+O
+
+O
+
+α22p+4
+
+( 8r
+
+α22
+
+=
+
+.
+
+
+
+O
+ble σ0, γ).
+
+p+2
+
+

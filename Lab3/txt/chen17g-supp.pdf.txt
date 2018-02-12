@@ -1,0 +1,8601 @@
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix
+
+Estimation on Compressed Data’
+
+This appendix is organized as follows. In Section 1, we state all theoretical results, including our proposed Lemma 1 and
+Lemma 2 whose details are not presented in the main text of the paper. In Section 2, we provide detailed proofs for all of
+the results. In Section 3, we reformulate and discuss the current theoretical results of the counterparts: Gauss-Inverse and
+UniSample-HD. In Section 4, we give a detailed analysis of the computational complexity. Finally, in Section 5, we study
+the impact of different α on the estimation accuracy.
+Before proceeding, we ﬁrst show the notations used in this appendix.
+Notation. Let [k] denote a set of integers {1, 2, . . . , k}. Given a matrix X ∈ Rd×n, for j ∈ [d], i ∈ [n], we let xi ∈ Rd
+denote the i-th column of X, and xji denote the (j, i)-th element of X or j-th element of xi. Let {Xt}k
+t=1 denote the set of
+matrices {X1, X2, . . . , Xk}, and xji,t denote the (j, i)-th element of Xt. Let XT denote the transpose of X, and Tr(X)
+denote its trace. Let |x| denote the absolute value of x. Let (cid:107)X(cid:107)2 and (cid:107)X(cid:107)F denote the spectral norm and Frobenius norm
+j=1 |xj|q)1/q for q ≥ 1 be the (cid:96)q-norm of x ∈ Rd. Let D(x) or D({xj}) be a square
+diagonal matrix with the elements of vector x on the main diagonal, and D(X) also be a square diagonal matrix whose
+main diagonal has only the main diagonal elements of X. Finally, X (cid:22) Y means that Y − X is positive semideﬁnite.
+
+of X, respectively. Let (cid:107)x(cid:107)q = ((cid:80)d
+
+1. Provable Results
+For convenience, we ﬁrst restate the theorems and their corollaries in the following.
+Theorem 1. Assume X ∈ Rd×n and the sampling size 2 ≤ m < d. Sample m entries from each xi ∈ Rd with replacement
+by running Algorithm 1. Let {pki}d
+k=1 and Si ∈ Rd×m denote the sampling probabilities and sampling matrix, respectively.
+Then, the unbiased estimator for the target covariance matrix C = 1
+n
+
+n XXT can be recovered as
+
+(cid:80)n
+
+i=1 xixT
+
+i = 1
+
+where (cid:98)C1 = m
+
+nm−n
+
+(cid:80)n
+
+Ce = (cid:98)C1 −(cid:98)C2,
+
+i , (cid:98)C2 = m
+
+nm−n
+
+(cid:80)n
+
+i=1 SiST
+
+i xixT
+
+i SiST
+
+D(SiST
+
+i xixT
+
+i SiST
+
+i )D(bi) with bki =
+
+i=1
+
+1
+
+1+(m−1)pki
+
+, and
+
+E [Ce] = C.
+Theorem 2. Given X ∈ Rd×n and the sampling size 2 ≤ m < d, let C and Ce be deﬁned as in Theorem 1. If the sampling
+with 0 < α < 1 for all k ∈ [d] and i ∈ [n], then with probability at least
+probabilities satisfy pki = α
+1 − η − δ,
+
++ (1− α) x2
+(cid:107)xi(cid:107)2
+
+|xki|
+(cid:107)xi(cid:107)1
+
+ki
+
+2
+
+(cid:107)Ce − C(cid:107)2 ≤ log(
+
+2d
+δ
+
+)
+
+2R
+3
+
+(cid:104) 7(cid:107)xi(cid:107)2
+
+2
+
+(cid:114)
+, and σ2 =(cid:80)n
+
+2σ2 log(
+
++
+
+2d
+δ
+
+(cid:105)
+
+),
+
+(cid:104)
+
+(cid:105)
+2(cid:107)xi(cid:107)2
+n2m2α(1−α)
+≤ ϕ with 1 ≤ ϕ ≤ √
+
+where we deﬁne that R = maxi∈[n]
++ 9(cid:107)xi(cid:107)4
+n2m(1−α) + 2(cid:107)xi(cid:107)2
+Corollary 1. Given X ∈ Rd×n and sampling size 2 ≤ m < d, let C and Ce be constructed by Algorithm 1. Deﬁne
+(cid:107)xi(cid:107)1
+(cid:107)xi(cid:107)2
+
+d, and (cid:107)xi(cid:107)2 ≤ τ for all i ∈ [n]. Then, with probability at least 1 − η − δ we have
+
+n + log2( 2nd
+(cid:107)xi(cid:107)2
+n2mα (cid:107)2.
+
+n2m2(1−α)2 + 4(cid:107)xi(cid:107)2
+
+1(cid:107)xi(cid:107)2
+n2m3α2(1−α)
+
++ (cid:107)(cid:80)n
+
+η ) 14(cid:107)xi(cid:107)2
+
+8(cid:107)xi(cid:107)4
+
+1xix2
+
+nmα2
+
+i=1
+
+i=1
+
+2
+
+1
+
+1
+
+2
+
+2
+
+i
+
+(cid:16)
+
+(cid:114)
+(cid:107)Ce − C(cid:107)2 ≤ min{(cid:101)O
+(cid:113)(cid:107)C(cid:107)2
+nm , and (cid:101)O(·) hides the logarithmic factors on η, δ, m, n, d, and α.
+
+(cid:114) 1
+
+(cid:17)
+,(cid:101)O
+
+(cid:114) 1
+
+nm + τ ϕ
+
+d(cid:107)C(cid:107)2
+
+τ 2ϕ
+m
+
+(cid:114)
+
+τ ϕ
+m
+
++ τ 2
+
+(cid:16)
+
+f +
+
+f +
+
+nm
+
++ τ
+
+n
+
+n
+
+d(cid:107)C(cid:107)2
+nm
+
+(cid:17)},
+
+where f = τ 2
+
+n + τ 2ϕ2
+
+(1)
+
+(2)
+
+(3)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+;
+
++
+
+d
+n
+
+nm
+
+d
+m
+
+(cid:114)
+
+(cid:107)Cp(cid:107)2
+
+(cid:17)
+(cid:114)
+
+(cid:107)Ce − Cp(cid:107)2
+
+Additionally, assuming rank(Cp)≤ r, with probability at least 1 − η − δ − ζ we have
+
+Corollary 2. Given X ∈ Rd×n (2 ≤ d) and an unknown population covariance matrix Cp ∈ Rd×d with each column
+vector xi ∈ Rd i.i.d. generated from the Gaussian distribution N (0, Cp). Let Ce be constructed by Algorithm 1 with
+sampling size 2 ≤ m < d. Then, with probability at least 1 − η − δ − ζ,
+
+(cid:16) d2
+≤ (cid:101)O
+(cid:114)
+(cid:16) rd
+≤ (cid:101)O
+where [Ce]r is the solution to minrank(A)≤r (cid:107)A − Ce(cid:107)2, and (cid:101)O(·) hides the logarithmic factors on η, δ, ζ, m, n, d, and α.
+Corollary 3. Given X, d, m, Cp and Ce as in Corollary 2. Let(cid:81)
+k =(cid:80)k
+i with {ui}k
+i=1
+i=1 being the leading k eigenvectors of Cp and Ce, respectively. Denote by λk the k-th largest eigenvalue of Cp.
+(cid:16) d2
+(cid:101)O
+
+and {ˆui}k
+Then, with probability at least 1 − η − δ − ζ,
+
+(cid:17)
+i and (cid:98)(cid:81)
+(cid:17)
+
+(cid:107)(cid:98)(cid:81)
+k −(cid:81)
+
+k =(cid:80)k
+
+where the eigengap λk − λk+1 > 0 and (cid:101)O(·) hides the logarithmic factors on η, δ, ζ, m, n, d, and α.
+
+(cid:107)[Ce]r − Cp(cid:107)2
+
+λk − λk+1
+
+(cid:107)Cp(cid:107)2
+
+(cid:107)Cp(cid:107)2
+
+i=1 ˆui ˆuT
+
+i=1 uiuT
+
+(cid:114)
+
+rd
+nm
+
+k (cid:107)2
+
+r
+m
+
+d
+m
+
+nm
+
+nm
+
+d
+n
+
+d
+n
+
+(4)
+
+(5)
+
+(6)
+
+≤
+
++
+
++
+
++
+
+1
+
+,
+
+,
+
+Next, we present two lemmas: Lemma 1 and Lemma 2, which are used to prove the foregoing theorems. The detailed
+statements of the two lemmas are omitted in the main text of the paper owing to limited space, and now they are
+described below.
+Lemma 1. Given any vector x ∈ Rd, and m < d, sample m entries from x with replacement by running Algorithm 1 with
+k=1 denote the corresponding sampling probabilities, S ∈ Rd×m denote the corresponding
+the inputs x and m. Let {pk}d
+rescaled sampling matrix, and {ek}d
+
+k=1 denote the standard basis vectors for Rd. Then, we have
+
+k=1
+
+m3p3
+k
+
+3(m2 − 3m + 2)
+
++
+
+xxT
+
+6(m − 1)
+m3p2
+k
+
+(cid:20)
+d(cid:88)
+2(m2 − 3m + 2)
+
+k=1
+
++
+
+m3
+
+E(cid:2)(SST xxT SST )2(cid:3) =
+(cid:34)(cid:107)x(cid:107)2
+d(cid:88)
+(cid:34)(cid:107)x(cid:107)2
+
+m3
+
+k=1
+
++
+
++
+
+}) +
+
+D({ x2
+k
+pk
+
+(cid:20) 4(m − 1)
+
+m3p2
+k
+m − 1
+m3
+
++
+
+2(m3 − 6m2 + 11m − 6)
+
++
+
+m3
+
+(cid:21)
+
+m − 3
+
+3
+
+D({x2
+
+k})
+
+;
+
+(cid:21)
+
+x4
+kekeT
+k
+
+1
+
+m3p3
+k
+
+(cid:35)
+
++
+
+d(cid:88)
+
+x2
+k
+pk
+
+x2
+k
+pk
+m2 − 3m + 2
+
+k=1
+
+ekeT
+k
+
+d(cid:88)
+
+m3
+
+k=1
+
+x2
+k
+pk
+
+(cid:35)
+
+xxT
+
+1
+
++
+
+k=1
+
+k +
+
+xxT ;
+
+ekeT
+
+(
+k=1
+
+x2
+k
+mpk
+
+m − 1
+m
+m − 1
+m
+
+d(cid:88)
+E(cid:2)SST xxT SST(cid:3) =
+d(cid:88)
+E(cid:2)D(SST xxT SST )(cid:3) =
+d(cid:88)
+E(cid:2)(D(SST xxT SST ))2(cid:3) =
+(cid:21)
+E(cid:2)SST xxT SST D(SST xxT SST )(cid:3) = (E(cid:2)D(SST xxT SST )SST xxT SST(cid:3))T
+d(cid:88)
+m − 1
+m3 xxT D({ x2
+
+m3 − 6m2 + 11m − 6
+
+7(m − 1)
+m3p2
+k
+
+3(m2 − 3m + 2)
+
+6(m2 − 3m + 2)
+
+(cid:20) 1
+
+(cid:20) 1
+
+kekeT
+x4
+k ;
+
+x4
+kekeT
+
+kekeT
+k ;
+
+m3p3
+k
+
+m3pk
+
+mpk
+
+(cid:21)
+
+k +
+
+)x2
+
+m3
+
+k=1
+
++
+
++
+
++
+
+=
+
++
+
+m3pk
+
+k
+p2
+k
+
+(7)
+
+(8)
+
+(9)
+
+(10)
+
+})
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+(cid:20) 2(m2 − 3m + 2)
+(cid:20) 2(m2 − 3m + 2)
+
+m3
+
++ xxT
+
++
+
+m3
+
+(cid:21)
+
+})
+
+D({ x2
+k
+pk
+}) +
+
+}) +
+m − 1
+m3
+
+m − 1
+m3
+D({ x2
+k
+p2
+k
+
+(cid:21)
+
+D({ x2
+k
+p2
+k
+})
+
+D({ x2
+k
+pk
+k}) denotes a square diagonal matrix with {x2
+
+xxT ,
+
+k}d
+
+where the expectation is w.r.t. S, and D({x2
+extended to other similar notations.
+
+Lemma 2. Given the deﬁnitions in Lemma 1. Then, with probability at least 1 −(cid:80)d
+
+k=1 ηk, we have
+
+k=1 on its diagonal that can be
+
+f 2(xk, ηk, m),
+
+(12)
+
+(cid:104) |xk|
+
++ |xk|(cid:113) 1
+
+)
+
+3mpk
+
+where Γ is a set containing at most m different elements of [d] with its cardinality |Γ| ≤ m, and f (xk, ηk, m) = |xk| +
+log( 2
+ηk
+Remark 1. For the expressions in Lemma 1 and Lemma 2, the sampling probability pk appears in the denominator, which
+indicates that the derived bound may be sensitive to a highly small pk (cid:54)= 0. However, in terms of any pk = 0, we can deﬁne
+|xk|a
+= 0 for a, b > 0, because we follow the rule that pk = 0 only when xk = 0 and xk = 0 can never be sampled. Thus,
+pb
+k
+the aforementioned two lemmas and other derived results are applicable to the case where there exists pk = 0.
+
+log(2/ηk) ( 1
+mpk
+
+− 1
+m )
+
+9m2p2
+k
+
++
+
+.
+
+2
+
+(cid:107)SST xxSST(cid:107)2 ≤(cid:88)
+
+k∈Γ
+
+(cid:105)
+
+(11)
+
+2. Analysis
+2.1. Technical Theorems
+
+Below, we ﬁrst show the Matrix Bernstein inequality employed for characterizing the sums of independent random vari-
+ables/matrices, and then present a matrix perturbation result for eigenvalues.
+Theorem 3 (Tropp 2015, p. 76). Let {Ai}L
+i=1 ∈ Rd×n be independent random matrices with E [Ai] = 0 and (cid:107)Ai(cid:107)2 ≤ R.
+i=1 Ai(cid:107)2 ≥ ) ≤ (d +
+
+Deﬁne the variance σ2 = max{(cid:107)(cid:80)L
+
+(cid:3)(cid:107)2}. Then, P((cid:107)(cid:80)L
+
+(cid:3)(cid:107)2,(cid:107)(cid:80)L
+
+E(cid:2)AiAT
+
+E(cid:2)AT
+
+i Ai
+
+i=1
+
+i=1
+
+i
+
+−2/2
+σ2+R/3 ) for all  ≥ 0.
+
+n) exp(
+Theorem 4 (Golub & Van Loan 1996, p. 396). If A ∈ Rd×d and A + E ∈ Rd×d are symmetric matrices, then
+
+for k ∈ [d], where λk(A + E) and λk(A) designate the k-th largest eigenvalues.
+
+λk(A) + λd(E) ≤ λk(A + E) ≤ λk(A) + λ1(E)
+
+(13)
+
+2.2. Proof of Lemma 1
+Proof. According to Algorithm 1 in the main text of the paper, each column vector in the rescaled sampling matrix S ∈
+Rd×m is sampled with replacement from {rk = 1√
+are the standard basis vectors for Rd.
+Firstly, we prove Eq. (7). By the deﬁnition, we expand
+
+k=1 with corresponding probabilities {pk}d
+
+k=1, where {ek}d
+
+ek}d
+
+mpk
+
+k=1
+
+where the random variable tj is in [d].
+Passing the expectation over S through the sum in Eq. (15), we have
+
+m(cid:88)
+
+m(cid:88)
+(cid:88)
+
+j=1
+
+i(cid:54)=j∈[m]
+
+m(cid:88)
+
+d(cid:88)
+
+SST xxT SST =
+
+stj sT
+tj
+
+x
+
+xT stj sT
+tj
+
+m(cid:88)
+
+j=1
+
+=
+
+j=1
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
++
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+,
+
+m(cid:88)
+m(cid:88)
+
+j=1
+
+E
+
+=
+
+d(cid:88)
+
+j=1
+
+k=1
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+=
+
+P(tj = k)rkrT
+
+k xxT rkrT
+k
+
+j=1
+
+k=1
+
+pk
+
+1
+
+m2p2
+k
+
+ekeT
+
+k xxT ekeT
+
+k =
+
+d(cid:88)
+
+k=1
+
+x2
+k
+mpk
+
+ekeT
+k ,
+
+(14)
+
+(15)
+
+(16)
+
+and similarly
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+E (cid:88)
+d(cid:88)
+d(cid:88)
+
+i(cid:54)=j∈[m]
+
+=
+
+k=1
+
+q=1
+
+(cid:88)
+
+d(cid:88)
+
+d(cid:88)
+
+i(cid:54)=j∈[m]
+
+k=1
+
+q=1
+
+xxT stj sT
+tj
+
+=
+
+P(ti = k)P(tj = q)rkrT
+
+k xxT rqrT
+q
+
+sti sT
+ti
+
+m − 1
+m
+
+xkxq
+
+ekeT
+
+q =
+
+m − 1
+m
+
+xxT .
+
+Now, combing Eq. (16) with Eq. (18) immediately proves Eq. (7).
+Then, Eq. (8) can be proved based on Eq. (7) by
+
+E(cid:2)D(SST xxT SST )(cid:3) = D(E(cid:2)SST xxT SST(cid:3)) =
+
+d(cid:88)
+
+(
+k=1
+
+1
+
+mpk
+
++
+
+m − 1
+m
+
+)x2
+
+kekeT
+k .
+
+Alternatively, D(SST xxT SST ) can be explicitly expanded by
+
+D(SST xxT SST ) =
+
+stj sT
+tj
+
+m(cid:88)
+
+j=1
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+k
+
+m(cid:88)
+
+j=1
+
+stj sT
+tj
+
+.
+
+(17)
+
+(18)
+
+(19)
+
+(20)
+
+Thus, the whole target expectations in Eq. (9), Eq. (10) and Eq. (11) can be explicitly expanded, and we can use similar
+ways of proving Eq. (7) to prove the remainder of the lemma.
+To prove Eq. (9), we expand
+
+
+
+(21)
+
+(22)
+
+(23)
+
+(24)
+
+(25)
+
+(26)
+
+x2
+kekeT
+
+k stj sT
+tj
+
+,
+
+stj sT
+tj
+
+x2
+kekeT
+k
+
+stj sT
+tj
+
+)2
+
+m(cid:88)
+
+j=1
+
+
+
+m(cid:88)
+
+j=1
+
+x2
+kekeT
+k
+
+stj sT
+tj
+
+d(cid:88)
+m(cid:88)
+
+k=1
+
+j=1
+
+j=1
+
+j=1
+
+j=1
+
+k=1
+
+= E
+
+stj sT
+tj
+
+x2
+kekeT
+k
+
+(
+m(cid:88)
+E(cid:2)(D(SST xxT SST ))2(cid:3) = E
+ m(cid:88)
+m(cid:88)
+m(cid:88)
+m(cid:88)
++ E (cid:88)
++ E (cid:88)
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+x2
+kekeT
+
+x2
+kekeT
+
+x2
+kekeT
+
+k stj sT
+tj
+
+k stj sT
+tj
+
+k stj sT
+tj
+
+i(cid:54)=j∈[m]
+
+stj sT
+tj
+
+stj sT
+tj
+
+stisT
+ti
+
+= E
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stisT
+ti
+
++ E
+
+k=1
+
+k=1
+
+k=1
+
+j=1
+
+j=1
+
+i(cid:54)=j∈[m]
+
+k=1
+
+stj sT
+tj
+
+stj sT
+tj
+
+j=1
+
+m(cid:88)
+(cid:88)
+m(cid:88)
+(cid:88)
+
+i(cid:54)=j∈[m]
+
+j=1
+
+i(cid:54)=j∈[m]
+
+d(cid:88)
+
+stj sT
+tj
+
+k=1
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+stisT
+ti
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stisT
+ti
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+where the four terms in the last equations are calculated as:
+
+m(cid:88)
+
+d(cid:88)
+
+(23) = E
+
+m(cid:88)
+
+stj sT
+tj
+
+d(cid:88)
+
+j=1
+
+stj sT
+tj
+
+= E
+
+k=1
+
+kekeT
+x2
+
+k stj sT
+tj
+
+m(cid:88)
+d(cid:88)
+
+j=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stj sT
+tj
+
+j=1
+
+k=1
+
+k=1
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+stisT
+ti
+
+x2
+kekeT
+
+k stisT
+ti
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+d(cid:88)
+
+k=1
+
+d(cid:88)
+
+d(cid:88)
+
+k=1
+
+ek1 eT
+k1
+
+x2
+kekeT
+
+k ek1 eT
+k1
+
+ek1eT
+k1
+
+x2
+kekeT
+
+k ek1eT
+k1
+
+ek1 eT
+k1
+
+pk1pq
+
+d(cid:88)
+
+1
+m4p2
+k1
+(m2 − m)x4
+
+p2
+q
+
+k
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k ek1eT
+k1
+
+eqeT
+q
+
+d(cid:88)
+
+k=1
+
+k=1
+
+ekeT
+k
+
+x2
+kekeT
+
+k eqeT
+q
+
+m4p2
+k
+
+k=1
+
+m − 1
+m3p2
+k
+
+)x4
+
+kekeT
+k ;
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stisT
+ti
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+(cid:88)
+
+i(cid:54)=j∈[m]
+
+stisT
+ti
+
+stisT
+ti
+
+d(cid:88)
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+x2
+kekeT
+
+k stg sT
+tg
+
+x2
+kekeT
+
+k stg sT
+tg
+
+x2
+kekeT
+
+k stg sT
+tg
+
+stisT
+ti
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+d(cid:88)
+
+k=1
+
+1
+
+pk1
+
+d(cid:88)
+
+m4p4
+k1
+
+d(cid:88)
+
+k1=1
+
+q=1
+
+ekeT
+
+k +
+
+i(cid:54)=j∈[m]
+
+=
+
+k1=1
+
++ E (cid:88)
+m(cid:88)
+d(cid:88)
++ E (cid:88)
+d(cid:88)
+d(cid:88)
+
+x4
+k
+
+k=1
+
+j=1
+
+=
+
+1
+
+i(cid:54)=j∈[m]
+
+m3p3
+k
+
+=
+
+=
+
++
+
+j=1
+
+(
+k=1
+
+k=1
+
+k=1
+
+k=1
+
+k=1
+
+k1,k2,k3=1
+
+m3p3
+k
+
+m4pk1
+
+stj sT
+tj
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+g=i(cid:54)=j∈[m]
+
+g=j(cid:54)=i∈[m]
+
+g(cid:54)=i(cid:54)=j∈[m]
+
+(24) = E
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+m(cid:88)
+= E (cid:88)
++ E (cid:88)
++ E (cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+(cid:20) m(m − 1)(m − 2)
+d(cid:88)
+(25) = E (cid:88)
+d(cid:88)
+(cid:20) m(m − 1)(m − 2)
+d(cid:88)
+d(cid:88)
+(26) = E (cid:88)
+
+m(m − 1)
+m4p2
+k1
+m(m − 1)
+m4p2
+k1
+
+m(m − 1)(m − 2)
+
+i(cid:54)=j∈[m]
+
+m4pk1
+
+stisT
+ti
+
+m4pk
+
+m4pk
+
+k1,k3=1
+
+k1,k2=1
+
+k1=1
+
+k=1
+
+k=1
+
+k=1
+
++
+
++
+
+=
+
+=
+
+=
+
+stisT
+ti
+
+i(cid:54)=j∈[m]
+
+k=1
+
+ek1 eT
+k1
+
+m(m − 1)(m − 2)
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k ek3 eT
+k3
+
+ek1eT
+k1
+
+x2
+kekeT
+
+k ek1eT
+k1
+
+ek2 eT
+k2
+
+k=1
+
+x2
+kekeT
+
+k ek1 eT
+k1
+
+ek1eT
+k1
+
+x2
+kekeT
+
+k ek3 eT
+k3
+
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+ek1 eT
+k1
+
+kekeT
+x2
+
+k ek1 eT
+k1
+
+ek2eT
+k2
+
+kekeT
+x2
+
+k ek1 eT
+k1
+
+m(m − 1)
+m4p2
+k1
+
+x4
+k1
+
+ek1 eT
+k1
+
++
+
+m(m − 1)
+m4p2
+k1
+
+x4
+k1
+
+ek1 eT
+k1
+
+d(cid:88)
+
+k1=1
+
+x4
+k1
+
+ek1eT
+k1
+
++
+
+k1=1
+
+2m(m − 1)x4
+
+k
+
+x4
+k +
+
+d(cid:88)
+
+m4p2
+k
+
+m(cid:88)
+
+j=1
+
+(cid:21)
+
+(cid:21)
+
+ekeT
+k ;
+
+d(cid:88)
+
+k=1
+
+ekeT
+k ;
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x4
+k +
+
+2m(m − 1)x4
+
+k
+
+m4p2
+k
+
+(cid:88)
+
+i(cid:54)=j∈[m]
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stisT
+ti
+
+x2
+kekeT
+
+k stj sT
+tj
+
+(27)
+
+(28)
+
+(29)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+k stj sT
+tj
+
+stg sT
+tg
+
+x2
+kekeT
+
+k sthsT
+th
+
+d(cid:88)
+
+k=1
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+k=1
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
++ E
+
++ E
+
++ E
+
+k=1
+
+k=1
+
+k=1
+
+stisT
+ti
+
+stisT
+ti
+
+stisT
+ti
+
+x2
+kekeT
+
+d(cid:88)
+
+i(cid:54)=j(cid:54)=g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=h,j(cid:54)=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=g,j(cid:54)=h,g(cid:54)=h∈[m]
+
+= E (cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+(cid:20) m(m − 1)(m − 2)(m − 3)
+
+i(cid:54)=j,i(cid:54)=g,j=h,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=h,j=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i(cid:54)=h,j=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=g,j=h,g(cid:54)=h∈[m]
+
+d(cid:88)
+
+stisT
+ti
+
+stisT
+ti
+
+stisT
+ti
+
+stisT
+ti
+
+k=1
+
+k=1
+
+k=1
+
+k=1
+
++ E
+
++ E
+
++ E
+
+=
+
+k=1
+
+m4
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+k=1
+
+4m(m − 1)(m − 2)
+
+m4pk
+
+x4
+k +
+
+x4
+k +
+
+2m(m − 1)
+
+m4p2
+k
+
+(cid:21)
+
+x4
+k
+
+ekeT
+k .
+
+Combing the above terms with simpliﬁcation and reformulation completes the proof of Eq. (9).
+Now, we continue to prove Eq. (10).
+
+
+
+m(cid:88)
+
+j=1
+
+stj sT
+tj
+
+x2
+kekeT
+k
+
+x2
+kekeT
+
+k stj sT
+tj
+
+d(cid:88)
+
+stj sT
+tj
+
+k=1
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+stisT
+ti
+
+k=1
+
+stisT
+ti
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+,
+
+x
+
+j=1
+
+j=1
+
+j=1
+
+j=1
+
+j=1
+
+j=1
+
++ E
+
+= E
+
+= E
+
+stj sT
+tj
+
+stj sT
+tj
+
+stj sT
+tj
+
+stj sT
+tj
+
+xT stj sT
+tj
+
+m(cid:88)
+
+xxT stj sT
+tj
+
+xxT stj sT
+tj
+
+E(cid:2)SST xxT SST D(SST xxT SST )(cid:3)
+ m(cid:88)
+m(cid:88)
+m(cid:88)
+m(cid:88)
++ E (cid:88)
++ E (cid:88)
+m(cid:88)
+d(cid:88)
+
+m(cid:88)
+m(cid:88)
+m(cid:88)
+(cid:88)
+
+xxT stj sT
+tj
+
+xxT stj sT
+tj
+
+d(cid:88)
+
+x2
+kekeT
+
+i(cid:54)=j∈[m]
+
+i(cid:54)=j∈[m]
+
+i(cid:54)=j∈[m]
+
+stj sT
+tj
+
+stisT
+ti
+
+stisT
+ti
+
+k=1
+
+j=1
+
+j=1
+
+i(cid:54)=j∈[m]
+
+where we calculate the four terms in the last equation as shown in below:
+
+m(cid:88)
+
+(32) = E
+
+m(cid:88)
+
+j=1
+
+stj sT
+tj
+
+= E
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+xxT stj sT
+tj
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+j=1
+
+k=1
+
+k stj sT
+tj
+
++ E (cid:88)
+
+i(cid:54)=j∈[m]
+
+stisT
+ti
+
+xxT stisT
+ti
+
+stj sT
+tj
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+(30)
+
+(31)
+
+(32)
+
+(33)
+
+(34)
+
+(35)
+
+d(cid:88)
+
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+=
+
+j=1
+
+k1=1
+
+d(cid:88)
+m(cid:88)
++ E (cid:88)
+d(cid:88)
+d(cid:88)
+
+x4
+k
+
+k=1
+
+=
+
+1
+
+i(cid:54)=j∈[m]
+
+m3p3
+k
+
+1
+
+pk1
+
+d(cid:88)
+
+m4p4
+k1
+
+d(cid:88)
+
+k1=1
+
+q=1
+
+ekeT
+
+k +
+
+=
+
++
+
+=
+
++
+
+j=1
+
+(
+k=1
+
+k1,k3=1
+
+k1,k2,k3=1
+
+m3p3
+k
+
+m4pk1
+
+stj sT
+tj
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+g=i(cid:54)=j∈[m]
+
+g=j(cid:54)=i∈[m]
+
+g(cid:54)=i(cid:54)=j∈[m]
+
+(33) = E
+
+m(cid:88)
+= E (cid:88)
++ E (cid:88)
++ E (cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+(cid:20) m(m − 1)(m − 2)
+d(cid:88)
+(34) = E (cid:88)
+= E (cid:88)
++ E (cid:88)
++ E (cid:88)
+
+m(m − 1)
+m4p2
+k1
+m(m − 1)
+m4p2
+k1
+
+m(m − 1)(m − 2)
+
+i(cid:54)=j=g∈[m]
+
+i(cid:54)=j(cid:54)=g∈[m]
+
+i(cid:54)=j∈[m]
+
+m4pk1
+
+stisT
+ti
+
+stisT
+ti
+
+stisT
+ti
+
+m4pk
+
+k1,k2=1
+
+k1=1
+
+k=1
+
+=
+
++
+
+=
+
+i=g(cid:54)=j∈[m]
+
+xxT stj sT
+tj
+
+xxT stj sT
+tj
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+ek1eT
+k1
+
+xxT ek1eT
+k1
+
+ek1eT
+k1
+
+x2
+kekeT
+
+k ek1eT
+k1
+
+ek1 eT
+k1
+
+pk1 pq
+
+d(cid:88)
+
+1
+m4p2
+k1
+(m2 − m)x4
+
+p2
+q
+
+k
+
+k=1
+
+xxT ek1 eT
+k1
+
+eqeT
+q
+
+d(cid:88)
+
+k=1
+
+ekeT
+k
+
+x2
+kekeT
+
+k eqeT
+q
+
+k=1
+
+m − 1
+m3p2
+k
+
+)x4
+
+kekeT
+k ;
+
+m4p2
+k
+
+(cid:88)
+
+xxT stj sT
+tj
+
+stisT
+ti
+
+i(cid:54)=j∈[m]
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+stisT
+ti
+
+stisT
+ti
+
+stisT
+ti
+
+xxT stg sT
+tg
+
+xxT stg sT
+tg
+
+xxT stg sT
+tg
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k stj sT
+tj
+
+(36)
+
+m(m − 1)(m − 2)
+
+ek1 eT
+k1
+
+xxT ek1eT
+k1
+
+ek2 eT
+k2
+
+d(cid:88)
+
+k=1
+
+x2
+kekeT
+
+k ek3 eT
+k3
+
+ek1eT
+k1
+
+xxT ek1 eT
+k1
+
+ek1eT
+k1
+
+ek1eT
+k1
+
+xxT ek1 eT
+k1
+
+ek2eT
+k2
+
+x2
+kekeT
+
+k ek3eT
+k3
+
+x2
+kekeT
+
+k ek1eT
+k1
+
+x4
+k1
+
+ek1eT
+k1
+
++
+
+x4
+k1
+
+ek1eT
+k1
+
++
+
+d(cid:88)
+
+k1=1
+
+m(m − 1)
+m4p2
+k1
+
+x4
+k1
+
+ek1eT
+k1
+
+x4
+k +
+
+ekeT
+k ;
+
+(37)
+
+xxT stj sT
+tj
+
+stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+d(cid:88)
+
+m(m − 1)
+m4p2
+k1
+
+(cid:21)
+
+k1=1
+
+2m(m − 1)
+
+m4p2
+k
+
+m(cid:88)
+
+x4
+k
+
+d(cid:88)
+
+j=1
+
+stg sT
+tg
+
+stg sT
+tg
+
+stg sT
+tg
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+k=1
+
+x2
+kekeT
+
+k stg sT
+tg
+
+x2
+kekeT
+
+k stg sT
+tg
+
+x2
+kekeT
+
+k stg sT
+tg
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+m(m − 1)(m − 2)
+
+m4pk3
+
+ek1 eT
+k1
+
+xxT ek2eT
+k2
+
+ek3 eT
+k3
+
+x2
+kekeT
+
+k ek3 eT
+k3
+
+k1,k2,k3=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k1,k3=1
+
+k2,k3=1
+
+=
+
++
+
++
+
+=
+
+ek1eT
+k1
+
+m(m − 1)
+m4p2
+k3
+m(m − 1)
+m4p2
+k3
+m(m − 1)(m − 2)
+
+ek3eT
+k3
+
+d(cid:88)
+
+k=1
+
+xxT ek3 eT
+k3
+
+x2
+kekeT
+
+k ek3eT
+k3
+
+xxT ek2 eT
+k2
+
+x2
+kekeT
+
+k ek3eT
+k3
+
+ek3eT
+k3
+
+ek3eT
+k3
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k1,k3=1
+
+m4pk3
+m(m − 1)(m − 2)
+
+xk1x3
+k3
+
+ek1eT
+k3
+
++
+
+m(m − 1)
+m4p2
+k3
+
+xk1x3
+k3
+
+ek1 eT
+k3
+
+k1,k3=1
+
+m(m − 1)
+
+m4
+
+xxT D({ x2
+k
+p2
+k
+
+}) +
+
+m(m − 1)
+
+m4
+
+xxT D({ x2
+k
+pk
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+x2
+kekeT
+
+k stj sT
+tj
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+x2
+kekeT
+
+k sthsT
+th
+
+d(cid:88)
+
+k3=1
+
+m(m − 1)
+m4p2
+k3
+
+x4
+k3
+
+ek3 eT
+k3
+
+x4
+k
+p2
+k
+
+ekeT
+k ;
+
+(38)
+
++
+
+d(cid:88)
+
+k=1
+
+}) +
+
+(cid:88)
+
+i(cid:54)=j∈[m]
+
+stisT
+ti
+
+d(cid:88)
+
+k=1
+
+sti sT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+sti sT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+d(cid:88)
+
+k=1
+
+k=1
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+k=1
+
+k=1
+
+i(cid:54)=j,i=g,j(cid:54)=h,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=h,j(cid:54)=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i(cid:54)=g,j=h,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i(cid:54)=h,j=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=g,j=h,g(cid:54)=h∈[m]
+
+i(cid:54)=j(cid:54)=g(cid:54)=h∈[m]
+
+i(cid:54)=j∈[m]
+
+=
+
+m4
+
++ E
+
++ E
+
+(35) = E (cid:88)
+= E (cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+
++ E
+
++ E
+
++ E
+
++ E
+
+k1,k2,k3,k4=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k1,k2,k4=1
+
+k1,k2,k3=1
+
+=
+
++
+
++
+
++
+
+k1,k2,k3=1
+
+m4pk2
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+x2
+kekeT
+
+k sthsT
+th
+
+d(cid:88)
+
+k=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+k=1
+
+x2
+kekeT
+
+k ek4 eT
+k4
+
+x2
+kekeT
+
+k ek1 eT
+k1
+
+x2
+kekeT
+
+k ek2 eT
+k2
+
+i(cid:54)=j,i=h,j=g,g(cid:54)=h∈[m]
+
+m(m − 1)(m − 2)(m − 3)
+
+xk1xk2 ek1 eT
+k2
+
+ek3eT
+k3
+
+x2
+kekeT
+
+k ek4eT
+k4
+
+m4
+m(m − 1)(m − 2)
+
+m4pk1
+
+m(m − 1)(m − 2)
+
+m4pk1
+
+m(m − 1)(m − 2)
+
+xk1 xk2ek1eT
+k2
+
+ek1 eT
+k1
+
+xk1 xk2ek1eT
+k2
+
+ek3 eT
+k3
+
+xk1 xk2ek1eT
+k2
+
+ek3 eT
+k3
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+d(cid:88)
+
+k=1
+
+d(cid:88)
+
+d(cid:88)
+d(cid:88)
+
+k=1
+
+k=1
+
+d(cid:88)
+
+k1,k2=1
+
+m(m − 1)
+m4p2
+k1
+
+x4
+k1
+
+ek1 eT
+k1
+
+k1,k2
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k1=1
+
+k1,k2=1
+
+k1,k2=1
+
++
+
++
+
++
+
+=
+
++
+
++
+
+=
+
++
+
++
+
+m(m − 1)(m − 2)
+
+m4pk2
+
+xk1 xk2ek1eT
+k2
+
+ek2 eT
+k2
+
+x2
+kekeT
+
+k ek4 eT
+k4
+
+k1,k2,k4=1
+
+m(m − 1)
+m4pk1 pk2
+
+xk1 xk2ek1eT
+k2
+
+ek1eT
+k1
+
+x2
+kekeT
+
+k ek2eT
+k2
+
+xk1xk2 ek1eT
+k2
+
+m(m − 1)
+m4pk1 pk2
+m(m − 1)(m − 2)(m − 3)
+
+m4
+m(m − 1)(m − 2)
+
+m4pk1
+
+x4
+k1
+
+ek1eT
+k1
+
++
+
+ek2eT
+k2
+
+x2
+kekeT
+
+k ek1eT
+k1
+
+xk1 x3
+k2
+
+ek1eT
+k2
+
++
+
+m(m − 1)(m − 2)
+
+k1=1
+
+m4pk1
+
+x4
+k1
+
+ek1eT
+k1
+
+m(m − 1)(m − 2)
+
+k1,k2=1
+
+m4pk2
+
+m(m − 1)(m − 2)(m − 3)
+
+d(cid:88)
+
+k=1
+
+m4
+
+m(m − 1)(m − 2)
+
+m4
+
+m(m − 1)(m − 2)
+
+m4
+
+x4
+k
+pk
+
+ekeT
+
+k +
+
+xxT D({ x2
+k
+pk
+
+}) +
+
+m(m − 1)(m − 2)
+
+d(cid:88)
+
+k1=1
+
+m4pk2
+m(m − 1)
+m4p2
+k1
+
+x4
+k1
+
+m(m − 1)(m − 2)
+
+xk1x3
+k2
+
+ek1eT
+k2
+
+d(cid:88)
+
+ek1 eT
+k1
+
++
+
+d(cid:88)
+
+k=1
+
+k1=1
+
+x4
+k
+pk
+
+ekeT
+k
+
+xk1x3
+k2
+
+ek1eT
+k2
+
++
+
+xxT D({x2
+
+k}) +
+m4
+m(m − 1)(m − 2)
+
+xxT D({ x2
+k
+pk
+
+})
+
+m4
+2m(m − 1)
+
+d(cid:88)
+
+m4
+
+k=1
+
+x4
+k
+p2
+k
+
+ekeT
+k .
+
+Combing the above terms with simpliﬁcation and reformulation completes the proof of Eq. (10).
+Finally, we have to prove Eq. (11).
+
+
+
+(
+m(cid:88)
+(cid:88)
+
+j=1
+
+i(cid:54)=j∈[m]
+
+m(cid:88)
+
+stj sT
+tj
+
+x
+
+xT stj sT
+tj
+
+)2
+
+j=1
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+)2
+
+E(cid:2)(SST xxT SST )2(cid:3) = E
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
++
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+)2
+
+sti sT
+ti
+
+xxT stj sT
+tj
+
+i(cid:54)=j∈[m]
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+sti sT
+ti
+
+xxT stj sT
+tj
+
+i(cid:54)=j∈[m]
+
+)2
+
+(cid:88)
+m(cid:88)
+
+j=1
+
+i(cid:54)=j∈[m]
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+,
+
+j=1
+
+= E(
+
+= E(
+
+m(cid:88)
+m(cid:88)
+(cid:88)
+m(cid:88)
++ E (cid:88)
+
++ E(
+
++ E
+
+j=1
+
+j=1
+
+where we calculate the four terms in the last equation as shown in below:
+
+(40) = E
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+stisT
+ti
+
+xxT stisT
+ti
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+m(cid:88)
+
+j=1
+
++ E (cid:88)
+
+i(cid:54)=j∈[m]
+
+(39)
+
+(40)
+
+(41)
+
+(42)
+
+(43)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+=
+
+j=1
+
+k=1
+
+d(cid:88)
+m(cid:88)
++ E (cid:88)
+d(cid:88)
+d(cid:88)
+
+k=1
+
+=
+
+pk
+
+ekeT
+
+k xxT ekeT
+
+k ekeT
+
+k xxT ekeT
+k
+
+1
+
+m4p4
+k
+
+d(cid:88)
+
+d(cid:88)
+
+i(cid:54)=j∈[m]
+
+k=1
+
+q=1
+
+x4
+k
+
+m3p3
+k
+
+ekeT
+
+k +
+
+ekeT
+
+1
+m4p2
+kp2
+q
+(m2 − m)x4
+
+m4p2
+k
+
+pkpq
+
+d(cid:88)
+
+k=1
+
+k
+
+ekeT
+k
+
+k xxT ekeT
+
+k eqeT
+
+q xxT eqeT
+q
+
+m − 1
+m3p2
+k
+
+)x4
+
+kekeT
+k ;
+
+(cid:88)
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+i(cid:54)=j∈[m]
+stg sT
+tg
+
+xxT sthsT
+th
+
++ E
+
+
+
+(cid:88)
+
+i(cid:54)=j∈[m]
+
+1
+
++
+
+=
+
+(41) = E
+
+m3p3
+k
+
+(
+k=1
+
+ (cid:88)
+= E (cid:88)
+(cid:88)
+(cid:88)
+(cid:88)
+
++ E
+
++ E
+
+i(cid:54)=j(cid:54)=g(cid:54)=h∈[m]
+
++ E
+
+i(cid:54)=j,i=h,j(cid:54)=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i(cid:54)=h,j=g,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=h,j=g,g(cid:54)=h∈[m]
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT sthsT
+th
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT sthsT
+th
+
++ E
+
++ E
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT sthsT
+th
+
+(44)
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT sthsT
+th
+
+i(cid:54)=j,i=g,j(cid:54)=h,g(cid:54)=h∈[m]
+
+(cid:88)
+(cid:88)
+
+i(cid:54)=j,i(cid:54)=g,j=h,g(cid:54)=h∈[m]
+
+i(cid:54)=j,i=g,j=h,g(cid:54)=h∈[m]
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT sthsT
+th
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT sthsT
+th
+
+k1,k2,k3=1
+
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k2=1
+
+k1,k4=1
+
+k1,k2=1
+
+k1,k2
+
+x2
+k2
+
+k1=1
+
+(cid:107)x(cid:107)2
+
+=
+
++
+
++
+
++
+
+=
+
++
+
++
+
++
+
+=
+
+m(m − 1)(m − 2)(m − 3)
+
+xk1xk2xk3 xk4ek1eT
+k2
+
+ek3 eT
+k4
+
+k1,k2,k3,k4=1
+
+m4
+m(m − 1)(m − 2)
+
+k1,k2,k4=1
+
+m4pk1
+
+x2
+k1
+
+xk2xk4ek1 eT
+k2
+
+ek1eT
+k4
+
++
+
+d(cid:88)
+d(cid:88)
+
+k1,k2,k3=1
+
+m(m − 1)(m − 2)
+
+m4pk1
+
+m(m − 1)(m − 2)
+
+x2
+k1
+
+xk2 xk3ek1eT
+k2
+
+ek3 eT
+k1
+
+xk1x2
+k2
+
+xk4ek1eT
+k2
+
+ek2 eT
+k4
+
+m(m − 1)(m − 2)
+
+m4pk2
+
+xk1 x2
+k2
+
+m(m − 1)
+m4pk1 pk2
+
+d(cid:88)
+
+x2
+k1
+
+x2
+k2
+
+ek1eT
+k2
+
+ek1eT
+k2
+
++
+
+m(m − 1)(m − 2)(m − 3)
+
+k1,k4=1
+
+m4
+
+m(m − 1)(m − 2)
+
+m4pk1
+
+x3
+k1
+
+xk4 ek1 eT
+k4
+
++
+
+xk3ek1 eT
+k2
+
+ek3eT
+k2
+
++
+
+d(cid:88)
+
+k1,k2=1
+
+k1,k2,k4=1
+
+m4pk2
+
+m(m − 1)
+m4pk1 pk2
+
+x2
+k1
+
+x2
+k2
+
+ek1eT
+k2
+
+ek2eT
+k1
+
+xk1xk4 ek1 eT
+k4
+
+d(cid:88)
+d(cid:88)
+
+k1=1
+
+d(cid:88)
+d(cid:88)
+
+k2=1
+
+k2=1
+
+x2
+k2
+
+x2
+k2
+pk2
+
+m(m − 1)(m − 2)
+
+m4pk1
+
+x2
+k1
+
+ek1 eT
+k1
+
+m(m − 1)(m − 2)
+
+xk1 xk4ek1eT
+k4
+
+xk1x3
+k2
+
+ek1 eT
+k2
+
+m(m − 1)(m − 2)
+
+m4pk2
+
+d(cid:88)
+2m(m − 1)(m − 2)(m − 3)
+
+m(m − 1)
+m4p2
+k1
+
+ek1eT
+k1
+
+x4
+k1
+
++
+
+k2=1
+
++
+
+d(cid:88)
+
+k1=1
+
+x2
+k2
+pk2
+
+xxT +
+
+m4
+
+k1,k4=1
+
+m4
+
+m(m − 1)
+m4pk1
+
+x2
+k1
+
+ek1 eT
+k1
+
+m(m − 1)(m − 2)
+
+m4
+
+D({ x2
+k
+pk
+
+})xxT
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
++
+
+(cid:107)x(cid:107)2
+
+2m(m − 1)(m − 2)
+d(cid:88)
+
+m(m − 1)(m − 2)
+
+m4
+
+d(cid:88)
+
+k=1
+
+x2
+k
+pk
+
+k=1
+
+m(m − 1)(m − 2)
+
+x2
+k
+pk
+
+ekeT
+
+k +
+
+m(m − 1)
+
+m4
+
+m4
+
+d(cid:88)
+
+k=1
+
+x4
+k
+p2
+k
+
+})
+
+xxT D({ x2
+k
+pk
+m(m − 1)
+
+d(cid:88)
+
+m4
+
+k=1
+
+ekeT
+
+k +
+
+d(cid:88)
+
+k=1
+
+x2
+k
+pk
+
+x2
+k
+pk
+
+ekeT
+k ;
+
+(45)
+
+stg sT
+tg
+
+xxT stg sT
+tg
+
+xxT stj sT
+tj
+
+stg sT
+tg
+
+xxT stg sT
+tg
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+xxT +
+
+(cid:88)
+
+i(cid:54)=j∈[m]
+stisT
+ti
+
+stj sT
+tj
+
+xxT stj sT
+tj
+
+stisT
+ti
+
+xxT stj sT
+tj
+
++ E (cid:88)
+
+g=i(cid:54)=j∈[m]
+
+stg sT
+tg
+
+xxT stg sT
+tg
+
+stisT
+ti
+
+xxT stj sT
+tj
+
+m(m − 1)(m − 2)
+
+m4pk1
+
+ek1eT
+k1
+
+xxT ek1eT
+k1
+
+ek2 eT
+k2
+
+g(cid:54)=i(cid:54)=j∈[m]
+
+g=j(cid:54)=i∈[m]
+
+m4
+
++
+
+j=1
+
+(42) = E
+
+m(cid:88)
+= E (cid:88)
++ E (cid:88)
+d(cid:88)
+d(cid:88)
+d(cid:88)
+
+k1,k2,k3=1
+
+k1,k3=1
+
+=
+
++
+
+xxT ek1 eT
+k1
+
+ek1eT
+k1
+
+xxT ek3 eT
+k3
+
++
+
+ek1 eT
+k1
+
+xxT ek1eT
+k1
+
+ek2 eT
+k2
+
+xxT ek1 eT
+k1
+
+ek1eT
+k1
+
+m(m − 1)
+m4p2
+k1
+m(m − 1)(m − 2)
+
+xxT ek3eT
+k3
+
+d(cid:88)
+
+k1,k2=1
+
+m(m − 1)
+m4p2
+k1
+
+x3
+k1
+
+m(m − 1)
+m4p2
+k1
+
+xk3ek1eT
+k3
+
+d(cid:88)
+
++
+
+d(cid:88)
+
+d(cid:88)
+
+k1=1
+
+x4
+k
+p2
+k
+
+d(cid:88)
+
+m4
+m(m − 1)
+
+k=1
+
+x3
+k1
+
+xk3 ek1eT
+k3
+
++
+
+=
+
+=
+
+k1,k3=1
+
+m4pk1
+m(m − 1)(m − 2)
+
+m4
+
+D({ x2
+k
+pk
+
+})xxT +
+
+(43) =
+
+m(m − 1)(m − 2)
+
+m4
+
+xxT D({ x2
+k
+pk
+
+}) +
+
+k1,k3=1
+
+m(m − 1)
+
+D({ x2
+k
+p2
+k
+
+m4
+m(m − 1)
+
+})xxT +
+
+m(m − 1)
+
+ekeT
+k ;
+
+xxT D({ x2
+k
+p2
+k
+
+}) +
+
+m4
+
+x4
+k
+p2
+k
+
+ekeT
+k .
+
+m4
+
+k=1
+
+m(m − 1)
+m4p2
+k1
+
+x4
+k1
+
+ek1eT
+k1
+
+(46)
+
+(47)
+
+Combing the above terms with simpliﬁcation and reformulation completes the proof of Eq. (11). To this end, we complete
+the whole proof.
+
+2.3. Proof of Lemma 2
+
+Proof. According to the setting, we have that
+
+(cid:107)SST xxT SST(cid:107)2
+
+(a)
+
+= (cid:107)SST x(cid:107)2
+
+x(cid:107)2
+
+stj sT
+tj
+
+= (cid:107) m(cid:88)
+
+d(cid:88)
+
+j=1
+
+k=1
+
+δtj k
+mpk
+
+xkek(cid:107)2
+
+2 =
+
+δtj kxk
+mpk
+
+)2 (b)
+=
+
+2 = (cid:107) m(cid:88)
+m(cid:88)
+d(cid:88)
+
+j=1
+
+(
+k=1
+
+j=1
+
+2 = (cid:107) m(cid:88)
+m(cid:88)
+(cid:88)
+
+j=1
+
+(
+k∈Γ
+
+j=1
+
+1
+
+mptj
+
+xtj etj(cid:107)2
+
+2
+
+δtj kxk
+mpk
+
+)2,
+
+(48)
+
+t=1 be a set containing at most m different elements of [d] with its cardinality |Γ| ≤ m.
+
+where we let Γ = {γt}|Γ|
+In Eq. (48), (a) follows because SST xxT SST is a positive semideﬁnite matrix of rank 1, δtj k returns 1 only when tj = k
+and 0 otherwise, and P(δtj k = 1) = P(tj = k) = pk. (b) holds due to that we perform random sampling with replacement
+m times on the d entries of x ∈ Rd, and consequently at most m certain different entries from x are sampled.
+δtj γ1 xγ1
+
+Let k = γ1 with γ1 ∈ Γ, and we ﬁrst bound |(cid:80)m
+
+m for all
+j=1 are independent with E [aj] = 0, so that we can leverage Theorem 3 to
+
+|. Deﬁne a random variable aj =
+
+− xγ1
+
+j ∈ [m]. We can easily check that {aj}m
+continue our following analysis. We see that
+
+δtj γ1 xγ1
+
+mpγ1
+
+mpγ1
+
+j=1
+
+|aj| = max{|xγ1|
+
+m
+
+max
+j∈[m]
+
+− 1),
+
+(
+
+1
+pγ1
+
+|xγ1|
+m
+
+} ≤ |xγ1|
+
+mpγ1
+
+,
+
+(49)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+and
+
+E(cid:2)a2
+
+j
+
+(cid:3) =
+
+m(cid:88)
+
+j=1
+
+x2
+γ1
+mpγ1
+
+− x2
+γ1
+m
+
+.
+
+Thus, applying Theorem 3 with R =
+
+|xγ1|
+mpγ1
+
+and σ2 =
+
+x2
+γ1
+mpγ1
+
+− x2
+
+P(| m(cid:88)
+
+aj| ≥ ) ≤ 2 exp(
+
+γ1
+
+m obtains that
+−2/2
+/m + |xγ1|/(3mpγ1)
+
+),
+
+/(mpγ1) − x2
+
+whose RHS is denoted by ηγ1. Then, with probability at least 1 − ηγ1 we have |(cid:80)m
+
+x2
+γ1
+
+j=1
+
+γ1
+
+|xγ1| + . We then replace  by other variables to obtain that
+
+j=1 aj| ≤ , i.e., |(cid:80)m
+(cid:35)
+
+j=1
+
+(50)
+
+(51)
+
+δtj γ1 xγ1
+
+mp1
+
+| ≤
+
+(cid:34) |xγ1|
+
+3mpγ1
+
+(cid:115)
++ |xγ1|
+
+|xγ1| +  = |xγ1| + log(
+
+2
+ηγ1
+
+)
+
+1
+
+9m2p2
+γ1
+
++
+
+2
+
+1
+
+(
+
+log(2/ηγ1)
+
+mpγ1
+
+− 1
+m
+
+)
+
+,
+
+(52)
+
+which is denoted by f (xγ1, ηγ1 , m).
+
+In a similar way, we can bound |(cid:80)m
+
+over cases for all k ∈ [d].
+
+j=1
+
+δtj kxk
+mpk
+
+| for any other k ∈ [d]. The lemma then follows by using the union bound
+
+nm − n
+
+n(cid:88)
+
+d(cid:88)
+
+i=1
+
+x2
+ki
+pki
+
+1
+
+=
+
+nm − n
+
+mn−n
+
+2.4. Proof of Theorem 1
+
+mn−n
+Note that each Si is created by running Algorithm 1, and {Si}n
+
+Proof. We have to prove that the unbiased estimator for original covariance matrix C is Eq. (1), i.e., Ce = (cid:98)C1 − (cid:98)C2,
+where (cid:98)C1 = m
+E(cid:2)SiST
+
+(cid:80)n
+(cid:3) together and leveraging Eq. (7) in Lemma 1 achieves the expectation of (cid:98)C1,
+E[(cid:98)C1] =
+
+.
+1+(m−1)pki
+i=1 are independent matrices. Thus, taking all summands
+
+i , and (cid:98)C2 = m
+
+i )D(bi) with bki =
+
+(cid:34) d(cid:88)
+
+(cid:80)n
+
+n(cid:88)
+
+n(cid:88)
+
+D(SiST
+
+i=1 SiST
+
+i SiST
+i
+
+i SiST
+
+i SiST
+
+i xixT
+
+i xixT
+
+i xixT
+
+SiST
+
+ekeT
+
+(cid:35)
+
+i SiST
+
+i xixT
+
+xixT
+i
+
+i =
+
+k +
+
+i=1
+
+E
+
+m
+
+m
+
+1
+
+m − 1
+m
+
+nm − n
+
+i=1
+
+k=1
+
+x2
+ki
+mpki
+
+ekeT
+
+k +
+
+XXT .
+
+1
+n
+
+(53)
+
+(cid:80)n
+
+n
+
+m
+
+i=1
+
+i=1
+
+k=1
+
+i xixT
+
+i SiST
+
+i=1 xixT
+
+n(cid:88)
+
+nm − n
+
+i . We still
+
+n XXT = 1
+
+E[(cid:98)C2] =
+
+E(cid:2)D(SiST
+
+i )(cid:3) D(bi) =
+
+Eq. (53) indicates that (cid:98)C1 is a biased estimator for the original covariance matrix C = 1
+need to apply a debiasing procedure to (cid:98)C1 to get an unbiased estimator. By Eq. (8) in Lemma 1, it can be shown that
+d(cid:88)
+n(cid:88)
+Combing Eq. (53) with Eq. (54), we immediately see that Ce = (cid:98)C1 −(cid:98)C2 is unbiased for C.
+n . Then, (cid:80)n
+
+2.5. Proof of Theorem 2
+Proof. Here, we have to bound the error (cid:107)Ce−C(cid:107)2. To make the representation compact, we deﬁne Ai = Ai1−Ai2−Ai3
+with Ai1 = mSiST
+It
+is straightforward to see that {Ai}n
+i=1 are independent zero-mean random matrices, which are exactly the setting of the
+Matrix Bernstein inequality, as shown in Theorem 3. To bound (cid:107)Ce−C(cid:107)2 via Theorem 3, we need to calculate the relevant
+parameters R and σ2 that characterize the range and variance of Ai respectively.
+We ﬁrst derive R by bounding (cid:107)Ai(cid:107)2 so that (cid:107)Ai(cid:107)2 ≤ R for all i ∈ [n]. Expanding (cid:107)Ai(cid:107)2 gets that
+
+i=1 Ai = Ce − C holds.
+
+, Ai2 = mD(SiST
+
+, Ai3 = xixT
+
+nm − n
+
+i xixT
+nm−n
+
+i )D(bi)
+
+x2
+ki
+pki
+
+ekeT
+k .
+
+nm−n
+
+i SiST
+
+i SiST
+
+i xixT
+
+(54)
+
+k=1
+
+i=1
+
+1
+
+i
+
+i
+
+(cid:107)Ai(cid:107)2 = (cid:107)Ai1 − Ai2 − Ai3(cid:107)2 ≤ (cid:107)Ai1 − Ai2(cid:107)2 + (cid:107)Ai3(cid:107)2
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+≤(cid:107)Ai1(cid:107)2 + (cid:107)Ai3(cid:107)2.
+
+The last inequality in Eq. (55) results from
+
+(cid:107)Ai1 − Ai2(cid:107)2 = max
+k∈[d]
+
+|λk(Ai1 − Ai2 )|
+
+(b)
+
+(c)
+
+(a)≤ max{|λd(Ai1) − λ1(Ai2)|,|λ1(Ai1 ) − λd(Ai2 )|}
+= max{λ1(Ai2 ),|λ1(Ai1 ) − λd(Ai2)|}
+= max{λ1(Ai2 ), λ1(Ai1) − λd(Ai2)}
+(d)≤ λ1(Ai1 )
+= (cid:107)Ai1(cid:107)2,
+
+(e)
+
+(55)
+
+(56)
+
+(57)
+
+(58)
+
+(59)
+
+(60)
+
+where λk(·) is the k-th largest eigenvalue.
+(a) follows from that λk(Ai1) − λ1(Ai2) ≤ λk(Ai1 − Ai2) ≤ λk(Ai1) − λd(Ai2) for any k ∈ [d], which can be proved
+by combining Theorem 4 with the fact that λd(−Ai2) = −λ1(Ai2) and λ1(−Ai2 ) = −λd(Ai2 ) for Ai2 ∈ Rd×d.
+(b) holds because of that λk≥2(Ai1 ) = 0 since Ai1 is a positive semideﬁnite matrix of rank 1, and λk∈[d](Ai2 ) ≥ 0 since
+Ai2 is positive semideﬁnite.
+
+(c) follows owing to that λ1(Ai1) = Tr(Ai1) ≥ Tr(Ai2 ) = (cid:80)d
+
+k=1 λk(Ai2 ) ≥ λd(Ai2 ) ≥ 0, where the ﬁrst equality
+holds because λk≥2(Ai1 ) = 0, the ﬁrst inequality results from the fact that the diagonal matrix Ai2 is constructed by the
+diagonal elements of Ai1 multiplied by positive scalars not bigger than 1, and the second inequality is the consequence of
+λk∈[d](Ai2 ) ≥ 0.
+(d) results from that λk∈[d](Ai2 ) ≥ 0.
+(e) follows owing to that Ai1 is positive semideﬁnite.
+Now, we only need to bound (cid:107)Ai1(cid:107)2 and (cid:107)Ai3(cid:107)2. We have that
+(cid:107)Ai3(cid:107)2 = (cid:107) xixT
+n
+(cid:88)
+
+Then, Lemma 2 reveals that with probability at least 1 −(cid:80)d
+
+(cid:107)xi(cid:107)2
+n
+
+k=1 ηki,
+
+(cid:107)2 =
+
+(61)
+
+2
+
+.
+
+i
+
+t=1 is a set occupying at most m different elements of [d] with its cardinality |Γi| ≤ m, and
+
+f 2(xki, ηki, m) ≤ 3x2
+
+ki + 3 log2(
+
+2
+ηki
+2
+ηki
+
+)
+
+x2
+ki
+
+)
+
+9m2p2
+ki
+2x2
+ki
+3m2p2
+ki
+
++ 3 log2(
+
++ log(
+
+2
+ηki
+
+)
+
++ 6 log(
+
+2
+ηki
+
+)(
+
+x2
+ki
+mpki
+
+− x2
+ki
+m
+
+)
+
+x2
+ki
+
+9m2p2
+ki
+
+)
+
+2
+ηki
+6x2
+ki
+mpki
+
+.
+
+≤ 3x2
+
+ki + log2(
+
+where Γi = {γti}|Γi|
+f (xki, ηki, m) = |xki| + log( 2
+We derive the similar results for all {xi}n
+
+3mpki
+
+ηki
+
+)
+
+(cid:104) |xki|
+
+Applying the well known inequality ((cid:80)n
+
+R = max
+i∈[n]
+
+(cid:107)Ai1(cid:107)2 ≤ m
+
+nm − n
+
+k∈Γi
+
+f 2(xki, ηki, m),
+
+2
+
+1
+
++
+
+mpki
+
+9m2p2
+ki
+
+− 1
+m )
+
+log(2/ηki) (
+
++ |xki|(cid:113) 1
+i=1. Then, by union bound, with probability at least 1−(cid:80)n
+(cid:34)
+(cid:88)
+t=1 at)2 ≤ n(cid:80)n
+
+f 2(xki, ηki, m) +
+
+(cid:107)xi(cid:107)2
+n
+
+t , we have
+
+nm − n
+
+(cid:105)
+(cid:35)
+
+t=1 a2
+
+k∈Γi
+
+m
+
+.
+
+2
+
+.
+
+(cid:80)d
+
+i=1
+
+k=1 ηki, we have
+
+(62)
+
+(63)
+
+(64)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+easy to check that(cid:80)d
+
+Before continuing characterizing R in Eq. (63), we set the sampling probabilities as pki = α
+
+k=1 pki = 1. For 0 < α < 1, we also have pki ≥ α
+
+|xki|
+(cid:107)xi(cid:107)1
+
+. It is
+, then plugging it in the second and third
+
++ (1 − α) x2
+(cid:107)xi(cid:107)2
+
+|xki|
+(cid:107)xi(cid:107)1
+
+ki
+
+2
+
+term of Eq. (64) respectively getting that
+
+f 2(xki, ηki, m) ≤ 3x2
+
+2(cid:107)xi(cid:107)2
+3m2α2 + log(
+
+1
+
+2
+ηki
+
+2
+ηki
+
+)
+
+ki + log2(
+(65)
+nd for all i ∈ [n] and k ∈ [d], we bound R with probability at least 1 −
+
+mα
+
+)
+
+.
+
+6|xki|(cid:107)xi(cid:107)1
+
+Equipped with Eq. (63) and setting ηki = η
+
+(cid:80)n
+
+i=1
+
+(cid:80)d
+(cid:34)
+k=1 ηki = 1 − η by
+(cid:20) 2
+(cid:16)
+(cid:20) 7(cid:107)xi(cid:107)2
+
+R ≤ max
+i∈[n]
+
+≤ max
+i∈[n]
+≤ max
+i∈[n]
+
+m
+
+n
+
+2
+
+n
+
+nm − n
+3(cid:107)xi(cid:107)2
+
+(cid:88)
+
+(cid:16)
+
+k∈Γi
+
+2nd
+
+2 + log2(
+
++ log2(
+
+2nd
+
+η
+
+(cid:21)
+
+η
+
+)
+
+)
+14(cid:107)xi(cid:107)2
+nmα2
+
+1
+
+where the second inequality follows from that m
+α ≤ 1 and log( 2nd
+
+At this stage, we have to derive σ2 by only bounding for (cid:107)(cid:80)n
+
+η ) ≥ 1 for n ≥ 1, d ≥ 2, and η ≤ 1.
+
+obtains that
+
+3x2
+
+ki + log2(
+
+2nd
+
+6|xki|(cid:107)xi(cid:107)1
+
+2nd
+
+2(cid:107)xi(cid:107)2
+3m2α2 + log(
+
+1
+
+)
+
+η
+2(cid:107)xi(cid:107)2
+3mα2 + log(
+
+1
+
+2nd
+
+η
+
+)
+
+)
+
+(cid:17)
+
+η
+6(cid:107)xi(cid:107)2
+mα
+
+1
+
+mα
+(cid:107)xi(cid:107)2
+n
+
+2
+
++
+
+(cid:21)
+
+(cid:35)
+
+(cid:17)
+
+(cid:107)xi(cid:107)2
+n
+
+2
+
++
+
+,
+
+(66)
+
+m−1 ≤ 2 for m ≥ 2 and |Γi| ≤ m, and the last inequality results from that
+
+E [AiAi](cid:107)2 since Ai is symmetric. Expanding E [AiAi]
+
+i=1
+
+in RHS of which, we bound the expectation of each term. Speciﬁcally, invoking Lemma 1, we have that
+
+n2E [AiAi] =
+
+4
+
+m(m − 1)p2
+
+ki
+
++
+
+(cid:20)
+
+d(cid:88)
+(cid:124)
+2(m − 2)
+m(m − 1)
+
+k=1
+
+(cid:34)(cid:107)xi(cid:107)2
+
+2(m − 2)
+m(m − 1)
+
+(cid:20)
+
+xixT
+i
+4(cid:13)
+
+(cid:123)(cid:122)
+d(cid:88)
+d(cid:88)
+(cid:124)
+
+k=1
+
++
+
+(
+k=1
+
+(cid:125)
+
++
+
++
+
+k=1
+
+d(cid:88)
+(cid:124)
+(cid:124)
+(cid:124)
+(cid:124)
+
+0 (cid:22) E [AiAi] = E [Ai1Ai1 + Ai2 Ai2 + Ai3Ai3 − Ai1 Ai2 − Ai2Ai1
+−Ai1 Ai3 − Ai3Ai1 + Ai2 Ai3 + Ai3Ai2] ,
+
+(cid:21)
+
+x4
+kiekeT
+k
+
+(m − 1)2mp3
+1(cid:13)
+
+ki
+
+1
+
+(cid:35)
+
+(cid:123)(cid:122)
+d(cid:88)
+
+k=1
+
+x2
+ki
+pki
+
+x2
+ki
+pki
+
++
+
+ekeT
+k
+
+(cid:125)
+
+(cid:125)
+(cid:34)(cid:107)xi(cid:107)2
+(cid:124)
+
++
+
+1
+
+m(m − 1)
+2(cid:13)
+})
+
++
+
+(cid:123)(cid:122)
+(cid:125)
+
+(cid:124)
+
+D({ x2
+ki
+pki
+
+1
+
+m(m − 1)
+
+2(m2 − 5m + 6)
+m(m − 1)
+
++
+
+m − 2
+m(m − 1)
+3(cid:13)
+})xixT
+
++
+
+1
+
+(cid:123)(cid:122)
+(cid:125)
+
+i
+
+(cid:123)(cid:122)
+
+D({ x2
+ki
+pki
+6(cid:13)
+(m − 2)(m − 3)
+
+(cid:124)
+(cid:21)
+
+m(m − 1)
+
+x4
+kiekeT
+k
+
+(cid:125)
+
+(cid:123)(cid:122)
+
+xixT
+i
+5(cid:13)
+7
+
+D({ x2
+ki
+p2
+ki
+
++
+
+})
+
+(cid:125)
+
+2(m − 2)
+m(m − 1)
+
+(cid:124)
+
+6(m − 2)
+m(m − 1)pki
+
++
+
++
+
+m(m − 1)p2
+8(cid:13)
+
+ki
+
+(cid:123)(cid:122)
+
+(cid:35)
+
+d(cid:88)
+
+k=1
+
+x2
+ki
+pki
+
+xixT
+i
+
+(cid:125)
+
+m(m − 1)
+
+(cid:123)(cid:122)
+
+D({ x2
+ki
+p2
+ki
+7(cid:13)
+
+})xixT
+
+i
+
+(cid:125)
+
++ D(bi)D(bi)
+
+1
+
+m(m − 1)2p3
+
+ki
+
++
+
++ (cid:107)xi(cid:107)2
+2xixT
+i
+9(cid:13)
+
+(cid:123)(cid:122)
+(cid:20)
+d(cid:88)
+
+k=1
+
+− 2
+
+(cid:124)
+
+1
+
+(m − 1)pki
+
++ 1)x2
+
+kiekeT
+k
+
+10(cid:13)
+
+(cid:123)(cid:122)
+(cid:123)(cid:122)
+
+6
+
+m(m − 1)p2
+12(cid:13)
+
+ki
+
+D(bi)xixT
+
+i
+
+(cid:125)
+
++ xixT
+i
+
+(cid:124)
+
+(cid:21)
+
+3(m − 2)
+m(m − 1)pki
+
++
+
+1
+
+m(m − 1)2p3
+
+ki
+
++
+
+1
+
+(m − 1)pki
+11(cid:13)
+
+(cid:123)(cid:122)
+
++ 1)x2
+
+kiekeT
+k
+
+D(bi)
+
+(cid:125)
+
+x4
+kiekeT
+k
+
+− 3(m − 2)
+(cid:124)
+m(m − 1)
+
+D(bi)
+
+(cid:125)
+
+(cid:123)(cid:122)
+
+D({ x2
+xixT
+ki
+i
+pki
+13(cid:13)
+
+})D(bi)
+
+(cid:125)
+
+d(cid:88)
+
+(
+k=1
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+x2
+ki
+
+m(m − 1)
+
+(cid:123)(cid:122)
+
+xixT
+i
+14(cid:13)
+
+− (m − 2)(m − 3)
+(cid:124)
+− d(cid:88)
+(cid:124)
+(cid:124)
+
+(cid:123)(cid:122)
+(m − 1)pki
+17(cid:13)
+(cid:123)(cid:122)
+D(bi)D({ x2
+ki
+p2
+ki
+
+m(m − 1)
+
+ekeT
+
+−
+
+k=1
+
+1
+
+22(cid:13)
+
+k xixT
+i
+
+})xixT
+
+i
+
+(cid:125)
+
+.
+
+D({x2
+
+(cid:125)
+ki})D(bi)
+
+(cid:124)
+
+(cid:123)(cid:122)
+
+−(cid:107)xi(cid:107)2
+2xixT
+i
+18(cid:13)
+
+(cid:125)
+
+− 3(m − 2)
+(cid:124)
+m(m − 1)
+− d(cid:88)
+(cid:124)
+
+(cid:125)
+
+k=1
+
+15(cid:13)
+
+(cid:123)(cid:122)
+D(bi)D({ x2
+ki
+pki
+(cid:123)(cid:122)
+
+xixT
+
+x2
+ki
+
+(m − 1)pki
+19(cid:13)
+
+(cid:125)
+(cid:124)
+
+i ekeT
+k
+
+(cid:123)(cid:122)
+
+−(cid:107)xi(cid:107)2
+2xixT
+i
+20(cid:13)
+
+(cid:125)
+
+(cid:125)
+
+})xixT
+
+i
+
+− (m − 2)(m − 3)
+(cid:124)
+
+m(m − 1)
+
+(cid:123)(cid:122)
+
+D(bi)D({x2
+16(cid:13)
+
+(cid:125)
+ki})xixT
+
+i
+
+−
+
+1
+
+m(m − 1)
+
+(cid:124)
+
+(cid:123)(cid:122)
+
+D({ x2
+xixT
+ki
+i
+p2
+ki
+21(cid:13)
+
+})D(bi)
+
+(cid:125)
+
+(67)
+
+Because of the limited space, D({ x2
+which is also extended to other similar notations.
+In Eq. (67), it can be checked that for m ≥ 2, we have
+
+ki
+pki
+
+}) is to denote a square diagonal matrix in Rd×d with { x2
+
+}d
+k=1 on its diagonal,
+
+ki
+pki
+
+10(cid:13) − 17(cid:13) = 0;
+11(cid:13) − 19(cid:13) = 0;
+
+xixT
+i
+
+4(cid:13) − 13(cid:13) + 5(cid:13) − 14(cid:13) − 21(cid:13) =
+6(cid:13) − 15(cid:13) + 7(cid:13) − 16(cid:13) − 22(cid:13) = D({ ((m − 1)/pki)x2
+1 + (m − 1)pki
+
+m(m − 1)
+
+(cid:34)
+
+3(cid:13) + 9(cid:13) − 18(cid:13) − 20(cid:13) =
+
+(m − 2)(m + 1 − 1/pki)x2
+
+ki
+
+});
+
+(m − 2)(m + 1 − 1/pki)x2
+
+1 + (m − 1)pki
+
+1 + (m − 1)pki
+})
+
+ki
+
+xixT
+i
+
+m(m − 1)
+
+;
+
++
+
+ki
+
+D({ ((m − 1)/pki)x2
+1 + (m − 1)pki
+d(cid:88)
+
++
+m − 2
+m(m − 1)
+
++
+
+ki
+
+2
+
+k=1
+
+(cid:35)
+
+x2
+ki
+pki
+
+xixT
+i
+
+Then, applying Eq. (67) and Eq. (68) obtains that
+
+With Eq. (69) in hand, we can formulate σ2 as
+
+σ2 = (cid:107) n(cid:88)
+
+E [AiAi](cid:107)2 ≤ n(cid:88)
+
+max
+k∈[d]
+
+1
+n2
+
+i=1
+
+i=1
+
+(cid:34)
+
+8x4
+ki
+m2p2
+ki
+
++
+
+4x4
+ki
+m3p3
+ki
+
++
+
+(cid:107)xi(cid:107)2
+2x2
+ki
+mpki
+
++
+
+2x2
+ki
+m2pki
+
+(cid:35)
+
+d(cid:88)
+
+k=1
+
+x2
+ki
+pki
+
+(cid:22) 1
+m
+8(cid:13) − 12(cid:13) (cid:22) 0;
+
+(6 − 4m)(cid:107)xi(cid:107)2
+
++
+
+k=1
+
+k=1
+
+xixT
+i ;
+
+x2
+ki
+pki
+
+m(m − 1)
+
+ki
+m2p2
+ki
+
+d(cid:88)
+(cid:20) 8x4
+1(cid:13) (cid:22) d(cid:88)
+(cid:34)(cid:107)xi(cid:107)2
+2(cid:13) (cid:22) d(cid:88)
+(cid:34)
+d(cid:88)
+D({ ((m − 1)/pki)x2
+1 + (m − 1)pki
+
+2x2
+ki
+mpki
+
+8x4
+ki
+m2p2
+ki
+
+k=1
+
+k=1
+
++
+
++
+
+0 (cid:22) E [AiAi] (cid:22) 1
+n2
+
+xixT
+i
+
++
+
+n2m(m − 1)
++ D({ ((m − 1)/pki)x2
+1 + (m − 1)pki
+
++
+
+1
+
+n2m
+
+x2
+ki
+pki
+
+xixT
+i .
+
+d(cid:88)
+
+k=1
+
+(cid:21)
+
+4x4
+ki
+m3p3
+ki
+
+ekeT
+k ;
+
+d(cid:88)
+
+k=1
+
+x2
+ki
+pki
+
+(cid:35)
+
+ekeT
+k .
+
+2x2
+ki
+m2pki
+
+d(cid:88)
+
+4x4
+ki
+m3p3
+ki
+
+ki
+
++
+
+(cid:107)xi(cid:107)2
+2x2
+ki
+mpki
+
+2x2
+ki
+m2pki
+
++
+
++
+(m − 2)(m + 1 − 1/pki)x2
+
+k=1
+
+ki
+
+1 + (m − 1)pki
+
+x2
+ki
+pki
+})
+
+ki
+
++
+
+(m − 2)(m + 1 − 1/pki)x2
+
+ki
+
+1 + (m − 1)pki
+
+})
+
+xixT
+i
+
+n2m(m − 1)
+
+(cid:35)
+
+ekeT
+k
+
+(68)
+
+(69)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
++
+
+i=1
+
+n(cid:88)
+≤ n(cid:88)
+n(cid:88)
+
+i=1
+
++
+
+i=1
+
+max
+k∈[d]
+
+max
+k∈[d]
+
+max
+k∈[d]
+
+1
+n2
+
+1
+n2
+
+1
+n2
+
+m(m − 1)
+
+2
+
+(cid:20) 2(cid:107)xi(cid:107)2
+(cid:34)
+(cid:20) 8(cid:107)xi(cid:107)2
+
+8x4
+ki
+m2p2
+ki
+
+2x2
+ki
+
++
+
+mpki
+
+(cid:21)
+
+(cid:107) n(cid:88)
+
+d(cid:88)
+
+i=1
+
+k=1
+
+((m − 1)/pki)x2
+1 + (m − 1)pki
+
+ki
+
+(
+
++
+
+(m − 2)(m + 1 + 1/pki)x2
+
+1 + (m − 1)pki
+
+ki
+
+)
+
++
+
+1
+
+n2m
+
+(cid:35)
+
+d(cid:88)
+
+k=1
+
+x2
+ki
+pki
+
++
+
+4x4
+ki
+m3p3
+ki
+
+(cid:21)
+
++
+
+1
+
+n2m
+
+(cid:107)xi(cid:107)2
+2x2
+ki
+mpki
+
+(cid:107) n(cid:88)
+
+d(cid:88)
+
+i=1
+
+k=1
+
++
+
+2x2
+ki
+m2pki
+
+xixT
+
+i (cid:107)2.
+
+x2
+ki
+pki
+
+xixT
+
+i (cid:107)2
+
+x2
+ki
+pki
+
+(70)
+
+Again, we have to consider the sampling distributions pki = α
+
+|xki|
+(cid:107)xi(cid:107)1
+
++ (1 − α) x2
+(cid:107)xi(cid:107)2
+
+ki
+
+2
+
+with 0 < α < 1. Plugging pki ≥
+
+|xki|
+(cid:107)xi(cid:107)1
+
+α
+
+and pki ≥ (1 − α) x2
+(cid:107)xi(cid:107)2
+
+ki
+
+2
+
+in Eq. (70), we have
+
+8(cid:107)xi(cid:107)4
+
+(cid:34)
+(cid:20) 8(cid:107)xi(cid:107)4
+
+m(1 − α)
+
+2
+
+2
+
+(cid:21)
+
+m2(1 − α)2 +
+
+2
+
+4(cid:107)xi(cid:107)2
+1(cid:107)xi(cid:107)2
+m3α2(1 − α)
+d(cid:88)
+
+(cid:107) n(cid:88)
+
+1
+
+i=1
+
+σ2 ≤ n(cid:88)
+n(cid:88)
+(cid:20)
+n(cid:88)
++ (cid:107) n(cid:88)
+
+i=1
+
+i=1
+
++
+
+=
+
+i=1
+
+max
+k∈[d]
+
+1
+n2
+
+max
+k∈[d]
+
+1
+n2
+8(cid:107)xi(cid:107)4
+
+2
+
+n2m2(1 − α)2 +
+(cid:107)xi(cid:107)2
+n2mα
+
+1xix2
+i
+
+(cid:107)2.
+(cid:80)d
+|xki|4/3
+k=1 |xki|4/3 ) for the term 4x4
+
+(cid:107)xi(cid:107)4
+m(1 − α)
+
+2
+
++
+
+2(cid:107)xi(cid:107)2
+m2(1 − α)
+
+2
+
++
+
+(cid:35)
+
+d(cid:88)
+
+k=1
+
+|xki|(cid:107)xi(cid:107)1
+
+α
+
++
+
+i=1
+
+n2m
+4(cid:107)xi(cid:107)2
+1(cid:107)xi(cid:107)2
+n2m3α2(1 − α)
+
+2
+
+k=1
+
+|xki|(cid:107)xi(cid:107)1
+
+α
+9(cid:107)xi(cid:107)4
+
+2
+
++
+
+n2m(1 − α)
+
+xixT
+
+i (cid:107)2
+
+2(cid:107)xi(cid:107)2
+2(cid:107)xi(cid:107)2
+n2m2α(1 − α)
+
+1
+
++
+
+(cid:21)
+
+(71)
+
+Note that employing pki = Ω(
+
+Eq. (71), which is because of the fact that ((cid:80)d
+
+k=1 |xki|4/3)3 ≤ (cid:107)xi(cid:107)2
+
+ki
+m3p3
+ki
+
+in Eq. (70) can produce a result tighter than that in
+2 always holds owing to the Holder’s in-
+in Eq. (70), because the term
+
+(cid:80)d
+|xki|4/3
+k=1 |xki|4/3 ) to the term 4x4
+
+1(cid:107)xi(cid:107)2
+
+ki
+m3p3
+ki
+
+2
+
+2
+
+(cid:107)xi(cid:107)2
+
+1(cid:107)xi(cid:107)2
+
+1(cid:107)xi(cid:107)2
+n2m3
+
+) in Eq. (71) obtained by applying pki = α
+
+equality. However, it is not necessary to apply pki = Ω(
+4(cid:107)xi(cid:107)2
++ (1 − α) x2
+n2m3α2(1−α) = O(
+(cid:107)xi(cid:107)2
+(cid:107)xi(cid:107)2
+to the term 4x4
+in Eq. (70) has already been small enough, which can be smaller than other terms in Eq. (71) like
+ki
+(cid:80)d
+m3p3
+ki
+(cid:107)xi(cid:107)2
+2(cid:107)xi(cid:107)2
+|xki|q
+k=1 |xki|q ) with q (cid:54)= 1, 4
+3 , 2
+n2m2α(1−α) = O(
+to Eq. (70) will produce a result larger than Eq. (71), which may not be bounded. This is also why we only use
+) to tighten R in Eq. (66). This derivation justiﬁes our selection of q = 1, 2 in
+pki = α
+
+). Similarly, applying other sampling probabilities pki = Ω(
+
+1(cid:107)xi(cid:107)2
+n2m2
+
+|xki|
+(cid:107)xi(cid:107)1
+
+|xki|
+(cid:107)xi(cid:107)1
+
++ x2
+
+2(cid:107)xi(cid:107)2
+
+= Ω(
+
+= Ω(
+
+)
+
+ki
+
+ki
+
+2
+
+2
+
+1
+
+2
+
++ (1 − α) x2
+(cid:107)xi(cid:107)2
+
+ki
+
+|xki|
+(cid:107)xi(cid:107)1
+
+|xki|
+(cid:107)xi(cid:107)1
+
+(cid:80)d
+|xki|q
+k=1 |xki|q ) used for constructing the sampling probability pki = α
+
+pki = Ω(
+We then invoke Theorem 3 to obtain that for  ≥ 0,
+
+2
+
+|xki|
+(cid:107)xi(cid:107)1
+
++ (1 − α) x2
+(cid:107)xi(cid:107)2
+
+ki
+
+2
+
+.
+
+P((cid:107)Ce − C(cid:107)2 ≥ ) ≤ 2d exp(
+
+−2/2
+
+σ2 + R/3
+
+).
+
+(72)
+
+Denote the RHS of Eq. (72) by δ = 2d exp(
+bound we have (cid:107)Ce − C(cid:107)2 ≤  holds with probability at least 1 − η − δ. Furthermore, δ = 2d exp(
+following quadratic equation in 
+
+−2/2
+σ2+R/3 ) and consider the failure probability η in Eq. (66), then by union
+−2/2
+σ2+R/3 ) yields the
+
+Solving Eq. (73) gets only one positive root
+
+ = log(
+
+2d
+δ
+
+)
+
+R
+3
+
++
+
+(
+
+R
+3
+
+)2 +
+
+2σ2
+
+log(2d/δ)
+
+(cid:35)
+
+2 log(2d/δ)
+
+2
+
+(cid:34)
+
+− R
+3
+
+(cid:115)
+
+− σ2 = 0.
+
+(73)
+
+(cid:114)
+(cid:113)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+2d
+δ
+Thus, immediately we have (cid:107)Ce − C(cid:107)2 ≤ log( 2d
+completes the whole proof.
+
+≤ log(
+
+)
+
+2R
+3
+
++
+
+2σ2 log(
+
+2d
+δ
+
+).
+
+(74)
+
+δ ) 2R
+
+3 +
+
+2σ2 log( 2d
+
+δ ) holds with probability at least 1 − η − δ, which
+
+(cid:114)
+
+τ 4
+nm
+
++
+
+2.6. Proof of Corollary 1
+Proof. According to the setting, substituting that (cid:107)xi(cid:107)2 ≤ τ for all i ∈ [n], (cid:107)xi(cid:107)1
+(cid:107)xi(cid:107)2
+Theorem 2 establishes that
+
+n
+
+n
+
++
+
++
+
++
+
++
+
+τ 2ϕ
+m
+
+(cid:114) 1
+
+τ 4
+nm2 +
+
+τ 4ϕ2
+nm3 +
+
+τ 2ϕ2
+nm
+τ 2ϕ2
+nm
+
+(cid:16) τ 2
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+(cid:114) 1
+(cid:16) τ 2
+≤ (cid:101)O
+where the ﬁrst inequality invokes(cid:80)n
+2 ≤ nτ 4, and C =(cid:80)n
+Also, we can adopt(cid:80)n
+2 ≤ ndτ 2(cid:107)C(cid:107)2, which holds because(cid:80)n
+i=n (cid:107)xi(cid:107)4
+(cid:16) τ 2
+(cid:16) τ 2
+
++ τ(cid:112)(cid:107)C(cid:107)2
+(cid:114)
+
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+≤ (cid:101)O
+
+nTr(C) ≤ nd(cid:107)C(cid:107)2.
+
+Hence, we have
+
+i=1 (cid:107)xi(cid:107)4
+
+d
+nm2 +
+
+d(cid:107)C(cid:107)2
+
+(cid:114)
+
+(cid:114)
+
++ τ 2
+
++ τ
+
+i=1
+
++
+
++
+
++
+
+n
+
+n
+
+n
+
+nm
+
+xixT
+i
+
++ τ ϕ
+
+dϕ2
+nm3 +
+d(cid:107)C(cid:107)2
+nm
+
+τ 2ϕ2
+nm
+τ 2ϕ2
+nm
+
+τ ϕ
+m
+
+i=1 (cid:107)xi(cid:107)4
+
+τ 4ϕ2
+nm2 +
+
+(cid:107)C(cid:107)2τ 2ϕ2
+
+≤ ϕ with 1 ≤ ϕ ≤ √
+(cid:17)
+(cid:114)(cid:107)C(cid:107)2
+(cid:17)
+2 ≤ τ 2(cid:80)n
+
+i=1 (cid:107)xi(cid:107)2
+
+nm
+
+nm
+
+,
+
+d, and m < d into
+
+(75)
+
+i=1 (cid:107)xi(cid:107)2
+
+2 =
+
+is the original covariance matrix.
+
+2 and(cid:80)n
+(cid:17)
+
++
+
+dϕ2
+nm2 +
+
+(cid:114)(cid:107)C(cid:107)2
+
+(cid:17)
+
+ϕ2
+nm
+
+d
+nm
+
++ τ ϕ
+
+.
+
+(76)
+
+nm
+Finally, assigning (cid:107)Ce − C(cid:107)2 by the smaller one of Eq. (75) and Eq. (76) completes the proof.
+
+n
+
+n
+
+(cid:80)n
+
+2.7. Proof of Corollaries 2 and 3
+Proof. The proof follows (Azizyan et al., 2015, Corollaries 4-6), where the key component (cid:107)Ce − Cp(cid:107)2 is upper bounded
+by (cid:107)Ce − 1
+i − Cp(cid:107)2. Then, the derivation results from Theorem 2 in our paper and the
+Gaussian tail bounds in (Azizyan et al., 2015, Proposition 14).
+(Azizyan et al., 2015, Proposition 14) shows that with probability at least 1 − ζ for d ≥ 2,
+
+i (cid:107)2 + (cid:107) 1
+
+(cid:80)n
+
+i=1 xixT
+
+i=1 xixT
+
+n
+
+n
+
+2Tr(Cp) log(nd/ζ);
+
+(cid:112)log(2/ζ)/n(cid:1).
+
+xixT
+
+(cid:107) 1
+n
+
+max
+i∈[n]
+
+n(cid:88)
+
+(cid:107)xi(cid:107)2 ≤(cid:113)
+i − Cp(cid:107)2 ≤ O(cid:0)(cid:107)Cp(cid:107)2
+Then, applying them and Corollary 1 along with the fact that (cid:107)xi(cid:107)1 ≤ √
+i − Cp(cid:107)2
+(cid:115)(cid:107) 1
+(cid:80)n
+(cid:114)(cid:107)Cp(cid:107)2
+(cid:17)
+
+(cid:107)Ce − Cp(cid:107)2 ≤ (cid:107)Ce − 1
+n
+
+(cid:114) 1
+(cid:114) 1
+
+i (cid:107)2 + (cid:107) 1
+n
+
+n(cid:88)
+
+τ 2ϕ2
+nm
+
+τ 2ϕ
+m
+
+xixT
+
+xixT
+
++ τ 2
+
++ τ ϕ
+
+nm
+
+i=1
+
+i=1
+
++
+
++
+
+n
+
+i=1
+
+n(cid:88)
+(cid:114) 1
+(cid:114) 1
+(cid:114)
+
+n
+
+n
+
+≤ (cid:101)O
+≤ (cid:101)O
+≤ (cid:101)O
+
+n
+
+(cid:16) τ 2
+(cid:16) τ 2
+(cid:16) d2(cid:107)Cp(cid:107)2
+
++
+
+n
+
+τ 2ϕ2
+nm
+
+nm
+
+τ 2ϕ
+m
+
++
+d(cid:107)Cp(cid:107)2
+
+m
+
++
+
++ τ 2
+
+nm
++ d(cid:107)Cp(cid:107)2
+
+d
+n
+
++ τ ϕ
+
+(cid:114) 1
+
+nm
+
+(cid:114) 1
+
+(cid:17)
+
+n
+
+i=1 xixT
+nm
+
+i (cid:107)2
+
+(cid:17)
+(cid:16)(cid:107)Cp(cid:107)2
++ (cid:101)O
+(cid:114) 1
+(cid:16)(cid:107)Cp(cid:107)2
+(cid:17)
++ (cid:101)O
+(cid:114) 1
+(cid:114) 1
+(cid:17)
+
+n
++ (cid:107)Cp(cid:107)2
+
+nm
+
+n
+
+nm
+
++ d(cid:107)Cp(cid:107)2
+
+d(cid:107)xi(cid:107)2 and Tr(Cp) ≤ d(cid:107)Cp(cid:107)2 establishes
+
+(77)
+
+(78)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+(cid:16) d2(cid:107)Cp(cid:107)2
+
+(cid:114)
+(cid:17)
+≤ (cid:101)O
+i − Cp(cid:107)2 + (cid:107)Cp(cid:107)2 ≤ (cid:101)O((cid:107)Cp(cid:107)2).
+
+d(cid:107)Cp(cid:107)2
+
+nm
+
+d
+n
+
+m
+
++
+
+(cid:80)n
+
+with probability at least 1 − η − δ − ζ, where Eq. (78) results from that we invoke Eq. (77) to get (cid:107) 1
+(cid:107) 1
+The proof for the low-rank case where rank(Cp)≤ r additionally adopts
+
+i=1 xixT
+
+n
+
+n
+
+(cid:80)n
+
+(79)
+i (cid:107)2 ≤
+
+i=1 xixT
+
+(cid:107)[Ce]r − Cp(cid:107)2 ≤ (cid:107)[Ce]r − Ce(cid:107)2 + (cid:107)Ce − Cp(cid:107)2
+≤ (cid:107)[Cp]r − Ce(cid:107)2 + (cid:107)Ce − Cp(cid:107)2
+≤ (cid:107)[Cp]r − Cp(cid:107)2 + (cid:107)Cp − Ce(cid:107)2 + (cid:107)Ce − Cp(cid:107)2
+= 2(cid:107)Ce − Cp(cid:107)2,
+
+(80)
+where the last equality holds because rank(Cp) ≤ r. Then, armed with Tr(Cp) ≤ rank(Cp)(cid:107)Cp(cid:107)2 ≤ r(cid:107)Cp(cid:107)2, we have
+
+(cid:107)[Ce]r − Cp(cid:107)2 ≤ O((cid:107)Ce − Cp(cid:107)2) ≤ O((cid:107)Ce − 1
+n
+
+(cid:16) rd(cid:107)Cp(cid:107)2
+(cid:16) rd(cid:107)Cp(cid:107)2
+
+nm
+
+≤ (cid:101)O
+≤ (cid:101)O
+
+r(cid:107)Cp(cid:107)2
+
+m
+
+r(cid:107)Cp(cid:107)2
+
++
+
++
+
+(cid:114)
+(cid:114)
+
+d
+n
+
+d
+n
+
+(cid:114) 1
+(cid:114)
+
+rd
+nm
+
+nm
+
+(cid:17)
+
++ r(cid:107)Cp(cid:107)2
+
++ (cid:107)Cp(cid:107)2
+
+n(cid:88)
+
+i=1
+
+n(cid:88)
+
+i=1
+
+xixT
+
+i (cid:107)2 + (cid:107) 1
+(cid:114)
+n
+
+xixT
+
+i − Cp(cid:107)2)
+(cid:17)
+
+(cid:114) 1
+
++ (cid:107)Cp(cid:107)2
+
++ (cid:107)Cp(cid:107)2
+
+rd
+nm
+
+n
+
+nm
+
+m
+with probability at least 1 − η − δ − ζ.
+The given deﬁnitions also implicitly indicate that Cp and Ce are symmetric. Then, following (Azizyan et al., 2015), the
+desired bound in Corollary 3 immediately results from Corollary 2 combined with the Davis-Kahan Theorem (Davis &
+
+Kahan, 1970) that shows (cid:107)(cid:98)(cid:81)
+
+k −(cid:81)
+
+k (cid:107)2 ≤
+
+1
+
+λk−λk+1
+
+(cid:107)Ce − Cp(cid:107)2.
+
+(81)
+
+3. Discussion for Counterparts
+3.1. Theorems for Gauss-Inverse and UniSample-HD
+
+We ﬁrst use our notations to rephrase current theoretical results provided in (Azizyan et al., 2015, Theorem 3) and (Anaraki
+& Becker, 2017, Theorem 6), which correspond to Gauss-Inverse and UniSample-HD, respectively.
+Theorem 5 (Azizyan et al. 2015, Theorem 3). Let d ≥ 2 and deﬁne,
+
+S1 = (cid:107) 1
+n
+
+(cid:107)xi(cid:107)2
+
+2xixT
+
+i (cid:107)2, S2 =
+
+1
+n
+
+(cid:107)xi(cid:107)4
+2.
+
+n(cid:88)
+
+i=1
+
+n(cid:88)
+(cid:114)
+
+i=1
+
+(cid:16)(cid:114)
+
+(cid:17)(cid:114)
+
+There exists universal constants κ1, κ2 > 0 such that for any 0 < δ < 1, with probability at least 1 − δ,
+
+(cid:107)Ce − C(cid:107)2 ≤ κ1
+
+d
+m
+
+S1 +
+
+d
+m2 S2
+
+log(d/δ)
+
+n
+
++ κ2
+
+d maxi∈[n] (cid:107)xi(cid:107)2
+
+2
+
+nm
+
+log(d/δ).
+
+(82)
+
+Theorem 6 (Anaraki & Becker 2017, Theorem 6). Let each column of Si ∈ Rd×m be chosen uniformly at random from
+the set of all canonical basis vectors without replacement. Let ρ > 0 be a bound such that (cid:107)SiST
+2 for all
+i ∈ [n]. Then, with probability at least 1 − δ
+
+i xi(cid:107)2
+
+(cid:104)
+
+where δ = d exp
+
+(ρ − m(m−1)
+
+d(d−1)
+nm(m−1)
++ 2(d−m)(cid:107)X(cid:107)2
+
+(cid:17)
+
+(cid:16) −2/2
+, R = 1
+n
+d(d−1) ) maxi∈[n] (cid:107)xi(cid:107)2
+
+σ2+R/3
+
+(cid:107)Ce − C(cid:107)2 ≤ ,
+
+(cid:104)(cid:16) d(d−1)
+2(cid:107)C(cid:107)2 + d−m
+m−1 ρ maxi∈[n] (cid:107)xi(cid:107)2
+(cid:80)n
+n(d−1)(m−1)
+
+m(m−1) ρ + 1
+
+(cid:17)
+(cid:105)
+
+i=1 x4
+
+ki
+
+.
+
+n(m−1) maxk∈[d],i∈[n] x2
+
+F
+
+ki + (d−m)2 maxk∈[d]
+
+2(cid:107)D(C)(cid:107)2
+
+maxi∈[n] (cid:107)xi(cid:107)2
+
+2 + d(d−m)
+
+m(m−1) maxk∈[d],i∈[n] x2
+
+ki
+
+, and σ2 =
+
+2 ≤ ρ(cid:107)xi(cid:107)2
+(cid:105)
+
+(83)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+3.2. Discussion
+
+In this subsection, we will simplify the foregoing two theorems by making Eq. (82) and Eq. (83) explicitly dependent on
+n, m and d. Our derivations are natural and straightforward, and we will not deliberately loose Eq. (82) and Eq. (83) in
+order to demonstrate the superiority of the theoretical results gained by our weighted sampling method. We deﬁne that
+maxi∈n (cid:107)xi(cid:107)2 ≤ τ.
+In terms of Eq. (82) in Theorem 5, S1 ≤ maxi∈[n] (cid:107)xi(cid:107)2
+maxi∈[n] (cid:107)xi(cid:107)2
+
+2(cid:107)C(cid:107)2 and S2 ≤ maxi∈[n] (cid:107)xi(cid:107)4
+
+F ≤ (cid:107)C(cid:107)2 ≤
+
+2. Note that 1
+
+2
+
++
+
+(cid:115)
+(cid:17)
+
+d maxi∈[n] (cid:107)xi(cid:107)4
+
+d(cid:107)C(cid:107)2 maxi∈[n] (cid:107)xi(cid:107)2
+
+2. Then, Eq. (82) can be simpliﬁed and reformulated as
+
+(cid:16)(cid:115)
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+(cid:114)
+(cid:16)
+≤ (cid:101)O
+τ
+(cid:16)(cid:115)
+2(cid:107)C(cid:107)2 in the original paper (Azizyan et al., 2015), we will get that
+If applying S2 ≤ d maxi∈[n] (cid:107)xi(cid:107)2
+d(cid:107)C(cid:107)2 maxi∈[n] (cid:107)xi(cid:107)2
+(cid:16) τ d
+
+d2 maxi∈[n] (cid:107)xi(cid:107)2
+
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+≤ (cid:101)O
+
+d(cid:107)C(cid:107)2
+nm
+
+2(cid:107)C(cid:107)2
+
+τ 2d
+nm
+
+(cid:115)
+
+(cid:114)
+
+τ 2
+m
+
+(cid:17)
+
+nm2
+
+nm2
+
+d
+n
+
++
+
+2
+
++
+
+2
+
++
+
+nm
+
++
+
+nm
+
+nm
+
++
+
+.
+
+d maxi∈[n] (cid:107)xi(cid:107)2
+
+2
+
+d maxi∈[n] (cid:107)xi(cid:107)2
+
+2
+
+nm
+
+nd(cid:107)X(cid:107)2
+(cid:17)
+
+In summary,
+
+(cid:114)(cid:107)C(cid:107)2
+(cid:16)
+
+n
+
+m
+
+(cid:107)Ce − C(cid:107)2 ≤ min{(cid:101)O
+
++
+
+τ 2d
+nm
+
+.
+
+(cid:114)
+
+τ
+
+d(cid:107)C(cid:107)2
+nm
+
++
+
+τ 2
+m
+
+(cid:114)
+
+(cid:17)
+
+,(cid:101)O
+
+(cid:16) τ d
+
+m
+
+(cid:114)(cid:107)C(cid:107)2
+
+n
+
+(cid:17)}.
+
++
+
+τ 2d
+nm
+
+d
+n
+
++
+
+τ 2d
+nm
+
+(cid:17)
+
+(84)
+
+(85)
+
+(86)
+
+For Eq. (83) in Theorem 6, we ﬁrst simplify its R and σ2. According to (Anaraki & Becker, 2017), to obtain a more accurate
+estimation, each xi is required to be multiplied by HD to ﬂatten its large entries before being sampled uniformly without
+replacement, where H is a Hadamard matrix with its dimension being 2l (l is a certain positive integer), and D is a diagonal
+matrix with its diagonal elements being i.i.d. Rademacher random variables. Note that HDDT HT = DT HT HD is an
+identity matrix.
+Suppose that we do not have to pad X with zeros until its dimension d = 2l holds. Hence, assuming that d = 2l for
+X ∈ Rd×n without loss of generality, we deﬁne Y = HDX ∈ Rd×n below.
+Corollary 2 of (Anaraki & Becker, 2017) indicates that with probability at least 1 − β, we have
+
+(cid:115)
+
+(cid:114) 1
+(cid:115)
+
+d
+
+(cid:115)
+
+(cid:114) m
+
+d
+
+and
+
+max
+
+k∈[d],i∈[n]
+
+|yki| ≤
+
+(cid:107)yi(cid:107)2 ≤
+
+max
+i∈[n]
+
+2 log(
+
+2nd
+
+β
+
+) max
+i∈[n]
+
+(cid:107)xi(cid:107)2
+
+2 log(
+
+2nd
+
+β
+
+) max
+i∈[n]
+
+(cid:107)xi(cid:107)2.
+
+Corollary 3 of (Anaraki & Becker, 2017) indicates that with probability at least 1 − β, we have
+
+(cid:107)SiST
+
+i yi(cid:107)2 ≤
+(cid:113)
+
+2 log(
+
+)(cid:107)xi(cid:107)2.
+
+2nd
+
+β
+
+To make a compact representation, we deﬁne θ =
+Then, in Theorem 6, we can replace the input data X by Y. Combing Eq. (89) with the fact that (cid:107)yi(cid:107)2 = (cid:107)HDxi(cid:107)2 =
+
+β ). Obviously, θ > 1.
+
+2 log( 2nd
+
+d θ)2) = mθ2
+
+d
+
+for the setting of Theorem 6. Along with θ > 1 and m ≤ d, we have
+
+(cid:107)xi(cid:107)2 getting ρ = (((cid:112) m
+
+(87)
+
+(88)
+
+(89)
+
+(cid:107)2
+
+(90)
+
+(91)
+
+n((cid:112)1/dθ)2 maxi∈[n] (cid:107)xi(cid:107)2
+
+2
+
+n
+
+(cid:107)xi(cid:107)2
+
+2
+
+(cid:17)
+
+max
+i∈[n]
+(cid:107)xi(cid:107)4
+
+2
+
+and
+
+(cid:16)
+
+σ2 ≤ d2
+
+mθ2
+
+nm2 O
+(d − m)
+
+(
+
+d
+mθ2
+
++
+
++
+
+=
+
++
+
+= (cid:101)O
+
++
+
+= (cid:101)O
+= (cid:101)O
+
+m
+d − m
+nm
+
+d
+
+θ2
+d
+
+(cid:16) m
+
+d2
+nm2 O
+d
+(d − m)θ2
+
+(cid:16) d
+
+nmd
+
+nm
+
+d(d − m)
+
+max
+i∈[n]
+
+max
+i∈[n]
+(θ2 − m − 1
+d − 1
+θ2
+(cid:107)xi(cid:107)2
+2nd
+d
+2(cid:107)C(cid:107)2 +
+
+max
+i∈[n]
+(cid:107)xi(cid:107)2
+
+nm3 max
+i∈[n]
+
+(cid:16) d
+(cid:16) τ 2d(cid:107)C(cid:107)2
+
+max
+i∈[n]
+
+nm
+
+(cid:107)xi(cid:107)4
+
+2 +
+2(cid:107)C(cid:107)2 +
+τ 4d(d − m)
+
+(cid:107)xi(cid:107)2
+
++
+
+nm
+
+nm3
+
+(cid:107)xi(cid:107)2
+
+)θ2 max
+i∈[n]
+HDXXT DT HT
+
+n
+
+(d − m)2
+
+ndm
+2(cid:107)C(cid:107)2 +
+
+(cid:107)xi(cid:107)2
+
+n
+
+2(cid:107) HDXXT DT HT
+(cid:17)
+
+)(cid:107)2
+
+θ4
+(cid:107)xi(cid:107)4
+d2 max
+i∈[n]
+(d − m)θ4
+
+2
+
+n
+
+d
+(d − m)2θ4
+
+d3m
+
+max
+i∈[n]
+
+)θ2 max
+i∈[n]
+
+(cid:107)xi(cid:107)2
+
+max
+i∈[n]
+d − m
+nm2 max
+i∈[n]
+
+2 +
+(cid:107)xi(cid:107)4
+
+2
+
+(d − m)2
+max
+i∈[n]
+nm3d
+d(d − m)
+
+(cid:107)xi(cid:107)4
+
+2
+
+(cid:17)
+
+(cid:107)xi(cid:107)4
+
+2 +
+
+nm3 max
+i∈[n]
+τ 4(d − m)2
+
+(cid:17)
+
++
+
+nm3d
+
+(cid:17)
+
+(d − m)2
+nm3d
+
+(cid:107)xi(cid:107)4
+
+2
+
+max
+i∈[n]
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+R =
+
+1
+n
+
+d2
+m2
+
+mθ2
+
+d
+
++ 1)θ2 max
+i∈[n]
+
+(cid:107)xi(cid:107)2
+
+2 +
+
+d(d − m)
+
+m2
+
+(
+
+(cid:114) 1
+
+d
+
+(cid:17)
+
+θ)2 max
+i∈[n]
+
+(cid:107)xi(cid:107)2
+
+2
+
+(cid:17)
+
+(cid:107)xi(cid:107)2
+
+2
+
+(cid:17)
+
+(
+
+O
+
+(cid:16)
+(cid:16)
+(cid:16) d
+(cid:16) τ 2d
+
+nm
+
+(
+
+dθ2
+nm
+
+,
+
+2
+
+)θ2 max
+i∈[n]
+(cid:107)xi(cid:107)2
+
+= O
+
+nm
+
+(cid:17)
+
+max
+i∈[n]
+
+= (cid:101)O
+= (cid:101)O
+− m(m − 1)
+d(d − 1)
+2(cid:107)D(
+(cid:107)xi(cid:107)2
+2(cid:107)HDX(cid:107)2
+
+θ2 max
+i∈[n]
+(cid:107)xi(cid:107)2
+
+F +
+
+.
+
+(92)
+
+Note that Eq. (92) for simplifying σ2 in Eq. (83) is tighter than the simpliﬁcation result in the original paper (Anaraki &
+Becker, 2017) that scales with d2
+nm2 . Recalling Eq. (83), and replacing its  by R and σ2 to get that with probability at least
+1 − δ − β, we have
+
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+
+(cid:114)
+
+(cid:16)
+
+τ
+
+(cid:114)
+(cid:16)
+
+d(cid:107)C(cid:107)2
+nm
+
++
+
+τ 2
+m
+
+d(d − m)
+
+τ 2(d − m)
+
++
+
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+
+τ
+
+nm
+
+(cid:114)
+
+d(cid:107)C(cid:107)2
+nm
+
++
+
+τ 2d
+nm
+
+m
+
+(cid:17)
+
+nmd
+
+.
+
+(cid:114) 1
+
+(cid:17)
+
++
+
+τ 2d
+nm
+
+.
+
+(93)
+
+(94)
+
+If m = d, then
+
+Although pure sampling without replacement makes no estimation error when m = d, processing the data by a Hadamard
+matrix before sampling can result in the error as shown in Eq. (94).
+If m < d with m being close to d, then d − m = O(1), and thus we have
+
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+
+(cid:107)Ce − C(cid:107)2 ≤ (cid:101)O
+
+(cid:114)
+
+(cid:16)
+
+τ
+
+(cid:114)
+
+(cid:16)
+
+τ
+
+(cid:114)
+
+(cid:114) 1
+
+(cid:17)
+
+(cid:17)
+
+If m (cid:28) d or there exists a certain constant κ < 1 with m < κd, then O(d − m) = O(d). In addition to considering that
+nd(cid:107)X(cid:107)2
+
+F ≤ (cid:107)C(cid:107)2 ≤ maxi∈[n] (cid:107)xi(cid:107)2
+
+2 = τ 2, then we have
+
+1
+
+d(cid:107)C(cid:107)2
+nm
+
++
+
+τ 2d
+m
+
++
+
+τ 2d
+nm
+
+nm
+
+.
+
+(96)
+
+d(cid:107)C(cid:107)2
+nm
+
++
+
+τ 2
+m
+
+d
+nm
+
++
+
+τ 2d
+nm
+
+.
+
+(95)
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+4. Computational Complexity
+Recall that we have n data samples in the d-dimensional space, and let m be the target compressed dimension. The
+computational comparisons between our proposed method and the other approaches are presented in Table 1, in which
+Standard method means computing C directly without data compression. We should explain some terms in the table
+before proceeding.
+Storage: storing data and random projection matrices (if any) in the remote sites and the fusion center, and storing the
+covariance matrix in the fusion center.
+Communication: shipping the data and random projection matrices (if any) from remote sites to the fusion center (high
+communication cost requires tremendous bandwidth and power consumption).
+Time (FLOPS): compressing the data in the remote sites, and calculating the covariance matrix in the fusion center (a low
+time complexity means a low power cost and high efﬁciency for the data processing).
+Note that, instead of only using the fusion center, data have to be ﬁrst collected from many remote sites like a network of
+g (cid:28) n sensors. Then, they are transmitted to the fusion center to estimate the covariance matrix. This procedure shows
+why communication cost is required. In the table, except for the communication, the two other compared terms have
+contained the total costs in both the remote sites and fusion center.
+i=1 xi in the fusion center by
+For a covariance matrix deﬁned as C = 1
+i=1 are distributed in g (cid:28) n remote sites, and uj ∈ Rd is the summation of all data vectors in
+¯x = 1
+n
+the j-th remote site before being compressed. Hence, about O(gd) storage, O(gd) communication cost, and O(nd) time
+have to be added to the last four methods in Table 1, with g (cid:28) n.
+
+(cid:80)g
+j=1 uj, where {xi}n
+
+n XXT − ¯x¯xT , we can exactly calculate ¯x = 1
+
+(cid:80)n
+
+n
+
+Table 1. Computational costs in terms of storage, communication, and time.
+
+Storage
+
+Communication
+
+Method
+Standard
+
+Gauss-Inverse
+
+O(nd + d2)
+O(nm + d2)
+O(nm + d2)
+UniSample-HD O(nm + d2)
+O(nm + d2)
+
+Our method
+
+Sparse
+
+O(nd)
+O(nm)
+O(nm)
+O(nm)
+O(nm)
+
+Time
+O(nd2)
+
+O(nmd + nm2d + nd2) + TG
+
+O(d + nm2) + TS
+O(nd log d + nm2)
+
+O(nd + nm log d + nm2)
+
+nm−n
+
+n XXT .
+
+SiST
+
+i xixT
+
+i SiST
+
+(cid:80)n
+
+i xi, SiST
+
+i xi, and SiST
+i
+
+i xi}n
+i xixT
+
+i=1 can be accurately computed in O(nm) time. Equipped with {SiST
+i SiST
+
+i xi}n
+i additionally takes only O(nm2) time, this is due to that each SiST
+
+From now on, we can focus on the covariance matrix deﬁned as C = 1
+First, we derive the computational costs in our propose algorithm. Computing {pki}k∈[d],i∈[n] takes O(nd) time. Then,
+sampling nm entries from all data vectors to get Y ∈ Rm×n takes time that is scaled on nm log d up to a certain small
+constant. In Eq. (1), each Si, ST
+(squared diagonal), has at most m non-zero entries. Hence,
+i=1 via the sampled nm entries in Y and the sampling indices in T ∈ Rm×n incurs O(nm) time. With
+recovering {Si}n
+(cid:80)n
+(cid:98)C1 = m
+Y and T in hand, {SiST
+i=1, computing
+i ∈ Rd×d has at most m and m2 non-zero entries respectively. Based on the obtained (cid:98)C1, computing
+i xi ∈ Rd and
+i=1 SiST
+the square diagonal matrix (cid:98)C2 = m
+has at most m non-zero entries in its diagonal. Finally, obtaining C = (cid:98)C1 − (cid:98)C2 incurs O(d) extra time. The total
+is enough to exactly calculate the (cid:98)C2 = m
+
+running time is about O(nd + nm log d + nm + nm + nm + nm2 + nm + d) = O(nd + nm log d + nm2). In the
+remote sites, data are compressed into m dimensional space. Computing bki only corresponding to the sampled entries
+i )D(bi) in Eq. (1), so that at most nm entries
+i xixT
+. Thus, in the remote sites, Y ∈ Rm×n
+from {pki}k∈[d],i∈[n] have to be retained to obtain {bki}, since bki =
+and T ∈ Rm×n dominate the storage cost, taking about O(nm) space in total. In the fusion center, O(d2) storage is
+additionally used to store the estimated covariance Ce ∈ Rd×d. Similarly, about O(nm) communication cost is required
+because of transmitting Y ∈ Rm×n, T ∈ Rm×n, v ∈ Rn, w ∈ Rn and α.
+Then, for Standard in Table 1 that means directly calculating covariance matrix through the observed data samples without
+compression, it is straightforward to check its computational complexity. X ∈ Rd×n and C ∈ Rd×d takes about O(nd+d2)
+storage in total, and X ∈ Rd×n leads to about O(nd) communication burden. Calculating the covariance matrix C =
+
+i )D(bi) takes O(nm) time since each SiST
+
+(cid:80)n
+
+i xixT
+
+i SiST
+
+i xixT
+
+i SiST
+i
+
+1+(m−1)pki
+
+D(SiST
+
+i=1
+
+D(SiST
+
+i=1
+
+i SiST
+
+1
+
+nm−n
+
+nm−n
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+1
+
+n XXT costs O(nd2) time.
+
+For Gauss-Inverse,(cid:80)n
+
+i=1 Si(ST
+
+i Si)−1ST
+
+i xixT
+
+i Si(ST
+
+i Si)−1ST
+
+i xi}n
+
+i xixT
+
+i SiST
+
+i Si)−1ST
+
+i Si)−1}n
+
+i xi ∈ Rm}n
+
+i xi ∈ Rd}n
+
+i=1 requires about a O(nm) computational burden.
+
+For Sparse, calculating(cid:80)n
+
+i , which is the main part of its unbiased estimator, dominates
+the computational cost. Generating n different Gaussian matrices {Si ∈ Rd×m}n
+i=1 by the pseudorandom number genera-
+tor like Mersenne twister (Matsumoto & Nishimura, 1998), which is by far the most widely used, takes considerably large
+amount of time in practice. The time cost can be denoted by TG. As Si is dense, computing {ST
+i=1 takes O(nmd)
+time. Calculating {(ST
+i=1 requires O(nm2d + nm3), which involves matrix multiplications and inversions. Sub-
+sequently, we repeat the matrix-vector multiplications in {Si(ST
+i=1 from the left to right, based on
+which we get the target covariance matrix. Finally, it takes at least O(nmd + nm2d + nm3 + nm2 + ndm + nd2) + TG =
+i xi ∈ Rm before sending
+O(nmd+nm2d+nd2)+TG time for Gauss-Inverse. In the remote sites, we compress data by ST
+them to the fusion center. Along with O(d2) storage for the derived covariance matrix, about O(nm + d2) storage space is
+required in total. Also, sending {ST
+Note that we have not listed the synchronization cost of Gauss-Inverse in Table 1. In practice, a pseudo-random number
+generator is applied to the program in both the remote sites and the fusion center to generate/reconstruct n Gaussian random
+matrices {Si ∈ Rd×m}n
+i=1, and only n seeds are required to be transmitted from remote sites to the fusion center to recover
+the Gaussian random matrices. Therefore, only about O(n) storage and communication cost have to be added in Table 1.
+i Si ∈ Rm×m into memory, hence at least O(m2) memory is required.
+i Si)−1 has to load each ST
+Also, calculating each (ST
+i and subtracting its rescaled diagonal entries dominate the computational
+i=1 SiST
+cost (Anaraki, 2016). Generating sparse projection matrices {Si ∈ Rd×q}n
+i=1 is also expensive (Anaraki & Becker, 2017),
+2s}.
+whose time cost is denoted by TS. The entries of each Si are distributed on {−1, 0, 1} with probabilities { 1
+s non-zero entries in expectation. Empirically, we can ﬁx that q/d = 0.2 or 0.4 according
+Then, each column of Si has d
+to (Anaraki & Hughes, 2014; Anaraki, 2016). The number of non-zero entries of SiST
+s )q)
+s (1 − q
+in expectation, which ranges from dq
+s )q) = m < d, thus we can solve s with
+q/d = 0.2 or 0.4 ﬁxed to obtain that s = O( d2
+i=1 takes O( ndq
+s ) = O(nm) time
+in expectation. Based on it, computing {SiST
+s ) = O(nm) time in expectation.
+Since each SiST
+i and
+subtracting its rescaled diagonal entries requires O(nm + nm + nm2 + d) + TS = O(nm2 + d) + TS time in total. Storing
+i xi ∈ Rd}n
+{SiST
+i=1 and the estimated covariance matrix requires O(nm + d2) storage in expectation, where a O(nm) cost
+results from O(nm) non-zero entries in {SiST
+i=1 along with O(nm) corresponding indices. Similarly, sending
+{SiST
+i xi ∈ Rd}n
+For UniSample-HD, processing data by a Hadamard matrix by HDX ∈ Rd×n requires O(nd log d) time, where H ∈ Rd×d
+can be a Hadamard matrix, D ∈ Rd×d is a diagonal matrix with diagonal elements being i.i.d. Rademacher random
+variables, and we suppose that d = 2l holds (l is a certain positive integer). Then, sampling m entries uniformly without
+replacement on each data vector by {ST
+i HDxi ∈ Rd}n
+i=1 takes O(nm) time. Hence, it is straightforward to check that
+i HD ∈ Rd×d requires O(nd log d+nm+nm2+d2 log d) = O(nd log d+nm2)
+i DT HT SiST
+time in total. HD ∈ Rd×d can be generated on the ﬂy when we process the data. About O(nm + d2) storage has to be
+used for the compressed data and estimated covariance matrix. Obviously, about O(nm) communication cost is required.
+
+i xi ∈ Rd contains only m non-zeros entries in expectation, thus obtaining(cid:80)n
+
+2s , 1 − 1
+s , 1
+i xi ∈ Rd is at least d(1 − (1 − 1
+
+i=1 from remote sites to the fusion center takes at most O(nm) communication cost in expectation.
+
+s . Deﬁne d(1 − (1 − 1
+
+2s ) to dq
+m ). Then computing {ST
+i xi ∈ Rd}n
+
+i xi ∈ Rq}n
+i=1 additionally costs O( ndq
+
+i=1 SiST
+
+i xixT
+
+i SiST
+
+i=1 HDSiST
+
+i DT HT xixT
+
+i xi ∈ Rd}n
+
+(cid:80)n
+
+5. Impact of the Parameter ααα
+5.1. Discussion
+To determine if the k-th entry of the data vector xi ∈ Rd should be retained or not, the sampling probability applied in our
+method is
+
+pki = α
+
+|xki|
+(cid:107)xi(cid:107)1
+
++ (1 − α)
+
+x2
+ki
+(cid:107)xi(cid:107)2
+
+2
+
+.
+
+(97)
+
+Achieving our theoretical bound of Theorem 2 requires 0 < α < 1. However, The case α = 1 and α = 0 can also
+obtain weaker error bounds, which can be straightforwardly derived from Eqs. (64)(65) and Eqs. (70)(71). The following
+illustration reveals the connection between α and error bounds on data owning different properties.
+
+1. Only using α = 0, i.e., (cid:96)2-norm based sampling pki = x2
+(cid:107)xi(cid:107)2
+
+ki
+
+2
+
+can yield a very weak bound if there exist some very
+
+Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+small entries |xki| in xi ∈ Rd. E.g., substituting pki = x2
+(cid:107)xi(cid:107)2
+in maxk∈[d]
+
+ki
+
+2
+
+(cid:107)xi(cid:107)4
+x2
+ki
+
+2
+
+in the ﬁnal error bound, which becomes inﬁnite if the positive entry |xki| gets close to 0;
+
+into the term maxk∈[d]
+
+of Eq. (64) or Eq. (70) results
+
+x2
+ki
+p2
+ki
+
+|xki|
+(cid:107)xi(cid:107)1
+
+ki(cid:107)xi(cid:107)2
+
+2. Only using α = 1, i.e., (cid:96)1-norm based sampling pki =
+
+large entries |xki| in xi ∈ Rd. E.g., substituting pki =
+maxk∈[d] x2
+by employing pki = x2
+(cid:107)xi(cid:107)2
+it is possible that maxxi⊂Rd,(cid:107)xi(cid:107)4
+
+yields a slightly weak bound if there exist some very
+of Eq. (70) results in
+2 derived
+2 = 1 without loss of generality, then
+and xki,k(cid:54)=j =
+d for all
+k ∈ [d] or we have xji = 1 and xki,k(cid:54)=j = 0 for all k ∈ [d] with k (cid:54)= j. Note xi ⊂ Rd in the above optimizations
+means that xi is a vector variable in the d-dimensional space, and j is an arbitrary integer in the set [d].
+
+for all k ∈ [d] with k (cid:54)= j. Also, minxi⊂Rd,(cid:107)xi(cid:107)4
+
+(cid:29) 1 if when xji =
+
+1 in the ﬁnal error bound, which is always greater than or equal to maxk∈[d] (cid:107)xi(cid:107)4
+(cid:113)√
+
+. Speciﬁcally, assume (cid:107)xi(cid:107)4
+ki(cid:107)xi(cid:107)2
+
+x4
+ki
+p2
+ki
+2=1 maxk∈[d] x2
+
+1 = 1 if we have xki =
+
+into the term maxk∈[d]
+
+(cid:113) 1
+
+√
+1 = d+2
+
+to bound maxk∈[d]
+
+2=1 maxk∈[d] x2
+
+2 = (cid:107)xi(cid:107)4
+
+(cid:113) 1
+
+ki(cid:107)xi(cid:107)2
+
+|xki|
+(cid:107)xi(cid:107)1
+
+√
+d+1
+d
+2
+
+x4
+ki
+p2
+ki
+
+√
+d
+
+2d+2
+
+d+1
+
+ki
+
+2
+
+4
+
+3. Therefore, α balances the performance by (cid:96)1-norm based sampling and (cid:96)2-norm based sampling. (cid:96)2 sampling penal-
+izes small entries more than (cid:96)1 sampling, hence (cid:96)2 sampling is more likely to select larger entries to decrease error
+(e.g., case 2). However, different from (cid:96)1 sampling, (cid:96)2 sampling is unstable and sensitive to small entries, and it can
+make estimation error incredibly high if extremely small entries are picked (e.g., case 1). Then 0 < α < 1 is applied
+to achieve the desired tight bound with pki ≥ (1 − α) x2
+to tackle the extreme situation in the case 2 that cannot
+(cid:107)xi(cid:107)2
+be well handled purely by pki ≥ α
+. When α turns from 1 to 0, the estimation error is likely to ﬁrst decrease and
+then increase.
+
+|xki|
+(cid:107)xi(cid:107)1
+
+ki
+
+2
+
+5.2. Experiments
+Accordingly, we create four different synthetic datasets: {Ai}4
+entries in A1 and A2 are i.i.d. generated from the Gaussian distributions N (
+respectively. For A3, the entries of its one row are i.i.d. generated from N (
+N (
+
+(cid:113) 1
+
+√
+
+(cid:113) 1
+(cid:113)√
+
+i=1 ∈ R1000×10000 (i.e., d = 1000 and n = 10000). All
+100 ),
+, 1
+d
+100 ), and the other entries follow
+, 1
+
+1000 ) and N (
+
+2d+2
+√
+d+1
+d
+
+2d+2
+
+√
+
+√
+
+d
+
+2
+
+1
+
+,
+
+100 ). For A4, its generation follows the way of X1 in the main text of the paper.
+, 1
+
+2d+2
+
+d
+
+(cid:113) 1
+
+Figure 1. Accuracy comparison by decreasing α from 1 to 0 with a step size of 0.1. The error at each α is normalized by that at α = 1
+on y-axis, and m/d varies from 0.005 to 0.2 with a step size of 0.005 on x-axis. Roughly, α = 0.9 is a good choice, and the smaller
+parameter like α = 0 usually leads to a poorer accuracy and higher variance compared with the other α values.
+
+In Figure 1, the y-axis reports the errors that are normalized by the error incurred at α = 1. For A1, the magnitudes of
+the data entries tend to be highly uniformly distributed. Thus, nearly the same results are returned over all α. For A2,
+its entries are slightly uniformly distributed with some entries having extremely small magnitudes. Hence, α = 0 has a
+poorer performance compared with the others, which is consistent with the case 1 in Section 5.1. A3 contains some entries
+larger than the others, and neither α = 0 nor α = 1 achieves the best performance obtained roughly at α = 0.9. Also,
+the estimation error ﬁrst decreases and then increases when α turns from 1 to 0. All such simulation results conform to
+the case 2 and case 3 in Section 5.1. Considering A4 that is not likely to contain the extreme situation as mentioned in the
+case 2 of Section 5.1, we see that best performance is roughly achieved when α gets close to 1.
+
+m/d0.050.10.150.2Error0.60.70.80.911.11.21.3DggGaussian1X8, d=1024 n=10000Alpha-1Alpha-0.9Alpha-0.8Alpha-0.7Alpha-0.6Alpha-0.5Alpha-0.4Alpha-0.3Alpha-0.2Alpha-0.1Alpha-0m/d0.050.10.150.2Rescaled Error0.60.811.21.41.6A1, d=1000 n=10000m/d0.050.10.150.2Rescaled Error0.60.811.21.41.6A2, d=1000 n=10000m/d0.050.10.150.2Rescaled Error0.60.811.21.41.6A3, d=1000 n=10000m/d0.050.10.150.2Rescaled Error024A4, d=1000 n=10000Appendix for ‘Toward Efﬁcient and Accurate Covariance Matrix Estimation on Compressed Data’
+
+References
+Anaraki, F. Estimation of the sample covariance matrix from compressive measurements. IET Signal Processing, 2016.
+
+Anaraki, F. and Becker, S. Preconditioned data sparsiﬁcation for big data with applications to pca and k-means. IEEE Transactions on
+
+Information Theory, 2017.
+
+Anaraki, F. and Hughes, S. Memory and computation efﬁcient pca via very sparse random projections. In Proceedings of the 31st
+
+International Conference on Machine Learning (ICML-14), pp. 1341–1349, 2014.
+
+Azizyan, M., Krishnamurthy, A., and Singh, A.
+
+arXiv:1506.00898, 2015.
+
+Extreme compressive sampling for covariance estimation.
+
+arXiv preprint
+
+Davis, C. and Kahan, W. M. The rotation of eigenvectors by a perturbation. iii. SIAM Journal on Numerical Analysis, 7(1):1–46, 1970.
+
+Golub, G. H. and Van Loan, C. F. Matrix computations. 1996.
+
+Matsumoto, M. and Nishimura, T. Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random number generator.
+
+ACM Transactions on Modeling and Computer Simulation, 1998.
+
+Tropp, J. A. An introduction to matrix concentration inequalities. Foundations and Trends in Machine Learning, 8(1-2):1–230, 2015.
+
+

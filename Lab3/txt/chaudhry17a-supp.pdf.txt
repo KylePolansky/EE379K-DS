@@ -1,0 +1,4334 @@
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+A. Proofs of Main Results
+In this section we present proofs of the results from Section 5.
+
+A.1. Proof of Theorem 5.5 and Corollaries
+
+We ﬁrst demonstrate how we decompose the estimation error in the unbiased Lasso Granger estimator(cid:98)θu into the sum of
+
+two components:
+
+M(cid:101)X(cid:62)(cid:101)X(θ∗ −(cid:98)θ) − (θ∗ −(cid:98)θ)
+
+(cid:98)θu − θ∗ = (cid:98)θ +
+
+=
+
+=
+
+1
+
+1
+
+T − p
+
+T − p
+
+M(cid:101)X(cid:62)((cid:101)Xθ∗ +  − (cid:101)X(cid:98)θ) − θ∗
+M(cid:101)X(cid:62) +
+M(cid:101)X(cid:62) + (M(cid:101)Σn − I)(θ∗ −(cid:98)θ).
+T − p(M(cid:101)Σn − I)(θ∗ −(cid:98)θ), we have
+(cid:112)T − p((cid:98)θu − θ∗) = Z + ∆.
+
+1
+
+1
+
+T − p
+T − p
+√
+
+√
+
+(A.1)
+
+T − p and ∆ =
+
+in Lemma A.2 that Z is asymptotically normally distributed.
+
+Letting Z = M(cid:101)X(cid:62)/
+Note that, clearly, E[Z] = 0. Thus, ∆ encapsulates the bias in(cid:98)θu. We divide this proof into two parts. We ﬁrst establish in
+Lemma A.1 that(cid:98)θu is an asymptotically unbiased estimator of θ∗ by proving that (cid:107)∆(cid:107)∞ = o(1). We then proceed to prove
+Lemma A.1. Suppose Assumptions 5.3 and 5.4 are satisﬁed. Let s0 = supp((cid:98)θ) (cid:16) (
+(cid:112)log(pd)/(T − p). Then (cid:107)∆(cid:107)∞ = o(1), where ∆ =
+T − p(cid:107)M(cid:101)Σn − I(cid:107)∞ · (cid:107)θ∗ − (cid:98)θ(cid:107)1. We bound (cid:107)M(cid:101)Σn − I(cid:107)∞ by constructing a martingale difference sequence (see
+(cid:107)θ∗ −(cid:98)θ(cid:107)1 via a standard argument for Lasso-type estimators that relies on the restricted eigenvalue condition. We amend
+Lemma A.2. Suppose Assumptions 5.3 and 5.4 are satisﬁed. Let s0 = supp((cid:98)θ) (cid:16) (
+(cid:112)log(pd)/(T − p). Then we have Z/(σ[M(cid:101)ΣnM(cid:62)]1/2) = M(cid:101)X(cid:62)/(σ
+Z/(σ[M(cid:101)ΣnM(cid:62)]1/2), and applying the Martingale Central Limit Theorem (Hall & Heyde, 1980).
+
+The proof of Lemma A.1, presented in Appendix B.1, uses H˝older’s inequality to decompose (cid:107)∆(cid:107)1 into the product
+√
+Deﬁnition G.1 in Appendix G) and applying a Bernstein-type inequality (Lemma F.8) to this sequence. We then bound
+
+this argument to work in our non-i.i.d. setting by appealing to martingale theory and present a restricted eigenvalue condition
+for martingale difference sequences in Appendix F.
+
+T − p[M(cid:101)ΣnM(cid:62)]1/2) D−→ N (0, Ipd×pd).
+
+The proof of Lemma A.2, deferred to Appendix B.2, relies on constructing a martingale difference sequence equal to
+
+T − p(M(cid:101)Σn − I)(θ∗ −(cid:98)θ).
+
+T − p)/ log(pd) and µ (cid:16)
+
+T − p)/ log(pd) and µ (cid:16)
+
+√
+
+√
+
+√
+
+√
+
+Having established Lemmas A.1 and A.2, we are now ready to present a proof of Theorem 5.5.
+
+Proof of Theorem 5.5. We write the estimation error of the unbiased Lasso Granger estimator as
+
+(cid:112)T − p((cid:98)θu − θ∗) = Z + ∆.
+T − p(M(cid:101)Σn − I)(θ∗ −(cid:98)θ). Then, by Lemma A.1 we have that ∆ P−→ 0. By
+where Z = M(cid:101)X(cid:62)/
+Lemma A.2, we have that Z/(σ[M(cid:101)ΣnM(cid:62)]1/2) D−→ N (0, I). Therefore, by the Slutsky Theorem (Van der Vaart, 2000), we
+T − p((cid:98)θu − θ∗)/(σ[M(cid:101)ΣnM(cid:62)]1/2) D−→ N (0, Ipd×pd), as desired.
+
+T − p and ∆ =
+
+have that
+
+√
+
+√
+
+√
+
+Theorem 5.5 allows us to demonstrate the asymptotic validity of the conﬁdence intervals we present in Corollary 5.6 as
+follows:
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+lim
+
+P
+
+(cid:19)
+
+(cid:18)
+
+T−p→∞
+
+i ∈ Ii
+θ∗
+
+Proof of Corollary 5.6. By Theorem 5.5, the asymptotic normality of(cid:98)θu
+(cid:18)(cid:98)θu
+(cid:19)
+i − θ∗
+i ≤ δ(α, T − p)
+(cid:18)√
+T − p((cid:98)θu
+σ[M(cid:101)ΣnM(cid:62)]1/2
+i − θ∗
+i )
+(cid:18)√
+T − p((cid:98)θu
+σ[M(cid:101)ΣnM(cid:62)]1/2
+i − θ∗
+i )
+
+− lim
+
+T−p→∞
+
+T−p→∞
+
+T−p→∞
+
+= lim
+
+= lim
+
+P
+
+P
+
+P
+
+i,i
+
+i,i
+
+i implies
+− lim
+
+T−p→∞
+≤ Φ−1(1 − α/2)
+
+(cid:18)(cid:98)θu
+(cid:19)
+
+P
+
+≤ −Φ−1(1 − α/2)
+
+i − θ∗
+(cid:19)
+
+= 1 − α.
+
+i ≤ −δ(α, T − p)
+
+(cid:19)
+
+(A.2)
+
+In a similar manner, Theorem 5.5 also permits us to prove the several desirable properties of hypothesis test ΨZ(α), which
+we introduce in (4.7), that we present in Corollary 5.7.
+
+Proof of Corollary 5.7. By (4.3), we have
+
+0) = P(−|(cid:99)Zi| < zα/2) = α
+
+we see that
+
+where zα/2 = Φ−1(α/2), since(cid:99)Zi converges in distribution to the standard normal distribution. Similarly, for any u ∈ (0, 1),
+
+P(ΨZ(α) = 1|H i
+
+(cid:18)
+P(Pi < u) = P(2(1 − Φ(|(cid:99)Zi|)) < u) = P
+
+(cid:19)
+Φ(|(cid:99)Zi|) > 1 − u
+
+2
+
+= P
+
+(cid:18)
+
+1 − u
+2
+
+−−−−−−−→ u
+
+(cid:18)
+|(cid:99)Zi| > Φ−1
+
+(cid:19)(cid:19) (T−p)→∞
+since, again,(cid:99)Zi converges in distribution to the standard normal distribution.
+In Section 4.1, we claim that the Scaled Lasso noise estimator (Sun & Zhang, 2012)(cid:98)σ, as given by (4.4), is a consistent
+estimator of the true noise level σ. We note that while Sun & Zhang (2012) prove the consistency in the i.i.d. case,(cid:98)σ is
+Lemma A.3. Let ((cid:98)θ(λ),(cid:98)σ(λ)) be the Scaled Lasso estimator from (4.4) and λ = 8Cσ(cid:112)log(pd)/(T − p). Furthermore,
+
+nevertheless still consistent in our non-i.i.d. case as well. This result follows directly from Theorem 1 in Sun & Zhang
+(2012), which we paraphrase in the following lemma.
+
+let the assumptions of Theorem 5.5 hold. Then,
+
+(cid:18)(cid:12)(cid:12)(cid:12)(cid:12)(cid:98)σ(λ)
+
+σ
+
+P
+
+(cid:12)(cid:12)(cid:12)(cid:12) > 
+(cid:19)
+
+− 1
+
+→ 0,
+
+for all  > 0 as (T − p, pd) → ∞.
+We present a proof of this lemma in Appendix B.3.
+
+A.2. Proof of Theorem 5.9
+
+We ﬁrst present a property and three lemmas that will allow us to prove Theorem 5.9. For ease of presentation, let
+G(t) = 2(1 − Φ(t)) and G−1(t) = Φ−1(1 − t/2).
+
+Property 1. Recall that (cid:101)Σ = [σi,j] ∈ Rpd×pd is the true covariance matrix of our design matrix (cid:101)X. Now let ρi,j =
+to that made by Liu et al. (2013b), since we assume that supp((cid:98)θ) (cid:16) √
+
+σi,iσj,j, and for δ,  > 0, let B(δ) = {(i, j)||ρi,j| ≥ δ, i (cid:54)= j} and A() = B([log(pd)]−2−). By a similar argument
+
+T − p/ log(pd) in Theorem 5.5, we have
+
+√
+σi,j/
+
+(cid:88)
+
+(i,j)∈A()
+
+(pd)a1 = O((pd)2/(log(pd)2),
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+where a1 = 2|ρi,j|/(1 + |ρi,j|) + δ.
+Property 1 amounts to a sparsity assumption on the true covariance matrix and allows us to cope with the correlation among
+test statistics.
+Lemma A.4. Suppose Assumptions 5.3, 5.4, the conditions of Theorem 5.9, and Property 1 are satisﬁed. Then we can
+
+bound(cid:98)ν from (4.9) as follows:
+
+P(0 ≤(cid:98)ν ≤ xpd) → 1
+
+Lemma A.5. Suppose Assumptions 5.3, 5.4, and Property 1 are satisﬁed. Then for xpd as deﬁned in Lemma A.4, we have:
+
+pd−→ ∞ and ypd = o(pd).
+
+where xpd = G−1(ypd/(pd)), and ypd is a sequence such that ypd
+
+Lemma A.4 bounds(cid:98)ν with high probability. We use this bound in the following lemma:
+(cid:12)(cid:12)(cid:12)(cid:12) P−→ 0.
+1(|(cid:99)Zi ≥(cid:98)ν), 1} = α.
+
+1(|(cid:99)Zi| ≥ ν)
+(pd)G((cid:98)ν)
+
+Lemma A.6. Suppose Assumptions 5.3 and 5.4 are satisﬁed. Then we have:
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+max{(cid:80)
+
+|H0|G(ν)
+
+0≤ν≤xpd
+
+(cid:80)
+
+1≤j≤pd
+
+− 1
+
+i∈H0
+
+sup
+
+In the interest of clarity, we defer the proofs of Lemmas A.4, A.5, and A.6 to Appendices B.4, B.5, and B.6, respectively.
+
+The proof of Theorem 5.9 proceeds in three parts. We ﬁrst bound(cid:98)ν with high probability in Lemma A.4, and then prove in
+Lemma A.5 that for any ν within those bounds (cid:80)
+
+The result of Theorem 5.9 then follows naturally by Lemma B.6 .
+
+Proof of Theorem 5.9. By Lemma A.4, P(0 ≤(cid:98)ν ≤ xpd) → 1. Then by Lemma A.5, we have
+(cid:12)(cid:12)(cid:12)(cid:12) P−→ 0.
+
+1(|(cid:99)Zi| ≥(cid:98)ν)
+|H0|G((cid:98)ν)
+
+1(|(cid:99)Zi| ≥ ν)
+
+|H0|G(ν)
+
+(cid:80)
+
+− 1
+
+− 1
+
+i∈H0
+
+i∈H0
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+Thus, we have
+
+From this result, we see that by the deﬁnition of FDP(ν),
+
+FDP((cid:98)ν)
+
+α|H0|/(pd)
+
+=
+
+(pd)(cid:80)
+α|H0| max{(cid:80)
+
+P−→
+
+α|H0| max{(cid:80)
+
+(pd)|H0|G((cid:98)ν)
+
+1≤j≤pd
+
+1(|(cid:99)Zi ≥(cid:98)ν), 1}.
+
+(A.3)
+
+(A.4)
+
+P−→ 1.
+
+P−→ 1.
+
+i∈H0
+
+i∈H0
+
+0≤ν≤xpd
+
+1(|(cid:99)Zi| ≥(cid:98)ν)
+|H0|G((cid:98)ν)
+(cid:80)
+(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12) ≤ sup
+(cid:80)
+1(|(cid:99)Zi| ≥(cid:98)ν)
+|H0|G((cid:98)ν)
+1(|(cid:99)Zi| ≥(cid:98)ν)
+1(|(cid:99)Zi ≥(cid:98)ν), 1}
+(pd)G((cid:98)ν)
+FDP((cid:98)ν)
+FDR((cid:98)ν)
+
+α|H0|/(pd)
+
+1≤j≤pd
+
+α|H0|/(pd)
+
+P−→ 1,
+
+P−→ 1,
+
+1(|(cid:99)Zi ≥(cid:98)ν), 1} = α.
+
+i∈H0
+1≤j≤pd
+
+max{(cid:80)
+
+By Lemma A.6,
+
+Thus, by (A.3) and (A.4)
+
+as (T − p, pd) −→ ∞. This result clearly then implies that
+
+as (T − p, pd) −→ ∞, as desired.
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+B. Proofs of Technical Lemmas in Appendix A
+In this section we present the proofs of technical lemmas introduced in Appendix A.
+
+B.1. Proof of Lemma A.1
+
+We ﬁrst present two auxiliary lemmas that we will use in the proof of Lemma A.1.
+
+Lemma B.1. If Assumption 5.3 holds and we additionally assume that the rows of (cid:101)X(cid:101)Σ−1/2 are sub-Gaussian with
+sub-Gaussian norm of κ = (cid:107)(cid:101)Σ−1/2(cid:102)Xi(cid:107)ψ2, then
+
+(cid:115)
+(cid:107)M(cid:101)Σn − I(cid:107)∞ ≤ a
+
+log(pd)
+T − p
+,
+
+holds with probability at least 1 − 2(pd)−c2, where c2 =
+
+a2Cmin
+
+24e2κ4Cmax
+
+− 2 and a is some constant.
+
+The proof of Lemma B.1, which we defer to Appendix C.1, relies constructing a martingale difference sequence (see
+Deﬁnition G.1 in Appendix G) and applying a Bernstein-type inequality (Lemma F.8) to this sequence.
+
+Lemma B.2. Let λ = 8Cσ(cid:112)log(pd)/(T − p) for some constant C. Then
+(cid:107)θ∗ −(cid:98)θ(cid:107)1 ≤ 12λs0
+
+,
+
+κ(cid:96)
+
+with probability at least
+
+1 − b1 exp[−b2σ2 log(pd)] − 2 exp(−c2
+1c2ω2(B)) − L exp
+0c2
+
+(cid:20)
+
+− 4
+
+(cid:21)
+
+,
+
+(ω(A))2
+
+α2
+
+1
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+where λmin((cid:101)Σn|A) = inf u∈A
+2 is the restricted minimum eigenvalue of (cid:101)Σn restricted to A ⊆ Spd−1 (the
+unit sphere in Rpd space), B = {(cid:101)u : (cid:101)u = (cid:101)Σ1/2u/(cid:107)(cid:101)Σ1/2u(cid:107)2, u ∈ A} is the normalized set of A, α = diam(A) =
+supu,v∈A d(u, v) = supu,v∈A (cid:107)u − v(cid:107)2, ω(A) is the Gaussian width of set A as deﬁned in Deﬁnition F.5, and
+The proof of Lemma B.2, which we present in Appendix C.2, relies on the restricted eigenvalue condition to bound (cid:107)θ∗−(cid:98)θ(cid:107)1
+κ(cid:96), b1, b2, c0, c1, c2, L > 0 are constants.
+
+T − p
+
+with high probability.
+We now present a proof of Lemma A.1.
+
+Proof of Lemma A.1. H˝older’s inequality allows us to decompose (cid:107)∆(cid:107)1 as follows:
+
+(cid:107)∆(cid:107)∞ ≤ (cid:107)∆(cid:107)1 ≤(cid:112)T − p(cid:107)M(cid:101)Σn − I(cid:107)∞ · (cid:107)θ∗ −(cid:98)θ(cid:107)1.
+
+We now bound (cid:107)M(cid:101)Σn − I(cid:107)∞ and (cid:107)θ∗ −(cid:98)θ(cid:107)1 separately. By Lemma B.1, we ﬁnd that (cid:107)M(cid:101)Σn − I(cid:107)∞ ≤ a(cid:112)log(pd)/T − p
+with high probability . Additionally, by Lemma B.2, (cid:107)θ∗ −(cid:98)θ(cid:107)1 ≤ 12λs0/κ(cid:96) with high probability
+
+Combining these two high-probability bounds yields the following result:
+
+(cid:112)T − p(cid:107)M(cid:101)Σn − I(cid:107)∞ · (cid:107)θ∗ −(cid:98)θ(cid:107)1 < as0
+
+with high probability. Thus, by (B.1), (cid:107)∆(cid:107)∞ = o(s0 log(pd)/
+Therefore, (cid:107)∆(cid:107)∞ = o(1).
+
+√
+
+96σ
+κ(cid:96)
+
+√
+· log(pd)
+T − p
+
+,
+
+(B.1)
+
+T − p). Recall that by assumption, s0 (cid:16) √
+
+T − p/ log(pd).
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+B.2. Proof of Lemma A.2
+
+We ﬁrst present an auxiliary lemma that we will use in the proof of Lemma A.2.
+Lemma B.3 (Lindeberg condition from Hall & Heyde (1980)). Denote the martingale difference sequence ζi,t =
+1((cid:107)ζt| ≥ δ)|Ft−1] →
+
+i (cid:101)Σnmi]1/2) and ﬁltration Ft = σ((cid:102)X1, . . . ,(cid:102)Xt, 1, . . . , t). Then,(cid:80)T
+
+t mi)/(σ[m(cid:62)
+
+(t(cid:102)X(cid:62)
+
+E[ζ 2
+
+i,t
+
+t=p+1
+
+0.
+
+In the interest of clarity, we defer the proof of Lemma B.3 to Appendix C.3.
+
+Proof of Lemma A.2. To prove this lemma, we need to show that
+m(cid:62)
+σ[m(cid:62)
+
+=
+
+(cid:99)Zi
+
+σ[M(cid:101)ΣnM(cid:62)]1/2
+i (cid:101)X(cid:62) = (m(cid:62)
+
+i,i
+
+i (cid:101)X(cid:62)
+i (cid:101)Σnmi]1/2
+i (cid:101)X(cid:62))(cid:62) = (cid:62)(cid:101)Xmi =
+
+(cid:99)Zi = m(cid:62)
+
+Note that
+
+D−→ N (0, 1).
+
+T(cid:88)
+
+t(cid:102)X(cid:62)
+
+t mi.
+
+Now deﬁne ﬁltration Ft = σ((cid:102)X1, . . . ,(cid:102)Xt, 1, . . . , t). By (3.1), t is independent of Ft−1 and conditionally independent
+of(cid:102)Xt given Ft−1. Furthermore, by (4.2), t is conditionally independent mi given Ft−1. Therefore,
+
+t=p+1
+
+= 0,
+where the last equality follows since t∼N (0, σ2). Thus,
+
+t mi|Ft−1]
+
+E[t(cid:102)X(cid:62)
+
+t mi|Ft−1] = E[t|Ft−1] · E[(cid:102)X(cid:62)
+t mi|Ft−1]
+(cid:27)T
+
+= E[t] · E[(cid:102)X(cid:62)
+(cid:26)
+
+t(cid:102)X(cid:62)
+i (cid:101)Σnmi]1/2
+
+t mi
+
+σ[m(cid:62)
+
+{ζi,t}T
+
+t=p+1 =
+
+,
+
+t=p+1
+
+is a martingale difference sequence by Deﬁnition G.1 in Appendix G.
+
+Since(cid:99)Zi/(σ[m(cid:62)
+
+i (cid:101)Σnmi]1/2) = (cid:80)T
+
+t=p+1 ζi,t, if we can show that we can apply the Martingale Central Limit Theorem
+(MCLT) (Hall & Heyde, 1980) to ζi,t, the result of this lemma will follow. To demonstrate that we can apply the MCLT to
+ζi,t, we must prove that the Lindeberg condition holds for this sequence. By Lemma B.3, the Lindeberg condition holds for
+ζi,t. Therefore, by the MCLT
+
+T(cid:88)
+
+(cid:99)Zi
+i (cid:101)Σnmi]1/2
+
+ζi,t =
+
+σ[m(cid:62)
+
+D−→ N (0, 1),
+
+t=p+1
+
+as desired.
+
+B.3. Proof of Lemma A.3
+
+notation. Denote the penalized least-squares loss function L(θ) = (2(T − p))−1(cid:107)Y −(cid:101)Xθ(cid:107)2
+from the Scaled Lasso loss function from (4.4), which we denote Lλ(θ, σ) = (2(T − p))−1(cid:107)Y − (cid:101)Xθ(cid:107)2
+
+We present a variation on the argument made in the Proof of Theorem 1 in Sun & Zhang (2012). The proof of Lemma A.3
+requires the following two supporting lemmas from Sun & Zhang (2012), which in turn necessitate introducing some new
+2 + λ(cid:107)θ(cid:107)1. We distinguish L(·)
+2 + σ/2 + λ(cid:107)θ(cid:107)1.
+
+As Sun & Zhang (2012) note, θ is a critical point of L if and only if it satisﬁes:
+
+(cid:40) (cid:102)X·,j(Y − (cid:101)Xθ)/(T − p) = λsign(θj), θj (cid:54)= 0
+(cid:102)X·,j(Y − (cid:101)Xθ)/(T − p) ∈ [−λ, λ], θj (cid:54)= 0
+
+(B.2)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+where(cid:102)X·,j is the j-th column of the design matrix (cid:101)X. Importantly, Sun & Zhang (2012) note that B.2 is the Karush-Kuhn-
+Lemma B.4 (Proposition 1 from Sun & Zhang (2012)). Let (cid:98)θ = (cid:98)θ(λ) be a solution path of B.2 and λ0 = λ/σ =
+8C(cid:112)log(pd)/(T − p). Then the loss function Lλ(·,·) is jointly convex in (θ, σ). Furthermore, the derivative of Lλ(·,·)
+
+Tucker (KKT) condition for the minimization of L(·) when L(·) is convex in θ. This property will prove important in the
+discussion of Lemma B.3 below. We now present the ﬁrst of two supporting lemmas for the proof of Lemma A.3.
+
+with respect to σ is
+
+Lλ0((cid:98)θ(tλ0), t) =
+
+∂
+∂t
+
+− (cid:107)Y − (cid:101)Xθ(tλ0)(cid:107)2
+
+2(T − p)t2
+
+2
+
+.
+
+1
+2
+
+(B.3)
+
+Lemma B.4 does not rely on the i.i.d.-ness of the rows of (cid:101)X, and so we refer readers to the proof of Proposition 1 in Sun &
+
+Zhang (2012) for a proof of Lemma B.4.
+The second supporting lemma requires additional notation from Sun & Zhang (2012). Let η(λ, ξ, w, Q) be a prediction
+error bound for the estimation of θ∗ via the Scaled Lasso. Let w ∈ Rpd Q ⊂ 1 . . . , pd, and
+2/(T − p) + 2λ(cid:107)wQc(cid:107)1(2 − 1(w = θ, Q = ∅)) +
+(cid:27)
+
+η(λ, ξ, w, Q) = (cid:107)(cid:101)X(θ∗ − w)(cid:107)2
+
+where vS = [vi]i∈S) ∈ R|S| and
+
+,
+(ξ + 1)2κ(ξ, Q)
+
+(cid:26) |Q|1/2(cid:107)(cid:101)Xu(cid:107)2
+
+4ξ2λ2|Q|
+
+T − p, which Sun & Zhang (2012)
+call the oracle estimator for σ. Based on these deﬁnitions, let the minimum prediction error bound be η∗(λ, ξ) =
+(σ∗λ0, ξ)/σ∗, where recall that λ0 = λ/σ =
+inf w,Q η(λ, ξ, w, Q) and deﬁne the following related quantity τ0 = η1/2∗
+
+where E(ξ, Q) = {u : (cid:107)uQc(cid:107)1 ≤ ξ(cid:107)uQ(cid:107)1}. Now let σ∗ = (cid:107)Y − (cid:101)Xθ∗(cid:107)2/
+8C(cid:112)log(pd)/(T − p). As Sun & Zhang (2012) note, since in (3.2)  in a Gaussian random vector, σ∗ is the maximum
+likelihood estimator for σ when θ is known. Thus, in the proof of Lemma A.3, we bound the quantity(cid:98)σ/σ∗ − 1 by τ0 in
+order to prove the consistency of(cid:98)σ. However, we ﬁrst require the following intermediate result.
+Lemma B.5 (Theorem 4 from Sun & Zhang (2012)). Let (cid:98)θ(λ) minimize L(·), ξ > 0, and deﬁne η∗(λ, ξ) =
+1)1/2)(cid:9) (not to be confused with η∗(λ, ξ) deﬁned above).
+(cid:8)(1/2)(η(λ, ξ, θ∗, Q) + (η(λ, ξ, θ∗, Q) − 16λ2(cid:107)θQc(cid:107)2
+If (cid:107)(cid:101)Xtop(Y − (cid:101)Xθ∗)(cid:107)∞/(T − p) ≤ λ(ξ − 1)/(ξ + 1), then
+
+minQ
+
+√
+
+: u ∈ E(ξ, Q), u (cid:54)= 0
+
+κ(ξ, Q) = min
+
+(cid:107)uQ(cid:107)1
+
+T − p
+
+(B.5)
+
+(B.4)
+
+√
+
+,
+
+(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+
+2/(T − p) ≤ min(cid:8)η∗(λ, ξ), η∗(λ, ξ)(cid:9).
+
+The proof of Lemma B.3 follows directly from the proof of Theorem 4 from Sun & Zhang (2012). The only point of
+contention in that proof is that B.2 must be the KKT condition for the minimization of L(·), which as we state above requires
+that L(·) is convex in theta. In Lemma C.1 in Appendix C.2, we prove that the restricted eigenvalue condition holds with
+
+high probability for the sample covariance matrix (cid:101)Σn. As we demonstrate in the proof of Lemma B.2 in Appendix C.2,
+the restricted eigenvalue condition implies that the unpenalized least-squares loss function (2(T − p))−1(cid:107)Y − (cid:101)Xθ(cid:107)2
+
+2 is
+strictly convex for all θ such that the error vector θ − θ∗ falls in the error cone E(3, S), where S is the support of θ∗. Since
+E(3, S) actually encompasses all possible error vectors, a property we prove in the proof of Lemma B.2, we see that the
+unpenalized loss function is convex with respect to θ. Since the derivative of penalty term λ(cid:107)θ(cid:107)1 with respect to θ is a
+strictly positive vector, given that the unpenalized loss function is convex in θ, so is the pealized loss function. Thus, B.2 is
+the KKT condition for the minimization of L(·), and Lemma follows immediately from the proof of Theorem 4 in Sun &
+Zhang (2012). We refer the reader to that paper for the full proof.
+We are now ready to present the proof of Lemma A.3.
+Proof of Lemma A.3. We present an amended version of the Proof of Theorem 1 from Sun & Zhang (2012). Let z∗ =
+
+(cid:107)(cid:101)X(cid:62)(Y − (cid:101)Xθ∗)/(T − p)(cid:107)∞/σ∗. Without loss of generality, assume τ0 < 1 and let t ≥ σ∗(1 − τ0) and let λ1 = tλ0,
+
+where λ0 is as deﬁned above. Now note that
+
+z∗σ∗ ≤ σ∗(1 − τ0)λ0
+
+ξ − 1
+ξ + 1
+
+≤ tλ0
+
+ξ − 1
+ξ + 1
+
+ξ − 1
+.
+ξ + 1
+
+= λ1
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Then by this inequality, the deﬁnition of σ∗, the Cauchy-Schwarz inequality, and Lemma B.3, we have
+
+T − p
+Now observe that B.3 in Lemma B.4 yields
+
+√
+
+− σ∗(cid:12)(cid:12)(cid:12)(cid:12) ≤ (cid:107)(cid:101)X((cid:98)θ(λ1) − θ∗)(cid:107)2
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:107)Y − (cid:101)X(cid:98)θ(λ1)(cid:107)2
+Lλ0((cid:98)θ(tλ0), t) = t2 − (cid:107)Y − (cid:101)X(cid:98)θ(tλ0)(cid:107)2
+
+T − p
+
+√
+
+2
+
+(T − p)
+
+2t2 ∂
+∂t
+
+≤ t2 − (σ∗)2(1 − τ0)2,
+
+≤ η1/2∗
+
+(λ1, ξ).
+
+(B.6)
+
+further that Lλ(·,·) is strictly convex in σ. Then the negativity of 2t2∂/(∂t)Lλ0 ((cid:98)θ(tλ0), t) implies that(cid:98)σ ≥ σ∗(1 − τ0).
+
+(λ1, ξ) ≤ σ∗τ0 for t < σ∗, since
+where the last inequality follows from B.6 and the deﬁnition of τ0, which implies η1/2∗
+λ1 = tλ0. Note that when t = σ∗(1 − τ0), the expression on the right-hand side of the last inequality equals zero. Note
+On the other hand, at t = σ∗/(1 − τ0) > σ∗, we have
+
+t2 − (cid:107)Y − (cid:101)X(cid:98)θ(tλ0)(cid:107)2
+
+2
+
+(T − p)
+
+≥ t2 − (σ + tτ0)2 ≥ 0,
+
+(λ1, ξ) ≤ tτ0. This result implies σ∗ ≥(cid:98)σ(1 − τ0) by the strict convexity of Lλ(·,·) in σ.
+
+since for t > σ∗, we have η1/2∗
+Therefore,
+
+max
+
+(cid:19)
+
+(cid:18)
+1 − (cid:98)σ
+σ∗, 1 − σ∗(cid:98)σ
+(cid:18)(cid:12)(cid:12)(cid:12)(cid:12)(cid:98)σ(λ)
+(cid:12)(cid:12)(cid:12)(cid:12) > 
+(cid:19)
+
+− 1
+
+σ
+
+P
+
+→ 0,
+
+(λ1, ξ)/σ → 0 as (T − p, pd) → ∞. Thus,
+
+≤ τ0.
+
+(B.7)
+
+As Sun & Zhang (2012) argue, η1/2∗
+
+for all  > 0 as (T − p, pd) → ∞.
+
+B.4. Proof of Lemma A.4
+
+r, b,  > 0. Furthermore, assume that (cid:107) Cov(ξi) − Ip×p(cid:107)2 ≤ C(log(p))−2−γ, where Cov(ξi) = E[(1/n)(cid:80)n
+
+We will need the following lemma, which is a modiﬁed version on Lemma 6.1 from Liu et al. (2013b) to prove Lemma A.4.
+Lemma B.6. Let ξ1, . . . , ξn ∈ Rp have mean zero. Suppose that p ≤ nr, log(p) = o(
+] ≤ ∞, for
+i ] and
+γ > 0. Deﬁne (cid:107) · (cid:107)min as (cid:107)v(cid:107)min = min1≤i≤p{|vi|}. Then,
+
+n), and E[(cid:107)ξi(cid:107)bpr+2+
+
+i=1 ξiξ(cid:62)
+
+√
+
+2
+
+(cid:12)(cid:12)(cid:12)(cid:12)P((cid:107)(cid:80)n
+
+√
+i=1 ξi(cid:107)min ≥ t
+(G(t))p
+
+n)
+
+− 1
+
+(cid:12)(cid:12)(cid:12)(cid:12) ≤ C(log(p))−1−γ1 ,
+
+√
+sup
+
+0≤t≤b
+
+log(p)
+
+r > 0, our assumption 5.4 of (cid:101)X having bounded sub-Gaussian rows is equivalent to E[(cid:107)ξi(cid:107)bpr+2+
+
+where γ1 = min{γ, 1/2}.
+Note that we make the assumptions p ≤ nr, r > 0 and log(p) = o(
+n), in the statement of Theorem 5.9. The former
+assumption is clearly satisﬁed in our setting, as we can have r > 1. As noted by Liu & Luo (2014), given that p ≤ nr, for
+] ≤ ∞, for b,  > 0.
+Additionally, the assumption of (cid:107) Cov(ξi) − Ip×p(cid:107)2 ≤ C(log(p)−2−γ is satisﬁed by Property 1, the sparsity property of the
+covariance matrix. Whereas Liu et al. (2013b) prove Lemma B.6 for the i.i.d. case, we present a proof that draws on the
+Bernstein inequality for martingale difference sequences (Lemma F.8) to prove this lemma when ξ1, . . . , ξn ∈ Rp are not
+independent. We defer the proof of Lemma B.6 to Appendix C.4. Having established Lemma B.6, we now present the proof
+of Lemma A.4.
+
+√
+
+2
+
+Proof of Lemma A.4. By Lemma B.6, we know that
+
+max
+1≤i≤pd
+
+√
+sup
+0≤ν≤4
+
+log(pd)
+
+(cid:12)(cid:12)(cid:12)(cid:12)P((cid:99)Zi ≥ ν)
+
+G(ν)
+
+(cid:12)(cid:12)(cid:12)(cid:12) ≤ C(log(pd))−1−γ1 ,
+
+− 1
+
+(B.8)
+
+i∈H1
+
+−1/2
+i,i
+
+−1/2
+i,i
+
+{i||θ∗
+
+P−→ 1,
+
+|B|
+1{|θ∗
+
+(cid:18)(cid:88)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+of true alternatives were ﬁxed, this convergence would clearly not occur. Now note that by Markov’s inequality
+
+for positive constants C and γ1. Then by (B.8), we have that P(|(cid:99)Zi| ≥ (cid:112)2 log(pd)) → 1 for all i ∈ B =
+) ≥(cid:112)c log(pd)/(T − p)}. Thus,(cid:80)
+i |/(σ(cid:101)Σ
+since we assumed by Assumption 5.8 that |B| =(cid:80)
+
+i∈B P(|(cid:99)Zi| ≥(cid:112)2 log(pd))
+) ≥(cid:112)c log(pd)/(T − p)} −→ ∞. If the number
+i |/(σ(cid:101)Σ
+(cid:20)(cid:80)
+(cid:21)
+i∈B 1{|(cid:99)Zi| ≥(cid:112)2 log(pd))}
+(cid:19)
+1{|(cid:99)Zi| ≥(cid:112)2 log(pd))} ≥ |B|
+i∈B P(|(cid:99)Zi| ≥(cid:112)2 log(pd)))
+(cid:80)
+i∈B 1{|(cid:99)Zi| ≥(cid:112)2 log(pd))} ≤ |B|, we have
+
+where the convergence follows by (B.9). Therefore, since(cid:80)
+This line implies that for 0 ≤ (cid:98)ν ≤ xpd, our FDR control procedure will correctly identify all true positives that meet a
+certain minimum signal condition. The result of this lemma then follows from the deﬁnition of(cid:98)ν Section 4.2.
+
+i∈B 1{|(cid:99)Zi| ≥(cid:112)2 log(pd))}
+(cid:80)
+
+=
+P−→ 1,
+
+P−→ 1.
+
+(B.9)
+
+|B|
+
+|B|
+
+|B|
+
+i∈B
+
+≤
+
+E
+
+P
+
+B.5. Proof of Lemma A.5
+
+(cid:18)(cid:12)(cid:12)(cid:12)(cid:12) n(cid:88)
+
+P
+
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ t
+
+√
+
+(cid:12)(cid:12)(cid:12)(cid:12) n(cid:88)
+
+(cid:19)
+
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ t
+
+√
+
+We will need the following lemma, which is a modiﬁed version on Lemma 6.2 from Liu et al. (2013b) to prove Lemma A.5.
+Lemma B.7. Let η1, . . . , ηn have mean zero, where ηt = (ηt,1, ηt,2)(cid:62). Suppose that p ≤ nr, log(p) = o(
+n), and
+] ≤ ∞, for r, b,  > 0. Furthermore, assume that V [ηt,1] = V [ηt,2] and |Cov(ηt,1, ηt,2)| ≤ δ, for some
+E[(cid:107)ξi(cid:107)bpr+2+
+0 ≤ δ ≤ 1. Then
+
+√
+
+2
+
+≤ C(t + 1)−2 exp[−t2/(1 + δ)],
+
+n
+
+n,
+
+i=1
+
+ηi,1
+
+ηi,2
+for 0 ≤ t ≤ b log(2), where C depends only on b, r, , δ.
+The proof of Lemma B.7 follows almost exactly the Proof of Lemma 6.2 in Liu et al. (2013b). The only difference is that
+whereas Lemma 6.2 in Liu et al. (2013b) requires i.i.d. ηt vectors in order to cite the Proof of Lemma 6.1 in Liu et al.
+(2013b), we do not require i.i.d. ηt vectors and instead appeal to the proof of Lemma B.6. We refer the reader to Liu et al.
+(2013b) for more details. Having established Lemma B.7, we now present the proof of Lemma A.5.
+
+i=1
+
+Proof of Lemma A.5. Let b0 < b1 < . . . < bk and νi = G−1(bi), where b0 = ypd/(pd), bi = ypd/(pd) + y2/3
+k = [log((pd − ypd)/y2/3
+
+ν0/(cid:112)2 log(pd/ypd) = 1 + o(1). One can easily verify that 0 ≤ j ≤ k ↔ 0 ≤ ν ≤ ypd. So we see that to prove this lemma
+
+/(pd),
+pd )]1/δ, and 0 < δ < 1. Then we have G(νi)/G(νi+1) = 1 + o(1) for all 0 ≤ i ≤ k, and
+
+pd eiδ
+
+it sufﬁces to show that
+
+Observe that for all  > 0,
+
+(cid:18)
+
+P
+
+(cid:80)
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+i∈H0
+
+max
+0≤j≤k
+
+(cid:80)
+(cid:12)(cid:12)(cid:12)(cid:12)
+[1(|(cid:99)Zi| ≥ νj) − G(νj)]
+
+max
+0≤j≤k
+
+|H0|G(νj)
+
+i∈H0
+
+|H0|G(νj)
+
+[1(|(cid:99)Zi| ≥ νj) − G(νj)]
+(cid:80)
+(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ 
+(cid:19)
+(cid:80)
+
+(cid:18)
+≤ k(cid:88)
+
+max
+0≤j≤k
+
+≤ P
+
+i∈H0
+
+P
+
+(cid:18)(cid:12)(cid:12)(cid:12)(cid:12)
+
+j=0
+
+(cid:12)(cid:12)(cid:12)(cid:12) P−→ 0.
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ 
+[1(|(cid:99)Zi| ≥ νj) − G(νj)]
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ 
+(cid:19)
+[1(|(cid:99)Zi| ≥ νj) − G(νj)]
+
+|H0|G(νj)
+
+|H0|G(νj)
+
+2
+
+.
+
+2
+
+i∈H0
+
+(cid:19)
+
+(B.10)
+
+(B.11)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Now let
+
+Note that
+
+(cid:80)
+
+i∈H0
+
+I(ν) =
+
+(cid:80)
+
+I(ν) =
+
+i∈H0
+
+[1(|(cid:99)Zi| ≥ ν) − P(|(cid:99)Zi| ≥ ν)]
+
+.
+
+|H0|G(ν)
+
+[1(|(cid:99)Zi| ≥ ν) − P(|(cid:99)Zi| ≥ ν)]
+
+|H0|G(ν)
+
+(cid:80)
+
+i∈H0
+
+P−→
+
+[1(|(cid:99)Zi| ≥ νj) − G(νj)]
+
+|H0|G(νj)
+
+,
+
+by (B.8) in the proof of Lemma A.4 in Appendix B.4. Clearly, E[I(ν)] = 0, so if we can show that V [I(ν)] = E[I 2(ν)] → 0,
+we will have that I(ν) P−→ 0. By (B.11), this convergence will prove (B.10). We now decompose V [I(ν)] = E[I 2(ν)] as
+follows:
+
+i∈H0
+
+(cid:80)
+≤ C|H0|G(ν)
+(|H0|G(ν))2 +
+
+[P(|(cid:99)Zi| ≥ ν) − P2(|(cid:99)Zi| ≥ ν)]
+(cid:88)
+
+|H0|2G2(ν)
+1
+
+G2(ν)|H0|2
+
+(i,j)∈A()
+
++
+
+(cid:80)
+i,j∈H0,i(cid:54)=j[P(|(cid:99)Zi| ≥ ν,|(cid:99)Zj| ≥ ν) − P(|(cid:99)Zi| ≥ ν)P(|(cid:99)Zj| ≥ ν)]
+(cid:18)P(|(cid:99)Zi| ≥ ν,|(cid:99)Zj| ≥ ν)
+P(|(cid:99)Zi| ≥ ν,|(cid:99)Zj| ≥ ν) +
+
+|H0|2G2(ν)
+1
+|H0|2
+
+(cid:88)
+(cid:84) A()c
+
+G2(ν)
+
+i,j∈H0
+
+E[I 2(ν)] =
+
+(B.12)
+where the equality follows by direct computation, and the inequality holds by (B.8) in the proof of Lemma A.4 in Appendix
+B.4. If we let
+
+(cid:19)
+
+,
+
+− 1
+
+I1,1(ν) =
+
+1
+
+G2(ν)|H0|2
+
+(cid:88)
+P(|(cid:99)Zi| ≥ ν,|(cid:99)Zj| ≥ ν),
+(cid:18)P(|(cid:99)Zi| ≥ ν,|(cid:99)Zj| ≥ ν)
+
+(i,j)∈A()
+
+(cid:19)
+
+− 1
+
+,
+
+G2(ν)
+
+(cid:88)
+(cid:84) A()c
+
+i,j∈H0
+
+and
+
+then (B.12) yields
+
+I1,2(ν) =
+
+1
+|H0|2
+
+Applying Lemma B.6 to I1,2(ν) yields the following result for all 0 ≤ t ≤(cid:112)2 log(pd) for some δ > 0:
+
++ I1,1(ν) + I1,2(ν).
+
+|H0|G(ν)
+
+E[I 2(ν)] ≤
+
+C
+
+Furthermore, Lemma B.7 yields
+
+P(|(cid:99)Zi| ≥ ν,|(cid:99)Zj| ≥ ν) ≤ C exp
+
+|I1,2(ν)| ≤ C(log(pd))−1−δ.
+
+(cid:20)
+
+(cid:21)
+
+,
+
+−ν2
+
+1 + |ρi,j| + δ1
+
+(B.13)
+
+(B.14)
+
+(B.15)
+
+for all (i, j) ∈ A() and i, j ∈ H0, where δ1, C > 0. Lastly, the proceeding result follows from (B.15) and Property 1
+
+I1,1(ν) ≤ C(log(pd))−2.
+
+Then by (F.2), (B.14), and (B.16), we have that
+
+k(cid:88)
+
+j=0
+
+≤ C
+
+k(cid:88)
+
+E[I(νj)]2 ≤ Ck[(log(pd))1−δ + (log(pd))−2] + C
+
+1
+
++ o(1)
+
+ypd + y2/3
+
+pd ejδ
+
+j=0
+
+(B.16)
+
+k(cid:88)
+
+j=0
+
+(pdG(νj))−1
+
+= o(1).
+
+The second inequality holds by the deﬁnition of the sequence νi and since k = o(log(pd)). The third inequality follows
+since 1/(ypd + y2/3
+) = o(1/ypd) = o(1/(pd)). Our desired result (B.10) follows naturally from this last set of
+inequalities.
+
+pd ejδ
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+B.6. Proof of Lemma A.6
+
+We present a variation on the argument made in the Proof of Theorem 3.1 in Liu et al. (2013b).
+
+Proof of Lemma A.6. Since by the deﬁnition of(cid:98)ν in 4.9,(cid:98)ν is the inﬁmum of all values ν > 0 such that FDP(ν) ≤ α, for
+ν <(cid:98)ν
+Using the asymptotic normality of(cid:99)Zi, which holds by Theorem 5.5, we can approximate(cid:80)
+
+1(|(cid:99)Zi| ≥ ν)
+1(|(cid:99)Zi ≥ ν), 1} > α.
+
+1(|(cid:99)Zi| ≥ ν) by (pd)G(ν),
+
+(cid:80)
+max{(cid:80)
+
+i∈H0
+1≤j≤pd
+
+i∈H0
+
+yielding
+
+for ν <(cid:98)ν. Note that (pd)G(ν)/ max{(cid:80)
+
+1≤j≤pd
+
+1(|(cid:99)Zi ≥ ν), 1} is decreasing in ν. Then by letting ν approach(cid:98)ν, we obtain
+
+≥ α.
+
+(B.17)
+
+max{(cid:80)
+
+(pd)G(ν)
+
+1(|(cid:99)Zi ≥ ν), 1} > α,
+
+(pd)G((cid:98)ν)
+
+1(|(cid:99)Zi ≥(cid:98)ν), 1}
+
+1≤j≤pd
+
+Now to prove the reverse bound, we note that the deﬁnition of inﬁmum implies the existence of a sequence νk, where
+
+νk ≥(cid:98)ν and νk
+
+Thus, by letting νk →(cid:98)ν, we see that
+
+1≤j≤pd
+
+max{(cid:80)
+k→∞−−−−→(cid:98)ν. Since νk ≥(cid:98)ν, we have
+max{(cid:80)
+max{(cid:80)
+max{(cid:80)
+
+Therefore, by (B.17) and (B.18)
+
+(pd)G(νk)
+
+1(|(cid:99)Zi ≥ νk), 1}
+
+1≤j≤pd
+
+≤ α.
+
+1≤j≤pd
+
+(pd)G((cid:98)ν)
+
+≤ α.
+
+1(|(cid:99)Zi ≥(cid:98)ν), 1}
+1(|(cid:99)Zi ≥(cid:98)ν), 1} = α,
+
+(pd)G((cid:98)ν)
+
+1≤j≤pd
+
+(B.18)
+
+as desired.
+
+C. Proofs of Auxiliary Lemmas in Appendix B
+In this section we present the proofs of auxiliary lemmas introduced in Appendix B.
+
+C.1. Proof of Lemma B.1
+
+Here we present a modiﬁed version of the proof for Theorem 7.(b) from Javanmard & Montanari (2014).
+
+Proof of Lemma B.1. Clearly (cid:107)M(cid:101)Σn − I(cid:107)∞ ≤ (cid:107)(cid:101)Σ−1(cid:101)Σn − I(cid:107)∞. Let X t = (cid:101)Σ−1/2(cid:102)Xt, where(cid:102)Xt is as deﬁned in Section
+
+3. Now deﬁne Z ∈ Rpd×pd as follows:
+
+Z = (cid:101)Σ−1(cid:101)Σn − I =
+
+1
+
+T − p
+
+T(cid:88)
+
+t=p+1
+
+(cid:18)(cid:101)Σ−1(cid:102)Xt(cid:102)X(cid:62)
+= (cid:104)(cid:101)Σ
+
+t − I
+
+1
+
+(cid:19)
+, X t(cid:105) · (cid:104)(cid:101)Σ1/2
+
+T − p
+
+=
+
+T(cid:88)
+
+(cid:18)(cid:101)Σ−1/2X tX
+
+t (cid:101)Σ1/2 − I
+
+(cid:62)
+
+(cid:19)
+
+.
+
+t=p+1
+
+For any given pair 1 ≤ i, j ≤ pd, denote γ(ij)
+j,· , X t(cid:105) − δi,j, where p + 1 ≤ t ≤ T , and
+δi,j represents the Kronecker delta: δi,j = 1(i = j). Let Ft be the ﬁltration Ft = σ(X 1, . . . , X t). Then note that
+
+−1/2
+i,·
+
+t
+
+t
+
+t=p+1 γ(ij)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+E[γ(ij)
+
+Zi,j = (T − p)−1(cid:80)T
+
+|Ft−1] = 0, so by Deﬁnition G.1 in Appendix G, γ(ij)
+
+. Thus, to bound (cid:107)(cid:101)Σ−1(cid:101)Σn − I(cid:107)∞, and by transitivity (cid:107)M(cid:101)Σn − I(cid:107)∞, we need only bound
+
+forms a martingale difference sequence. Note further that
+
+Zi,j.
+We refer the reader to Deﬁnition G.2 in Appendix G for the deﬁnition of the sub-exponential norm. By Remark 5.18
+(Centering) from Vershynin (2012), we can bound the sub-exponential norm of γ(ij)
+j,· , X t(cid:105)(cid:107)ψ1.
+
+as follows:
+
+(cid:107)γ(ij)
+
+−1/2
+i,·
+
+(C.1)
+
+t
+
+t
+
+t
+
+t
+
+Now note that, as shown by Javanmard & Montanari (2014) we can bound the sub-exponential norm of the product of two
+random variables X and Y by:
+
+(cid:107)ψ1 ≤ 2(cid:107)(cid:104)(cid:101)Σ
+(cid:20)
+(cid:18)
+(cid:20)
+(cid:18)
+
+|XY |q
+
+E
+
+, X t(cid:105) · (cid:104)(cid:101)Σ1/2
+(cid:21)(cid:19)1/q
+(cid:21)(cid:19)1/2q(cid:18)
+(cid:20)
+(cid:21)(cid:19)1/r(cid:19)(cid:18)
+
+|Y |2q
+
+E
+
+|X|r
+
+(cid:21)(cid:19)1/2q
+
+r−1/2
+
+sup
+r≥2
+
+j,· , X t(cid:105)(cid:107)ψ1 ≤ 2(cid:107)(cid:104)(cid:101)Σ
+
+−1/2
+i,·
+
+E
+
+q−1
+
+q−1
+
+|X|2q
+
+(cid:107)XY (cid:107)ψ1 ≤ sup
+q≥1
+≤ sup
+(cid:18)
+(cid:18)
+(cid:20)
+q≥1
+≤ 2
+E
+≤ 2(cid:107)X(cid:107)ψ2 · (cid:107)Y (cid:107)ψ2.
+, X t(cid:105) · (cid:104)(cid:101)Σ1/2
+
+(cid:107)ψ1 ≤ 2(cid:107)(cid:104)(cid:101)Σ
+
+r−1/2
+
+−1/2
+i,·
+
+sup
+r≥2
+
+(cid:18)
+
+(cid:20)
+
+E
+
+|Y |r
+
+(cid:21)(cid:19)1/r(cid:19)
+
+, X t(cid:105)(cid:107)ψ2 · (cid:107)(cid:104)(cid:101)Σ1/2
+j,· , X t(cid:105)(cid:107)ψ2,
+(cid:115)
+
+j,· (cid:107)ψ2κ2 ≤ 2κ2
+
+Cmax
+Cmin
+
+.
+
+Therefore, by (C.1)
+
+(cid:107)γ(ij)
+
+t
+
+and by assumption
+
+apply the Bernstein inequality for martingale difference sequences (Lemma F.8 in Appendix F) to obtain:
+
+is a martingale difference sequence, we can
+
+−1/2
+i,·
+
+(cid:107)ψ2 · (cid:107)(cid:101)Σ1/2
+(cid:107)ψ1 ≤ κ(cid:48). Now, since γ(ij)
+(cid:19)
+
+t
+
+−1/2
+i,·
+
+2(cid:107)(cid:104)(cid:101)Σ
+
+, X t(cid:105)(cid:107)ψ2 · (cid:107)(cid:104)(cid:101)Σ1/2
+j,· , X t(cid:105)(cid:107)ψ2 ≤ 2(cid:107)(cid:101)Σ
+Thus, if we let κ(cid:48) = 2κ2(cid:112)Cmax/Cmin, then (cid:107)γ(ij)
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ 
+(cid:115)
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ a
+
+(cid:18) 1
+
+log(pd)
+T − p
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+≤ 2 exp
+
+T(cid:88)
+
+T(cid:88)
+
+T − p
+
+T − p
+
+(cid:32)
+
+γ(ij)
+t
+
+γ(ij)
+t
+
+(cid:20)
+
+P
+
+P
+
+1
+
+t
+
+(cid:33)
+
+− T − p
+
+6
+
+min
+
+= P
+
+(cid:32)(cid:12)(cid:12)(cid:12)(cid:12)Zi,j
+
+(cid:115)
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ a
+
+t=p+1
+
+(cid:18)(cid:18) 
+
+(cid:19)2
+
+eκ(cid:48)
+
+,
+
+
+eκ(cid:48)
+
+(cid:19)(cid:21)
+
+.
+
+(cid:33)
+
+log(pd)
+T − p
+
+Let  = a(cid:112)log(pd)/(T − p), and assume that T − p ≥ (a/(eκ(cid:48)))2 log(pd) so that (/(eκ(cid:48)))2 ≤ (/(eκ(cid:48))) ≤ 1. Then,
+
+t=p+1
+
+≤ 2(pd)−a2/(6e2κ(cid:48)2)
+= 2(pd)−(a2Cmin)/(24e2κ4Cmax).
+
+Taking the union over all (pd)2 pairs and letting c2 = (a2Cmin)/(24e2κ4Cmax) − 2 yields the result:
+
+(cid:107)M(cid:101)Σn − I(cid:107)∞ ≤ a
+
+(cid:115)
+
+P
+
+ ≥ 1 − 2(pd)−c2.
+
+log(pd)
+T − p
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+C.2. Proof of Lemma B.2
+
+The proof of Lemma B.2 relies on two lemmas. First, the following lemma asserts that the restricted eigenvalue condition
+
+(RE condition) holds true for our design matrix (cid:101)X. As we will see in the proof of Lemma B.2 below, the restricted eigenvalue
+property will prove instrumental in bounding (cid:107)(cid:98)θ − θ∗(cid:107)1.
+
+condition implies the restricted strong convexity condition when the loss function is the least squares loss function. This
+
+Lemma C.1. Under Assumptions 5.3 and 5.4, we have
+
+with probability at least
+
+(cid:98)θ−θ∗∈Er
+
+inf
+
+1
+
+T − p
+
+(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+(cid:20)
+
+2 > 0
+
+(cid:21)
+
+(ω(A))2
+
+,
+
+1
+
+α2
+
+− 4
+
+T − p
+
+1 − 2 exp(−c2
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+1c2ω2(B)) − L exp
+0c2
+where where λmin((cid:101)Σn|A) = inf u∈A
+2 is the restricted minimum eigenvalue of (cid:101)Σn restricted to A ⊆ Spd−1
+(the unit sphere in Rpd space), B = {(cid:101)u : (cid:101)u = (cid:101)Σ1/2u/(cid:107)(cid:101)Σ1/2u(cid:107)2, u ∈ A} is the normalized set of A, α = diam(A) =
+supu,v∈A d(u, v) = supu,v∈A (cid:107)u − v(cid:107)2, and c0, c1, c2, L > 0 are constants.
+The RE condition has been studied extensively in the setting where the rows of the design matrix are independent. However,
+condition. We construct a martingale difference sequence equal to 1/(T − p)(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+since the rows of the design matrix are dependent in this setting, we must appeal to martingale theory to prove the RE
+2, and then bound the minimum
+restricted eigenvalue of that sequence using the results from Appendix F. We defer the proof of Lemma C.1 to Appendix
+D.1.
+Second, the following lemma establishes with high-probability a property of the regularization parameter λ.
+
+Lemma C.2. Denote the least-squares loss function L(θ) = (2(T − p))−1(cid:107)Y − (cid:101)Xθ(cid:107)2
+λ = 8Cσ(cid:112)log(pd)/(T − p) for some constant C, then
+
+2. If Assumption 5.4 holds and
+
+λ ≥ 2(cid:107)∇L(θ∗)(cid:107)∞,
+
+holds with probability at least 1 − b1 exp[−b2σ2 log(pd)], for constants b1 and b2.
+We defer the proof of Lemma C.2 to Appendix D.2.
+We now present a proof of Lemma B.2.
+
+1
+
+(cid:98)θ = arg min
+
+Proof of Lemma B.2. To prove this lemma, we ﬁrst recall the form of the biased Lasso Granger estimator from (3.3):
+
+(cid:107)Y − (cid:101)Xθ(cid:107)2
+2 + λ(cid:107)θ(cid:107)1.
+2. We immediately realize that the optimality of(cid:98)θ
+For brevity, we denote the loss function L(θ) = (2(T − p))−1(cid:107)Y −(cid:101)Xθ(cid:107)2
+To establish a lower bound on L((cid:98)θ), we will appeal to the restricted strong convexity condition (RSC condition), which
+provides a lower bound on the ﬁrst-degree Taylor approximation of L((cid:98)θ):
+
+L((cid:98)θ) + λ(cid:107)(cid:98)θ(cid:107)1 ≤ L(θ∗) + λ(cid:107)θ∗(cid:107)1.
+
+yields the following inequality:
+
+2(T − p)
+
+(C.2)
+
+θ
+
+δL((cid:98)θ) := L((cid:98)θ) − L(θ∗) − (cid:104)∇L(θ∗),(cid:98)θ − θ∗(cid:105) ≥ κ(cid:96)(cid:107)(cid:98)θ − θ∗(cid:107)2
+
+(C.3)
+(cid:96). As noted by Negahban et al. (2012), when L(·) is the least-squares loss function, as it is in our setting,
+
+2 > 0,
+
+for some constant κ(cid:48)
+we obtain
+
+δL((cid:98)θ) =
+
+1
+
+T − p
+
+(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+
+2 ≥ κ(cid:48)
+
+(cid:96)(cid:107)(cid:98)θ − θ∗(cid:107)2
+
+2.
+
+(C.4)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Note that
+
+(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+
+(cid:18) 1
+
+(cid:19)
+
+(cid:101)X(cid:62)(cid:101)X|Er
+
+= λmin((cid:101)Σn|Er),
+
+(cid:98)θ−θ∗∈Er
+
+inf
+
+1
+
+T − p
+
+2 = λmin
+
+T − p
+
+sample covariance matrix. So we see that when L(·) is the least-squares loss function, the restricted strong convexity
+
+where Er is the set the error vector (cid:98)θ − θ∗ can fall in, and λmin((cid:101)Σn|Er) is the minimum restricted eigenvalue of the
+condition collapses into the RE condition. The RE condition holds for (cid:101)X with high probability by Lemma C.1. Thus,
+λmin((cid:101)Σn|Er) > 0, and so the RSC condition holds. Then, rearranging (C.3), we see that
+(cid:107)(cid:98)θ − θ∗(cid:107)2
+
+L((cid:98)θ) ≥ L(θ∗) + (cid:104)∇L(θ∗),(cid:98)θ − θ∗(cid:105) +
+
+(C.6)
+
+2,
+
+(C.5)
+
+κ(cid:96)
+2
+
+where κ(cid:96) = 2κ(cid:48)
+(cid:96).
+As a consequence of (C.2) and (C.6), we have
+
+L(θ∗) + (cid:104)∇L(θ∗),(cid:98)θ − θ∗(cid:105) + λ(cid:107)(cid:98)θ(cid:107)1 ≤ L((cid:98)θ) + λ(cid:107)(cid:98)θ(cid:107)1 ≤ L(θ∗) + λ(cid:107)θ∗(cid:107)1.
+
+Furthermore, since (cid:104)∇L(θ∗),(cid:98)θ − θ∗(cid:105) ≤ (cid:107)∇L(θ∗)(cid:107)∞ · (cid:107)(cid:98)θ − θ∗(cid:107)1 by Holder’s inequality, we achieve the following result:
+
+−(cid:107)∇L(θ∗)(cid:107)∞ · (cid:107)(cid:98)θ − θ∗(cid:107)1 + λ(cid:107)(cid:98)θ(cid:107)1 ≤ λ(cid:107)θ∗(cid:107)1.
+
+(C.7)
+We apply Lemma C.2 to establish that λ ≥ 2(cid:107)∇L(θ)(cid:107)∞ with probability at least 1 − b1 exp[−b2σ2 log(pd)], for constants
+b1 and b2. Thus, since λ ≥ 2(cid:107)∇L(θ∗)(cid:107)∞ with high probability, (C.7) implies
+
+Now denote S to be the support of θ∗, so that θ∗ = θ∗
+
+Sc = 0. Then, based on the previous inequality, we have
+
+− 1
+2
+
+S and θ∗
+
+λ(cid:107)(cid:98)θ − θ∗(cid:107)1 + λ(cid:107)(cid:98)θ(cid:107)1 ≤ λ(cid:107)θ∗(cid:107)1.
+λ(cid:107)((cid:98)θ − θ∗)Sc(cid:107)1 + λ(cid:107)(cid:98)θS(cid:107)1 + λ(cid:107)(cid:98)θSc(cid:107)1 ≤ λ(cid:107)θ∗
+S(cid:107)1.
+S(cid:107)1 − λ(cid:107)(cid:98)θS(cid:107)1
+λ(cid:107)((cid:98)θ − θ∗)Sc(cid:107)1 + λ(cid:107)((cid:98)θ − θ∗)Sc(cid:107)1 ≤ λ(cid:107)θ∗
+≤ λ(cid:107)((cid:98)θ − θ∗)S(cid:107)1,
+
+2
+
+− 1
+2
+
+λ(cid:107)((cid:98)θ − θ∗)S(cid:107)1 − 1
+λ(cid:107)((cid:98)θ − θ∗)S(cid:107)1 − 1
+
+2
+
+− 1
+2
+
+Rearranging these terms yields:
+
+where the second inequality follows by the triangle inequality. Rearranging terms once more produces the following result:
+
+− 1
+2
+
+and thus,
+
+λ(cid:107)((cid:98)θ − θ∗)Sc(cid:107)1 ≤ 3λ(cid:107)((cid:98)θ − θ∗)S(cid:107)1.
+We use (C.8) to bound λ(cid:107)(cid:98)θ − θ∗(cid:107)1. Note that (C.2) and (C.6) together imply
+(cid:107)(cid:98)θ − θ∗(cid:107)2
+2 ≤ λ(cid:107)θ∗(cid:107)1 − λ(cid:107)(cid:98)θ(cid:107)1 +
+2 ≤ λ(cid:107)(cid:98)θ − θ∗(cid:107)1 +
+λ(cid:107)((cid:98)θ − θ∗)(cid:107)1.
+
+λ(cid:107)(cid:98)θ − θ∗(cid:107)1 + λ(cid:107)(cid:98)θ(cid:107)1 +
+(cid:107)(cid:98)θ − θ∗(cid:107)2
+(cid:107)(cid:98)θ − θ∗(cid:107)2
+
+κ(cid:96)
+2
+Applying the triangle inequality yields
+
+2 ≤ λ(cid:107)θ∗(cid:107)1,
+λ(cid:107)(cid:98)θ − θ∗(cid:107)1.
+λ(cid:107)(cid:98)θ − θ∗(cid:107)1
+
+κ(cid:96)
+2
+
+κ(cid:96)
+2
+
+1
+2
+
+1
+2
+
+=
+
+3
+2
+
+(C.8)
+
+(C.9)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Note that by (C.8), we have (cid:107)(cid:98)θ − θ∗(cid:107)1 ≤ 4(cid:107)((cid:98)θ − θ∗)S(cid:107)1. Substituting this result into (C.9) allows us to conclude that
+
+(cid:107)(cid:98)θ − θ∗(cid:107)2
+
+2 ≤ 6λ(cid:107)((cid:98)θ − θ∗)S(cid:107)1 ≤ 6λ
+
+s0(cid:107)((cid:98)θ − θ∗)S(cid:107)2 ≤ 6λ
+
+√
+
+s0(cid:107)(cid:98)θ − θ∗(cid:107)2.
+
+√
+
+κ(cid:96)
+2
+
+Thus, (cid:107)(cid:98)θ − θ∗(cid:107)2 ≤ 12λ
+
+√
+
+s0/κ(cid:96), which offers us the result of this lemma:
+
+(cid:107)(cid:98)θ − θ∗(cid:107)1 ≤ √
+
+s0(cid:107)(cid:98)θ − θ∗(cid:107)2 ≤ 12λs0
+
+.
+
+κ(cid:96)
+
+We note that this result holds with high probability by Lemma C.2.
+
+C.3. Proof of Lemma B.3
+
+Here we verify that the Lindeberg condition (Hall & Heyde, 1980) holds for ζi,t.
+
+Proof of Lemma B.3. Note that for some random variable Q ∼ N (0, 1), C = [(t(cid:102)X(cid:62)
+
+positive, ﬁxed constant δ > 0, and t ≥ p:
+
+t mi)2/(σ2[m(cid:62)
+
+i (cid:101)Σnmi])]−1/2, some
+
+E[ζ 2
+
+t
+
+1((cid:107)ζt| ≥ δ)|Ft−1] =
+
+(t(cid:102)X(cid:62)
+
+t mi)2E[Q2 1(|Q| > δC)]
+.
+
+i (cid:101)Σnmi]
+
+σ2[m(cid:62)
+
+(C.10)
+
+By the properties of the truncated standard normal, we can see that E[Q2|Q > c] = 1 + c(φ(c)/Φ(c)), where φ(c) is the
+PDF of the standard normal. Thus,
+
+E[Q2 1(Q > c)] = 2Φ(c)
+
+1 + c
+
+φ(c)
+Φ(c)
+
+= 2(Φ(c) + cφ(c)) ≤ 2φ(c)
+
+Now the proceeding inequality follows from the union bound and a standard bound on the normal CDF:
+
+(cid:18) c + c2
+
+(cid:19)
+
+.
+
+c
+
+(cid:18)
+
+(cid:19)
+
+|t(cid:102)X(cid:62)
+
+max
+
+p+1≤t≤T
+
+t mi| > v,
+
+(cid:113)
+i (cid:101)Σmi)]. If we let v = 2
+i (cid:101)Σmi,
+
+(cid:113)
+t mi| ≤ 2
+
+log(T − p)m(cid:62)
+
+|t(cid:102)X(cid:62)
+
+log(T − p)m(cid:62)
+
+i (cid:101)Σmi, the we obtain the
+
+with probability at most 2(T − p) exp[−v2/(2m(cid:62)
+following bound:
+
+with probability at least 1 − 2/(T − p). Returning to (C.10), we now see that for D =(cid:112)(T − p)/(4 log(T − p):
+
+p+1≤t≤T
+
+max
+
+E[ζ 2
+
+t
+
+1((cid:107) zetat(cid:107) ≥ δ)|Ft−1] ≤ 8 log(T − P )φ(δD)((δD)−1 + δD)
+
+T − p
+
+,
+
+since φ(z)(z−1 + z) is a decreasing function. Therefore, if we sum over all t, we attain
+
+T(cid:88)
+
+E[ζ 2
+
+t
+
+1((cid:107)ζt| ≥ δ)|Ft−1] ≤ 8 log(T − P )φ(δD)((δD)−1 + δD) → 0,
+
+t=p+1
+
+which demonstrates that the Lindeberg condition does indeed hold for ζt.
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+C.4. Proof of Lemma B.6
+
+We present a modiﬁed version of the proof of Lemma 6.1 from Liu et al. (2013b).
+
+Proof of Lemma B.6. Deﬁne ﬁltration Ft = σ(ξ1, . . . , ξt). For 1 ≤≤ p, let:
+
+n/(log(p))4} − E[ξt 1{(cid:107)ξt(cid:107)2 ≤ √
+
+n/(log(p))4}|Ft],
+
+Note that by Deﬁnition G.1,(cid:98)ξi forms a martingale difference sequence (MDS). Now we have by the triangle inequality
+
+(C.11)
+
+(cid:98)ξt = ξt 1{(cid:107)ξt(cid:107)2 ≤ √
+(cid:101)ξt = ξt −(cid:98)ξt.
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+
+P
+
+ξt
+
+≥ t
+
+t=1
+
+(cid:19)
+
+√
+
+n
+
+≤P
+
+t=1
+
++ P
+
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:98)ξt ≥ t
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:98)ξt ≥ t
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+
+− P
+
+t=1
+
+t=1
+
+t=1
+
+√
+
+n − √
+(cid:101)ξt ≥ √
+
+√
+
+√
+
+n +
+
+(cid:101)ξt ≥ √
+
+n/(log(p))2
+
+n/(log(p))2
+
+n/(log(p))2
+
+n/(log(p))2
+
+(cid:19)
+
+,
+
+(cid:19)
+
+.
+
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:19)
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:19)
+
+(C.12)
+
+(C.13)
+
+(C.14)
+
+and
+
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+
+t=1
+
+P
+
+(cid:13)(cid:13)(cid:13)(cid:13)min
+
+ξt
+
+(cid:19)
+
+√
+
+n
+
+≥ t
+
+≥P
+
+√
+By our assumption that log(p) = o(
+E[ξt 1{(cid:107)ξt(cid:107)2 ≤ √
+
+n(cid:88)
+
+n), we have that,
+
+t=1
+
+√
+n/(log(p))4}|Ft] = o(
+
+n/(log(p))2).
+
+So by our assumption that E[(cid:107)ξt(cid:107)bpr+2+
+
+] ≤ ∞, for r, b,  > 0, the previous line implies that:
+
+n/(log(p))2
+
+for 0 ≤ t ≤ b(cid:112)log(p). Thus, by (C.13) and (C.12), we obtain:
+
+P
+
+t=1
+
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+
+t=1
+
+t=1
+
+(cid:101)ξt ≥ √
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:13)(cid:13)(cid:13)(cid:13)min
+
+ξt
+
+ξt
+
+P
+
+P
+
+√
+
+√
+
+≥ t
+
+≥ t
+
+√
+sup
+0≤t≤b
+
+log(p)
+
+2
+
+n
+
+√
+
+√
+
+≥P
+
+(cid:19)
+
+(cid:98)ξt ≥ t
+
+(cid:107)ξt(cid:107) ≥ √
+
+≤ nP( max
+1≤t≤n
+
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:19)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:19)
+(cid:12)(cid:12)(cid:12)(cid:12)P((cid:107)(cid:80)n
+t=1(cid:98)ξt(cid:107)min ≥ (t ± (log(p)−2)
+
+(cid:98)ξt ≥ t
+
+n − √
+
+(G(t))p
+
+≤P
+
+n +
+
+√
+
+t=1
+
+t=1
+
+n
+
+for constant C > 0 Therefore, it sufﬁces to prove
+
+and
+
+n/(log(p))4) ≤ C(log(p))−3/2(G(t))p,
+
+n/(log(p))2
+
+− C(log(p))−3/2(G(t))p,
+
+n/(log(p))2
+
++ C(log(p))−3/2(G(t))p,
+
+(cid:19)
+
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:19)
+(cid:12)(cid:12)(cid:12)(cid:12) ≤ C(log(p))−1−γ1
+
+− 1
+
+√
+
+n)
+
+in order to prove this lemma. To prove this line, we appeal to Theorem 1.1 from Zaitsev (1987). The original version of
+
+Theorem 1.1 requires i.i.d. vectors only in order to leverage the Bernstein inequality. However, since in this application(cid:98)ξt
+
+form a MDS, the proof of Theorem 1.1 holds by our Bernstein inequality for MDS (Lemma F.8). In the interest of clarity,
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+since Theorem 1.1 requires introducing a signiﬁcant amount of new material from probability theory, we refer the reader to
+
+Zaitsev (1987) for more details. Thus, by application of Theorem 1.1 from Zaitsev (1987) to(cid:98)ξt, we obtain
+
+≤ P((cid:107)W(cid:107)min ≥ t − 2(log(p))−2) + c1,p exp[−c2,d(log(p))2],
+
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+
+t=1
+
+t=1
+
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:13)(cid:13)(cid:13)(cid:13)min
+
+(cid:98)ξt
+
+(cid:98)ξt
+
+P
+
+P
+
+(cid:19)
+
+√
+≥ (t + (log(p)−2)
+
+√
+≥ (t − (log(p)−2)
+
+n
+
+(cid:19)
+
+n
+
+and
+
+≤ P((cid:107)W(cid:107)min ≥ t + 2(log(p))−2) − c1,p exp[−c2,d(log(p))2],
+
+(cid:18)
+
+(cid:18)(cid:80)n
+t=1(cid:98)ξi/
+
+√
+
+n
+
+(cid:19)(cid:19)
+
+0, Cov
+
+. By our assumption that
+
+where c1,p, c2,p > 0 are constants that depend only on p and W ∼ N
+(cid:107) Cov(ξi) − Ip×p(cid:107)2 ≤ C(log(p)−2−γ, one can easily show that,
+
+P((cid:107)W(cid:107)min ≥ t − 2(log(p))−2) ≤ (1 + C(log(p))−1−γ1)(G(t))p,
+
+and
+
+for 0 ≤ t ≤ b(cid:112)log(p). Since for 0 ≤ t ≤ b(cid:112)log(p) we have c1,p exp[−c2,p(log(p))2] ≤ C(log(p))−1−γ1(G(t))p, the
+
+P((cid:107)W(cid:107)min ≥ t + 2(log(p))−2) ≤ (1 − C(log(p))−1−γ1)(G(t))p,
+
+≥ (t − (log(p)−2)
+
+√
+
+n
+
+≤ (1 + C(log(p))−1−γ1)(G(t))p,
+
+following holds:
+
+P
+
+and
+
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+(cid:18)(cid:13)(cid:13)(cid:13)(cid:13) n(cid:88)
+
+t=1
+
+(cid:13)(cid:13)(cid:13)(cid:13)min
+(cid:13)(cid:13)(cid:13)(cid:13)min
+
+(cid:98)ξt
+
+(cid:98)ξt
+
+P
+
+(cid:19)
+
+(cid:19)
+
+√
+
+for 0 ≤ t ≤ b(cid:112)log(p). Therefore, (C.15) and (C.16) imply (C.14), which concludes the proof.
+
+t=1
+
+n
+
+≥ (t + (log(p)−2)
+
+≤ (1 − C(log(p))−1−γ1)(G(t))p,
+
+(C.15)
+
+(C.16)
+
+D. Proofs of Supporting Lemmas in Appendix C
+In this section we present proofs for the supporting Lemmas of Lemma B.2.
+
+D.1. Proof of Lemma C.1
+
+1
+
+We present a variation of the proof of Theorem 5 from Johnson et al. (2016). This proof will rely on lower bounding
+
+(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105).
+inf(cid:98)θ−θ∗∈Er
+We lower bound inf u∈A 1/(T −p)(cid:80)T
+t=p+1(cid:104)(cid:102)Xt−
+Lemma D.1. Let Zt = (cid:102)Xt − µt, for µt = E[(cid:102)Xt|Ft−1], where Ft is the ﬁltration Ft = σ((cid:102)Xp+1, . . . ,(cid:102)Xt), and Z =
+µt, u(cid:105) in Lemma D.2 below.
+
+2 by inf u∈A 1/(T − p)(cid:80)T
+t=p+1(cid:104)(cid:102)Xt−µt, u(cid:105)2 in Lemma D.1 and upper bound supu∈A 2/(T −p)(cid:80)T
+
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)2 − supu∈A 2/(T − p)(cid:80)T
+
+T − p
+
+[Zp+1, . . . , ZT ](cid:62). Furthermore, let E[Z(cid:62)Z/(T − p)] = ΣZ and (cid:107)Σ
+
+T(cid:88)
+
+(cid:18)
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 ≥ λmin(ΣZ|A)
+
+(cid:19)
+1 − 2c0c1κ(cid:48)2ω(B)
+
+√
+
+(cid:18)
+
+P
+
+1
+
+T − p
+
+inf
+u∈A
+
+T − p
+
+t=p+1
+
+(cid:19)
+
+−1/2
+Z Zt(cid:107)ψ2 ≤ κ(cid:48). Then,
+
+> 0
+
+≥ 1 − 2 exp(−c2
+
+0c2
+
+1c2ω2(B))
+
+where λmin(Σ|A) = inf u∈A u(cid:62)Σu is the restricted minimum eigenvalue of Σ restricted to A ⊆ Spd−1 (the unit sphere in
+
+Rpd space), and B = {(cid:101)u :(cid:101)u = Σ1/2u/(cid:107)Σ1/2u(cid:107)2, u ∈ A} is the normalized set of A.
+
+The proof of Lemma D.1 relies on the restricted eigenvalue condition for martingale difference sequences from Appendix F.
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Lemma D.2. Let µt = E[(cid:102)Xt|Ft−1], where Ft is the ﬁltration Ft = σ((cid:102)Xp+1, . . . ,(cid:102)Xt), A ⊆ Spd−1 (the unit sphere in
+
+Rpd space), and α = diam(A) = supu,v∈A d(u, v). Then,
+
+(cid:18)
+
+P
+
+T(cid:88)
+
+(cid:19)
+(cid:104)(cid:102)Xt − µt, u(cid:105) ≤ 0
+
+2
+
+T − p
+
+sup
+u∈A
+
+t=p+1
+
+(cid:20)
+
+(cid:21)
+
+.
+
+≥ 1 − L exp
+
+− 4
+
+(ω(A))2
+
+α2
+
+The proof of Lemma D.2 employs a generic chaining argument (Talagrand, 2006). We defer the proofs of Lemmas D.1 and
+D.2 to Appendicies E.1 and E.2. We now present the proof of Lemma C.1.
+
+Proof of Lemma C.1. We seek to prove that,
+
+(cid:107)(cid:101)X((cid:98)θ − θ∗)(cid:107)2
+
+2 > 0.
+
+(D.1)
+
+(cid:98)θ−θ∗∈Er
+
+inf
+
+1
+
+T − p
+
+problem as
+
+From Negahban et al. (2012), we note that the error set Er is actually a cone, and that the magnitude of the error vector
+
+(cid:98)θ − θ∗ in (D.1) does not matter, only the direction does. Thus, we consider set A = Spd−1 ∩ Er and reformulate our
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+2 > 0.
+
+(D.2)
+
+1
+
+T − p
+It sufﬁces to prove (D.2) to prove the result of this lemma.
+
+inf
+u∈A
+
+We now construct a martingale difference sequence that we will bound in order to prove (D.2). Let µt = E[(cid:102)Xt|Ft−1],
+where Ft is the ﬁltration Ft = σ((cid:102)Xp+1, . . . ,(cid:102)Xt), so that by Deﬁnition G.1 in Appendix G,(cid:102)Xt − µt forms a martingale
+
+difference sequence (MDS). Then we have,
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+2 =
+
+1
+
+T − p
+
+(cid:19)
+
+t u)2 + (µ(cid:62)
+
+t u)2
+
+t u)(µ(cid:62)
+
+t u) − (µ(cid:62)
+(cid:19)
+
+t u)(µ(cid:62)
+
+t u)
+
+.
+
+(cid:104)(cid:102)Xt, u(cid:105)(cid:104)µt, u(cid:105)
+(cid:104)(cid:102)Xt − µt, u(cid:105)(cid:104)µt, u(cid:105)
+
+1
+
+T − p
+
+1
+
+T − p
+
+1
+
+T − p
+
+=
+
+=
+
+=
+
+1
+
+T − p
+
+≥ 1
+
+T − p
+
+T(cid:88)
+T(cid:88)
+T(cid:88)
+
+t=p+1
+
+t=p+1
+
+t=p+1
+
+t=p+1
+
+T(cid:88)
+T(cid:88)
+T(cid:88)
+
+t=p+1
+
+t=p+1
+
+(cid:104)(cid:102)Xt, u(cid:105)
+(cid:18)
+((cid:102)X(cid:62)
+t u)2 − 2((cid:102)X(cid:62)
+(cid:18)
+((cid:102)X(cid:62)
+t u − µ(cid:62)
+
+1
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 − 1
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 +
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 +
+T(cid:88)
+T(cid:88)
+
+T − p
+
+t=p+1
+
+1
+
+1
+
+2
+
+≥ inf
+u∈A
+
+T − p
+
+t=p+1
+
+t u)(µ(cid:62)
+
+t u) + 2((cid:102)X(cid:62)
+t u)2 + 2((cid:102)X(cid:62)
+t u)2 − (µ(cid:62)
+T(cid:88)
+T(cid:88)
+T(cid:88)
+
+T − p
+
+T − p
+
+t=p+1
+
+t=p+1
+
+T − p
+
+t=p+1
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 + inf
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 − sup
+
+t=p+1
+
+t=p+1
+
+2
+
+2
+
+T − p
+
+T − p
+
+(cid:104)µt, u(cid:105)2 +
+
+(cid:104)µt, u(cid:105)2 +
+
+T(cid:88)
+T(cid:88)
+(cid:104)(cid:102)Xt − µt, u(cid:105)(cid:104)µt, u(cid:105).
+T(cid:88)
+T(cid:88)
+
+T − p
+
+u∈A
+
+t=p+1
+
+2
+
+2
+
+T − p
+
+u∈A
+
+t=p+1
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)(cid:104)µt, u(cid:105)
+(cid:104)(cid:102)Xt − µt, u(cid:105),
+
+(D.3)
+
+(D.4)
+
+Distributing the summation in the last line then yields:
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+2 =
+
+1
+
+T − p
+
+1
+
+T − p
+
+Hence,
+
+inf
+u∈A
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+2 ≥ inf
+u∈A
+
+1
+
+T − p
+
+1
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+(cid:107)(cid:101)Xu(cid:107)2
+
+where the second inequality holds since we can scale the design matrix to fall in the L2 unit ball so that (cid:104)µt, u(cid:105) <= 1.
+
+Thus, to prove (D.2), we must lower bound inf u∈A 1/(T − p)(cid:80)T
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105). We bound inf u∈A 1/(T − p)(cid:80)T
+p)(cid:80)T
+p)(cid:80)T
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105) with Lemma D.2. Thus, by application of Lemmas D.1 and D.2 to (D.3), we have that
+
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)2 and upper bound supu∈A 2/(T −
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)2 with Lemma D.1, and supu∈A 2/(T −
+T(cid:88)
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 − sup
+(cid:18)
+(cid:19)
+1 − 2c0c1κ(cid:48)2ω(B)
+(cid:20)
+1c2ω2(B)) − L exp
+0c2
+Thus, (cid:101)X satisﬁes that restricted eigenvalue condition with high probability.
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)
+
+≥ λmin(ΣZ|A)
+
+with probability at least
+
+1 − 2 exp(−c2
+
+2 ≥ inf
+u∈A
+
+T(cid:88)
+
+T − p
+
+inf
+u∈A
+
+T − p
+
+1
+
+T − p
+
+T − p
+
+(cid:21)
+
+.
+
+(ω(A))2
+
+− 4
+
+u∈A
+
+> 0,
+
+t=p+1
+
+t=p+1
+
+√
+
+2
+
+α2
+
+D.2. Proof of Lemma C.2
+
+Here we prove Lemma C.2.
+
+Proof of Lemma C.2. To prove this lemma, we ﬁrst note that 2(cid:107)∇L(θ∗)(cid:107)∞ = 4
+
+(cid:13)(cid:13)(cid:13)∞
+vector from (3.2), so  = Y −(cid:101)Xθ∗. Then Assumption 5.4 implies that  (3.2) is sub-Gaussian. Note that since Assumption
+5.4 ensures that (cid:107)(cid:102)Xi(cid:107)ψ2 ≤ κ, for i ∈ {1, 2, . . . , T − p}, we can scale the columns of any(cid:102)X so that (cid:107)(cid:101)X·,j(cid:107)2/
+
+(cid:13)(cid:13)(cid:13)(T − p)−1(cid:101)X(cid:62)
+
+. Let  be the error
+
+T − p ≤ 1,
+
+for 1 ≤ k ≤ pd. Then the sub-Gaussian tails of  guarantee that for all t > 0
+
+√
+
+(cid:107)(cid:104)(cid:101)X, (cid:105)(cid:107)2 < t,
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)∞
+
+(cid:101)X(cid:62)
+
+< t,
+
+1
+
+T − p
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13) 1
+
+T − p
+
+with probability at least 1 − 2 exp[−(T − p)t2/(2σ2)]. Bounding over all pd columns yields:
+
+holds with probability at least 1 − 2 exp[−(T − p)t2/(2σ2) + log(pd)]. Setting t = 2σ(cid:112)log(pd)/(T − p) allows us to
+
+conclude that
+
+(cid:115)
+
+λ = 8σ
+
+log(pd)
+T − p
+
+≥ 2(cid:107)∇L(θ∗)(cid:107)∞ = 4
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13) 1
+
+T − p
+
+(cid:101)X(cid:62)
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)∞
+
+,
+
+holds with probability at least 1 − b1 exp[−b2σ2 log(pd)].
+
+E. Proofs of Supporting Lemmas in Appendix D
+In this section, we present proofs of the supporting lemmas for Lemma C.1.
+
+E.1. Proof of Lemma D.1
+
+We seek to bound inf u∈A 1/(T − p)(cid:80)T
+
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)2. Since {(cid:102)Xt − µt} is a martingale difference sequence (MDS)
+
+by Deﬁnition G.1 in Appendix G, we will appeal to the restricted eigenvalue condition for MDS that we present in Theorem
+F.6 in Appendix F. We reproduce Theorem F.6 here for the convenience of the reader:
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Theorem E.1. Let X = (X1,··· , Xn)(cid:62) be a n × d design matrix whose anisotropic sub-Gaussian rows form a vector
+valued martingale difference sequence. Let E[X(cid:62)X/n] = Σ and (cid:107)Σ−1/2Xi(cid:107)ψ2 ≤ κ. Then for absolute constants
+c0, c1, c2 > 0, with probability at least 1 − 2 exp(−c2
+0c2
+
+(cid:18)
+
+(cid:19)
+
+1c2ω2(B)), we have
+≤ inf
+u∈A
+
+√
+
+1 − 2c0c1κ2ω(B)
+
+n
+
+(cid:107)Xu(cid:107)2
+2,
+
+1
+n
+
+λmin(Σ|A)
+
+where λmin(Σ|A) = inf u∈A u(cid:62)Σu is the restricted minimum eigenvalues of Σ restricted to A ⊆ Sd−1 (the unit sphere in
+
+Rd space), and B = {(cid:101)u :(cid:101)u = Σ1/2u/(cid:107)Σ1/2u(cid:107)2, u ∈ A} is the normalized set of A.
+Proof of Lemma D.1. Let Zt = (cid:102)Xt − µt for µt = E[(cid:102)Xt|Ft−1], where Ft is the ﬁltration Ft = σ((cid:102)Xp+1, . . . ,(cid:102)Xt), as
+Assumption 5.4, they are sub-Gaussian as well. The deﬁnition of (cid:101)X in Section 3 implies that the rows or Z are anisotropic.
+deﬁned in Appendix D.1. Then let Z = [Zp+1, . . . , ZT ](cid:62). Clearly the rows of Z form a vector-values MDS, and by
+−1/2
+Let E[Z(cid:62)Z/(T − p)] = ΣZ be the true covariance matrix of Z, and (cid:107)Σ
+Z Zt(cid:107)ψ2 ≤ κ(cid:48). Then by Theorem F.6 we have
+that,
+
+T(cid:88)
+
+t=p+1
+
+1
+
+T − p
+
+inf
+u∈A
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 = inf
+
+(cid:107)Zu(cid:107)2
+
+1
+n
+
+u∈A
+
+(cid:18)
+2 ≥ λmin(ΣZ|A)
+
+(cid:19)
+
+,
+
+1 − 2c0c1κ(cid:48)2ω(B)
+
+√
+
+T − p
+
+with high probability. Thus, to prove Lemma D.1, it sufﬁces to demonstrate that λmin(ΣZ|A), the restricted minimum
+eigenvalue of ΣZ, is positive. In this endeavor, we will draw upon the argument made by Johnson et al. (2016) in a similar
+context.
+Let Bpd
+
+2 (x, ) be a L2 ball centered at x with radius . Clearly, we can scale the orignial design matrix (cid:101)X so that its rows fall
+in a L2 unit ball, in which case the rows of Z fall in a L2 unit ball centered at the origin. So then the set, A = {(cid:102)Xt − µt},
+where (cid:102)Xt is drawn from the aforementioned L2 ball, is a subset of the L2 ball centered at the origin. Now note that by
+
+deﬁnition λmin(ΣZ|A) ≥ λmin(ΣZ), where λmin(ΣZ) is the unrestricted minimum eigenvalue of ΣZ. So it sufﬁces to
+show that λmin(ΣZ) > 0. By way of contradiction, assume that λmin(ΣZ) = 0. Then let the eigendecomposition of ΣZ
+be ΣZ = QΛQ−1, where Q = [v1, . . . , vpd] has the eigenvectors of ΣZ for columns, and Λ = diag(λi)pd
+i=1 is a diagonal
+matrix of the eigenvalues of ΣZ in descending order. Observe that λpd = 0 implies
+
+(E.1)
+since vpd is the eigenvector corresponding to the minimum eigenvalue of 0. Let Avpd = {a ∈ A|(cid:104)a, vpd(cid:105) = 0}. Then
+clearly, (E.1) implies,
+
+Ea∼A[(cid:104)a, vpd(cid:105)] = 0,
+
+(E.2)
+Note that by (E.2), since there is no probability density outside Avpd, this density is thus concentrated on a subspace of Rpd.
+Here we have a contradiction, since the span of Avpd is Rpd. Therefore, λmin(ΣZ|A) ≥ λmin(ΣZ) > 0, and we have
+
+P(a ∈ Avpd ) = 1.
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)2 = inf
+
+1
+(cid:107)Zu(cid:107)2
+n
+
+u∈A
+
+(cid:18)
+2 ≥ λmin(ΣZ|A)
+
+(cid:19)
+1 − 2c0c1κ(cid:48)2ω(B)
+
+√
+
+T − p
+
+> 0,
+
+T(cid:88)
+
+t=p+1
+
+1
+
+T − p
+
+inf
+u∈A
+
+with probability at least 1 − 2 exp(−c2
+
+0c2
+
+1c2ω2(B)), as desired.
+
+E.2. Proof of Lemma D.2
+
+In this section we present a proof for Lemma D.2. This proof will make a generic chaining argument, and will thus rely on
+the following standard lemmas from Talagrand (2006) and Talagrand (2014).
+Lemma E.2 (Theorem 2.1.5 from Talagrand (2006)). Consider two processes {Xt}t∈A and {Yt}t∈A, indexed by the same
+set A. Assume {Xt}t∈A is Gaussian, and {Yt}t∈A satisﬁes the condition:
+
+∀δ > 0,∀u, v ∈ A, P(|Yu − Yv| > δ) ≤ 2 exp
+
+(cid:18) − δ2
+
+d(u, v)2
+
+(cid:19)
+
+,
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+where d(u, v) is the distance metric associated with Xt (we assume d(u, v) = (cid:107)u − v(cid:107)2). Then, for some constant L,
+
+E[ sup
+u,v∈A
+
+|Yu − Yv|] ≤ LE[sup
+v∈A
+
+Xv]]
+
+Lemma E.3 (Lemma 1.2.8 from Talagrand (2006)). If the process {Xt}t∈A is symmetric, then
+
+E[ sup
+u,v∈A
+
+|Xu − Xv|] = 2E[sup
+u∈A
+
+Xu]].
+
+Lemma E.4 (Theorem 2.2.27 from Talagrand (2014)). Let {Xt}t∈A be a process that satisﬁes Lemma E.2. Then for any
+δ > 0 and constant L,
+
+(cid:18)
+
+P
+
+|Xu − Xv| ≥ L(γ2(A, d(u, v)) + δα)
+
+sup
+u,v∈A
+
+≤ L exp(−δ2),
+
+(cid:19)
+
+where α = diam(A) = supu,v∈A d(u, v), and γ2(·,·) is the γ2-functional deﬁned in F.4.
+Lemma E.5 (Theorem 2.2.27 from Talagrand (2014)). For constant L,
+
+1
+γ2(A, d(u, v)) ≤ E sup
+u∈A
+L
+
+Xu ≤ Lγ2(A, d(u, v)).
+
+Having presented these lemmas, we now give the proof of Lemma D.2.
+
+2
+
+T − p
+
+(cid:18)
+
+P
+
+(cid:21)
+
+,
+
+2κ2
+
+T(cid:88)
+
+t=p+1
+
+1√
+T − p
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+T(cid:88)
+
+(cid:20) − 2
+
+2(cid:107)u(cid:107)2
+
+(cid:104)(cid:102)Xt − µt, u(cid:105)
+
+Proof of Lemma D.2. We seek to bound supu∈A
+
+for any u ∈ A. Then for u, v ∈ A, we have that
+
+bounded MDS, and so we can apply the Azuma-Hoeffding inequality to obtain
+
+(cid:80)T
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105). Recall that by Assumption 5.4, the sub-
+Gaussian norm of each row(cid:102)Xt is bounded by κ, which implies that (cid:107)(cid:102)Xt− µt(cid:107)ψ2 ≤ κ. Thus,(cid:102)Xt− µt forms a sub-Gaussian
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ 
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ 
+(cid:19)
+T − p(cid:80)T
+
+(cid:20)
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105) with high probability.
+
+√
+We now make a generic chaining argument to bound supu∈A 1/
+
+Let Z = [((cid:102)Xp+1−µp+1), . . . , ((cid:102)XT−µT )](cid:62). We ﬁrst note that by (E.3), the process Zu = (cid:104)Z, u(cid:105) = 1/
+T − p(cid:104)(cid:102)Xt−µt, u(cid:105)
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)] in terms of the Gaussian width of set A (see Deﬁnition F.5), and then prove
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105) concentrates around its expectation with high probability.
+T − p(cid:80)T
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)], we appeal to Lemma E.2. In our setting, E[supv∈A Xv] = ω(A),
+
+has sub-Gaussian concentration. Similarly, by (E.4), Zu − Zv is a sub-Gaussian process ∀u, v ∈ A. We now bound
+√
+E[supu∈A 1/
+√
+that supu∈A 1/
+√
+To bound E[supu∈A 1/
+the Gaussian width of A. Thus, by Lemma E.2 and (E.4), we achieve the following bound for some constant L:
+
+T − p(cid:80)T
+T − p(cid:80)T
+
+√
+
+(cid:104)(cid:102)Xt − µt, u − v(cid:105)
+
+− 2
+2(cid:107)u − v(cid:107)2
+
+2κ2
+
+(cid:18)
+
+P
+
+1√
+T − p
+
+t=p+1
+
+(E.3)
+
+(E.4)
+
+(cid:19)
+
+≤ 2 exp
+
+≤ 2 exp
+
+(cid:21)
+
+.
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+E[ sup
+u,v∈A
+
+|Zu − Zv|] ≤ Lκω(A).
+
+(E.5)
+
+Note that by (E.3), the process Zu is symmetric, and so Lemma E.3 applies. Thus, by Lemma E.3 and (E.5), we have that,
+
+E[ sup
+u,v∈A
+
+|Zu − Zv|] = 2E[sup
+u∈A
+
+Zu]] ≤ Lκω(A).
+
+(E.6)
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+√
+Thus, the deﬁnition of Zu, we can bound E[supu∈A 2/
+
+(cid:20)
+
+2E
+
+2
+
+sup
+u∈A
+
+T − p
+
+T − p(cid:80)T
+(cid:21)
+T(cid:88)
+(cid:104)(cid:102)Xt − µt, u(cid:105)
+T − p(cid:80)T
+
+√
+
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)] as follows:
+
+= 2E[sup
+u∈A
+
+Zu]] ≤ Lκω(A).
+
+Having bound the expectation of E[supu∈A 1/
+seek to bound supu∈A 1/
+to lemma E.4. In this setting, d(u, v) = (cid:107)u − v(cid:107)2. Lemma E.4 motivates the following result:
+
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105)] in terms of the Gaussian width of A, we now
+t=p+1(cid:104)(cid:102)Xt − µt, u(cid:105) around its expectation with high-probability. To do so, we appeal
+
+T − p(cid:80)T
+
+t=p+1
+
+√
+
+P( sup
+u,v∈A
+
+|Zu − Zv| ≥ L(γ2(A, d(u, v)) + δα) = P( sup
+u,v∈A
+
+|Zu − Zv| ≥ L(γ2(A, d(u, v)) + ),
+
+(E.7)
+
+where the right-hand side of the inequality follows since, as Taylor et al. (2014) notes, γ2(A, d(u, v)) ≥ α from the
+deﬁnition of the γ2 functional. We now bound γ2(A, d(u, v)) with Lemma E.5. So by Lemma E.5 and (E.5),
+|Zu − Zv|] + )
+
+|Zu − Zv| ≥ L(γ2(A, d(u, v)) + ) ≤ P( sup
+u,v∈A
+= P(sup
+u∈A
+
+|Zu − Zv| ≥ E[ sup
+u,v∈A
+|Zu| ≥ 2E[sup
+|Zu|] + ),
+u∈A
+
+P( sup
+u,v∈A
+
+(cid:18)
+
+P
+
+where the equality follows from Lemma E.3. Now substituting in the deﬁnition of Zu, and applying (E.6) and Lemma E.4,
+we have:
+
+T(cid:88)
+
+(cid:19)
+(cid:104)(cid:102)Xt − µt, u(cid:105) ≥ 2Lκω(A) + 
+
+(cid:20)
+
+(cid:18) 
+
+(cid:19)2(cid:21)
+
+≤ L exp
+
+−
+
+sup
+u∈A
+T − p, multiplying by 2, and letting  = −2Lκαω(A), we achieve the following bound on the
+
+Lκα
+
+t=p+1
+
+.
+
+1√
+T − p
+
+√
+
+Dividing through by
+desired quantity
+
+(cid:18)
+
+P
+
+T(cid:88)
+
+(cid:19)
+(cid:104)(cid:102)Xt − µt, u(cid:105) ≥ 0
+
+2
+
+T − p
+
+sup
+u∈A
+
+t=p+1
+
+(cid:20)
+
+≤ L exp
+
+− 4
+
+(ω(A))2
+
+α2
+
+(cid:21)
+
+.
+
+(E.8)
+
+F. Restricted Eigenvalue Condition for Martingale Difference Sequences
+In this section, we prove that under mild conditions, the restricted eigenvalue condition will hold for martingale difference
+sequences (MDS), which we deﬁne in Deﬁnition G.1 in Appendix G. We ﬁrst present the following deﬁnitions:
+Deﬁnition F.1. An isotropic design matrix is one for which the covariance matrix of each row Σ = E[XiX T
+Deﬁnition F.2. An anisotropic design matrix has rows with a general covariance matrix Σ = E[XiX T
+i ], but with corre-
+sponding isotropic rows X i = XiΣ−1/2.
+Deﬁnition F.3. For a ﬁnite set A ⊂ T , denote the cardinality of A by |A|. An admissible sequence of T is a collection of
+subsets of T,{Ts : s ≥ 0}, such that for every s ≥ 1, |Ts| = 22s and |T0| = 1.
+Deﬁnition F.4. (Talagrand, 2006) For a metric space (T, d) and k = 1, 2, deﬁne
+
+i ] = I.
+
+∞(cid:88)
+
+s=0
+
+γk(T, d) = inf sup
+t∈T
+
+2s/kd(t, Ts),
+
+where d(t, Ts) is the distance between the set Ts and t, and the inﬁmum is taken with respect to all admissible sequences of
+T . In cases where the metric is clear from the context, we will denote the γk functional by γk(T ).
+Deﬁnition F.5. (Gordon, 1988; Chandrasekaran et al., 2012) The Gaussian width of a set A ∈ Rp is
+
+where we take the expectation over random vector g ∼ N (0, Ip×p). The Gaussian width is a measure of the size of set A.
+
+ω(A) = sup
+u∈A
+
+E[(cid:104)g, u(cid:105)],
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+We now present the restricted eigenvalue condition for MDS.
+Theorem F.6. Let X = (X1,··· , Xn)(cid:62) be a n × d design matrix whose anisotropic sub-Gaussian rows form a vector
+valued martingale difference sequence. Let E[X(cid:62)X/n] = Σ and (cid:107)Σ−1/2Xi(cid:107)ψ2 ≤ κ. Then for absolute constants
+c0, c1, c2 > 0, with probability at least 1 − 2 exp(−c2
+0c2
+
+(cid:18)
+
+(cid:19)
+
+1c2ω2(B)), we have
+≤ inf
+u∈A
+
+√
+
+1 − 2c0c1κ2ω(B)
+
+n
+
+(cid:107)Xu(cid:107)2
+2,
+
+1
+n
+
+λmin(Σ|A)
+
+where λmin(Σ|A) = inf u∈A u(cid:62)Σu is the restricted minimum eigenvalues of Σ restricted to A ⊆ Sd−1 (the unit sphere in
+
+Rd space), and B = {(cid:101)u :(cid:101)u = Σ1/2u/(cid:107)Σ1/2u(cid:107)2, u ∈ A} is the normalized set of A.
+
+In the proof of this theorem, we will use the following lemma, which is a MDS version of the sub-Gaussian concentration in
+Mendelson et al. (2007).
+Lemma F.7. (Mendelson et al., 2007) Let (Ω, µ) be a probability space, and F ⊂ SL2 be a set of functions, where
+SL2 := {f : (cid:107)f(cid:107)L2 = 1} is the unit sphere in L2(µ) space. Assume that diam(F,(cid:107) · (cid:107)ψ2) = α. Then, for any θ > 0 and
+n ≥ 1 satisfying
+
+we have with probability at least 1 − exp(−c2nθ2/α4) that
+
+where c1, c2 are absolute constants.
+
+sup
+f∈F
+
+√
+
+n,
+
+c1αγ2(F,(cid:107) · (cid:107)ψ2 ) ≤ θ
+k(cid:88)
+
+f 2(Xi) − E[f 2]
+
+(cid:12)(cid:12)(cid:12) 1
+
+n
+
+i=1
+
+(cid:12)(cid:12)(cid:12) ≤ θ,
+
+The detailed proof of Lemma F.7 can be found in Mendelson et al. (2007). We outline the proof of this lemma in Appendix
+F.1.
+
+Proof of Theorem F.6. We will apply Lemma F.7 to this proof. First, we deﬁne the following class of functions:
+
+(cid:27)
+
+1√
+u(cid:62)Σu
+
+(cid:104)·, u(cid:105)
+
+1
+
+u(cid:62)Σu
+
+EX [u(cid:62)X(cid:62)Xu] = 1.
+
+.
+
+(F.1)
+
+(cid:26)
+
+(cid:13)(cid:13)(cid:13)(cid:13)
+
+fu : u ∈ A, fu(·) =
+We need to verify that F ⊂ SL2. In fact, for any fu ∈ F , we have
+EX [(cid:104)X, u(cid:105)2] =
+
+(cid:107)fu(X)(cid:107)L2 =
+
+F =
+
+1
+
+u(cid:62)Σu
+
+Note that
+
+diam(F,(cid:107) · (cid:107)ψ2) = sup
+fu,fv∈F
+
+(cid:107)fu − fv(cid:107)ψ2 ≤ 2 sup
+fu∈F
+
+(cid:107)fu(cid:107)ψ2 .
+
+In order to bound the diameter of F according to (cid:107) · (cid:107)ψ2, we only need to get a bound on the following term
+
+(cid:107)fu(cid:107)ψ2 = sup
+u∈A
+
+sup
+fu∈F
+
+1√
+u(cid:62)Σu
+
+(cid:104)X, u(cid:105)
+
+= sup
+u∈A
+
+Σ−1/2X,
+
+Σ1/2u
+(cid:107)Σ1/2u(cid:107)2
+
+Thus, we have supfu∈F (cid:107)fu(cid:107)ψ2 ≤ (cid:107)Σ−1/2X |ψ2 ≤ κ. By similar argument, we have
+
+(cid:13)(cid:13)(cid:13)(cid:13)ψ2
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:28)
+(cid:29)(cid:13)(cid:13)(cid:13)(cid:13)ψ2
+(cid:29)2(cid:21)
+
+(cid:107)Σ1/2u(cid:107)2
+
+(cid:13)(cid:13)(cid:13)(cid:13) Σ1/2u
+(cid:13)(cid:13)(cid:13)(cid:13) Σ1/2u
+
+(cid:107)Σ1/2u(cid:107)2
+
+(cid:29)(cid:13)(cid:13)(cid:13)(cid:13)ψ2
+
+.
+
+.
+
+(cid:13)(cid:13)(cid:13)(cid:13)2
+(cid:13)(cid:13)(cid:13)(cid:13)2
+
+.
+
+(cid:107)fu − fv(cid:107)ψ2 =
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:28)
+(cid:20)(cid:28)
+(cid:107)fu − fv(cid:107)L2 = E
+
+By deﬁnition, we also have
+
+Σ−1/2X,
+
+Σ1/2u
+(cid:107)Σ1/2u(cid:107)2
+
+− Σ1/2v
+(cid:107)Σ1/2v(cid:107)2
+
+≤ κ
+
+− Σ1/2v
+(cid:107)Σ1/2v(cid:107)2
+
+Σ−1/2X,
+
+Σ1/2u
+(cid:107)Σ1/2u(cid:107)2
+
+− Σ1/2v
+(cid:107)Σ1/2v(cid:107)2
+
+=
+
+− Σ1/2v
+(cid:107)Σ1/2v(cid:107)2
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+This equality immediately implies (cid:107)fu − fv(cid:107)ψ2 ≤ κ(cid:107)fu − fv(cid:107)L2. Then the γ2-functional in Lemma F.7 can be bounded as
+where the last inequality is due to the majorizing measure theorem in Talagrand (2006), B := {(cid:101)u : (cid:101)u =
+
+γ2(F ∩ SL2 ,(cid:107) · (cid:107)ψ2 ) ≤ κγ2(F ∩ SL2 ,(cid:107) · (cid:107)L2 ) ≤ κc0ω(B),
+
+Σ1/2u/(cid:107)Σ1/2u(cid:107)2, u ∈ A} is the normalized set of A and c0 > 0 is an absolute constant. Now we choose the parameter θ
+in Theorem F.7 as
+
+θ =
+
+2c0c1κ2ω(B)
+
+√
+
+n
+
+≥ 2c1κγ2(F,(cid:107) · (cid:107)ψ2)
+
+√
+
+n
+
+.
+
+Therefore, we have with probability at least 1 − exp(−c2
+
+0c2
+
+1c2ω(B)2/4) that
+
+n(cid:88)
+
+sup
+u∈A
+
+1
+
+u(cid:62)Σu
+
+(cid:104)Xi, u(cid:105)2 − 1
+
+(cid:12)(cid:12)(cid:12)(cid:12) ≤ 2c0c1κ2ω(B)
+
+√
+
+n
+
+,
+
+where c0, c1, c2 are absolute constants and B := {(cid:101)u :(cid:101)u = Σ1/2u/(cid:107)Σ1/2u(cid:107)2, u ∈ A}. It follows that
+
+i=1
+
+(cid:12)(cid:12)(cid:12)(cid:12) 1
+(cid:18)
+
+n
+
+1 − 1
+n
+
+1
+
+u(cid:62)Σu
+
+(cid:107)Xu(cid:107)2
+
+2
+
+≤ 2c0c1κ2ω(B)
+
+√
+
+n
+
+,
+
+sup
+u∈A
+
+1 − 2c0c1κ2ω(B)
+
+√
+
+n
+
+and
+
+Thus we obtain that
+
+(cid:18)
+
+(cid:19)
+
+2 ≤
+(cid:19)
+
+≤ inf
+u∈A
+
+1
+n
+
+1
+
+u(cid:62)Σu
+
+(cid:107)Xu(cid:107)2
+
+1
+
+λmin(Σ|A)
+
+inf
+u∈A
+
+(cid:107)Xu(cid:107)2
+2.
+
+1
+n
+
+λmin(Σ|A)
+
+1 − 2c0c1κ2ω(B)
+
+√
+
+n
+
+≤ inf
+u∈A
+
+(cid:107)Xu(cid:107)2
+
+2
+
+1
+n
+
+holds with probability at least 1 − exp(−c2
+
+0c2
+
+1c2ω(B)2/4), with c0, c1, c2 being absolute constants.
+
+F.1. Sketch of Proof of Lemma F.7
+
+Here we lay the outline of the proof for Lemma F.7, and show that it can be extended to bounded martingale difference
+sequence. The only difference in the proof for our MDS version of this lemma from the independent case is the Bernstein
+inequality. Whereas the original result leveraged the canonical Bernstein inequality, we here use the following MDS version
+of the Bernstein inequality:
+Lemma F.8 (Bernstein-Type Inequality for Martingale Difference Sequences). Let X1, . . . , Xn form a sub-exponential
+Martingale Difference Sequence (MDS) such that max1≤i≤n (cid:107)Xi(cid:107)ψ1 ≤ κ. Here (cid:107)·(cid:107)ψ1 is the sub-Exponential norm deﬁned
+in Deﬁnition G.2 in Appendix G. Then
+
+(cid:18)(cid:12)(cid:12)(cid:12)(cid:12) n(cid:88)
+
+i
+
+(cid:12)(cid:12)(cid:12)(cid:12) ≥ t
+(cid:19)
+
+(cid:20)
+
+(cid:26) t2
+
+aiXi
+
+≤ 2 exp
+
+− C min
+
+κ2(cid:107)a(cid:107)2,
+
+t
+
+κ(cid:107)a(cid:107)∞
+
+P
+
+where C is a constant.
+
+We defer the proof of Lemma F.8 to Appendix F.2. With the Bernstein inequality for MDS, we can now outline the proof of
+Lemma F.7.
+Let X1, . . . , Xn be a bounded martingale difference sequence. We ﬁrst deﬁne the empircal processes
+
+n(cid:88)
+
+(cid:18)
+
+n(cid:88)
+
+Zf = 1/n
+
+f 2(Xi) − E[f 2]
+
+Wf =
+
+1/n
+
+f 2(Xi)
+
+.
+
+The following lemma from Mendelson et al. (2007) can be easily obtained from Lemma F.8.
+
+i=1
+
+i=1
+
+(cid:27)(cid:21)
+
+,
+
+(cid:19)2
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+Lemma F.9. There exists an absolute constant c1 > 0 for which the following holds. Let F ⊂ SL2, α = diam(F,(cid:107) · (cid:107)ψ2 )
+and set n ≥ 1. For every f, g ∈ F and every u ≥ 2 we have
+
+Also, for every u > 0,
+
+and
+
+P(Wf−g ≥ u(cid:107)f − g(cid:107)ψ2 ) ≤ exp(−c1nu2).
+
+P(|Zf − Zg| ≥ uα(cid:107)f − g(cid:107)ψ2) ≤ exp(−c1nu2),
+
+P(|Zf| ≥ uα2) ≤ 2 exp(−c1nu2).
+
+The following two lemmas from Mendelson et al. (2007) hold in our setting since they do not require i.i.d. observations.
+Lemma F.10. There exists an absolute constant C for which the following holds. Let F ⊂ SL2, α = diam(F,(cid:107) · (cid:107)ψ2) and
+n ≥ 1. There is F (cid:48) ⊂ F such that |F (cid:48)| ≤ 4n and with probability at least 1 − exp(−n), we have, for every f ∈ F ,
+
+Wf−πF(cid:48) (f ) ≤ Cγ2(F,(cid:107) · (cid:107)ψ2 )
+
+√
+
+,
+
+n
+where πF (cid:48)(f ) is a nearest point to f in F (cid:48) with respect to the ψ2 metric.
+Lemma F.11. There exist absolute constants C and c(cid:48) > 0 for which the following holds. Let F ⊂ SL2 and α =
+diam(F,(cid:107) · (cid:107)ψ2). Let n ≥ 1 and F (cid:48) ⊂ F such that |F (cid:48)| ≤ 4n. Then for every w > 0,
+
+with probability at least 1 − 3 exp(−c(cid:48)n min(w, w2)).
+
+|Zf| ≤ Cα
+
+sup
+f∈F (cid:48)
+
+γ2(F,(cid:107) · (cid:107)ψ2)
+
+√
+
+n
+
++ α2w,
+
+Based on the above lemmas, the rest of proof of Theorem F.7 is stated as the proof of Theorem 1.4 in Mendelson et al.
+(2007).
+
+F.2. Proof of Berstein Inequality for MDS (Lemma F.8)
+
+We ﬁrst present the following lemma from Vershynin (2012).
+Lemma F.12 (Lemma 5.15 from Vershynin (2012)). If X is a sub-exponential random variable such that E[X] = 0, then
+for every t such that |t| ≤ c/(cid:107)X(cid:107)ψ1, we have
+
+E[exp(tX)] ≤ exp(Ct2(cid:107)X(cid:107)ψ1],
+
+where C, c > 0 are constants.
+
+(cid:20)
+
+(cid:18)
+
+E
+
+exp
+
+(cid:19)(cid:21)
+
+aiXi
+
+= E
+
+t · n(cid:88)
+
+We now prove the Berstein Inequality for MDS.
+
+Proof of Lemma F.8. We begin by bounding the moment-generating function of(cid:80)n
+(cid:12)(cid:12)(cid:12)(cid:12)X1, . . . , Xn−1
+(cid:21)
+(cid:20) n−1(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)X1, . . . , Xn−1
+
+(cid:21)
+n−1(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)X1, . . . , Xn−1
+(cid:20) n−1(cid:89)
+
+(cid:20) n(cid:89)
+(cid:20)
+(cid:20)
+(cid:20)
+(cid:20)
+(cid:20)
+
+nκ2) · E
+
+exp[tanXn]
+
+exp[tanXn]
+
+exp[taiXi]
+
+≤ E
+
+exp(Ct2a2
+
+exp[taiXi]
+
+i
+
+i
+
+· E
+
+i
+
+= E
+
+E
+
+= E
+
+E
+
+(cid:21)(cid:21)
+
+i
+
+exp[taiXi]
+
+i
+
+i aiXi as follows:
+
+exp[taiXi]
+
+(cid:21)(cid:21)
+
+(cid:12)(cid:12)(cid:12)(cid:12)X1, . . . , Xn−1
+(cid:21)(cid:21)
+
+,
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+where the second inequality holds by the Law of Iterated Expectations. Furthermore, the last inequality holds by Lemma
+F.12 since E[Xn|X1, . . . , Xn−1] = E[Xn|Fn−1] = 0 by the deﬁnition of a MDS (recall Deﬁnition G.1 in Appendix G). By
+iteratively repeating this process, we obtain
+
+2κ2
+Now note that by the Chernoff bound, for all λ such that |λ| ≤ C/(cid:107)a(cid:107)∞ we have
+
+= exp
+
+Ct2(cid:107)a(cid:107)2
+
+(F.2)
+
+(cid:19)
+
+≥ exp(λt)
+
+(cid:20)
+
+E
+
+exp
+
+(cid:18)
+
+t · n(cid:88)
+
+i
+
+(cid:19)(cid:21)
+
+aiXi
+
+≤ E
+
+exp(Ct2a2
+
+i κ2)
+
+= exp
+
+Ct2
+
+a2
+i κ2
+
+(cid:20) n(cid:89)
+(cid:18)
+(cid:18)
+
+i
+
+(cid:21)
+
+(cid:19)
+(cid:19)
+
+.
+
+n(cid:88)
+
+i
+
+(cid:19)
+
+(cid:18) n(cid:88)
+
+P
+
+i
+
+aiXi ≥ t
+
+(cid:19)
+
+(cid:20)
+
+λ
+
+exp
+
+= P
+
+(cid:18)
+(cid:18)
+n(cid:88)
+≤ E[exp[λ(cid:80)n
+≤ exp[Cλ2(cid:107)a(cid:107)2
+exp[λt]
+= exp[Cλ2(cid:107)a(cid:107)2
+
+exp[λt]
+
+aiXi
+
+i
+i aiXi]]
+
+2κ2]
+
+2κ2 − λt],
+(cid:21)
+
+t2
+
+where the last inequality holds by F.2. Now if we let λ = min{t/(2C(cid:107)a(cid:107)2
+t/(2C(cid:107)a(cid:107)2
+
+2κ2) < c/((cid:107)a(cid:107)∞κ), then
+
+2κ2), c/((cid:107)a(cid:107)∞κ)}, then we see that if
+
+(cid:21)
+
+.
+
+2κ2
+
+4C(cid:107)a(cid:107)2
+
+(cid:20) − t2
+(cid:20)
+
+(cid:21)
+
+ct
+
+2(cid:107)a(cid:107)∞κ
+
+,
+
+(F.3)
+
+(F.4)
+
+(cid:19)
+
+(cid:19)
+
+P
+
+(cid:18) n(cid:88)
+(cid:18) n(cid:88)
+
+i
+
+i
+
+Similarly, if c/((cid:107)a(cid:107)∞κ) < t/(2C(cid:107)a(cid:107)2
+
+2κ2), then
+
+P
+
+aiXi ≥ t
+
+≤ exp
+
+where the second inequality holds since Cc(cid:107)a(cid:107)2
+
+(cid:18) n(cid:88)
+
+P
+
+aiXi ≥ t
+
+≤ exp
+
+t2
+4C(cid:107)a(cid:107)2
+
+2κ2 −
+
+2κ2C(cid:107)a(cid:107)2
+
+2
+
+= exp
+
+c
+
+·
+
+(cid:21)
+
+(cid:20) Cc(cid:107)a(cid:107)2
+2κ
+(cid:107)a(cid:107)∞
+(cid:27)(cid:19)
+(cid:19)
+2κ/(cid:107)a(cid:107)∞ ≤ t/2. Combining F.3 and F.4 yields
+
+(cid:26) − t2
+
+(cid:107)a(cid:107)∞κ
+
+(cid:107)a(cid:107)∞κ
+
+− ct
+
+≤ exp
+
+(cid:18)
+
+−
+
+− ct
+2(cid:107)a(cid:107)∞κ
+
+Note that we can repeat this process and replace each Xi with −Xi to obtain this same bound for P(−(cid:80)n
+
+4C(cid:107)a(cid:107)2
+
+2κ2,
+
+min
+
+.
+
+i
+
+aiXi ≥ t
+
+≤ exp
+
+lemma then follows as a result of these two bounds.
+
+i aiXi ≥ t). This
+
+G. Auxiliary Deﬁnitions
+In this section we present deﬁnitions used in the Appendix sections.
+Deﬁnition G.1. A stochastic process {ξt} is a martingale difference sequence with respect to ﬁltration Ft if:
+1. ξt is Ft-measurable, and
+2. E[ξt|Ft−1] = 0.
+Deﬁnition G.2. The sub-Exponential norm of a random scalar variable X , (cid:107)X(cid:107)ψ1, is:
+
+(cid:18)
+
+(cid:20)
+
+(cid:21)(cid:19)1/q
+
+.
+
+(cid:107)X(cid:107)ψ1 = sup
+q≥1
+
+q−1
+
+E
+
+|X|q
+
+Uncertainty Assessment and False Discovery Rate Control in High-Dimensional Granger Causal Inference
+
+The sub-Exponential norm of a random vector X ∈ Rn is:
+
+where Sn−1 is the unit sphere in Rn space.
+
+(cid:107)X(cid:107)ψ1 = sup
+u∈Sn−1
+
+(cid:107)(cid:104)X, u(cid:105)(cid:107)ψ1 ,
+
+

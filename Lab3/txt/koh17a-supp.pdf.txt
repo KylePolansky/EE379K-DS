@@ -1,0 +1,203 @@
+Appendix: Understanding Black-box Predictions via Inﬂuence Functions
+
+Pang Wei Koh 1 Percy Liang 1
+
+A. Deriving the inﬂuence function Iup,params
+For completeness, we provide a standard derivation of the
+inﬂuence function Iup,params in the context of loss minimiza-
+tion (M-estimation). This derivation is based on asymp-
+totic arguments and is not fully rigorous; see van der Vaart
+(1998) and other statistics textbooks for a more thorough
+treatment.
+Recall that ˆθ minimizes the empirical risk:
+
+n(cid:88)
+
+i=1
+
+R(θ) def=
+
+1
+n
+
+L(zi, θ).
+
+(1)
+
+We further assume that R is twice-differentiable and
+strictly convex in θ, i.e.,
+
+n(cid:88)
+
+i=1
+
+def= ∇2R(ˆθ) =
+
+Hˆθ
+
+1
+n
+
+∇2
+θL(zi, ˆθ)
+
+(2)
+
+, which we will use in the subsequent derivation.
+
+exists and is positive deﬁnite. This guarantees the existence
+of H−1
+ˆθ
+The perturbed parameters ˆθ,z can be written as
+{R(θ) + L(z, θ)} .
+
+(3)
+
+ˆθ,z = arg min
+θ∈Θ
+
+Deﬁne the parameter change ∆ = ˆθ,z − ˆθ, and note that,
+as ˆθ doesn’t depend on , the quantity we seek to compute
+can be written in terms of it:
+
+dˆθ,z
+d
+
+=
+
+d∆
+d
+
+.
+
+(4)
+
+Since ˆθ,z is a minimizer of (3), let us examine its ﬁrst-
+order optimality conditions:
+
+0 = ∇R(ˆθ,z) + ∇L(z, ˆθ,z).
+
+(5)
+
+1Stanford University, Stanford, CA. Correspondence to:
+Pang Wei Koh <pangwei@cs.stanford.edu>, Percy Liang <pli-
+ang@cs.stanford.edu>.
+
+Proceedings of the 34 th International Conference on Machine
+Learning, Sydney, Australia, PMLR 70, 2017. Copyright 2017
+by the author(s).
+
+Next, since ˆθ,z → ˆθ as  → 0, we perform a Taylor expan-
+sion of the right-hand side:
+
++
+
+0 ≈(cid:104)∇R(ˆθ) + ∇L(z, ˆθ)
+(cid:105)
+(cid:104)∇2R(ˆθ) + ∇2L(z, ˆθ)
+(cid:105)
+∆ ≈ −(cid:104)∇2R(ˆθ) + ∇2L(z, ˆθ)
+(cid:105)−1
+(cid:104)∇R(ˆθ) + ∇L(z, ˆθ)
+(cid:105)
+
+∆,
+
+.
+
+where we have dropped o((cid:107)∆(cid:107)) terms.
+Solving for ∆, we get:
+
+(6)
+
+(7)
+
+Since ˆθ minimzes R, we have ∇R(ˆθ) = 0. Keeping only
+O() terms, we have
+
+∆ ≈ − ∇2R(ˆθ)−1∇L(z, ˆθ).
+
+Combining with (2) and (4), we conclude that:
+
+(cid:12)(cid:12)(cid:12)=0
+
+dˆθ,z
+d
+
+∇L(z, ˆθ)
+
+= −H−1
+ˆθ
+def= Iup,params(z).
+
+(8)
+
+(9)
+
+(10)
+
+B. Inﬂuence at non-convergence
+Consider a training point z. When the model parameters
+˜θ are close to but not at a local minimum, Iup,params(z) is
+approximately equal to a constant (which does not depend
+on z) plus the change in parameters after upweighting z and
+then taking a single Newton step from ˜θ. The high-level
+idea is that even though the gradient of the empirical risk at
+˜θ is not 0, the Newton step from ˜θ can be decomposed into
+a component following the existing gradient (which does
+not depend on the choice of z) and a second component
+(cid:80)n
+responding to the upweighted z (which Iup,params(z) tracks).
+i=1 ∇θL(zi, ˜θ) be the gradient of the em-
+Let g def= 1
+n
+pirical risk at ˜θ; since ˜θ is not a local minimum, g (cid:54)= 0.
+After upweighting z by , the gradient at ˜θ goes from
+g (cid:55)→ g + ∇θL(z, ˜θ), and the empirical Hessian goes from
+H˜θ (cid:55)→ H˜θ + ∇2
+θL(z, ˜θ). A Newton step from ˜θ therefore
+changes the parameters by:
+H˜θ + ∇2
+
+def= −(cid:104)
+
+g + ∇θL(z, ˜θ)
+
+(cid:105)−1(cid:104)
+
+θL(z, ˜θ)
+
+N,z
+
+(cid:105)
+
+.
+(11)
+
+Appendix: Understanding Black-box Predictions via Inﬂuence Functions
+
+(cid:16)
+
+(cid:17)
+
+g + ∇θL(z, ˜θ)
+
+Ignoring terms in g, 2, and higher, we get N,z ≈
+−H−1
+. Therefore, the actual change
+˜θ
+due to a Newton step N,z is equal to a constant −H−1
+g
+(that doesn’t depend on z) plus  times Iup,params(z) =
+−H−1
+∇θL(z, ˜θ) (which captures the contribution of z).
+˜θ
+
+˜θ
+
+References
+van der Vaart, A. W. Asymptotic statistics. Cambridge
+
+University Press, 1998.
+
+

@@ -1,0 +1,1799 @@
+Supplementary Material to Robust Structured Estimation with Single-Index
+
+Models
+
+Sheng Chen 1 Arindam Banerjee 1
+
+Abstract
+
+In this supplementary material, we present the
+deferred proofs of the results in the main paper.
+
+1. Proof of Claim 1
+Statement of Claim 1: Suppose that each element xi of x
+is sampled i.i.d. from Rademacher distribution, i.e., P(xi =
+1) = P(xi = −1) = 0.5. Under model (3) with noise
+ϵ = 0, there exists a (cid:22)(cid:18) ∈ Sp−1 together with a monotone
+) and yi = (cid:22)f (⟨ (cid:22)(cid:18), xi⟩)
+(cid:22)f, such that supp( (cid:22)(cid:18)) = supp((cid:18)
+for data {(xi, yi)}n
+i=1 with arbitrarily large sample size n,
+while ∥ (cid:22)(cid:18) − (cid:18)
+Proof:
+ed that S , supp((cid:18)
+∗
+∗ is simpliﬁed as
+of (cid:18)
+
+∗, provid-
+) is given and |S| = s, the estimation
+
+∗∥2 > δ for some constant δ.
+
+In the noiseless setting with unknown f
+
+∗
+
+(⟨(cid:18)S, xiS − xjS⟩)
+
+Find (cid:18)S ∈ Ss−1
+
+∀ 1 ≤ i < j ≤ n ,
+
+s.t. sign
+
+= sign(yi − yj),
+
+(S.1)
+
+∗ on the premise
+any of whose solution (cid:18) can be true (cid:18)
+that no other information is available, since there always
+exists a monotone f satisfying f (⟨(cid:18), xi⟩) = yi. Given
+the distribution of x, xiS − xjS only has 3s possibilities
+even if n → +∞. We denote the feasible set of (S.1) by
+C, which is basically an intersection of Ss−1 and at most
+min{n(n − 1), 3p} halfspaces (or hyperplanes if yi = yj).
+Depending on the 3 different values of each sign(yi − yj),
+this feasible set C has at most 3min{n(n−1);3p} possibili-
+ties, which is ﬁnite, and the union of them should be Ss−1.
+When s ≥ 2 and the constant δ is small enough, we can
+always ﬁnd a C, in which there exist two different points
+away by δ. Specify them as (cid:18)∗S and (cid:22)(cid:18)S respectively, and
+
+we are unable to distinguish between them, as both can be
+solution to (S.1) for any samples.
+
+2. Proof of Lemma 1
+Statement of Lemma 1: Suppose the distribution of y in
+, x⟩ and we deﬁne ac-
+model (1) depends on x through ⟨(cid:18)
+cordingly
+
+∗
+
+∗
+
+∗
+
+bi (z1, . . . , zm; (cid:18)
+
+(S.2)
+E [qi (y1, . . . , ym)|⟨(cid:18)
+, xm⟩ = zm] ,
+With x being standard Gaussian N (0, I), u deﬁned in (4)
+satisﬁes
+
+, x1⟩ = z1, . . . ,⟨(cid:18)
+
+) =
+
+∗
+
+E [u ((x1, y1), . . . , (xm, ym))] = β(cid:18)
+∗
+E[bi (g1, . . . , gm; (cid:18)
+
+m
+i=1
+
+where β =
+g1, . . . , gm are i.i.d. standard Gaussian.
+∗. For
+Proof: Let (cid:18)⊥ be any vector orthogonal to (cid:18)
+convenience, we use the shorthand notation u for
+u ((x1, y1), . . . , (xm, ym)). Then we have
+
+,
+
+∗
+(S.3)
+) · gi], and
+
+∑
+
+]
+
+qi (y1, . . . , ym) · ⟨xi, (cid:18)⊥⟩
+
+[
+m∑
+
+i=1
+
+E [qi (y1, . . . , ym) · ⟨xi, (cid:18)⊥⟩]
+
+⟨Eu, (cid:18)⊥⟩ = E
+m∑
+m∑
+
+i=1
+
+=
+
+=
+
+i=1
+
+E [⟨xi, (cid:18)⊥⟩ · E [qi (y1, . . . , ym)|x1, . . . , xm]] ((cid:3))
+
+∗⟩ and ⟨xi, (cid:18)⊥⟩ are two zero-
+As xi follows N (0, I), ⟨xi, (cid:18)
+mean independent Gaussian random variables. Since the
+distribution of yi depends on x only via ⟨(cid:18)
+, xi⟩, we can
+split the expectation and obtain
+
+∗
+
+E [⟨xi, (cid:18)⊥⟩ · bi (⟨(cid:18)
+
+∗
+
+, x1⟩, . . . ,⟨(cid:18)
+
+∗
+
+, xm⟩; (cid:18)
+
+∗
+
+)]
+
+E [⟨xi, (cid:18)⊥⟩] · E [bi (⟨(cid:18)
+
+∗
+
+, x1⟩, . . . ,⟨(cid:18)
+
+∗
+
+, xm⟩; (cid:18)
+
+∗
+
+)]
+
+m∑
+m∑
+
+i=1
+
+1Department of Computer Science & Engineering, Univer-
+sity of Minnesota-Twin Cities, Minnesota, USA. Correspon-
+dence to: Sheng Chen <shengc@cs.umn.edu>, Arindam Baner-
+jee <banerjee@cs.umn.edu>.
+
+((cid:3)) =
+
+Proceedings of the 34 th International Conference on Machine
+Learning, Sydney, Australia, 2017. JMLR: W&CP. Copyright
+2017 by the author(s).
+
+=
+
+i=1
+= 0 .
+
+Supplementary Material to Robust Structured Estimation with Single-Index Models
+
+Hence u has to point towards either (cid:18)
+that
+⟨Eu, (cid:18)
+
+E [qi (y1, . . . , ym) · ⟨xi, (cid:18)
+
+∗⟩ =
+
+∗ or −(cid:18)
+
+∗, and note
+
+(Vershynin, 2012), the sub-Gaussian norm of ui1;:::;im sat-
+isﬁes
+
+∗⟩]
+
+∥ui1;:::;im
+
+∥
+
+ 2
+
+= sup
+v∈Sp−1
+
+qj (y11 , . . . , yim) · ⟨xj, v⟩
+
+m∑
+m∑
+m∑
+
+i=1
+
+i=1
+
+=
+
+=
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13) m∑
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13) m∑
+
+j=1
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)
+
+ 2
+
+ 2
+
+ 2
+
+≤ κm ,
+
+≤ κm · ∥v − w∥2.
+)
+
+⟩(cid:12)(cid:12)(cid:12)(cid:12) > δ
+
+− (cid:18)
+
+∗
+
+^u
+β
+
+· ⟨ui1;:::;im , v − w⟩
+
+)
+
+E [bi (⟨(cid:18)
+
+∗
+
+, x1⟩, . . . ,⟨(cid:18)
+
+∗
+
+, xm⟩; (cid:18)
+
+∗
+
+) · ⟨xi, (cid:18)
+
+∗⟩]
+
+E [bi (g1, . . . , gm; (cid:18)
+
+∗
+
+) · gi] = β
+
+i=1
+
+We complete the proof by recalling that ∥(cid:18)
+Eu = β(cid:18)
+
+∗.
+
+∗∥2 = 1, thus
+
+3. Proof of Theorem 1
+We ﬁrst provide a lemma that is useful for bounding the
+Gaussian width of unions of sets, which originates in
+Maurer et al. (2014).
+
+Lemma A (Lemma 2 in Maurer et al. (2014)) Let M >
+4, A1,··· ,AM ⊂ Rp, and A = ∪mAm. The Gaussian
+width of A satisﬁes
+w(A) ≤ max
+1≤m≤M
+
+w(Am) + 2 sup
+z∈A
+
+log M (S.4)
+
+∥z∥2
+
+√
+
+Statement of Theorem 1: Suppose that the optimization
+(9) can be solved to global minimum. Then the following
+error bound holds for the minimizer ^(cid:18) with probability at
+least 1 − C
+
+(−w2 (AK((cid:18)
+
+exp
+
+))
+
+′′
+
+∗
+
+)
+· w(AK((cid:18)
+∗
+√
+
+,
+
+(cid:13)(cid:13)(cid:13) ^(cid:18) − (cid:18)
+
+∗
+
+(cid:13)(cid:13)(cid:13)
+
+≤ Cκm 3
+
+2
+
+β
+
+2
+
+′
+
+,
+
+(S.5)
+
+)) + C
+n
+
+∗
+
+′, C
+
+⟨
+
+where κ is the sub-Gaussian norm of a standard Gaussian
+′′ are all absolute constan-
+random variable, and C, C
+t. Proof: We use the shorthand notation AK for the set
+AK((cid:18)
+). As ^(cid:18) attains the global minimum of (9), we have
+⟨ ^(cid:18) − (cid:18)
+≥ 0
+⟩
+=⇒ ⟨ ^(cid:18), (cid:18)
+
+⟨
+, ^u⟩ ≥ 0 ⇐⇒
+∗⟩ ≥ 1 −
+≥ 1 − ∥ ^(cid:18) − (cid:18)
+
+⟩
+− (cid:18)
+⟨
+
+^(cid:18) − (cid:18)
+∗∥2 ·
+
+^u
+,
+β
+− (cid:18)
+
+^(cid:18) − (cid:18)
+
+− (cid:18)
+
+⟩
+
++ (cid:18)
+
+^u
+β
+
+∗
+
+∗
+
+∗
+
+∗
+
+∗
+
+∗
+
+∗
+
+,
+
+sup
+
+v∈AK∪{0}
+
+v,
+
+^u
+β
+
+In order to bound the supremum above, we use the result
+from generic chaining. We deﬁne the stochastic process
+{Zv = ⟨v, ^u/β − (cid:18)
+∗⟩}v∈AK∪{0}. First, we need to check
+the process has sub-Gaussian incremental. For simplici-
+ty, we denote u ((xi1, yi1 ), . . . , (xim , yim)) by ui1;:::;im.
+By the deﬁnitions and properties of sub-Gaussian norm
+
+j=1
+
+≤ m ·
+
+sup
+v∈Sp−1
+
+≤ sup
+v∈Sp−1
+
+|⟨xj, v⟩|
+∥|⟨xj, v⟩|∥
+thus we know ∥⟨ui1;:::;im, v − w⟩∥ 2
+((cid:12)(cid:12)(cid:12)(cid:12)⟨
+By Lemma 2, we have
+P (|Zv − Zw| > δ) = P
+∑
+)
+(cid:12)(cid:12)(cid:12)(cid:12) > δ
+
+1≤i1;:::;im≤n
+i1̸=:::̸=im
+∗⟩
+
+((cid:12)(cid:12)(cid:12)(cid:12) (n − m)!
+(
+− ⟨v − w, (cid:18)
+⌊
+(
+
+v − w,
+
+= P
+
+⌋
+
+1
+β
+
+n!
+
+·
+
+≤ 2 exp
+≤ 2 exp
+
+−C
+−C
+′
+
+′ ·
+
+2
+
+β2δ2
+
+)
+m2κ2 · ∥v − w∥2
+nβ2δ2
+
+n
+m
+m3κ2 · ∥v − w∥2
+= C/2. Therefore we can conclude
+√
+the metric
+n. Now applying Lemma
+
+2
+
+,
+
+P
+
+2 · ∥v − w∥2/β
+
+where we set C
+that {Zv} has sub-Gaussian incremental w.r.t.
+s(v, w) , κm 3
+(
+3 to {Zv}, we obtain
+
+(
+))
+γ2 (AK ∪ {0}, s)
+|Zv − Zw| ≥ C1
+)
+v;w∈AK∪{0}
+(
+(
+≤ C2 exp
++ δ · diam (AK ∪ {0}, s)
+·
+=⇒ P
+
+(−δ2
+
+sup
+
+sup
+
+))
+
+v∈AK∪{0}
+
++ 2δ
+
+2
+
+√
+n
+
+|Zv| ≥ C1κm 3
+)
+≤ C2 exp
+
+(−δ2
+
+β
+
+γ2 (AK ∪ {0},∥ · ∥2)
+
+⟩
+
+⟨
+
+Using Lemma 4 γ2 (AK ∪ {0},∥ · ∥2) ≤ C0 ·
+w (AK ∪ {0}) and taking δ = w (AK ∪ {0}), we
+get
+
+∗
+
+v,
+
+sup
+
+^u
+β
+
+− (cid:18)
+
+≤ sup
+
+|Zv|
+· w (AK) + C4
+
+v∈AK∪{0}
+· w (AK ∪ {0}) ≤ C3κm 3
+
+v∈AK∪{0}
+√
+≤ C3κm 3
+n
+with probability at least 1 − C2 exp
+. The last
+inequality follows from Lemma A. Now we turn to the
+
+(−w2 (AK)
+)
+
+√
+n
+
+β
+
+β
+
+2
+
+2
+
+∗∥2,
+
+quantity ∥ ^(cid:18) − (cid:18)
+(
+∥ ^(cid:18) − (cid:18)
+≤ 2 − 2
+
+2
+
+∗⟩
+
+≤ 2 − 2⟨ ^(cid:18), (cid:18)
+
+∗∥2
+1 − ∥ ^(cid:18) − (cid:18)
+
+∗∥2 · C3κm 3
+
+2
+
+≤ ∥ ^(cid:18) − (cid:18)
+
+∗∥2 · 2C3κm 3
+
+2
+
+β
+
+β
+√
+
+· w (AK) + C4
+
+.
+
+n
+
+· w (AK) + C4
+
+√
+n
+
+)
+
+We ﬁnish the proof by letting C = 2C3, C
+C
+
+= C2.
+
+′′
+
+′
+
+= C4 and
+
+∗
+
+4. Proof of Theorem 2
+Statement of Theorem 2: Deﬁne the following set for any
+ρ > 1,
+
+{
+(cid:12)(cid:12)(cid:12) ∥v + (cid:18)
+A(cid:26) ((cid:18)
+Sp−1
+√
+(S.6)
+))
+(B∥·∥
+(−w2
+If we set λ = ρ∥^u − β(cid:18)
+∗∥∗ = O(ρm3=2w(B∥·∥)/
+n)
+and it satisﬁes λ < ∥^u∥∗, then with probability at least
+1 − C
+)
+
+, ^(cid:18) in (10) satisﬁes
+
+}∩
+
+∗∥ ≤ ∥(cid:18)
+
+∥v∥
+ρ
+
+∗∥ +
+
+) = cone
+
+exp
+
+v
+
+′
+
+(B∥·∥
+
+(cid:13)(cid:13)(cid:13) ^(cid:18) − (cid:18)
+
+∗
+
+(cid:13)(cid:13)(cid:13)
+
+≤ C(1 + ρ)κm 3
+
+2
+
+2
+
+β
+
+· (cid:9) (A(cid:26)((cid:18)
+
+)) · w
+∗
+√
+n
+
+,
+(S.7)
+∥v∥ and B∥·∥ =
+
+∗
+
+where (cid:9) (A(cid:26)((cid:18)
+{v | ∥v∥ ≤ 1} is the unit ball of norm ∥ · ∥.
+Proof: Based on the optimality of ^(cid:18), we have
+
+)) = supv∈A(cid:26)((cid:18)∗)
+
+∗⟩ + λ∥(cid:18)
+−⟨^u, ^(cid:18)⟩ + λ∥ ^(cid:18)∥ ≤ −⟨^u, (cid:18)
+⟨β(cid:18)
+∗ − ^u − β(cid:18)
+, ^(cid:18)⟩ + λ∥ ^(cid:18)∥
+∗
+∗ − ^u − β(cid:18)
+∗⟩ + λ∥(cid:18)
+∗
+, (cid:18)
+, ^(cid:18)⟩) ≤ ⟨^u − β(cid:18)
+, ^(cid:18) − (cid:18)
+∗
+
+≤ ⟨β(cid:18)
+∗
+
+β(1 − ⟨(cid:18)
+
+∗∥ =⇒
+
+∗⟩ + λ(∥(cid:18)
+
+∗∥ − ∥ ^(cid:18)∥)
+
+∗∥ =⇒
+
+Since ⟨(cid:18)
+
+∗
+
+, ^(cid:18)⟩ ≤ 1, we have
+
+≥ 0 =⇒
+
+(
+)
+∗∥ − ∥ ^(cid:18)∥
+∗⟩ + λ
+∥(cid:18)
+, ^(cid:18) − (cid:18)
+· ⟨^u − β(cid:18)
+∗⟩
+∗
+∗∥
+· ∥^u − β(cid:18)
+∗∥∗∥ ^(cid:18) − (cid:18)
+∗ ∈ A(cid:26)((cid:18)
+∗∥ =⇒ ^(cid:18) − (cid:18)
+∥ ^(cid:18) − (cid:18)
+
+∗
+
+⟨^u − β(cid:18)
+∥ ^(cid:18)∥ ≤ ∥(cid:18)
+≤ ∥(cid:18)
+= ∥(cid:18)
+
+, ^(cid:18) − (cid:18)
+∗∥ +
+1
+λ
+∗∥ +
+1
+λ
+∗∥ +
+1
+ρ
+
+Therefore it follows that
+− (cid:18)
+1 − ⟨(cid:18)
+∗
+
+, ^(cid:18)⟩ ≤ ⟨ ^u
+β
+
+∗
+
+≤ ∥ ^(cid:18) − (cid:18)
+
+∗∥2
+
+− (cid:18)
+
+((cid:13)(cid:13)(cid:13)(cid:13) ^u
+
+β
+
+≤ (1 + ρ)∥ ^(cid:18) − (cid:18)
+
+∗∥2 ·
+
+(
+
+)
+
+)
+∗∥ − ∥ ^(cid:18)∥
+· ∥ ^(cid:18) − (cid:18)
+∗∥
+∥ ^(cid:18) − (cid:18)∗∥2
+∥v∥
+
+λ
+β
+
++
+
+λ
+β
+
+∥(cid:18)
+∗⟩ +
+· ∥ ^(cid:18) − (cid:18)
+∗∥
+∥ ^(cid:18) − (cid:18)∗∥2
+∗
+
+·
+
+sup
+
+∗
+
+∗
+
+∗
+
+))
+
+(S.8)
+
+∗∥2 ·
+
+(cid:13)(cid:13)(cid:13) ^u
+
+Now we try to bound
+
+= (1 + ρ)∥ ^(cid:18) − (cid:18)
+
+v∈A(cid:26)((cid:18)∗)
+· (cid:9) (A(cid:26)((cid:18)
+∗
+⟩
+∗. We ﬁrst rewrite it as
+∗
+. Construct the s-
+, v
+tochastic process {Zv = ⟨v, ^u/β − (cid:18)
+∗⟩}v∈B∥·∥, and it is
+not difﬁcult to verify that {Zv} has sub-Gaussian incre-
+mental using the proof in Theorem 1. Now applying Lem-
+ma 3 and 4, we have
+− (cid:18)
+
+(cid:13)(cid:13)(cid:13)
+⟨
+
+∗ = supv∈B∥·∥
+
+∗
+− (cid:18)
+
+− (cid:18)
+
+⟩
+
+sup
+
+, v
+
+=
+
+^u
+(cid:12)
+
+∗
+
+∗
+
+·
+
+(cid:12)
+
+sup
+v∈B∥·∥
+
+^u
+β
+
+1
+2
+
+v;w∈B∥·∥
+· w
+
+2
+
+≤ C1κm 3
+
+β
+′
+
+exp
+
+(B∥·∥
+)
+|Zv − Zw|
+))
+(B∥·∥
+(−w2
+)
+
+√
+n
+
+,
+
+(S.9)
+
+. There-
+
+with probability at least 1 − C
+fore we know that λ satisﬁes
+
+(
+
+λ = O
+
+ρm3=2w(B∥·∥)
+
+√
+
+n
+
+If ^(cid:18) = 0 is the minimizer, the ﬁrst-order optimality should
+hold, i.e.,
+
+^u ∈ λ · ∂∥0∥ =⇒ ∥^u∥∗ ≤ λ
+
+Hence if λ < ∥^u∥∗, 0 cannot be the minimizer, which
+means that the minimum of (10) must be negative. So we
+can assert that ∥ ^(cid:18)∥2 = 1, otherwise we can normalize ^(cid:18) to
+get a smaller objective value. Combining (S.8) and (S.9),
+we ﬁnally get
+∗∥ =
+
+∥ ^(cid:18) − (cid:18)
+
+∗⟩
+2 − 2⟨ ^(cid:18), (cid:18)
+∥ ^(cid:18) − (cid:18)∗∥
+≤ Cmκ(1 + ρ)
+
+β
+
+)
+
+(B∥·∥
+
+,
+
+· (cid:9) (A(cid:26)((cid:18)
+
+)) · w
+∗
+√
+n
+
+where the equality uses the fact that ∥ ^(cid:18)∥2 = 1.
+
+Supplementary Material to Robust Structured Estimation with Single-Index Models
+
+∗
+
+, ^(cid:18) − (cid:18)
+
+∗
+− (cid:18)
+
+(cid:13)(cid:13)(cid:13)(cid:13)
+(cid:13)(cid:13)(cid:13)(cid:13) ^u
+(cid:13)(cid:13)(cid:13)(cid:13) ^u
+− (cid:18)
+(cid:13)(cid:13)(cid:13) ^u
+⟨
+− (cid:18)
+
+β
+
+β
+
+(cid:12)
+
+(cid:13)(cid:13)(cid:13)(cid:13)
+(cid:13)(cid:13)(cid:13)(cid:13)
+(cid:13)(cid:13)(cid:13)
+
+∗
+
+)
+
+5. Proof of Corollary 1
+Statement of Corollary 1: Assume that {(xi, yi)}n
+i=1 fol-
+low 1-bit CS model in (2) and ^u is given as (14). For any
+
+Supplementary Material to Robust Structured Estimation with Single-Index Models
+
+∗, with high probability, ^(cid:18) produced by both (15)
+
+s-sparse (cid:18)
+and (17) (i.e., ^(cid:18)ks and ^(cid:18)ps) satisfy
+
+(√
+
+)
+
+(cid:13)(cid:13)(cid:13) ^(cid:18) − (cid:18)
+
+∗
+
+(cid:13)(cid:13)(cid:13)
+
+≤ O
+
+2
+
+s log p
+
+n
+
+(S.10)
+
+∗
+
+Proof: For
+AK((cid:18)
+AK((cid:18)
+
+) is given by
+
+the k-support norm estimator,
+
+(cid:12)(cid:12)(cid:12) ∥ ^(cid:18)∥0 ≤ s,∥ ^(cid:18)∥2 ≤ 1
+{
+} ∩
+^(cid:18) − (cid:18)
+∗
+) = cone
+=⇒ AK((cid:18)
+) ⊆ S = {v | ∥v∥0 ≤ 2s} ∩ Sp−1
+∗
+)
+
+Using (19) from (Chen & Banerjee, 2015), we have
+
+(√
+
+∗
+
+the cone
+
+Sp−1
+
+By Theorem 1, the error of k-support norm estimator satis-
+ﬁes
+
+s log p
+
+.
+
+w(AK((cid:18)
+
+∗
+
+)) ≤ w(S) ≤ O
+(√
+
+(cid:13)(cid:13)(cid:13) ^(cid:18)ks − (cid:18)
+
+∗
+
+(cid:13)(cid:13)(cid:13)
+
+≤ O
+
+2
+
+s log p
+
+n
+
+)
+
+For the passive algorithm, if we choose ρ = 2, the restricted
+norm compatibility (cid:9) (A(cid:26)((cid:18)
+(cid:9) (A(cid:26)((cid:18)
+∗
+
+∗
+)) for L1 norm satisﬁes
+√
+)) ≤ 4
+s
+
+(S.11)
+
+according to the results
+in (Negahban et al., 2012;
+Banerjee et al., 2014). Chen & Banerjee (2015) also show
+that the Gaussian width of the L1-norm ball is bounded by
+
+(√
+
+)
+
+w(BL1 ) ≤ O
+
+log p
+
+.
+
+Now combining (S.11), (S.12) and Theorem 2, we can con-
+
+clude that (cid:13)(cid:13)(cid:13) ^(cid:18)ps − (cid:18)
+
+∗
+
+(cid:13)(cid:13)(cid:13)
+
+(√
+
+)
+
+≤ O
+
+2
+
+s log p
+
+n
+
+,
+
+which completes the proof.
+
+6. Proof of Proposition 1
+Statement of Proposition 1: Given {(xi, yi)}n
+be the permutation of {1, . . . , n} such that y(cid:25)
+. . . > y(cid:25)
+
+. Then we have
+
+↓
+n
+
+↓
+
+i=1, let π
+↓
+>
+> y(cid:25)
+1
+
+↓
+2
+
+n∑
+(n + 1 − 2i) · x(cid:25)
+
+i=1
+
+^h =
+
+2
+
+n(n − 1)
+
+↓
+i
+
+(S.13)
+
+7. Proof of Proposition 2
+Statement of Proposition 2: For s-fused-sparse (cid:18)
+Gaussian width of set AK((cid:18)
+s, ∥(cid:18)∥2 = 1} satisﬁes
+w(AK((cid:18)
+
+∗, the
+) with K = {(cid:18) | |F ((cid:18))| ≤
+√
+)) ≤ O(
+
+s log p)
+
+(S.14)
+
+∗
+
+∗
+
+Proof: Deﬁne the following sets
+Ti;j =
+
+(cid:12)(cid:12)(cid:12) u1 = . . . = ui−1 = uj+1 = . . . = up = 0,
+
+{
+αu ∈ Rp
+
+(S.12)
+
+ui = . . . = uj =
+
+, |α| ≤ √
+
+2s + 1
+
+}
+
+(S.15)
+
+(S.16)
+
+Proof: We rearrange the terms inside the summation of
+(21) based on π
+1
+
+sign(yi − yj) · (xi − xj)
+
+^h =
+
+↓,
+
+n(n − 1)
+
+i̸=j
+
+i̸=j
+
+1≤i;j≤n
+
+1≤i;j≤n
+
+∑
+∑
+sign(yi − yj) · xi
+)
+∑
+n∑
+n∑
+j̸=(cid:25)
+(n + 1 − 2i) · x(cid:25)
+)
+
+− yj
+
+(
+
+sign
+
+y(cid:25)
+
+i=1
+
+i=1
+
+↓
+i
+
+↓
+i
+
+↓
+i
+
+,
+
+=
+
+2
+
+n(n − 1)
+
+=
+
+2
+
+n(n − 1)
+
+=
+
+2
+
+n(n − 1)
+(
+
+· x(cid:25)
+
+↓
+i
+
+inequality uses the fact
+
+∑
+where the last
+(i − 1) yj larger than and (n − i) smaller than y(cid:25)
+j̸=(cid:25)
+
+= (n−i)−(i−1) = n+1−2i.
+
+− yj
+
+sign
+
+that
+
+there are
+, thus
+
+y(cid:25)
+
+↓
+i
+
+↓
+i
+
+↓
+i
+
+1√
+j − i + 1
+∪
+]
+
+Ti;j
+
+i≤j
+
+T =
+
+[
+
+For each Ti;j, its Gaussian width can be calculated as
+√
+2s + 1 · E [|⟨u, g⟩|]
+√
+2s + 1) ,
+
+w(Ti;j) = E
+sup
+=
+v∈Ti;j
+√
+2s + 1 · E|g| = O(
+
+⟨v, g⟩
+
+=
+
+√
+
+((
+
+)
+where u is deﬁned in (S.15) and g is a standard Gaussian
+random variable. We apply Lemma A to T , and obtain
+w(T ) ≤ max
+w(Ti;j) + 2 sup
+i≤j
+z∈T
+√
+√
+√
+≤ O(
+2s + 1) + O(
+= O(
+
+∥z∥2
+2s + 1 ·
+
+√
+
+s log p)
+
+)
+
+log p)
+
++ p
+
+log
+
+p
+2
+
+∗
+
+∗
+
+v
+
+, ^(cid:18) ∈ K
+
+}∩
+
+(cid:12)(cid:12)(cid:12) v = ^(cid:18) − (cid:18)
+
+{
+|F ((cid:18))| ≤ s, ∥(cid:18)∥2 = 1} and AK((cid:18)
+
+Next we show that AK((cid:18)
+) ⊆ conv(T ). Since K =
+{(cid:18) |
+) =
+Sp−1 by deﬁnition, we
+cone
+have |F(v)| ≤ 2s for any v ∈ AK((cid:18)
+). Suppose |F(v)| =
+∗
+t ≤ 2s and F(v) = {i1, i2, . . . , it}. For simplicity, we al-
+so let i0 = 0 and it+1 = p. Then any v ∈ AK((cid:18)
+) can be
+written as a convex combination of t + 2 points in T . To
+see this, we rewrite v as
+
+∗
+
+∗
+
+t∑
+
+v =
+
+vir+1:ir+1 =
+
+r=0
+
+∥vir+1:ir+1
+
+∥2
+
+t∑
+(
+1 − t∑
+
+r=0
+
+√
+t + 1
+√
+
++
+
+∥vir+1:ir+1
+
+t + 1
+
+r=0
+
+·
+
+√
+)
+t + 1vir+1:ir+1
+∥vir+1:ir+1
+∥2
+∥2
+· 0 ,
+
+(S.17)
+where vir+1:ir+1 is obtained from v by keeping the entries
+from index ir + 1 to ir+1 while zeroing out the rest. Let
+uir+1:ir+1 =
+
+√
+t+1vir +1:ir+1
+∥vir +1:ir+1
+∥2
+∥2 =
+∥uir+1:ir+1
+=⇒ uir+1:ir+1
+√
+It follows from ∥v∥2 = 1 that
+t∑
+=⇒ 1 − t∑
+
+∥vir+1:ir+1
+
+√
+t + 1
+
+∥2
+
+≤
+
+r=0
+
+, and we have
+√
+t + 1 ≤ √
+∈ Tir+1:ir+1
+∑
+
+2s + 1
+⊆ T .
+
+(t + 1)
+
+t
+√
+r=0
+t + 1
+∥vir+1:ir+1
+
+∥2
+
+√
+
+t + 1
+
+r=0
+
+≥ 0
+
+∥vir+1:ir+1
+
+∥2
+
+2
+
+= 1
+
+Hence (S.17) is indeed a convex combination of t+2 points
+in T , which implies AK((cid:18)
+) ⊆ conv(T ). Finally, by the
+√
+properties of Gaussian width, we conclude that
+)) ≤ w(conv(T )) = w(T ) ≤ O(
+
+w(AK((cid:18)
+
+s log p)
+
+∗
+
+∗
+
+Supplementary Material to Robust Structured Estimation with Single-Index Models
+
+in which C is an absolute constant.
+
+∑
+
+Proof: Our proof is based on Hoeffding’s decomposition
+for U-statistics. For simplicity, we use U as shorthand for
+Un;m(h). Given a permutation π of {1, . . . , n}, deﬁne
+)
+
+(
+
+⌋−1∑
+⌋ ⌊ n
+
+m
+
+h
+
+z(cid:25)mk+1 , . . . , z(cid:25)m(k+1)
+
+,
+
+W(cid:25) =
+
+1⌊
+
+n
+m
+
+k=0
+
+m
+
+(cid:25) W(cid:25), and the
+The U-statistic can be rewritten as U = 1
+summation is over all possible permutations of {1, . . . , n}.
+n!
+As no copy of z appears more than twice in a single W(cid:25),
+√⌊ n
+⌋ independent sub-Gaussian ran-
+W(cid:25) is an average of ⌊ n
+dom variables. Hence the ψ2-norm of its centered version
+≤ cκ/
+satisﬁes ∥W(cid:25) − EW(cid:25)∥ 2
+⌋. Using Chernoff
+(
+[
+)]
+technique, we have for any t > 0,
+∑
+−t(cid:14) · E [exp(t(U − EU ))]
+P (U − EU > δ) ≤ e
+[
+]
+(W(cid:25) − EU )
+∑
+exp (t(W(cid:25) − EU ))
+
+−t(cid:14) · E
+
+≤e
+
+t
+n!
+
+exp
+
+=e
+
+m
+
+(cid:25)
+
+1
+n!
+
+−t(cid:14) · E
+(
+−t(cid:14) · E [exp (t(W(cid:25) − EW(cid:25)))]
+
+−tδ + ct2 · κ2⌊
+
+⌋)
+
+(cid:25)
+
+,
+
+=e
+≤ exp
+
+n
+m
+
+(S.20)
+where the second inequality is obtained via Jensen’s in-
+equality and the last one follows the moment generating
+function bound for centered sub-Gaussian random variable.
+Choosing t =
+δ/2cκ2 to minimize right-hand side of
+n
+m
+(S.20), we obtain
+
+⌊
+
+⌋
+
+(
+
+⌊
+
+⌋
+
+)
+
+P (U − EU > δ) ≤ exp
+
+−C
+
+n
+m
+
+· δ2
+κ2
+
+,
+
+8. Proof of Lemma 2
+Statement of Lemma 2: Deﬁne the U-statistic
+
+∑
+
+(n − m)!
+
+n!
+
+1≤i1;:::;im≤n
+i1̸=i2̸=:::̸=im
+
+Un;m(h) =
+
+h (zi1 , . . . , zim)
+
+(S.18)
+with order m and kernel h : Rd×m 7→ R based on n in-
+dependent copies of random vector z ∈ Rd, denoted by
+≤ κ,
+z1,··· , zn. If h(·, . . . ,·) is sub-Gaussian with ∥h∥ 2
+)
+⌋
+⌊
+then the following inequality holds for Un;m(h) with any
+δ > 0,
+P (|Un;m(h) − EUn;m(h)| > δ) ≤ 2 exp
+
+(
+−C
+
+n
+m
+
+· δ2
+κ2
+(S.19)
+
+where C = 1/2c. To complete the proof, we just need to
+repeat the argument above for P (U − EU < −δ).
+
+References
+Banerjee, A., Chen, S., Fazayeli, F., and Sivakumar, V. Es-
+timation with norm regularization. In Advances in Neu-
+ral Information Processing Systems (NIPS), 2014.
+
+Chen, S. and Banerjee, A. Structured estimation with atom-
+ic norms: General bounds and applications. In Proceed-
+ings of the 28th International Conference on Neural In-
+formation Processing Systems, 2015.
+
+,
+
+Maurer, A., Pontil, M., and Romera-Paredes, B. An In-
+equality with Applications to Structured Sparsity and
+Multitask Dictionary Learning. In Conference on Learn-
+ing Theory (COLT), 2014.
+
+Supplementary Material to Robust Structured Estimation with Single-Index Models
+
+Negahban, S., Ravikumar, P., Wainwright, M. J., and Yu,
+B. A uniﬁed framework for the analysis of regularized
+M-estimators. Statistical Science, 27(4):538–557, 2012.
+
+Vershynin, R. Introduction to the non-asymptotic analysis
+of random matrices. In Eldar, Y. and Kutyniok, G. (ed-
+s.), Compressed Sensing, chapter 5, pp. 210–268. Cam-
+bridge University Press, 2012.
+
+

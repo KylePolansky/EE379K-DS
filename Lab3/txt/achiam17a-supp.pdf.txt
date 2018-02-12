@@ -1,0 +1,896 @@
+Constrained Policy Optimization
+
+10. Appendix
+10.1. Proof of Policy Performance Bound
+10.1.1. PRELIMINARIES
+
+Our analysis will make extensive use of the discounted future state distribution, dπ, which is deﬁned as
+
+It allows us to express the expected discounted total reward compactly as
+
+dπ(s) = (1 − γ)
+
+γtP (st = s|π).
+
+∞�t=0
+
+J(π) =
+
+1
+1 − γ
+
+E
+s∼dπ
+a∼π
+s�∼P
+
+[R(s, a, s�)] ,
+
+(17)
+
+where by a ∼ π, we mean a ∼ π(·|s), and by s� ∼ P , we mean s� ∼ P (·|s, a). We drop the explicit notation for the sake
+of reducing clutter, but it should be clear from context that a and s� depend on s.
+First, we examine some useful properties of dπ that become apparent in vector form for ﬁnite state spaces. Let pt
+denote the vector with components pt
+
+π ∈ R|S|
+π(s) = P (st = s|π), and let Pπ ∈ R|S|×|S| denote the transition matrix with
+
+π = Pπpt−1
+
+π = P t
+
+πµ and
+
+components Pπ(s�|s) =� daP (s�|s, a)π(a|s); then pt
+
+dπ = (1 − γ)
+
+(γPπ)tµ
+
+= (1 − γ)(I − γPπ)−1µ.
+
+∞�t=0
+
+(18)
+
+(19)
+
+(20)
+
+This formulation helps us easily obtain the following lemma.
+Lemma 1. For any function f : S → R and any policy π,
+[f (s)] + E
+s∼dπ
+a∼π
+s�∼P
+
+(1 − γ) E
+s∼µ
+
+[γf (s�)] − E
+s∼dπ
+
+[f (s)] = 0.
+
+Proof. Multiply both sides of (18) by (I − γPπ) and take the inner product with the vector f ∈ R|S|.
+Combining this with (17), we obtain the following, for any function f and any policy π:
+
+J(π) = E
+s∼µ
+
+[f (s)] +
+
+1
+1 − γ
+
+E
+s∼dπ
+a∼π
+s�∼P
+
+[R(s, a, s�) + γf (s�) − f (s)] .
+
+This identity is nice for two reasons. First: if we pick f to be an approximator of the value function V π, then (20) relates
+the true discounted return of the policy (J(π)) to the estimate of the policy return (Es∼µ[f (s)]) and to the on-policy average
+TD-error of the approximator; this is aesthetically satisfying. Second: it shows that reward-shaping by γf (s�) − f (s) has
+the effect of translating the total discounted return by Es∼µ[f (s)], a ﬁxed constant independent of policy; this illustrates
+the ﬁnding of Ng. et al. (1999) that reward shaping by γf (s�) + f (s) does not change the optimal policy.
+It is also helpful to introduce an identity for the vector difference of the discounted future state visitation distributions on
+.
+= (I − γPπ� )−1, and Δ = Pπ� − Pπ. Then:
+two different policies, π� and π. Deﬁne the matrices G
+
+.
+= (I − γPπ)−1, ¯G
+
+G−1 − ¯G−1 = (I − γPπ) − (I − γPπ� )
+
+= γΔ;
+
+left-multiplying by G and right-multiplying by ¯G, we obtain
+
+¯G − G = γ ¯GΔG.
+
+Thus
+
+Constrained Policy Optimization
+
+dπ� − dπ = (1 − γ)� ¯G − G� µ
+= γ(1 − γ) ¯GΔGµ
+= γ ¯GΔdπ.
+
+(21)
+
+For simplicity in what follows, we will only consider MDPs with ﬁnite state and action spaces, although our attention is
+on MDPs that are too large for tabular methods.
+
+10.1.2. MAIN RESULTS
+
+In this section, we will derive and present the new policy improvement bound. We will begin with a lemma:
+Lemma 2. For any function f : S → R and any policies π� and π, deﬁne
+
+Lπ,f (π�)
+
+.
+= E
+s∼dπ
+a∼π
+s�∼P
+
+π(a|s) − 1� (R(s, a, s�) + γf (s�) − f (s))� ,
+�� π�(a|s)
+
+and �π�
+f
+
+.
+= maxs |Ea∼π�,s�∼P [R(s, a, s�) + γf (s�) − f (s)]|. Then the following bounds hold:
+f DT V (dπ�||dπ)� ,
+f DT V (dπ�||dπ)� ,
+
+1 − γ�Lπ,f (π�) − 2�π�
+1 − γ�Lπ,f (π�) + 2�π�
+
+J(π�) − J(π) ≥
+J(π�) − J(π) ≤
+
+1
+
+1
+
+(22)
+
+(23)
+
+(24)
+
+where DT V is the total variational divergence. Furthermore, the bounds are tight (when π� = π, the LHS and RHS are
+identically zero).
+
+Proof. First, for notational convenience, let δf (s, a, s�)
+quantity is intentionally suggestive—this bears a strong resemblance to a TD-error.) By (20), we obtain the identity
+
+.
+= R(s, a, s�) + γf (s�) − f (s). (The choice of δ to denote this
+
+J(π�) − J(π) =
+
+1
+1 − γ
+
+
+
+E
+s∼dπ�
+a∼π�
+s�∼P
+
+[δf (s, a, s�)] − E
+s∼dπ
+a∼π
+s�∼P
+
+[δf (s, a, s�)] .
+
+Now, we restrict our attention to the ﬁrst term in this equation. Let ¯δπ�
+Ea∼π�,s�∼P [δf (s, a, s�)|s]. Observe that
+
+f ∈ R|S| denote the vector of components ¯δπ�
+
+f (s) =
+
+E
+s∼dπ�
+a∼π�
+s�∼P
+
+[δf (s, a, s�)] =�dπ� , ¯δπ�
+f �
+=�dπ, ¯δπ�
+f � +�dπ� − dπ, ¯δπ�
+f �
+f � −���dπ� − dπ���p���¯δπ�
+f ���q
+[δf (s, a, s�)] ≥�dπ, ¯δπ�
+
+f ���q ≥ E
+
+s∼dπ�
+a∼π�
+s�∼P
+
+.
+
+�dπ, ¯δπ�
+
+f � +���dπ� − dπ���p���¯δπ�
+
+This term is then straightforwardly bounded by applying H¨older’s inequality; for any p, q ∈ [1,∞] such that 1/p+1/q = 1,
+we have
+
+The lower bound leads to (23), and the upper bound leads to (24).
+We choose p = 1 and q = ∞; however, we believe that this step is very interesting, and different choices for dealing with
+the inner product�dπ� − dπ, ¯δπ�
+
+f � may lead to novel and useful bounds.
+
+Constrained Policy Optimization
+
+With���dπ� − dπ���1
+
+by the importance sampling identity,
+
+f ���∞
+= 2DT V (dπ�||dπ) and���¯δπ�
+�dπ, ¯δπ�
+f � =
+
+=
+
+After grouping terms, the bounds are obtained.
+
+= �π�
+
+f , the bounds are almost obtained. The last step is to observe that,
+
+[δf (s, a, s�)]
+
+π(a|s)� δf (s, a, s�)� .
+�� π�(a|s)
+
+E
+s∼dπ
+a∼π�
+s�∼P
+E
+s∼dπ
+a∼π
+s�∼P
+
+V π� = 0 and �π�
+
+This lemma makes use of many ideas that have been explored before; for the special case of f = V π, this strategy (after
+bounding DT V (dπ�||dπ)) leads directly to some of the policy improvement bounds previously obtained by Pirotta et al.
+and Schulman et al. The form given here is slightly more general, however, because it allows for freedom in choosing f.
+Remark. It is reasonable to ask if there is a choice of f which maximizes the lower bound here. This turns out to trivially
+be f = V π�. Observe that Es�∼P [δV π� (s, a, s�)|s, a] = Aπ� (s, a). For all states, Ea∼π� [Aπ� (s, a)] = 0 (by the deﬁnition
+V π� = 0. Also, Lπ,V π� (π�) = −Es∼dπ,a∼π�Aπ� (s, a)�; from (20) with f = V π�, we can
+of Aπ�), thus ¯δπ�
+see that this exactly equals J(π�) − J(π). Thus, for f = V π�, we recover an exact equality. While this is not practically
+useful to us (because, when we want to optimize a lower bound with respect to π�, it is too expensive to evaluate V π� for
+each candidate to be practical), it provides insight: the penalty coefﬁcient on the divergence captures information about the
+mismatch between f and V π�.
+Next, we are interested in bounding the divergence term, �dπ� − dπ�1. We give the following lemma; to the best of our
+knowledge, this is a new result.
+Lemma 3. The divergence between discounted future state visitation distributions, �dπ� − dπ�1, is bounded by an average
+divergence of the policies π� and π:
+
+2γ
+1 − γ
+
+E
+s∼dπ
+
+[DT V (π�||π)[s]] ,
+
+(25)
+
+�dπ� − dπ�1 ≤
+where DT V (π�||π)[s] = (1/2)�a |π�(a|s) − π(a|s)|.
+
+Proof. First, using (21), we obtain
+
+� ¯G�1 is bounded by:
+
+�dπ� − dπ�1 = γ� ¯GΔdπ�1
+
+≤ γ� ¯G�1�Δdπ�1.
+
+� ¯G�1 = �(I − γPπ� )−1�1 ≤
+
+∞�t=0
+
+γt �Pπ��t
+
+1 = (1 − γ)−1
+
+Constrained Policy Optimization
+
+To conclude the lemma, we bound �Δdπ�1.
+
+�Δdπ�1 = �s� ������s
+≤ �s,s�
+= �s,s�������a
+≤ �s,a,s�
+= �s,a
+
+= 2 E
+s∼dπ
+
+|Δ(s�|s)| dπ(s)
+
+Δ(s�|s)dπ(s)�����
+P (s�|s, a) (π�(a|s) − π(a|s))�����
+
+P (s�|s, a)|π�(a|s) − π(a|s)| dπ(s)
+
+dπ(s)
+
+|π�(a|s) − π(a|s)| dπ(s)
+[DT V (π�||π)[s]] .
+
+The new policy improvement bound follows immediately.
+Theorem 1. For any function f : S → R and any policies π� and π, deﬁne δf (s, a, s�)
+
+.
+= R(s, a, s�) + γf (s�) − f (s),
+
+�π�
+f
+
+.
+= max
+
+s
+
+|Ea∼π�,s�∼P [δf (s, a, s�)]| ,
+π(a|s) − 1� δf (s, a, s�)� , and
+�� π�(a|s)
+
+Lπ,f (π�)
+
+.
+= E
+s∼dπ
+a∼π
+s�∼P
+
+D±π,f (π�)
+
+.
+=
+
+Lπ,f (π�)
+1 − γ ±
+
+2γ�π�
+f
+(1 − γ)2 E
+s∼dπ
+
+[DT V (π�||π)[s]] ,
+
+where DT V (π�||π)[s] = (1/2)�a |π�(a|s) − π(a|s)| is the total variational divergence between action distributions at s.
+
+The following bounds hold:
+
+(4)
+
+π,f (π�) ≥ J(π�) − J(π) ≥ D−π,f (π�).
+D+
+
+Furthermore, the bounds are tight (when π� = π, all three expressions are identically zero).
+
+Proof. Begin with the bounds from lemma 2 and bound the divergence DT V (dπ�||dπ) by lemma 3.
+10.2. Proof of Analytical Solution to LQCLP
+Theorem 2 (Optimizing Linear Objective with Linear and Quadratic Constraints). Consider the problem
+
+p∗ = min
+x
+
+gT x
+
+s.t. bT x + c ≤ 0
+xT Hx ≤ δ,
+
+(26)
+
+where g, b, x ∈ Rn, c, δ ∈ R, δ > 0, H ∈ Sn, and H � 0. When there is at least one strictly feasible point, the optimal
+point x∗ satisﬁes
+
+x∗ = −
+
+1
+λ∗
+
+H−1 (g + ν∗b) ,
+
+where λ∗ and ν∗ are deﬁned by
+
+ν∗ =� λ∗c − r
+
+s
+
+�+
+
+Constrained Policy Optimization
+
+,
+
+λ∗ = arg max
+
+λ≥0 � fa(λ)
+
+2λ� r2
+2� c2
+s − q� + λ
+s − δ� − rc
+.
+= 1
+λ + λδ�
+2� q
+.
+= − 1
+with q = gT H−1g, r = gT H−1b, and s = bT H−1b.
+.
+.
+= {λ|λc − r ≤ 0, λ ≥ 0}. The value of λ∗ satisﬁes
+= {λ|λc − r > 0, λ ≥ 0}, and Λb
+Furthermore, let Λa
+
+if λc − r > 0
+otherwise,
+
+fb(λ)
+
+s
+
+λ∗ ∈�λ∗a
+
+.
+
+= Proj�� q − r2/s
+
+δ − c2/s
+
+, Λa� , λ∗b
+
+.
+
+= Proj�� q
+
+δ
+
+, Λb�� ,
+
+with λ∗ = λ∗a if fa(λ∗a) > fb(λ∗b ) and λ∗ = λ∗b otherwise, and Proj(a, S) is the projection of a point x on to a set S. Note:
+the projection of a point x ∈ R onto a convex segment of R, [a, b], has value Proj(x, [a, b]) = max(a, min(b, x)).
+
+Proof. This is a convex optimization problem. When there is at least one strictly feasible point, strong duality holds by
+Slater’s theorem. We exploit strong duality to solve the problem analytically.
+
+p∗ = min
+x
+
+max
+λ≥0
+ν≥0
+
+x
+
+min
+
+= max
+λ≥0
+ν≥0
+=⇒ x∗ = −
+
+1
+λ
+
+gT x +
+
+λ
+
+2�xT Hx − δ� + ν�bT x + c�
+λδ�
+xT Hx + (g + νb)T x +�νc −
+
+1
+2
+
+λ
+2
+
+H−1 (g + νb)
+
+−
+
+−
+
+1
+2λ
+
+(g + νb)T H−1 (g + νb) +�νc −
+λδ�
+2λ�q + 2νr + ν2s� +�νc −
+
+1
+2
+
+1
+
+1
+2
+
+λδ�
+
+∂L
+∂ν
+
+1
+2λ
+
+= −
+
+(2r + 2νs) + c
+
+= max
+λ≥0
+ν≥0
+
+= max
+λ≥0
+ν≥0
+=⇒
+
+Strong duality
+
+∇xL(x, λ, ν) = 0
+Plug in x∗
+
+Notation: q
+
+.
+= gT H−1g, r
+
+.
+= gT H−1b, s
+
+.
+= bT H−1b.
+
+Optimizing single-variable convex quadratic function over R+
+
+s �+
+=⇒ ν =� λc − r
+2λ� r2
+2� c2
+s − q� + λ
+s − δ� − rc
+λ≥0 � 1
+2� q
+λ + λδ�
+− 1
+
+s
+
+= max
+
+.
+= {λ|λc − r > 0, λ ≥ 0},
+.
+= {λ|λc − r ≤ 0, λ ≥ 0}
+Observe that when c < 0, Λa = [0, r/c) and Λb = [r/c,∞); when c > 0, Λa = [r/c,∞) and Λb = [0, r/c).
+Notes on interpreting the coefﬁcients in the dual problem:
+
+Notation: Λa
+Λb
+
+if λ ∈ Λa
+if λ ∈ Λb
+
+• We are guaranteed to have r2/s − q ≤ 0 by the Cauchy-Schwarz inequality. Recall that q = gT H−1g, r = gT H−1b,
+
+s = bT H−1b. The Cauchy-Scwarz inequality gives:
+
+2 ≥��H−1/2b�T�H−1/2g��2
+
+�H−1/2b�2
+
+2�H−1/2g�2
+
+=⇒ �bT H−1b��gT H−1g� ≥�bT H−1g�2
+∴ qs ≥ r2.
+
+Constrained Policy Optimization
+
+• The coefﬁcient c2/s− δ relates to whether or not the plane of the linear constraint intersects the quadratic trust region.
+An intersection occurs if there exists an x such that c + bT x = 0 with xT Hx ≤ δ. To check whether this is the case,
+we solve
+(27)
+and see if x∗T Hx∗ ≤ δ. The solution to this optimization problem is x∗ = cH−1b/s, thus x∗T Hx∗ = c2/s. If
+c2/s − δ ≤ 0, then the plane intersects the trust region; otherwise, it does not.
+
+x∗ = arg min
+x
+
+c + bT x = 0
+
+xT Hx :
+
+If c2/s− δ > 0 and c < 0, then the quadratic trust region lies entirely within the linear constraint-satisfying halfspace, and
+we can remove the linear constraint without changing the optimization problem. If c2/s − δ > 0 and c > 0, the problem
+is infeasible (the intersection of the quadratic trust region and linear constraint-satisfying halfspace is empty). Otherwise,
+we follow the procedure below.
+Solving the dual for λ: for any A > 0, B > 0, the problem
+
+2� A
+has optimal point λ∗ =�A/B and optimal value f (λ∗) = −√AB.
+
+.
+= −
+
+max
+λ≥0
+
+f (λ)
+
+λ
+
+1
+
++ Bλ�
+
+We can use this solution form to obtain the optimal point on each segment of the piecewise continuous dual function for λ:
+
+objective
+
+fa(λ)
+
+.
+=
+
+fb(λ)
+
+.
+= −
+
+1
+
+s − q� +
+2λ� r2
++ λδ�
+2� q
+
+λ
+
+1
+
+optimal point (before projection)
+
+optimal point (after projection)
+
+λ
+
+2� c2
+
+s − δ� −
+
+rc
+s
+
+λa
+
+λb
+
+.
+
+.
+
+=� q − r2/s
+=� q
+
+δ − c2/s
+
+δ
+
+λ∗a = Proj(λa, Λa)
+
+λ∗b = Proj(λb, Λb)
+
+The optimization is completed by comparing fa(λ∗a) and fb(λ∗b ):
+
+λ∗ =� λ∗a
+
+λ∗b
+
+fa(λ∗a) ≥ fb(λ∗b )
+otherwise.
+
+10.3. Experimental Parameters
+10.3.1. ENVIRONMENTS
+
+In the Circle environments, the reward and cost functions are
+
+R(s) =
+
+,
+
+vT [−y, x]
+
+1 + |�[x, y]�2 − d|
+
+C(s) = 111 [|x| > xlim] ,
+
+where x, y are the coordinates in the plane, v is the velocity, and d, xlim are environmental parameters. We set these
+parameters to be
+
+Point-mass Ant Humanoid
+
+d
+
+xlim
+
+15
+2.5
+
+10
+3
+
+10
+2.5
+
+In Point-Gather, the agent receives a reward of +10 for collecting an apple, and a cost of 1 for collecting a bomb. Two
+apples and eight bombs spawn on the map at the start of each episode. In Ant-Gather, the reward and cost structure was
+the same, except that the agent also receives a reward of −10 for falling over (which results in the episode ending). Eight
+apples and eight bombs spawn on the map at the start of each episode.
+
+Constrained Policy Optimization
+
+Figure 5. In the Circle task, reward is maximized by moving along the green circle. The agent is not allowed to enter the blue regions,
+so its optimal constrained path follows the line segments AD and BC.
+
+10.3.2. ALGORITHM PARAMETERS
+
+In all experiments, we use Gaussian policies with mean vectors given as the outputs of neural networks, and with variances
+that are separate learnable parameters. The policy networks for all experiments have two hidden layers of sizes (64, 32)
+with tanh activation functions.
+We use GAE-λ (Schulman et al., 2016) to estimate the advantages and constraint advantages, with neural network value
+functions. The value functions have the same architecture and activation functions as the policy networks. We found that
+having different λGAE values for the regular advantages and the constraint advantages worked best. We denote the λGAE
+used for the constraint advantages as λGAE
+For the failure prediction networks Pφ(s → U ), we use neural networks with a single hidden layer of size (32), with output
+of one sigmoid unit. At each iteration, the failure prediction network is updated by some number of gradient descent steps
+using the Adam update rule to minimize the prediction error. To reiterate, the failure prediction network is a model for the
+probability that the agent will, at some point in the next T time steps, enter an unsafe state. The cost bonus was weighted
+by a coefﬁcient α, which was 1 in all experiments except for Ant-Gather, where it was 0.01. Because of the short time
+horizon, no cost bonus was used for Point-Gather.
+For all experiments, we used a discount factor of γ = 0.995, a GAE-λ for estimating the regular advantages of λGAE =
+0.95, and a KL-divergence step size of δKL = 0.01.
+Experiment-speciﬁc parameters are as follows:
+
+C
+
+.
+
+Parameter
+Batch size
+
+Rollout length
+
+Maximum constraint value d
+Failure prediction horizon T
+
+Failure predictor SGD steps per itr
+
+Predictor coeff α
+
+λGAE
+
+C
+
+Point-Circle Ant-Circle Humanoid-Circle
+
+Point-Gather Ant-Gather
+
+50,000
+50-65
+
+5
+5
+25
+1
+1
+
+100,000
+
+500
+10
+20
+25
+1
+0.5
+
+50,000
+1000
+10
+20
+25
+1
+0.5
+
+50,000
+
+15
+0.1
+(N/A)
+(N/A)
+(N/A)
+
+1
+
+100,000
+
+500
+0.2
+20
+10
+0.01
+0.5
+
+Note that these same parameters were used for all algorithms.
+We found that the Point environment was agnostic to λGAE
+essary to set λGAE
+constraint gradient magnitude, which led the algorithm to take unsafe steps. The choice λGAE
+hyperparameter search in {0.5, 0.92, 1}, but 0.92 worked nearly as well.
+10.3.3. PRIMAL-DUAL OPTIMIZATION IMPLEMENTATION
+
+, but for the higher-dimensional environments, it was nec-
+to a value < 1. Failing to discount the constraint advantages led to substantial overestimates of the
+= 0.5 was obtained by a
+
+C
+
+C
+
+C
+
+Our primal-dual implementation is intended to be as close as possible to our CPO implementation. The key difference
+is that the dual variables for the constraints are stateful, learnable parameters, unlike in CPO where they are solved from
+scratch at each update.
+
+The update equations for our PDO implementation are
+
+Constrained Policy Optimization
+
+θk+1 = θk + sj�
+
+2δ
+
+(g − νkb)T H−1(g − νkb)
+
+H−1 (g − νkb)
+
+νk+1 = (νk + α (JC(πk) − d))+ ,
+
+where sj is from the backtracking line search (s ∈ (0, 1) and j ∈ {0, 1, ..., J}, where J is the backtrack budget; this is
+the same line search as is used in CPO and TRPO), and α is a learning rate for the dual parameters. α is an important
+hyperparameter of the algorithm: if it is set to be too small, the dual variable won’t update quickly enough to meaningfully
+enforce the constraint; if it is too high, the algorithm will overcorrect in response to constraint violations and behave too
+conservatively. We experimented with a relaxed learning rate, α = 0.001, and an aggressive learning rate, α = 0.01. The
+aggressive learning rate performed better in our experiments, so all of our reported results are for α = 0.01.
+Selecting the correct learning rate can be challenging; the need to do this is obviated by CPO.
+
+

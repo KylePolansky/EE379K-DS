@@ -1,0 +1,1390 @@
+Dual Iterative Hard Thresholding: From Non-convex Sparse Minimization to
+
+Non-smooth Concave Maximization
+
+Supplementary File
+
+A. Technical Proofs
+A.1. Proof of Theorem 1
+Proof. “⇐”: If the pair ( ¯w, ¯α) is a sparse saddle point for L, then from the deﬁnition of conjugate convexity and inequali-
+ty (3) we have
+
+P ( ¯w) = max
+α∈F N
+
+L( ¯w, α) ≤ L( ¯w, ¯α) ≤ min
+(cid:107)w(cid:107)0≤k
+
+L(w, ¯α).
+
+On the other hand, we know that for any (cid:107)w(cid:107)0 ≤ k and α ∈ F N
+
+L(w, α) ≤ max
+α(cid:48)∈F N
+
+L(w, α(cid:48)) = P (w).
+
+By combining the preceding two inequalities we obtain
+
+P ( ¯w) ≤ min
+(cid:107)w(cid:107)0≤k
+
+L(w, ¯α) ≤ min
+(cid:107)w(cid:107)0≤k
+
+P (w) ≤ P ( ¯w).
+
+Therefore P ( ¯w) = min(cid:107)w(cid:107)0≤k P (w), i.e., ¯w solves the problem in (1), which proves the necessary condition (a). Moreover,
+the above arguments lead to
+
+Then from the maximizing argument property of convex conjugate we know that ¯αi ∈ ∂li( ¯w(cid:62)xi). Thus the necessary
+condition (b) holds. Note that
+
+P ( ¯w) = max
+α∈F N
+
+L( ¯w, α) = L( ¯w, ¯α).
+
+L(w, ¯α) =
+
+λ
+2
+
+l∗
+i (¯αi) + C,
+
+(11)
+
+where C is a quantity not dependent on w. Let ¯F = supp( ¯w). Since the above analysis implies L( ¯w, ¯α) =
+min(cid:107)w(cid:107)0≤k L(w, ¯α), it must hold that
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)2
+
+¯αixi
+
+− 1
+N
+
+N(cid:88)
+
+i=1
+
+1
+N λ
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)w +
+N(cid:88)
+
+− 1
+N λ
+
+i=1
+
+(cid:32)
+
+N(cid:88)
+
+i=1
+
+(cid:33)
+
+(cid:33)
+
+(cid:32)
+
+N(cid:88)
+
+i=1
+
+− 1
+N λ
+
+¯w = H ¯F
+
+¯αixi
+
+= Hk
+
+¯αixi
+
+.
+
+This validates the necessary condition (c).
+“⇒”: Conversely, let us assume that ¯w is a k-sparse solution to the problem (1) (i.e., conditio(a)) and let ¯αi ∈ ∂li( ¯w(cid:62)xi)
+(i.e., condition (b)). Again from the maximizing argument property of convex conjugate we know that li( ¯w(cid:62)xi) =
+¯αi ¯w(cid:62)xi − l∗
+
+i ( ¯αi). This leads to
+
+L( ¯w, α) ≤ P ( ¯w) = max
+α∈F N
+
+L( ¯w, α) = L( ¯w, ¯α).
+
+(cid:80)N
+
+(12)
+
+The sufﬁcient condition (c) guarantees that ¯F contains the top k (in absolute value) entries of − 1
+on the expression in (11) we can see that the following holds for any k-sparse vector w
+
+N λ
+
+i=1 ¯αixi. Then based
+
+L( ¯w, ¯α) ≤ L(w, ¯α).
+
+(13)
+
+By combining the inequalities (12) and (13) we get that for any (cid:107)w(cid:107)0 ≤ k and α ∈ F N ,
+
+L( ¯w, α) ≤ L( ¯w, ¯α) ≤ L(w, ¯α).
+
+This shows that ( ¯w, ¯α) is a sparse saddle point of the Lagrangian L.
+
+Dual Iterative Hard Thresholding
+
+A.2. Proof of Theorem 2
+Proof. “⇒”: Let ( ¯w, ¯α) be a saddle point for L. On one hand, note that the following holds for any k-sparse w(cid:48) and
+α(cid:48) ∈ F N
+
+(14)
+
+(15)
+
+which implies
+
+min
+(cid:107)w(cid:107)0≤k
+
+L(w, α(cid:48)) ≤ L(w(cid:48), α(cid:48)) ≤ max
+α∈F N
+
+L(w(cid:48), α),
+
+max
+α∈F N
+On the other hand, since ( ¯w, ¯α) is a saddle point for L, the following is true:
+
+min
+(cid:107)w(cid:107)0≤k
+
+max
+α∈F N
+
+L(w, α) ≤ min
+(cid:107)w(cid:107)0≤k
+
+L(w, α).
+
+min
+(cid:107)w(cid:107)0≤k
+
+max
+α∈F N
+
+L(w, α) ≤ max
+α∈F N
+
+L( ¯w, α)
+
+≤ L( ¯w, ¯α) ≤ min
+(cid:107)w(cid:107)0≤k
+≤ max
+α∈F N
+
+min
+(cid:107)w(cid:107)0≤k
+
+L(w, α).
+
+L(w, ¯α)
+
+By combining (14) and (15) we prove the equality in (4).
+“⇐”: Assume that the equality in (4) holds. Let us deﬁne ¯w and ¯α such that
+
+max
+α∈F N
+min
+(cid:107)w(cid:107)0≤k
+
+L( ¯w, α) = min
+(cid:107)w(cid:107)0≤k
+
+L(w, ¯α) = max
+α∈F N
+
+max
+α∈F N
+min
+(cid:107)w(cid:107)0≤k
+
+L(w, α)
+
+.
+
+L(w, α)
+
+Then we can see that for any α ∈ F N ,
+
+L( ¯w, ¯α) ≥ min
+(cid:107)w(cid:107)0≤k
+
+L(w, ¯α) = max
+α(cid:48)∈F N
+
+L( ¯w, α(cid:48)) ≥ L( ¯w, α),
+
+where the “=” is due to (4). In the meantime, for any (cid:107)w(cid:107)0 ≤ k,
+
+L( ¯w, ¯α) ≤ max
+α∈F N
+
+L( ¯w, α) = min
+
+(cid:107)w(cid:48)(cid:107)0≤k
+
+L(w(cid:48), ¯α) ≤ L(w, ¯α).
+
+This shows that ( ¯w, ¯α) is a sparse saddle point for L.
+
+A.3. Proof of Lemma 1
+Proof. For any ﬁxed α ∈ F N , then it is easy to verify that the k-sparse minimum of L(w, α) with respect to w is attained
+at the following point:
+
+w(α) = arg min
+(cid:107)w(cid:107)0≤k
+
+L(w, α) = Hk
+
+(cid:32)
+
+N(cid:88)
+
+i=1
+
+− 1
+N λ
+
+(cid:33)
+
+αixi
+
+.
+
+Thus we have
+
+D(α) = min
+(cid:107)w(cid:107)0≤k
+
+N(cid:88)
+N(cid:88)
+
+i=1
+
+i=1
+
+L(w, α) = L(w(α), α)
+
+(cid:0)αiw(α)(cid:62)xi − l∗
+
+i (αi)(cid:1) +
+
+(cid:107)w(α)(cid:107)2
+
+λ
+2
+
+−l∗
+
+i (αi) − λ
+2
+
+(cid:107)w(α)(cid:107)2,
+
+=
+
+ζ1=
+
+1
+N
+
+1
+N
+
+where “ζ1” follows from the above deﬁnition of w(α).
+Now let us consider two arbitrary dual variables α(cid:48), α(cid:48)(cid:48) ∈ F N and any g(α(cid:48)(cid:48)) ∈ 1
+∂l∗
+N (α(cid:48)(cid:48)
+that
+
+1 ), ..., w(α(cid:48)(cid:48))(cid:62)xN −
+N )]. From the deﬁnition of D(α) and the fact that L(w, α) is concave with respect to α at any ﬁxed w we can derive
+
+N [w(α(cid:48)(cid:48))(cid:62)x1−∂l∗
+
+1(α(cid:48)(cid:48)
+
+D(α(cid:48)) = L(w(α(cid:48)), α(cid:48))
+≤ L(w(α(cid:48)(cid:48)), α(cid:48))
+≤ L(w(α(cid:48)(cid:48)), α(cid:48)(cid:48)) + (cid:104)g(α(cid:48)(cid:48)), α(cid:48) − α(cid:48)(cid:48)(cid:105) .
+
+Dual Iterative Hard Thresholding
+
+This shows that D(α) is a concave function and its super-differential is as given in the theorem.
+If we further assume that w(α) is unique and {l∗
+1(α1), ..., w(α)(cid:62)xN − ∂l∗
+∂l∗
+
+i }i=1,...,N are differentiable at any α, then ∂D(α) = 1
+
+N (αN )] becomes unique, which implies that ∂D(α) is the unique super-gradient of D(α).
+
+N [w(α)(cid:62)x1 −
+
+A.4. Proof of Theorem 3
+Proof. “⇒”: Given the conditions in the theorem, it can be known from Theorem 1 that the pair ( ¯w, ¯α) forms a sparse
+saddle point of L. Thus based on the deﬁnitions of sparse saddle point and dual function D(α) we can show that
+
+D(¯α) = min
+(cid:107)w(cid:107)0≤k
+
+L(w, ¯α) ≥ L( ¯w, ¯α) ≥ L( ¯w, α) ≥ D(α).
+
+This implies that ¯α solves the dual problem in (5). Furthermore, Theorem 2 guarantees the following
+
+D(¯α) = max
+α∈F N
+
+min
+(cid:107)w(cid:107)0≤k
+
+L(w, α) = min
+(cid:107)w(cid:107)0≤k
+
+max
+α∈F N
+
+L(w, α) = P ( ¯w).
+
+This indicates that the primal and dual optimal values are equal to each other.
+“⇐”: Assume that ¯α solves the dual problem in (5) and D(¯α) = P ( ¯w). Since D(¯α) ≤ P (w) holds for any (cid:107)w(cid:107)0 ≤ k, ¯w
+must be the sparse minimizer of P (w). It follows that
+
+max
+α∈F N
+
+min
+(cid:107)w(cid:107)0≤k
+
+L(w, α) = D(¯α) = P ( ¯w) = min
+(cid:107)w(cid:107)0≤k
+
+max
+α∈F N
+
+L(w, α).
+
+From the “⇐” argument in the proof of Theorem 2 and Corollary 1 we get that the conditions (a)∼(c) in Theorem 1 should
+be satisﬁed for ( ¯w, ¯α).
+
+A.5. Proof of Theorem 4
+
+We need a series of technical lemmas to prove this theorem. The following lemmas shows that under proper conditions,
+w(α) is locally smooth around ¯w = w(¯α).
+Lemma 2. Let X = [x1, ..., xN ] ∈ Rd×N be the data matrix. Assume that {li}i=1,...,N are differentiable and
+
+If (cid:107)α − ¯α(cid:107) ≤ λN ¯
+
+2σmax(X) , then supp(w(α)) = supp( ¯w) and
+
+¯ := ¯wmin − 1
+λ
+
+(cid:107)P (cid:48)( ¯w)(cid:107)∞ > 0.
+
+(cid:107)w(α) − ¯w(cid:107) ≤ σmax(X, k)
+
+N λ
+
+(cid:107)α − ¯α(cid:107).
+
+Proof. For any α ∈ F N , let us deﬁne
+
+˜w(α) = − 1
+N λ
+
+N(cid:88)
+
+αixi.
+
+i=1
+
+Consider ¯F = supp( ¯w). Given ¯ > 0, it is known from Theorem 3 that ¯w = H ¯F ( ˜w(¯α)) and P (cid:48)( ¯w)
+¯ > 0 implies ¯F is unique, i.e., the top k entries of ˜w(¯α) is unique. Given that (cid:107)α − ¯α(cid:107) ≤ λN ¯
+
+λ = H ¯F c (− ˜w(¯α)). Then
+2σmax(X), it can be shown that
+
+(cid:107) ˜w(α) − ˜w(¯α)(cid:107) =
+
+1
+N λ
+
+(cid:107)X(α − ¯α)(cid:107) ≤ σmax(X)
+
+N λ
+
+(cid:107)α − ¯α(cid:107) ≤ ¯
+2
+
+.
+
+This indicates that ¯F still contains the (unique) top k entries of ˜w(α). Therefore,
+
+Then it must hold that
+
+supp(w(α)) = ¯F = supp( ¯w).
+
+(cid:107)w(α) − w(¯α)(cid:107) = (cid:107)H ¯F ( ˜w(α)) − H ¯F ( ˜w(¯α))(cid:107)
+
+This proves the desired bound.
+
+(cid:107)X ¯F (α − ¯α)(cid:107)
+
+1
+N λ
+
+=
+≤ σmax(X, k)
+
+(cid:107)α − ¯α(cid:107).
+
+N λ
+
+The following lemma bounds the estimation error (cid:107)α − ¯α(cid:107) = O((cid:112)(cid:104)D(cid:48)(α), ¯α − α(cid:105)) when the primal loss {li}N
+
+Dual Iterative Hard Thresholding
+
+i=1 are
+
+smooth.
+Lemma 3. Assume that the primal loss functions {li(·)}N
+α, α(cid:48)(cid:48) ∈ F and g(α(cid:48)(cid:48)) ∈ ∂D(α(cid:48)(cid:48)):
+
+i=1 are 1/µ-smooth. Then the following inequality holds for any
+
+D(α(cid:48)) ≤ D(α(cid:48)(cid:48)) + (cid:104)g(α(cid:48)(cid:48)), α(cid:48) − α(cid:48)(cid:48)(cid:105) − λN µ + σ2
+2λN 2
+
+min(X, k)
+
+(cid:107)α(cid:48) − α(cid:48)(cid:48)(cid:107)2.
+
+Moreover, ∀α ∈ F and g(α) ∈ ∂D(α),
+
+(cid:107)α − ¯α(cid:107) ≤
+
+(cid:115)
+
+N(cid:88)
+
+i=1
+
+2λN 2(cid:104)g(α), ¯α − α(cid:105)
+λN µ + σ2
+min(X, k)
+
+.
+
+−l∗
+
+i (αi) − λ
+2
+
+(cid:107)w(α)(cid:107)2,
+
+Proof. Recall that
+
+D(α) =
+
+1
+N
+
+Now let us consider two arbitrary dual variables α(cid:48), α(cid:48)(cid:48) ∈ F. The assumption of li being 1/µ-smooth implies that its
+convex conjugate function l∗
+
+i is µ-strongly-convex. Let F (cid:48)(cid:48) = supp(w(α(cid:48)(cid:48))). Then
+
+D(α(cid:48)) =
+
+(cid:107)w(α(cid:48))(cid:107)2
+
+(cid:32)
+
+=
+
+i=1
+
+i=1
+
+1
+N
+
+1
+N
+
+−l∗
+
+i (α(cid:48)
+
+−l∗
+
+i (α(cid:48)
+
+i) − λ
+2
+
+i) − λ
+2
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)Hk
+
+N(cid:88)
+N(cid:88)
+(cid:16)−l∗
+N(cid:88)
+(cid:16)−l∗
+N(cid:88)
+≤ 1
+i ) − l∗(cid:48)
+i (α(cid:48)(cid:48)
+N
+2λN 2 (α(cid:48) − α(cid:48)(cid:48))(cid:62)X(cid:62)
+− 1
+
+i ) − l∗(cid:48)
+
+i (α(cid:48)(cid:48)
+
+≤ 1
+N
+
+i (α(cid:48)(cid:48)
+
+i (α(cid:48)(cid:48)
+
+i=1
+
+i=1
+
+N(cid:88)
+
+i=1
+
+α(cid:48)
+ixi
+
+(cid:33)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)2
+
+− 1
+N λ
+
+i )(α(cid:48)
+
+i − α(cid:48)(cid:48)
+
+i ) − µ
+2
+
+(α(cid:48)
+
+i − α(cid:48)(cid:48)
+
+i )(α(cid:48)
+
+i − α(cid:48)(cid:48)
+
+i ) − µ
+2
+
+(α(cid:48)
+
+i − α(cid:48)(cid:48)
+
+F (cid:48)(cid:48)XF (cid:48)(cid:48) (α(cid:48) − α(cid:48)(cid:48))
+≤D(α(cid:48)(cid:48)) + (cid:104)g(α(cid:48)(cid:48)), α(cid:48) − α(cid:48)(cid:48)(cid:105) − λN µ + σ2
+2λN 2
+
+min(X, k)
+
+(cid:107)α(cid:48) − α(cid:48)(cid:48)(cid:107)2.
+
+i )2(cid:17) − λ
+i )2(cid:17) − λ
+
+2
+
+2
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)HF (cid:48)(cid:48)
+
+(cid:32)
+
+− 1
+N λ
+
+(cid:107)w(α(cid:48)(cid:48))(cid:107)2 +
+
+1
+N
+
+N(cid:88)
+N(cid:88)
+
+i=1
+
+i=1
+
+(cid:33)(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)2
+
+α(cid:48)
+ixi
+
+x(cid:62)
+i w(α(cid:48)(cid:48))(α(cid:48)
+
+i − α(cid:48)(cid:48)
+i )
+
+This proves the ﬁrst desirable inequality in the lemma. By invoking the above inequality and using the fact D(α) ≤ D(¯α)
+we get that
+
+D(¯α) ≤D(α) + (cid:104)g(α), ¯α − α(cid:105) − λN µ + σ2
+2λN 2
+≤D(¯α) + (cid:104)g(α), ¯α − α(cid:105) − λN µ + σ2
+2λN 2
+
+min(X, k)
+
+min(X, k)
+
+(cid:107)α − ¯α(cid:107)2
+(cid:107)α − ¯α(cid:107)2,
+
+which leads to the second desired bound.
+
+The following lemma gives a simple expression of the gap for properly related primal-dual pairs.
+Lemma 4. Given a dual variable α ∈ F N and the related primal variable
+
+(cid:33)
+
+(cid:32)
+
+N(cid:88)
+
+i=1
+
+− 1
+N λ
+
+w = Hk
+
+αixi
+
+.
+
+The primal-dual gap P D(w, α) can be expressed as:
+
+P D(w, α) =
+
+1
+N
+
+(cid:0)li(w(cid:62)xi) + l∗
+
+i (αi) − αiw(cid:62)xi
+
+(cid:1) .
+
+N(cid:88)
+
+i=1
+
+Dual Iterative Hard Thresholding
+
+Proof. It is directly to know from the deﬁnitions of P (w) and D(α) that
+
+P (w) − D(α)
+
+(cid:32)
+
+1
+N
+
+N(cid:88)
+(cid:0)αiw(cid:62)xi − l∗
+(cid:1) .
+
+i=1
+
+(cid:107)w(cid:107)2 −
+
+λ
+2
+
+li(w(cid:62)xi) +
+
+(cid:0)li(w(cid:62)xi) + l∗
+
+i (αi) − αiw(cid:62)xi
+
+N(cid:88)
+N(cid:88)
+
+i=1
+
+i=1
+
+=
+
+=
+
+1
+N
+
+1
+N
+
+i (αi)(cid:1) +
+
+(cid:33)
+
+(cid:107)w(cid:107)2
+
+λ
+2
+
+This shows the desired expression.
+
+Based on Lemma 4, we can derive the following lemma which establishes a bound on the primal-dual gap.
+Lemma 5. Consider a primal-dual pair (w, α) satisfying
+
+(cid:33)
+
+(cid:32)
+
+N(cid:88)
+
+i=1
+
+− 1
+N λ
+
+w = Hk
+
+αixi
+
+.
+
+Then the following inequality holds for any g(α) ∈ ∂D(α) and β ∈ [∂l1(w(cid:62)x1), ..., ∂lN (w(cid:62)xN )]:
+
+P (w) − D(α) ≤ (cid:104)g(α), β − α(cid:105).
+
+Proof. For any i ∈ [1, ..., N ], from the maximizing argument property of convex conjugate we have
+
+li(w(cid:62)xi) = w(cid:62)xil(cid:48)
+
+i(w(cid:62)xi) − l∗
+
+i (l(cid:48)
+
+i(w(cid:62)xi)),
+
+and
+
+l∗
+i (αi) = αil∗(cid:48)
+
+i (αi) − li(l∗(cid:48)
+
+i (αi)).
+
+By summing both sides of above two equalities we get
+
+i (αi)
+
+li(w(cid:62)xi) + l∗
+=w(cid:62)xil(cid:48)
+ζ1≤w(cid:62)xil(cid:48)
+
+i(w(cid:62)xi) + αil∗(cid:48)
+i(w(cid:62)xi) + αil∗(cid:48)
+
+i (αi) − (li(l∗(cid:48)
+i (αi) − l∗(cid:48)
+
+i (αi)) + l∗
+i (l(cid:48)
+i(w(cid:62)xi),
+
+i (αi)l(cid:48)
+
+i(w(cid:62)xi)))
+
+where “ζ1” follows from Fenchel-Young inequality. Therefore
+
+(16)
+
+(cid:17)
+
+(cid:104)g(α), β − α(cid:105)
+
+(cid:16)
+
+i=1
+
+N(cid:88)
+N(cid:88)
+N(cid:88)
+
+i=1
+
+i=1
+
+=
+
+=
+
+1
+N
+
+1
+N
+
+ζ2≥ 1
+N
+
+(w(cid:62)xi − l∗(cid:48)
+
+i (αi))(l(cid:48)
+
+i(w(cid:62)xi) − αi)
+
+w(cid:62)xil(cid:48)
+
+i(w(cid:62)xi) − l∗(cid:48)
+
+i (αi)l(cid:48)
+
+i(w(cid:62)xi) − αiw(cid:62)xi + αil∗(cid:48)
+
+i (αi)
+
+(li(w(cid:62)xi) + αil∗
+
+i (αi) − w(cid:62)xi)
+
+ζ3=P (w) − D(α),
+
+where “ζ2” follows from (16) and “ζ3” follows from Lemma 4. This proves the desired bound.
+
+The following simple result is also needed in our iteration complexity analysis.
+Lemma 6. For any  > 0,
+
+holds when t ≥ max(cid:8) 3
+
+ , 1(cid:9).
+
+ ln 3
+
+1
+t
+
++
+
+ln t
+t
+
+≤ 
+
+Proof. Obviously, the inequality 1
+t implies that 1
+3. Also, we have
+
+t ≤ 
+
+Dual Iterative Hard Thresholding
+
+t + ln t
+
+t ≤  holds for  ≥ 1. When  < 1, it holds that ln( 3
+
+ ) ≥ 1. Then the condition on
+
+ln t
+t
+
+≤ ln( 3
+
+ ln 3
+ )
+ ln 3
+
+
+
+3
+
+≤ ln( 3
+ )2
+ ln 3
+
+3
+
+
+
+=
+
+2
+3
+
+,
+
+where the ﬁrst “≤” follows the fact that ln t/t is decreasing when t ≥ 1 while the second “≤” follows ln x < x for all
+x > 0. Therefore we have 1
+
+t + ln t
+
+t ≤ .
+
+We are now in the position to prove the main theorem.
+
+of Theorem 4. Part(a): Let us consider g(t) ∈ ∂D(α(t)) with g(t)
+we can verify that (cid:107)w(t)(cid:107) ≤ r/λ. Therefore we have
+
+i = 1
+
+N (x(cid:62)
+
+i w(t) − l∗(cid:48)
+
+i (α(t)
+
+i )). From the expression of w(t)
+
+Let h(t) = (cid:107)α(t) − ¯α(cid:107) and v(t) = (cid:104)g(t), ¯α − α(t)(cid:105). The concavity of D implies v(t) ≥ 0. From Lemma 3 we know that
+
+(cid:107)g(t)(cid:107) ≤ c0 =
+
+√
+r + λρ
+N
+λ
+
+.
+
+h(t) ≤(cid:112)2λN 2v(t)/(λN µ + σmin(X, k)). Then
+
+(cid:16)
+
+α(t−1) + η(t−1)g(t−1)(cid:17) − ¯α(cid:107)2
+
+(h(t))2 =(cid:107)PFN
+
+≤(cid:107)α(t−1) + η(t−1)g(t−1) − ¯α(cid:107)2
+=(h(t−1))2 − 2η(t−1)v(t−1) + (η(t−1))2(cid:107)g(t−1)(cid:107)2
+≤(h(t−1))2 − η(t−1)(λN µ + σmin(X, k))
+
+λN 2
+
+(h(t−1))2 + (η(t−1))2c2
+0.
+
+Let η(t) =
+
+(λN µ+σmin(X,k))(t+1). Then we obtain
+
+λN 2
+
+(cid:18)
+
+(cid:19)
+
+(h(t))2 ≤
+
+1 − 1
+t
+
+(h(t−1))2 +
+
+λ2N 4c2
+0
+
+(λN µ + σmin(X, k))2t2 .
+
+By recursively applying the above inequality we get
+
+(h(t))2 ≤
+
+λ2N 4c2
+0
+
+(λN µ + σmin(X, k))2
+
+(cid:18) 1
+
+t
+
+(cid:19)
+
+= c1
+
+(cid:18) 1
+
+t
+
+(cid:19)
+
+.
+
++
+
+ln t
+t
+
++
+
+ln t
+t
+
+This proves the desired bound in part(a).
+Part(b): Let us consider  = λN ¯
+
+2σmax(X). From part(a) and Lemma 6 we obtain
+
+(cid:107)α(t) − ¯α(cid:107) ≤ 
+
+after t ≥ t0 = 3c1
+Let β(t) := [l(cid:48)
+
+2 ln 3c1
+1((w(t))(cid:62)x1), ..., l(cid:48)
+
+2 . It follows from Lemma 2 that supp(w(t)) = supp( ¯w).
+N ((w(t))(cid:62)xN )]. According to Lemma 5 we have
+
+P D = P (w(t)) − D(α(t))
+(t)
+≤ (cid:104)g(t), β(t) − α(t)(cid:105)
+≤ (cid:107)g(t)(cid:107)((cid:107)β(t) − ¯α(cid:107) + (cid:107)¯α − α(t)(cid:107)).
+
+Since ¯ = ¯wmin − 1
+from the smoothness of li and Lemma 2 we get
+
+λ(cid:107)P (cid:48)( ¯w)(cid:107)∞ > 0, it follows from Theorem 2 that ¯α = [l(cid:48)
+
+1( ¯w(cid:62)x1), ..., l(cid:48)
+
+N ( ¯w(cid:62)xN )]. Given that t ≥ t0,
+
+(cid:107)β(t) − ¯α(cid:107) ≤ 1
+µ
+
+(cid:107)w(t) − ¯w(cid:107) ≤ σmax(X, k)
+
+µλN
+
+(cid:107)α(t) − ¯α(cid:107), .
+
+where in the ﬁrst “≤” we have used (cid:107)xi(cid:107) ≤ 1. Therefore, the following is valid when t ≥ t0:
+
+Dual Iterative Hard Thresholding
+
+(cid:18)
+
+P D ≤ (cid:107)g(t)(cid:107)((cid:107)β(t) − ¯α(cid:107) + (cid:107)¯α − α(t)(cid:107))
+(t)
+(cid:107)α(t) − ¯α(cid:107).
+
+σmax(X, k)
+
+≤ c0
+
+1 +
+
+(cid:19)
+
+µλN
+Since t ≥ t1, from part(a) and Lemma 6 we get (cid:107)α(t) − ¯α(cid:107) ≤
+implies (t)
+
+P D ≤ . This proves the desired bound.
+
+
+
+c0(1+ σmax(X,k)
+
+µλN
+
+, which according to the above inequality
+
+)
+
+A.6. Proof of Theorem 5
+Proof. Part(a): Let us consider g(t) with g(t)
+
+The concavity of D implies v(t) ≥ 0. From Lemma 3 we know that h(t) ≤ (cid:112)2λN 2v(t)/(λN µ + σmin(X, k)). Let
+
+i )). Let h(t) = (cid:107)α(t)− ¯α(cid:107) and v(t) = (cid:104)g(t), ¯α− α(t)(cid:105).
+
+j w(t)− l∗(cid:48)
+
+j (α(t)
+
+g(t)
+Bi
+
+:= HB(t)
+
+i
+
+(g(t)) and v(t)
+Bi
+
+:= (cid:104)g(t)
+
+Bi
+
+j = 1
+
+N (x(cid:62)
+(cid:16)
+, ¯α − α(t)(cid:105) Then
+
+(cid:17) − ¯α(cid:107)2
+
+(h(t))2 =(cid:107)PFN
+
+α(t−1) + η(t−1)g(t−1)
+− ¯α(cid:107)2
+
+≤(cid:107)α(t−1) + η(t−1)g(t−1)
+=(h(t−1))2 − 2η(t−1)v(t−1)
+
+Bi
+
+Bi
+
+Bi
+
++ (η(t−1))2(cid:107)g(t−1)
+
+Bi
+
+(cid:107)2.
+
+By taking conditional expectation (with respect to uniform random block selection, conditioned on α(t−1)) on both sides
+of the above inequality we get
+
+2η(t−1)v(t−1)
+
+m(cid:88)
+E[(h(t))2 | α(t−1)]
+≤(h(t−1))2 − 1
+1
+m
+m
+(η(t−1))2
+=(h(t−1))2 − 2η(t−1)
+≤(h(t−1))2 − η(t−1)(λN µ + σmin(X, k))
+
+v(t−1) +
+
+i=1
+
+m
+
+m
+
++
+
+Bi
+
+m(cid:88)
+
+i=1
+
+λmN 2
+
+(η(t−1))2(cid:107)g(t−1)
+
+(cid:107)2
+
+Bi
+
+(cid:107)g(t−1)(cid:107)2
+
+(h(t−1))2 +
+
+(η(t−1))2
+
+m
+
+c2
+0..
+
+Let η(t) =
+
+(λN µ+σmin(X,k))(t+1). Then we obtain
+
+λmN 2
+
+E[(h(t))2 | α(t−1)] ≤
+
+(cid:19)
+
+(h(t−1))2 +
+
+λ2mN 4c2
+0
+
+(λN µ + σmin(X, k))2t2 .
+
+By taking expectation on both sides of the above over α(t−1), we further get
+
+(cid:18)
+
+1 − 1
+t
+
+(cid:19)
+
+(cid:18)
+
+E[(h(t))2] ≤
+
+This recursive inequality leads to
+
+1 − 1
+t
+
+E[(h(t−1))2] +
+
+λ2mN 4c2
+0
+
+(λN µ + σmin(X, k))2t2 .
+
+E[(h(t))2] ≤
+
+λ2mN 4c2
+0
+
+(λN µ + σmin(X, k))2
+
++
+
+ln t
+t
+
+= c2
+
++
+
+ln t
+t
+
+t
+
+(cid:18) 1
+
+t
+
+(cid:19)
+
+(cid:18) 1
+
+(cid:19)
+
+.
+
+This proves the desired bound in part(a).
+Part(b): Let us consider  = λN ¯
+
+2σmax(X). From part(a) and Lemma 6 we obtain
+
+E[(cid:107)α(t) − ¯α(cid:107)] ≤ δ
+
+after t ≥ t2 = 3c2
+δ22 . Then from Markov inequality we know that (cid:107)α(t) − ¯α(cid:107) ≤ E[(cid:107)α(t) − ¯α(cid:107)]/δ ≤  holds with
+probability at least 1− δ. Lemma 2 shows that (cid:107)α(t) − ¯α(cid:107) ≤  implies supp(w(t)) = supp( ¯w). Therefore when t ≥ t2, the
+event supp(w(t)) = supp( ¯w) occurs with probability at least 1 − δ.
+
+δ22 ln 3c2
+
+Similar to the proof arguments of Theorem 4(b) we can further show that when t ≥ 4t2, with probability at least 1 − δ/2
+
+Dual Iterative Hard Thresholding
+
+(cid:107)α(t) − ¯α(cid:107) ≤
+
+λN ¯
+
+2σmax(X)
+
+,
+
+(cid:19)
+
+(cid:18)
+
+which then leads to
+
+(cid:107)α(t) − ¯α(cid:107).
+Since t ≥ t3, from the arguments in part(a) and Lemma 6 we get that (cid:107)α(t) − ¯α(cid:107) ≤
+at least 1 − δ/2. Let us consider the following events:
+
+P D ≤ c0
+(t)
+
+σmax(X, k)
+
+µλN
+
+1 +
+
+
+
+c0(1+ σmax(X,k)
+
+µλN
+
+)
+
+holds with probability
+
+P D ≤ ;
+
+• A: the event of (t)
+• B: the event of (cid:107)α(t) − ¯α(cid:107) ≤ λN ¯
+• C: the event of (cid:107)α(t) − ¯α(cid:107) ≤
+
+2σmax(X);
+
+
+
+c0(1+ σmax(X,k)
+
+µλN
+
+.
+
+)
+
+When t ≥ max{4t2, t3}, we have the following holds:
+
+P(A) ≥ P(A | B)P(B) ≥ P(C | B)P(B) ≥ (1 − δ/2)2 ≥ 1 − δ.
+
+This proves the desired bound.
+
+

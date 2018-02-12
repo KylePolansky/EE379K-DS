@@ -1,0 +1,707 @@
+Efﬁcient Online Bandit Multiclass Learning
+
+A. Adaptive Tuning of the Exploration Rate
+√T ). However, this setting
+In Theorem 2 we have presented a tuning of γ that guarantees a regret of the order of ˜O( 1
+η
+requires to upper bound the sum of the quadratic terms with a worst case bound. In this section, we develop an adaptive
+strategy for the tuning of the exploration rate γ that guarantees an optimal bound w.r.t. to the tightest sum of the quadratic
+terms.
+First, we make rate dependent of the time, i.e. γt. Our aim is to choose γt in each time step in order to minimize the excess
+
+bound within (roughly) a constant factor of that obtained by the best ﬁxed γ in hindsight. We start with a technical lemma.
+
+mistake bound E��T
+Lemma 4. Let c1, . . . , cT ∈ [0, b] be a sequence of real numbers, a > 0, and deﬁne γt = min�� b+�t−1
+
+t zt�. The main result is that, adaptively setting γt’s would result in a
+, 1�. We
+
+η(2−η)�T
+
+t=1 γt + 1
+
+t A−1
+zT
+
+s=1 cs
+t
+
+k
+γt
+
+t=1
+
+have,
+
+cs .
+
+T�s=1
+
+T�t=1�γt + a
+
+ct
+γt
+
+T�t=1
+
+ct .
+
+ct + a
+
+T�t=1
+t ≤ 2√T����b +
+, ct
+T�t=1
+
+ct
+
+ct
+
+cs
+
+T�s=1
+
+T�t=1
+
+s=1 cs
+t
+
+γt� ≤ (2 + 2a)√T����b +
+T�t=1� 1
+
+≤����b +
+max
+T�t=1
+�b +�t−1
+T�t=1
+�b +�t−1
+T�t=1
+√T
+ct��t
+≤ 2√T����b +
+T�s=1
+
+T�t=1
+T�t=1
+
+ct√t
+
+s=1 cs
+
+s=1 cs
+
+s=1 cs
+
+√T
+
+cs +
+
+≤
+
+≤
+
+ct
+
++
+
+=
+
+ct,
+
++
+
+ct
+
+Proof. First, note that
+
+T�t=1
+
+γt ≤
+
+T�t=1
+
+� b +�t−1
+
+Second, using the elementary chain of inequalities max(a, b) ≤ a + b,∀a, b ≥ 0, we have that
+
+where the last inequality uses Lemma 3.5 of (Auer et al., 2002). Combining the two inequalities, we get the desired
+result.
+
+Built upon the lemma above, we show that, tailored to our setting, the adaptive tuning would result in a bound within a
+constant factor of that achieved by the best ﬁxed γ in hindsight.
+
+Theorem 5. Running SOBA with the adaptive setting of γt = min�� k(1+�t−1
+
+t
+
+s=1 zT
+
+s A−1
+
+s zs)
+
+, 1� and a = X 2, we have that
+
+E[M ] ≤ Lη(U ) + O�X 2�U�2
+
+F +
+
+1
+η
+
+(√dk2T ln T + dk2 ln T )� .
+
+Proof Sketch. Following the same proof as Theorem 3, we get that
+
+E� ˆMT� ≤ Lη(U ) +
+
+F
+
+aη�U�2
+2 − η
+
++
+
+1
+
+η(2 − η)
+
+E[
+
+k
+γt
+
+T�t=1
+
+t A−1
+zT
+
+t zt]
+
+Meanwhile by triangle inequality,
+
+Efﬁcient Online Bandit Multiclass Learning
+
+E[MT ] ≤ E[ ˆMT ] + E� T�t=1
+
+1[˜yt �= ˆyt]� ≤ E[ ˆMT ] + E� T�t=1
+
+γt� .
+
+Combining the two inequalities above, we get
+
+E [MT ] ≤ Lη(U ) +
+
+F
+
+aη�U�2
+2 − η
+
++ E�
+
+1
+
+η(2 − η)
+
+T�t=1
+
+k zT
+
+t zt
+
+t A−1
+γt
+
++
+
+γt� .
+
+T�t=1
+η(2−η), implies that
+
+We take a closer look at the last term. Lemma 4 with ct = kzT
+
+t A−1
+
+t zt ∈ [0, k], b = k, a = 1
+
+T�t=1
+
+γt +
+
+T�t=1
+≤�2 +
+
+k
+
+t A−1
+zT
+
+t zt
+
+η(2 − η)γt
+
+2
+
+η(2 − η)�√T����k(1 +
+
+t A−1
+zT
+
+t zt) +
+
+T�t=1
+
+1
+
+η(2 − η)
+
+k(1 +
+
+T�t=1
+
+t A−1
+zT
+
+t zt) .
+
+Taking the expecation of both sides and using Lemma 3, we get that the last term on the right hand side is at most
+η (√dk2T ln T + dk2 ln T ). This completes the proof.
+12
+
+B. Deferred Proofs
+Proof of Theorem 1. Let p ≥ 2 such that 1
+an update, i.e. makes a mistake. We have:
+
+p + 1
+
+q = 1. Denote by bt the indicator variable that multiclass Perceptron makes
+
+t �xT�2
+
+2
+
+�WT +1, U�
+≤ �WT +1�F �U�F
+
+2
+
+≤ ···
+
+F + 2b2
+
+t �xT�2
+
+= �U�F��WT�2 + 2bt�WT , (eyT − eˆyT ) ⊗ xT� + 2b2
+≤ �U�F��WT�2
+≤ �U�F����2
+T�t=1
+≤ �U�F X√2����
+= �U�F X√2����
+
+t �xt�2
+b2
+T�t=1
+T�t=1
+
+b2
+t
+
+bt
+
+2
+
+Efﬁcient Online Bandit Multiclass Learning
+
+Also, we have, that
+
+�WT +1, U� =
+
+=
+
+≥
+
+≥
+
+≥
+
+=
+
+T�t=1
+T�t=1
+T�t=1
+T�t=1
+T�t=1
+T�t=1
+
+Putting all together we have
+
+bt�U , (eyt − eˆyt ) ⊗ xt�
+
+bt[1 − (1 − �U , (eyt − eˆyt ) ⊗ xt�)]
+
+bt[1 − |1 − �U , (eyt − eˆyt ) ⊗ xt�|+]
+
+bt −
+
+bt − (
+
+bt − (
+
+T�t=1
+T�t=1
+T�t=1
+
+bt�(U , (xt, yt))
+
+bp
+t )
+
+1
+p (
+
+bt)
+
+1
+
+p (
+
+T�t=1
+T�t=1
+
+�(U , (xt, yt))q)
+
+1
+q
+
+�(U , (xt, yt))q)
+
+1
+
+q .
+
+�U�F X√2����
+
+T�t=1
+
+bt ≥
+
+bt −� T�t=1
+
+T�t=1
+
+p
+
+bt� 1
+
+LMH,q(U )
+
+1
+
+q .
+
+t=1 bt is equal to number of mistake MT , we get the stated bound.
+
+Noting that�T
+Lemma 5. Suppose we are given positive real numbers L, T, H, U and function F (γ) = min(T, L+γT + U H
+where γ ∈ [0, 1]. Then:
+1. If L ≤ (U + 1)√HT , then taking γ∗ = min(� H
+2. If L > (U + 1)√HT , then taking γ∗ = min(( HL
+T 2 )
+
+T , 1) gives that F (γ∗) ≤ L + 3(U + 1)√HT .
+3 , 1) gives that F (γ∗) ≤ L + 2(√U + 1)(HLT )
+
+3 .
+
+1
+
+1
+
+γ +� U HL
+
+γ
+
+),
+
+Proof. We prove the two cases separately.
+
+1. If T ≤ H, then γ∗ = 1, F (γ∗) ≤ T ≤ L + 3(U + 1)√HT .
+Otherwise, T > H. In this case, γ∗ =� H
+T . We have that
+
+F (γ∗)
+
+= L + γ∗T +
+
++� U HL
+
+γ∗
+
+U H
+γ∗
+
+= L + √HT + U√HT +�U L√HT
+≤ L + (U + 1)√HT + L + U√HT
+≤ L + 3(U + 1)√HT .
+
+where the ﬁrst inequality is from that arithmetic mean-geometric mean inequality, the second inequality is by the
+assumption on L.
+
+Efﬁcient Online Bandit Multiclass Learning
+
+2. If HL > T 2, then γ∗ = 1, F (γ∗) ≤ T ≤ (HLT )
+
+Otherwise, HL ≤ T 2. In this case, γ∗ = ( HL
+T 2 )
+
+1
+
+3 .
+
+1
+
+3 . We have that
+
+F (γ∗) = L + γ∗T +
+
+U H
+γ∗
+
+∗
+
++� U HL
+
+γ
+3 L− 1
+1
+3 + 1)(HLT )
+
+2
+3 T
+
+1
+3
+
+2
+
+1
+3 + U H
+
+= L + (HLT )
+
+≤ L + (√U + U
+≤ L + 2(√U + 1)(HLT )
+3 ≤ √U + 1.
+
+1
+
+1
+3 .
+
+3 + √U (HLT )
+
+1
+3
+
+where the ﬁrst inequality is from algebra and the condition on L, implying U H
+U
+
+3 , the second inequality is from that U
+
+1
+3 (HLT )
+
+1
+
+2
+3 T
+
+2
+
+3 L− 1
+
+3 ≤ (HLT )
+
+1
+
+3 U ( HT
+L2 )
+
+1
+
+3 ≤
+
+C. Per-Step Analysis of Online Least Squares
+For completeness, we present a technical lemma in online least squares, which has appeared in (e.g., Orabona et al., 2012).
+s , wt =
+
+Lemma 6. Suppose zt’s are vectors, and αt’s are scalars. For all t ≥ 1, deﬁne At = �t
+t−1�t−1
+−A−1
+1
+2�u − wt+1�2
+
+s=1 αszs. Then for any vector u, we have:
+
+(�wt , zt� + αt)2(1 − zT
+
+(�u , zt� + αt)2 ≤
+
+1
+2�u − wt�2
+
+t zt) −
+
+At−1 −
+
+s=1 zszT
+
+t A−1
+
+At .
+
+1
+2
+
+1
+2
+
+Proof. Observe that wt’s have the following recurrence:
+
+wt+1 = A−1
+
+t (At−1wt − αtzt)
+
+Since At = At−1 + ztzT
+
+t , we have
+
+Atwt+1 = Atwt − (wT
+
+t zt + αt)zt
+
+Now, by standard online mirror descent analysis (See e.g. Cesa-Bianchi & Lugosi, 2006, proof of Theorem 11.1), we have
+
+�wt − u , (wT
+
+t zt + αt)zt� ≤
+
+≤
+
+1
+2�u − wt�2
+1
+2�u − wt�2
+
+At −
+At−1 −
+
+1
+2�u − wt+1�2
+1
+2�u − wt+1�2
+
+At +
+
+At +
+
+1
+2
+
+(wT
+
+t zt + αt)2zT
+
+t A−1
+
+t zt
+
+1
+2
+
+(wT
+
+t zt + αt)2zT
+
+t A−1
+
+t zt +
+
+1
+2
+
+(uT zt − wT
+
+t zt)2
+
+Now, move the last term on the RHS to the LHS, we get
+
+(wT
+
+t zt − uT zt) ·
+
+1
+2
+
+(wT
+
+t zt + uT zt + 2αt) ≤
+
+1
+2�u − wt�2
+
+At−1 −
+
+1
+2�u − wt+1�2
+
+At +
+
+1
+2
+
+i.e.
+
+(wT
+
+t zt + αt)2zT
+
+t A−1
+
+t zt
+
+1
+2
+
+(�wt , zt� + αt)2 −
+
+At−1 −
+Now moving the last term on the RHS to the LHS, the lemma follows.
+
+(�u , zt� + αt)2 ≤
+
+1
+2�u − wt�2
+
+1
+2
+
+1
+2�u − wt+1�2
+
+At +
+
+1
+2
+
+(wT
+
+t zt + αt)2zT
+
+t A−1
+
+t zt .
+
+

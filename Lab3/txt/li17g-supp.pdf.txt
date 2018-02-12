@@ -1,0 +1,1618 @@
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+Supplementary Materials
+
+A. Proof of Theorem 1
+We ﬁrst recall the following lemma.
+Lemma 1 (Lemma 1, (Gong et al., 2013)). Under Assumption 1.{3}. For any η > 0 and any x, y ∈ Rd such that
+x = proxηg(y − η∇f (y)), one has that
+
+F (x) ≤ F (y) − ( 1
+
+2η − L
+
+2 )(cid:107)x − y(cid:107)2.
+
+Applying Lemma 1 with x = xk, y = yk, we obtain that
+
+(12)
+L, it follows that F (xk) ≤ F (yk). Moreover, the update rule of APGnc guarantees that F (yk+1) ≤ F (xk). In
+
+F (xk) ≤ F (yk) − ( 1
+
+2η − L
+
+2 )(cid:107)xk − yk(cid:107)2.
+
+Since η < 1
+summary, for all k the following inequality holds:
+
+(13)
+Combing further with the fact that F (xk), F (yk) ≥ inf F > −∞ for all k, we conclude that {F (xk)},{F (yk)} converge
+to the same limit F ∗, i.e.,
+
+F (yk+1) ≤ F (xk) ≤ F (yk) ≤ F (xk−1).
+
+lim
+k→∞ F (xk) = lim
+
+k→∞ F (yk) = F ∗.
+
+(14)
+
+On the other hand, by induction we conclude from eq. (13) that for all k
+
+F (yk) ≤ F (x0), F (xk) ≤ F (x0).
+
+Combining with Assumption 1.1 that F has bounded sublevel set, we conclude that {xk} and {yk} are bounded and thus
+have bounded limit points. Now combining eq. (12) and eq. (13) yields
+
+2η − L
+( 1
+
+2 )(cid:107)yk − xk(cid:107)2 ≤ F (yk) − F (xk)
+
+≤ F (yk) − F (yk+1),
+
+which, after telescoping over k and letting k → ∞, becomes
+
+∞(cid:88)
+
+2η − L
+( 1
+
+2 )(cid:107)yk − xk(cid:107)2 ≤ F (y1) − inf F < ∞.
+
+(15)
+
+(16)
+
+(17)
+
+k=1
+
+This further implies that (cid:107)yk − xk(cid:107) → 0, and hence {xk} and {yk} share the same set of limit points Ω. Note that Ω is
+closed (it is a set of limit points) and bounded, we conclude that Ω is compact in Rd.
+By optimality condition of the proximal gradient step of APGnc, we obtain that
+
+−∇f (yk) − 1
+⇔ ∇f (xk) − ∇f (yk) − 1
+
+η (xk − yk) ∈ ∂g(xk)
+(cid:125)
+∈ ∂F (xk),
+η (xk − yk)
+
+(cid:124)
+
+(cid:123)(cid:122)
+
+uk
+
+which further implies that
+
+(cid:107)uk(cid:107) = (cid:107)∇f (xk) − ∇f (yk) − 1
+η )(cid:107)yk − xk(cid:107) → 0.
+
+≤ (L + 1
+
+η (xk − yk)(cid:107)
+
+(18)
+Consider any limit point z(cid:48) ∈ Ω, and w.l.o.g we write xk → z(cid:48), yk → z(cid:48) by restricting to a subsequence. By the deﬁnition
+of the proximal map, the proximal gradient step of APGnc implies that
+
+(cid:104)∇f (yk), xk − yk(cid:105) + 1
+
+2η(cid:107)yk − xk(cid:107)2 + g(xk)
+
+≤ (cid:104)∇f (yk), z(cid:48) − yk(cid:105) + 1
+
+2η(cid:107)z(cid:48) − yk(cid:107)2 + g(z(cid:48)).
+
+(19)
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+Taking lim sup on both sides and note that xk − yk → 0, yk → z(cid:48), we obtain that lim supk→∞ g(xk) ≤ g(z(cid:48)). Since
+g is lower semicontinuous and xk → z(cid:48), it follows that lim supk→∞ g(xk) ≥ g(z(cid:48)). Combining both inequalities, we
+conclude that limk→∞ g(xk) = g(z(cid:48)). Note that the continuity of f yields limk→∞ f (xk) = f (z(cid:48)), we then conclude that
+limk→∞ F (xk) = F (z(cid:48)). Since limk→∞ F (xk) = F ∗ by eq. (14), we conclude that
+
+(20)
+Hence, F remains constant on the compact set Ω. To this end, we have established xk → z(cid:48), F (xk) → F (z(cid:48)) and that
+∂F (xk) (cid:51) uk → 0. Recall the deﬁnition of limiting sub-differential, we conclude that 0 ∈ ∂F (z(cid:48)) for all z(cid:48) ∈ Ω.
+
+F (z(cid:48)) ≡ F ∗,
+
+∀z(cid:48) ∈ Ω.
+
+B. Proof of Theorem 2
+Throughout the proof we assume that F (xk) (cid:54)= F ∗ for all k because otherwise the algorithm terminates and the conclusions
+hold trivially. We also denote k0 as a sufﬁciently large positive integer.
+Combining eq. (12) and eq. (13) yields that
+
+F (xk+1) ≤ F (xk) − ( 1
+
+2η − L
+
+2 )(cid:107)yk+1 − xk+1(cid:107)2.
+
+(21)
+
+Moreover, eq. (17) and eq. (18) imply that
+
+(22)
+We have shown in Appendix A that F (xk) ↓ F ∗, and it is also clear that distΩ(xk) → 0. Thus, for any , δ > 0 and all
+k ≥ k0, we have
+
+dist∂F (xk)(0) ≤ (L + 1
+
+η )(cid:107)yk − xk(cid:107).
+
+Since Ω is compact and F is constant on it, the uniformized KL property implies that for all k ≥ k0
+
+xk ∈ {x | distΩ(x) ≤ , F ∗ < F (x) < F ∗ + δ}.
+
+ϕ(cid:48)(F (xk) − F ∗)dist∂F (xk)(0) ≥ 1.
+
+(23)
+
+Recall that rk := F (xk) − F ∗. Then eq. (23) is equivalent to
+
+1 ≤(cid:0)ϕ(cid:48) (rk) dist∂F (xk) (0)(cid:1)2
+(cid:17)2 (cid:107)yk − xk(cid:107)2
+(i)≤ (ϕ(cid:48) (rk))2(cid:16) 1
+(cid:16) 1
+(cid:17)2
+η +L
+2η − L
+
+(ii)≤ (ϕ(cid:48) (rk))2
+≤ d1 (ϕ(cid:48) (rk))2 (rk−1 − rk) ,
+
+η + L
+
+2
+
+1
+
+[F (xk−1) − F (xk)]
+
+(cid:16) 1
+
+(cid:17)2
+
+(cid:16) 1
+2η − L
+
+2
+
+(cid:17)
+
+. Since ϕ (t) = c
+
+θ tθ, we have that
+
+where (i) is due to eq. (22), (ii) follows from eq. (21), and d1 =
+ϕ(cid:48) (t) = ctθ−1. Thus the above inequality becomes
+
+η + L
+
+/
+
+(24)
+It has been shown in (Frankel et al., 2015; Li & Lin, 2015) that sequence {rk} satisfying the above inductive property
+converges to zero at different rates according to θ as stated in the theorem.
+
+k
+
+1 ≤ d1c2r2θ−2
+
+(rk−1 − rk) .
+
+C. Proof of Theorem 3
+g non-convex, k = 0: In this setting, we ﬁrst prove the following inexact version of Lemma 1.
+Lemma 2. Under Assumption 1.3. For any η > 0 and any x, y ∈ Rd such that x = proxηg(y − η(∇f (y) + e)), one has
+that
+
+F (x) ≤ F (y) + ( L
+
+2 − 1
+
+2η )(cid:107)x − y(cid:107)2 + (cid:107)x − y(cid:107)(cid:107)e(cid:107).
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+Proof. By Assumption 1.3 we have that
+
+Also, by the deﬁnition of proximal map, the proximal gradient step implies that
+
+f (x) ≤ f (y) + (cid:104)x − y,∇f (y)(cid:105) + L
+
+2 (cid:107)x − y(cid:107)2.
+
+g(x) + 1
+
+2η(cid:107)x − y + η(∇f (y) + e)(cid:107)2 ≤ g(y) + 1
+
+2η(cid:107)η(∇f (y) + e)(cid:107)2,
+
+which, after simpliﬁcations becomes that
+
+g(x) ≤ g(y) − 1
+Combine the above two inequalities further gives that
+F (x) ≤ F (y) + ( L
+
+2η(cid:107)x − y(cid:107)2 − (cid:104)x − y, (∇f (y) + e)(cid:105).
+
+2 − 1
+
+2η )(cid:107)x − y(cid:107)2 + (cid:107)x − y(cid:107)(cid:107)e(cid:107).
+
+Using Lemma 2 with x = xk, y = yk, e = ek and notice the fact that (cid:107)ek(cid:107) ≤ γ(cid:107)xk − yk(cid:107), we obtain that
+
+F (xk) ≤ F (yk) + (γ + L
+
+2 − 1
+
+2η )(cid:107)xk − yk(cid:107)2.
+
+(25)
+
+Moreover, the optimality condition of the proximal gradient step with gradient error gives that By optimality condition of
+the proximal gradient step of APGnc, we obtain that
+
+∇f (xk) − ∇f (yk) − ek − 1
+
+η (xk − yk) ∈ ∂F (xk),
+
+which further implies that
+
+dist∂F (xk)(0) ≤ (γ + L + 1
+
+η )(cid:107)yk − xk(cid:107).
+
+(26)
+
+2γ+L and redeﬁning d1 = ( 1
+
+Notice that eq. (25) and eq. (26) are parallel to the key inequalities eq. (21) and eq. (22) in the analysis of exact APGnc.
+2 − γ), all the statements in Theorem 1 remain
+Thus, by choosing η < 1
+true and the convergence rates in Theorem 2 remain the same order with a worse constant.
+g convex: We ﬁrst present the following lemma.
+Lemma 3. For any x, v ∈ Rd, let u(cid:48) ∈ ∂g(x) such that ∇f (x) + u(cid:48) has minimal norm. Denote ξ := dist∂g(x)(u(cid:48)), then
+we have
+
+η + L + γ)2/( 1
+
+2η − L
+
+dist∂F (x)(0) ≤ dist∇f (x)+∂g(x)(0) + ξ.
+
+Proof. We observe the following
+
+dist∂F (x)(0) = min
+
+u∈∂g(x)
+
+(cid:107)∇f (x) + u(cid:107)
+(cid:107)∇f (x) + u(cid:48) + u − u(cid:48)(cid:107), ∀u(cid:48) ∈ ∂g(x)
+
+(cid:107)u − u(cid:48)(cid:107), ∀u(cid:48) ∈ ∂g(x)
+
+u∈∂g(x)
+
+= min
+≤ (cid:107)∇f (x) + u(cid:48)(cid:107) + min
+u∈∂g(x)
+≤ min
+u(cid:48)∈∂
+
+g(x)(cid:107)∇f (x) + u(cid:48)(cid:107) + ξ
+
+= dist∇f (x)+∂g(x)(0) + ξ.
+
+(27)
+
+(28)
+
+(29)
+
+Recall that we have two inexactness, i.e., xk = proxk
+Lemma 2 and notice that k ≤ δ(cid:107)xk − yk(cid:107)2, we can obtain that
+F (xk) ≤ F (yk) + (γ + L
+≤ F (yk) + (γ(cid:48) + L
+
+2 − 1
+2 − 1
+
+2η )(cid:107)xk − yk(cid:107)2 + k
+2η )(cid:107)xk − yk(cid:107)2
+
+ηg(yk − η(∇f (yk) + ek)). Following a proof similar to that of
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+for some γ(cid:48) > γ > 0. Since g is convex, by Lemma 2 in (Schmidt et al., 2011) one can exhibit vk with (cid:107)vk(cid:107) ≤ √
+
+such that
+
+This implies that
+
+1
+
+η [yk − xk − η(∇f (yk) + ek) − vk] ∈ ∂k g(xk).
+
+(cid:113) 2k
+
+η .
+
+η + L)(cid:107)xk − yk(cid:107) +
+Apply Lemma 3 and notice that k ≤ δ(cid:107)xk − yk(cid:107)2, ξk ≤ λ(cid:107)xk − yk(cid:107), we obtain that
+
+dist∇f (xk)+∂k g(xk)(0) ≤ (γ + 1
+
+dist∂F (xk)(0) ≤ (γ(cid:48) +
+
++ L)(cid:107)xk − yk(cid:107)
+
+1
+η
+
+Now telescoping eq. (34) again over t from t = 0 to t = m − 1 and applying eq. (36), we obtain
+
+E[F (yk+1)] ≤ E[F (xm
+
+k)] + ηL2mE[(cid:107)¯x1
+
+k − x0
+
+k(cid:107)2].
+
+k )] ≤ E[F (¯x1
+m−1(cid:88)
+
+2η )E(cid:2)(cid:107)¯xt+1
+
+k − xt
+
+k(cid:107)2(cid:3) .
+
+E[F (xm
+
+k )] ≤ E[F (yk)] +
+
+(L − 1
+
+t=0
+
+Combining all the above facts, we conclude that for η < 1
+2L
+
+(38)
+Since E[F (·)] is bounded below, E[F (yk)] decreases to a ﬁnite limit, say, F ∗. Deﬁne rk = E [F (yk) − F ∗], and assume
+rk > 0 for all k (since otherwise rk = 0 and the algorithm terminates). Applying the KŁ property with θ = 1/2, we obtain
+
+E[F (yk)] ≤ E[F (yk−1)] ≤ . . . ≤ F (y0).
+
+Setting x = ¯x1
+
+k, we further obtain
+
+1
+
+c (F (x) − F ∗)
+
+1
+
+2 ≤ dist∂F (x)(0).
+
+k)(0) ≤(cid:16)
+
+(cid:17)2 (cid:107)¯x1
+
+1
+
+c2 (F (¯x1
+
+k) − F ∗) ≤ dist2
+
+∂F (¯x1
+
+L + 1
+η
+
+k − yk(cid:107)2,
+
+for some γ(cid:48) > γ > 0. Now eq. (29) and eq. (30) are parallel to the key inequalities eq. (21) and eq. (22) in the analysis
+2 − γ(cid:48)), all the statements in
+of exact APGnc. Thus, by choosing η < 1
+Theorem 1 remain true and the convergence rates in Theorem 2 remain the same order with a worse constant.
+
+2γ(cid:48)+L and redeﬁning d1 = ( 1
+
+η + L + γ(cid:48))2/( 1
+
+2η − L
+
+D. Proof of Theorem 4
+We ﬁrst deﬁne the following quantities for the convenience of the proof.
+
+k := E(cid:2)F (xt
+
+ct = ct+1(1 + 1
+Rt
+¯xt+1
+k = proxηg(xt
+
+k(cid:107)2(cid:3) ,
+
+m ) + ηL2
+k) + ct(cid:107)xt
+
+2 , cm = 0,
+k − x0
+k − η∇f (xt
+k)).
+
+(31)
+(32)
+(33)
+
+Note that ¯xt+1
+implementation of the algorithm. Then it has been shown in the proof of Theorem 5 of (Reddi et al., 2016b) that
+
+is a reference sequence introduced for the convenience of analysis, and is not being computed in the
+
+k
+
+(cid:16)
+
+k ≤ Rt
+Rt+1
+
+k +
+
+L − 1
+
+2η
+
+(cid:34)
+
+(cid:17) E(cid:2)(cid:107)¯xt+1
+k − xt
+(cid:16)
+m−1(cid:88)
+
+k(cid:107)2(cid:3) .
+(cid:17)(cid:107)¯xt+1
+
+L − 1
+
+2η
+
+(cid:35)
+
+.
+
+(34)
+
+(35)
+
+E[F (xm
+
+k )] ≤ E
+
+F (¯x1
+
+k) + c1(cid:107)¯x1
+
+k − x0
+
+k(cid:107)2 +
+
+k − xt
+
+k(cid:107)2
+
+Following from eq. (31), a simple induction shows that ct ≤ ηL2m. Setting η < 1
+eq. (35) further implies that
+
+2L and recalling that F (yk) ≤ F (xm
+
+k−1).,
+
+t=1
+
+Telescoping eq. (34) over t from t = 1 to t = m − 1, we obtain
+
+2ηk
+
+(30)
+
+(36)
+
+(37)
+
+(39)
+
+(40)
+
+E. Proof of Theorem 5
+We ﬁrst introduce some auxiliary lemmas.
+Lemma 4. Consider the convex function g and x, y ∈ Rd such that y = prox
+(cid:107)i(cid:107) ≤ √
+
+2η that satisﬁes the following inequality for all z ∈ Rd.
+
+ηg(x) for some  > 0. Then, there exists
+
+2η(cid:107)z − x(cid:107)2 − 1
+Proof. By Lemma 2 in (Schmidt et al., 2011), there exists (cid:107)i(cid:107) ≤ √
+
+2η(cid:107)y − x(cid:107)2 ≤ g(z) + 1
+
+g(y) + 1
+
+2η such that
+
+2η(cid:107)y − z(cid:107)2 + (cid:104)y − z, 1
+
+η i(cid:105) + .
+
+1
+
+η (x − y − i) ∈ ∂g(y).
+
+Then, the deﬁnition of -subdifferential implies that
+
+g(z) − g(y) ≥ (cid:104)z − y, ∂g(y)(cid:105) −  = (cid:104)z − y, 1
+
+η (x − y − i)(cid:105) − , ∀ z ∈ Rd.
+
+(41)
+
+(42)
+
+(43)
+
+(44)
+
+(45)
+
+(46)
+
+(47)
+
+(48)
+
+(49)
+
+(50)
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+where the last inequality is due to eq. (33). Taking expectation over both sides and using eq. (36), we obtain
+
+1
+
+c2 E[F (xm
+
+k ) − F ∗] − ηL2m
+
+c2 E(cid:2)(cid:107)¯x1
+
+k − x0
+
+Noting that x0
+
+k = yk and EF (yk+1) ≤ EF (xm
+
+k ), we then rearrange the above inequality and obtain
+
+L + 1
+η
+
+k(cid:107)2(cid:3) ≤(cid:16)
+(cid:20)(cid:16)
+(cid:17)2
+
+L + 1
+η
+
+(cid:17)2 E(cid:2)(cid:107)¯x1
+k − yk(cid:107)2(cid:3) .
+(cid:21)
+k − yk(cid:107)2(cid:3)
+E(cid:2)(cid:107)¯x1
+
+c2
+
++ ηL2m
+
+1
+
+c2 E[F (yk+1) − F ∗] ≤ 1
+
+c2 E[F (xm
+
+k ) − F ∗] ≤
+
+which can be further rewritten as
+
+rk+1 ≤ d (rk − rk+1) ,
+
+≤ (L+ 1
+
++ ηL2m
+
+c2
+
+η )2
+2η −L
+
+1
+
+(E[F (yk)] − E[F (yk+1)]) ,
+
+where d =
+
+c2(L+ 1
+
++ηL2m
+
+η )2
+2η −L
+
+1
+
+. Then a simple induction yields that
+
+rk+1 ≤(cid:16) d
+
+d+1
+
+(cid:17)k+1
+
+(F (y0) − F ∗) .
+
+The desired result follows by rearranging the above inequality.
+Lemma 5. Consider the convex function g and x, y, d ∈ Rd such that y = prox
+exists (cid:107)i(cid:107) ≤ √
+
+2η that satisﬁes the following inequality for all z ∈ Rd.
+
+ηg(x − ηd) for some  > 0. Then, there
+
+(cid:2)(cid:107)z − x(cid:107)2 − (cid:107)y − z(cid:107)2 − (cid:107)y − x(cid:107)2(cid:3) + .
+
+g(y) = (cid:104)y − z, d − 1
+
+η i(cid:105) ≤ g(z) + 1
+
+2η
+
+Proof. By Lemma 4, we obtain the following inequality for all z ∈ Rd.
+
+g(y) + (cid:104)y − x, d(cid:105) + 1
+
+2η(cid:107)y − x(cid:107)2 +
+
+η
+2
+
+(cid:107)d(cid:107)2
+2η(cid:107)y − z(cid:107)2 + (cid:104)y − z, 1
+
+η i(cid:105) + 
+
+2η(cid:107)z − x + ηd(cid:107)2 − 1
+
+≤ g(z) + 1
+= g(z) + (cid:104)z − x, d(cid:105) 1
+
+2η(cid:107)z − x(cid:107)2 + η
+The desired result follows by rearranging the above inequality.
+Lemma 6. Consider the convex function g and x, y, d ∈ Rd such that y = prox
+exists (cid:107)i(cid:107) ≤ √
+
+2η that satisﬁes the following inequality for all z ∈ Rd.
+
+2(cid:107)d(cid:107)2 − 1
+
+2η(cid:107)y − z(cid:107)2 + (cid:104)y − z, 1
+
+η i(cid:105) + .
+
+ηg(x − ηd) for some  > 0. Then, there
+
+(cid:16) L
+2 − 1
+
+2η
+
+(cid:17)(cid:107)y − x(cid:107)2 +
+
+(cid:16) L
+
+2 + 1
+
+2η
+
+(cid:17)(cid:107)z − x(cid:107)2 − 1
+
+2η(cid:107)y − z(cid:107)2 + .
+
+(51)
+
+F (y) + (cid:104)y − z, d − 1
+
+η i − ∇f (x)(cid:105) ≤ F (z) +
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+Proof. By Lipschitz continuity of ∇f, we obtain
+
+f (y) ≤ f (x) + (cid:104)∇f (x), y − x(cid:105) + L
+f (x) ≤ f (z) + (cid:104)∇f (x), x − z(cid:105) + L
+
+2 (cid:107)y − x(cid:107)2,
+2 (cid:107)x − z(cid:107)2.
+
+Adding the above inequalities together yields
+
+f (y) ≤ f (z) + (cid:104)∇f (x), y − z(cid:105) + L
+
+2
+
+(cid:2)(cid:107)y − x(cid:107)2 + (cid:107)z − x(cid:107)2(cid:3) .
+
+(52)
+(53)
+
+(54)
+
+k
+
+k
+
+k
+
+2η
+
++
+
+.
+
+(55)
+
+2η
+
+2η
+
+k
+
+k
+
+2 + 1
+
+2η
+
+k
+
+F (xt
+
+k) +
+
+2η
+
+k
+
+(56)
+
+(57)
+
+(cid:105)
+
+.
+
+k
+
+k − xt
+
+k, y = xt+1
+
+k
+
+E[F (xt+1
+
+k
+
+E[F (xt+1
+
+k
+
+, z = xt
+
+k, and
+
+k(cid:107)2(cid:105)
+
+, z = ¯xt+1
+
+, d = vt
+
+where T = (cid:104)xt+1
+
+)] ≤ E(cid:104)
+
+) − xt
+
+k(cid:107)2 − 1
+
+2η(cid:107)¯xt+1
+
+k − xt
+
+k − xt
+η (cid:105) + t
+
+2η(cid:107)¯xt+1
+
+k − xt+1
+
+k (cid:107)2 + t
+
+Similarly, applying Lemma 6 with  = t
+
+Adding eq. (55) and eq. (56) together yields
+
+k(cid:107)2 − 1
+
+2η(cid:107)¯xt+1
+
+k − xt+1
+
+k (cid:107)2 + T
+
+F (xt
+k − ¯xt+1
+
+k) +
+,∇f (xt
+
+k)). Applying Lemma 6 with  = 0, y = ¯xt+1
+
+η ik(cid:105)
+k + 1
+k − xt
+k(cid:107)2 − 1
+
+k and taking expectation on both sides, we obtain
+
+) + (cid:104)xt+1
+k − xt
+
+k − ¯xt+1
+k(cid:107)2 +
+
+Recall the reference sequence ¯xt+1
+d = ∇f (xt
+
+Combining with Lemma 5, we then obtain the desired result.
+k − η∇f (xt
+(cid:16) L
+k) and taking expectation on both sides, we obtain
+2 − 1
+
+)] ≤ E(cid:104)
+
+k = proxηg(xt
+
+E[F (¯xt+1
+
+k + ik
+k − xt+1
+k − xt+1
+k − xt+1
+
+k(cid:107)2 +
+k. Now we bound E[T ] as follows.
+
+)] ≤ E(cid:104)
+(cid:16) L
+F (¯xt+1
+2 − 1
+(cid:16)
+L − 1
+k) − vt
+E(cid:2)(cid:107)xt+1
+E(cid:2)(cid:107)xt+1
+E(cid:2)(cid:107)xt+1
+
+(cid:17)(cid:107)xt+1
+(cid:17)(cid:107)¯xt+1
+(cid:16) L
+2 − 1
+E(cid:104)(cid:107)∇f(cid:0)xt
+k (cid:107)2(cid:3) + η
+k (cid:107)2(cid:3) + ηE(cid:2)(cid:107)∇f(cid:0)xt
+k (cid:107)2(cid:3) + ηE(cid:2)(cid:107)∇f(cid:0)xt
+By Lemma 3 of (Reddi et al., 2016b), it holds that E(cid:2)(cid:107)∇f (xt
+
+(cid:17)(cid:107)¯xt+1
+(cid:1) − vt
+,∇f(cid:0)xt
+(cid:17)(cid:107)¯xt+1
+(cid:16) L
+(cid:17)(cid:107)xt+1
+η (cid:107)2(cid:105)
+(cid:1) − vt
+η (cid:107)2(cid:105)
+k(cid:107)2(cid:3) + ηE(cid:104)(cid:107) ik
+(cid:1) − vt
+(cid:1) − vt
+k(cid:107)2(cid:3) + 3t
+k(cid:107)2(cid:3) ≤ L2E(cid:2)(cid:107)xt
+k(cid:107)2(cid:3) . Combining with the
+E(cid:2)(cid:107)xt+1
+k (cid:107)2(cid:3) + ηL2E(cid:2)(cid:107)xt
+k(cid:107)2(cid:3) + 3t
+)] ≤ E(cid:104)
+(cid:17)(cid:107)¯xt+1
+(cid:17)(cid:107)xt+1
+k(cid:107)2(cid:3) , where ct = ηL2 (1+β)m−t−1
+k := E(cid:2)F (xt
+k =E(cid:2)F (xt+1
+(cid:0)(cid:107)xt+1
+=E(cid:2)F (xt+1
+(cid:16)
+≤E(cid:104)
+≤E(cid:104)
+(cid:17)(cid:107)¯xt+1
++(cid:2)ct+1 (1 + β) + ηL2(cid:3)(cid:107)xt
+
+k(cid:107)2(cid:3)
+k − x0
+k + xt
+k(cid:107)2 + 2(cid:104)xt+1
+k − x0
+k(cid:107)2 + (cid:107)xt
+(cid:104)
+(cid:16)
+(cid:17)
+k − xt
+k(cid:107)2 + ct+1 (1 + β)(cid:107)xt
+k(cid:107)2 +
+k(cid:107)2 + 3t
+
+Substituting the above result into eq. (57), we obtain
+k − xt
+
+above inequality, we further obtain that
+E[T ] ≤ 1
+
+(cid:16)
+k) + ct(cid:107)xt
+
+L − 1
+
+k − xt
+k − xt
+1 + 1
+β
+
+(cid:17)(cid:107)xt+1
+
+k − x0
+
+k(cid:107)2(cid:105)
+(cid:105)(cid:107)xt+1
+
+E[T ] ≤ 1
+≤ 1
+≤ 1
+
+) + ct+1(cid:107)xt+1
+) + ct+1
+
+k(cid:107)2 + ηL2(cid:107)xt
+
+k − x0
+
+k(cid:107)2 + 3t
+
+with β > 0. Then, we can upper bound
+
+Recalling that Rt
+Rt+1
+
+as
+
+(cid:16) L
+2 − 1
+
+k − xt
+k − x0
+
+) + ct+1
+L − 1
+
+k, xt
+k − x0
+
+k − xt
+
+k(cid:107)2
+
+k − xt+1
+
++ L
+
+2 − 1
+
+2η
+
+k(cid:105)(cid:1)(cid:3)
+
+E[F (xt+1
+
+k
+
+(63)
+(64)
+
+(65)
+
+k − xt
+
+k − xt
+
+(58)
+
+(59)
+
+(60)
+
+k) − vt
+
+ct+1
+
+(cid:3) .
+
+k
+
+k + ik
+
++ t
+k
+
+.
+
+k
+
+(62)
+
+k − x0
+
+F (xt+1
+
+k
+
+F (xt
+
+k) +
+
+k − x0
+
+k − x0
+
+k(cid:107)2 +
+
+2η
+
+k
+
+k
+
+(cid:16)
+
+k.
+
+(61)
+
++ t
+k
+
+k.
+
+2η
+
+1 + 1
+β
+
+k
+
+Rt+1
+
+(cid:105)
+
+(cid:105)
+
+2
+
+k
+
+k
+
+k
+
+k
+
+2η
+
+2η
+
+2η
+
+2η
+
+2η
+
+F (xt
+
+k) +
+
+β
+
+(66)
+
+(67)
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+= ηL2m(cid:0)(1 + β)m−t − 1(cid:1) ≤ ηL2m (e − 1) ≤ 2ηL2m,
+
+Setting β = 1/m in ct and observe that
+
+ct = ηL2 (1+β)m−t−1
+
+β
+
+which further implies that
+
+ct+1
+
+(cid:16)
+
+(cid:17)
+
+1 + 1
+β
+
++ L
+
+2 ≤ 2ηL2m(1 + m) ≤ 4ηL2m2 + L
+
+2 = 4ρLm2 + L
+
+2 ≤ 1
+2η .
+
+Also note that ct = ct+1(1 + β) + ηL2. Collecting all these facts, Rt+1
+
+k + E(cid:104)(cid:16)
+
+k ≤ Rt
+Rt+1
+
+L − 1
+
+2η
+
+(cid:105)
+
+can be further upper bounded by
+k(cid:107)2 + 3t
+
+k
+
+.
+
+Telescoping eq. (70) from t = 1 to t = m − 1, we obtain
+
+(cid:34)
+
+E[F (xm
+
+k )] ≤ E
+
+F (¯x1
+
+k) + c1(cid:107)¯x1
+
+k − x0
+
+k(cid:107)2 +
+
+(cid:17)(cid:107)¯xt+1
+
+k − xt
+
+k(cid:107)2 +
+
+k
+
+(cid:17)(cid:107)¯xt+1
+k − xt
+(cid:16)
+m−1(cid:88)
+
+L − 1
+
+2η
+
+t=1
+
+Again, telescoping eq. (70) from t = 0 to t = m − 1 we obtain
+
+E[F (yk+1)] ≤ E[F (xm
+
+k )] ≤ E[F (yk)] +
+
+(L − 1
+
+m−1(cid:88)
+
+2η )E(cid:2)(cid:107)¯xt+1
+
+k − xt
+
+k(cid:107)2(cid:3) + 3
+
+m−1(cid:80)
+m−1(cid:80)
+
+t=0
+
+t=0
+
+Assume
+
+that 3
+
+E [t
+
+E(cid:2)(cid:107)¯xt+1
+k − xt
+m−1(cid:80)
+
+k] ≤ α
+
+k(cid:107)2(cid:3) > 0, because otherwise the algorithm is terminated. Assume that there exists α > 0 such
+E(cid:2)(cid:107)¯xt+1
+
+2η − L − α > 0. Then eq. (72) further implies that
+
+k(cid:107)2(cid:3) and 1
+
+k − xt
+
+t=0
+
+t=0
+
+t=0
+
+m−1(cid:88)
+
+t=1
+
+m−1(cid:88)
+
+(cid:35)
+
+3t
+k
+
+.
+
+E(cid:2)t
+
+k
+
+(cid:3) .
+
+(68)
+
+(69)
+
+(70)
+
+(71)
+
+(72)
+
+(73)
+
+(75)
+
+(76)
+
+That is, we have E[F (yk)] ≤ E[F (yk−1)] ≤ . . . ≤ F (y0), and hence E[F (yk)] ↓ F ∗. We can further upper bound
+eq. (71) as
+
+E[F (yk+1)] ≤ E[F (xm
+
+k )] ≤ E[F (yk)] +
+
+(L − 1
+
+E[F (xm
+
+k )] ≤E
+
+k) + c1(cid:107)¯x1
+
+k − x0
+
+F (¯x1
+
+(cid:34)
+(cid:34)
+(cid:34)
+≤E(cid:2)F (¯x1
+
+≤E
+
+≤E
+
+F (¯x1
+
+F (¯x1
+
+2η
+
+t=1
+
+(cid:16)
+
+k(cid:107)2 +
+
+m−1(cid:88)
+k(cid:107)2 −(cid:16)
+(cid:17)(cid:107)¯x1
+(cid:17)(cid:107)¯x1
+
+k − x0
+
+L − 1
+
+(cid:17)(cid:107)¯xt+1
+(cid:17)(cid:107)¯x1
+k − x0
+(cid:16)
+m−1(cid:88)
+k(cid:107)2(cid:105)
+k − x0
+
+k(cid:107)2 +
+
+L − 1
+
+L − 1
+
+t=0
+
+2η
+
+.
+
+k − x0
+
+k) + c1(cid:107)¯x1
+
+(cid:16)
+k)(cid:3) + E(cid:104)(cid:16)
+
+k) +
+
+c1 + 1
+2η
+
+2ηL2m + 1
+2η
+
+m−1(cid:88)
+
+t=0
+
+k − xt
+
+k(cid:107)2(cid:3) .
+
+2η + α)E(cid:2)(cid:107)¯xt+1
+(cid:35)
+(cid:17)(cid:107)¯xt+1
+k − xt
+(cid:35)
+
+m−1(cid:88)
+
+L − 1
+
+3t
+k
+
+t=1
+
+2η
+
+k − xt
+k(cid:107)2 +
+(cid:16)
+m−1(cid:88)
+(cid:17)(cid:107)¯xt+1
+
+k(cid:107)2 +
+
+2η + α
+
+t=0
+
+k − xt
+
+k(cid:107)2
+
+k(cid:107)2 +
+
+(cid:35)
+
+m−1(cid:88)
+
+t=0
+
+3t
+k
+
+(74)
+
+Deﬁne rk = E [F (yk) − F ∗], and suppose rk > 0 for all k (otherwise the algorithm terminates in ﬁnite steps). Applying
+the KŁ condition with θ = 1/2, we obtain
+
+Setting x = ¯x1
+
+k, we obtain
+
+1
+
+c (F (x) − F ∗)
+
+1
+c2 (F (¯x1
+
+k) − F ∗) ≤ dist2
+
+∂F (¯x1
+
+1
+
+2 ≤ dist∂F (x)(0).
+
+k)(0) ≤(cid:16)
+
+(cid:17)2 (cid:107)¯x1
+
+k − yk(cid:107)2.
+
+L + 1
+η
+
+Convergence Analysis of Proximal Gradient with Momentum for Nonconvex Optimization
+
+Taking expectation on both sides and using the result from eq. (74), we obtain
+
+E[F (xm
+
+k ) − F ∗] − 2ηL2m+ 1
+
+2η
+
+c2
+
+1
+c2
+
+Note that x0
+
+k = yk. Then rearranging the above inequality yields
+c2 E[F (yk+1) − F ∗] ≤ 1
+
+k ) − F ∗] ≤
+
+1
+
+c2 E[F (xm
+
+L + 1
+η
+
+(cid:20)(cid:16)
+
+E(cid:2)(cid:107) ¯xk
+
+1 − x0
+
+k(cid:107)2(cid:3) ≤(cid:16)
+(cid:17)2
+
++
+
+L + 1
+η
+
+(cid:17)2 E(cid:2)(cid:107)¯x1
+k − yk(cid:107)2(cid:3) .
+(cid:21)
+k − yk(cid:107)2(cid:3)
+E(cid:2)(cid:107)¯x1
+
+2ηL2m+ 1
+2η
+
+c2
+
+(E[F (yk)] − E[F (yk+1)]) ,
+
+. Then, induction yields that
+
+2ηL2m+ 1
+2η
+
+≤ (L+ 1
+
++
+
+η )2
+2η −L−α
+
+1
+
+c2
+
+η )2
+2η −L−α
+
+1
+
+(cid:19)k+1
+
+(cid:18) d
+
+d + 1
+
+(F (y0) − F ∗) .
+
+(77)
+
+(78)
+
+(79)
+
+(80)
+
+which can be rewritten as rk+1 ≤ d (rk − rk+1) with d =
+
+c2(L+ 1
+
++2ηL2m+ 1
+2η
+
+rk+1 ≤ d
+d + 1
+
+rk ≤
+
+

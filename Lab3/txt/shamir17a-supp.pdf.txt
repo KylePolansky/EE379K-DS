@@ -1,0 +1,2796 @@
+Online Learning with Local Permutations and Delayed Feedback
+
+A. Proofs
+A.1. Analysis Of The Delayed Permuted Mirror Descent Algorithm
+
+We will use throughout the proofs the well known Pythagorean Theorem for Bregman divergences, and the ’projection’
+lemma that considers the projection step in the algorithm.
+Lemma 1. Pythagorean Theorem for Bregman divergences
+Let v be the projection of w onto a convex set W w.r.t Bregman divergence (cid:52)ψ: v = argminu∈W(cid:52)ψ (u, w), then:
+(cid:52)ψ (u, w) ≥ (cid:52)ψ (u, v) + (cid:52)ψ (v, w)
+Lemma 2. Projection Lemma
+Let W be a closed convex set and let v be the projection of w onto W, namely,
+v = argmin
+
+(cid:107)x − w(cid:107)2. Then, for every u ∈ W, (cid:107)w − u(cid:107)2 − (cid:107)v − u(cid:107)2 ≥ 0
+
+x∈W
+
+The following lemma gives a bound on the distance between two consequent predictions when using the Euclidean mirror
+map:
+Lemma 3. Let g ∈ Rn s.t. (cid:107)g(cid:107)2 < G, W a convex set, and η > 0 be ﬁxed. Let w ∈ W and w2 = w − η · g. Then, for
+w(cid:48) = argmin
+u∈W
+
+2, we have that (cid:107)w − w(cid:48)(cid:107) ≤ η · G
+
+(cid:107)w2 − u(cid:107)2
+
+Proof. From the projection lemma: (cid:107)w2 − w(cid:107)2
+(cid:107)w2 − w(cid:107)2 = (cid:107)η · g(cid:107)2 ≤ η · G. and so we get: (cid:107)w(cid:48) − w(cid:107)2 ≤ (cid:107)w2 − w(cid:107)2 ≤ η · G
+
+2 ≥ (cid:107)w(cid:48) − w(cid:107)2
+
+2 and so: (cid:107)w2 − w(cid:107)2 ≥ (cid:107)w(cid:48) − w(cid:107)2. From deﬁnition:
+
+We prove a modiﬁcation of Lemma 2 given in (Menache et al., 2014) in order to bound the distance between two consequent
+predictions when using the negative entropy mirror map:
+Lemma 4. Let g ∈ Rn s.t. (cid:107)g(cid:107)1 ≤ G for some G > 0 and let η > 0 be ﬁxed, with η < 1√
+2·G
+w in the n − simplex, if we deﬁne w(cid:48) to be the new distribution vector
+
+. For any distribution vector
+
+Then (cid:107)w − w(cid:48)(cid:107)1 ≤ 3ηG
+Proof. Since (cid:107)g(cid:107)∞ < G and η < 1√
+2·G
+
+(cid:107)w − w(cid:48)(cid:107)1 =
+
+|wi − w(cid:48)
+
+i| =
+
+n(cid:88)
+
+i=1
+
+∀i ∈ {1, ..., n} , w(cid:48)
+
+i =
+
+(cid:80)n
+wi · exp (−η · gi)
+j=1 wj · exp (−η · gj)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)wi ·
+
+(cid:32)
+
+1 −
+
+(cid:80)n
+j=1 wj · exp (−η · gj)
+
+exp (−η · gi)
+
+(cid:33)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+n(cid:88)
+
+i=1
+
+we get that ∀i : |η · gi| < 1. We have that:
+
+Since (cid:107)w(cid:107)1 = 1, we can apply Holder’s inequality, and upper bound the above by
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)1 −
+
+i
+
+max
+
+exp (−η · gi)
+
+(cid:80)n
+j=1 wj · exp (−η · gj)
+1+x for all |x| ≤ 1, we know that
+1 − η · gi ≤ exp (−η · gi) ≤
+
+1
+
+1 + η · gi
+
+Using the inequality 1 − x ≤ exp (−x) ≤ 1
+
+and since −ηG ≤ η · gi ≤ ηG we have that
+
+and so we get:
+
+1 − η · gi ≤ exp (−η · gi) ≤
+
+1
+
+1 + η · gi
+
+≤
+
+1
+
+1 − ηG
+
+1 −
+
+1
+
+1+ηgi
+1 + ηG
+
+≤ 1 −
+
+(cid:80)n
+j=1 wj · exp (−η · gj)
+
+exp (−η · gi)
+
+≤ 1 − 1 − η · gi
+1−ηG
+
+1
+
+Online Learning with Local Permutations and Delayed Feedback
+
+Using again the fact that −ηG ≤ η · gi ≤ ηG, we have
+
+1 −
+
+1
+
+1−ηG
+1 + ηG
+
+≤ 1 −
+
+exp (−η · gi)
+
+(cid:80)n
+j=1 wj · exp (−η · gj)
+(cid:80)n
+j=1 wj · exp (−η · gj)
+
+exp (−η · gi)
+
+≤ 1 − 1 − ηG
+1−ηG
+
+1
+
+≤ 1 − (1 − ηG)2 = 2ηG + η2G2
+
+=⇒ −η2G2
+
+1 − η2G2 = 1 −
+
+Now, since ηG < 1, we get that:
+
+and so we can conclude that
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)1 −
+
+max
+
+i
+
+−η2G2
+1 − η2G2 ≤ 1 −
+
+1
+
+1 − η2G2 ≤ 1 −
+(cid:80)n
+j=1 wj · exp (−η · gj)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ max
+
+exp (−η · gi)
+
+i
+
+(cid:80)n
+j=1 wj · exp (−η · gj)
+
+exp (−η · gi)
+
+Since η < 1√
+
+2G
+
+, we get (η · G)2 < 1
+
+2. Thus we get:
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)1 −
+
+max
+
+i
+
+(cid:80)n
+j=1 wj · exp (−η · gj)
+
+exp (−η · gi)
+
+≤ 2ηG + ηG = 3ηG
+
+(cid:19)
+
+≤ max
+
+i
+
+(cid:18) ηG
+
+1 − η2G2 , 3ηG
+
+(cid:19)
+
+1 − η2G2
+
+(cid:18)(cid:12)(cid:12)(cid:12)(cid:12) −η2G2
+(cid:12)(cid:12)(cid:12)(cid:12) ,|3ηG|
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ max
+
+i
+
+(2ηG, 3ηG) ≤ 3ηG
+
+which gives us our desired bound.
+
+With the above two lemmas in hand, we bound the distance between consequent predictors by cηG, where c is a different
+constant in each mirror map: c = 1 for the euclidean case, and c = 3 for the negative entropy mirror map.
+Note that both mapping are 1-strongly convex with respect to their respective norms. For other mappings with a different
+strong convexity constant, one would need to scale the step sizes according to the strong convexity parameter in order to
+get the bound.
+
+A.1.1. PROOF OF THEOREM 1
+
+We provide an upper bound on the regret of the algorithm, by competing against the best ﬁxed action in each one of the
+sets of iterations- the ﬁrst τ iterations and the last M − τ iterations in each block. This is an upper bound on competing
+against the best ﬁxed predictor in hindsight for the entire sequence. Formally, we bound:
+
+R(T ) = E
+
+≤ E
+
+(cid:35)
+
+ft (w∗)
+
+ft (wt) − ft
+
+t=1
+
+t=1
+
+(cid:34) T(cid:88)
+ft (wt) − T(cid:88)
+ M·i+τ(cid:88)
+ T
+M −1(cid:88)
+M·i+τ(cid:88)
+M −1(cid:88)
+
+t=M·i+1
+
+i=0
+
+T
+
+where
+
+w∗
+f = argmin
+w∈W
+
+ft (w) and w∗
+
+s = argmin
+w∈W
+
+i=0
+
+t=M·i+1
+
+(cid:0)w∗
+
+f
+
+(cid:1) +
+
+M·(i+1)(cid:88)
+
+t=M·i+τ +1
+
+
+
+ft (wt) − ft (w∗
+s )
+
+T
+
+M·(i+1)(cid:88)
+
+M −1(cid:88)
+(cid:17) ≤ B2 and (cid:52)ψ (w∗
+
+t=M·i+τ +1
+
+i=0
+
+ft (w)
+
+(cid:16)
+
+where expectation is taken over the randomness of the algorithm.
+The diameter of the domain W is bounded by B2, and so (cid:52)ψ
+0) ≤ B2. We start with a
+general derivation that will apply both for ws and for wf simultaneously. For the following derivation we use the notation
+wj, wj+1 omitting the f, s superscript, for denoting subsequent updates of the predictor vector, whether it is ws or wf .
+
+w∗
+f , wf
+
+s , ws
+
+0
+
+Denote by gj the gradient used to update wj, i.e., ∇ψ
+
+Looking at the update step in the algorithm, we have that gj = 1
+
+(cid:16)
+
+w, wj+ 1
+
+2
+
+(cid:17)
+
+.
+
+(cid:52)ψ
+
+Online Learning with Local Permutations and Delayed Feedback
+
+2
+
+(cid:17)
+
+wj+ 1
+
+(cid:17)(cid:17)
+
+= ∇ψ (wj) − η · gj, and wj+1 = argmin
+w∈W
+and thus:
+
+(cid:16)
+η ·(cid:16)∇ψ (wj) − ∇ψ
+(cid:16)
+(cid:17)(cid:17)(cid:69)
+(cid:16)∇ψ (wj) − ∇ψ
+(cid:16)
+(cid:17) − (cid:52)ψ
+(cid:16)
+w∗, wj+ 1
+(cid:16)
+(cid:17) − (cid:52)ψ (w∗, wj+1) − (cid:52)ψ
+
+·(cid:68)
+·(cid:16)(cid:52)ψ (w∗, wj) + (cid:52)ψ
+(cid:16)
+
+wj − w∗,
+
+(cid:17)(cid:17)
+
+(cid:17)(cid:17)
+
+wj, wj+ 1
+
+wj+1, wj+ 1
+
+wj, wj+ 1
+
+wj+ 1
+
+wj+ 1
+
+(cid:16)
+
+2
+
+2
+
+2
+
+2
+
+2
+
+2
+
+(cid:16)
+
+When we sum terms for all updates of the predictor, wf or ws respectively, the terms (cid:52)ψ (w∗, wj) − (cid:52)ψ (w∗, wj+1) will
+result in a telescopic sum, canceling all terms expect the ﬁrst and last. Thus we now concentrate on bounding the term:
+(cid:52)ψ
+
+(cid:17) − (cid:52)ψ
+
+(cid:17)
+
+.
+
+(cid:16)
+
+2
+
+wj, wj+ 1
+(cid:52)ψ
+
+wj, wj+ 1
+
+2
+
+≤
+
+(cid:17)
+
+= ψ (wj) − ψ (wj+1) −(cid:68)
+(cid:17)(cid:69) − 1
+
+(cid:16)
+
+wj+ 1
+
+2
+
+2
+
+wj − wj+1,∇ψ
+· (cid:107)wj − wj+1(cid:107)2
+
+(cid:17)(cid:69)
+
+(cid:16)
+
+wj+ 1
+
+2
+
+wj − wj+1,∇ψ (wj) − ∇ψ
+
+We now use the Pythagorean Theorem to get:
+
+≤ 1
+η
+
+(cid:104)wj − w∗, gj(cid:105) =
+
+=
+
+1
+η
+1
+η
+
+·(cid:16)(cid:52)ψ (w∗, wj) + (cid:52)ψ
+(cid:16)
+(cid:17) − (cid:52)ψ
+(cid:68)
+
+wj+1, wj+ 1
+
+wj+1, wj+ 1
+
+(cid:16)
+
+2
+
+2
+
+ψ 1-strong convex
+= (cid:104)wj − wj+1, η · gj(cid:105) − 1
+2
+≤ η · G · (cid:107)wj − wj+1(cid:107) − 1
+2
+≤ (η · G)2
+
+2
+
+· (cid:107)wj − wj+1(cid:107)2
+· (cid:107)wj − wj+1(cid:107)2
+
+where the last inequality stems from the fact that
+
+We now continue with the analysis referring to wf and ws separately. Summing over j = τ + 1 to(cid:0) T
+
+− η·G√
+
+1√
+2
+
+2
+
+M + 1(cid:1) · τ for wf
+
+M τ iterations in which the ﬁrst sub-algorithm is in use), and from j = 1 to T
+
+M · (M − τ ) for ws (these are
+
+(cid:16)(cid:107)wj − wj+1(cid:107) · √
+
+(cid:17)2 ≥ 0
+
+(these are the T
+the T
+For wf :
+( T
+
+( T
+
+( T
+
+wf
+
+j−τ
+
+j=τ +1
+
+j=τ +1
+
+f , gj
+
+(cid:16)
+
+(cid:69)
+
+j − w∗
+wf
+
+j − w∗
+wf
+(cid:68)
+
+f ,∇fT1(j−τ )
+(cid:16)
+
+M (M − τ ) iterations in which the second sub-algorithm is in use) we get:
+(cid:68)
+M +1)·τ(cid:88)
+M +1)·τ(cid:88)
+·(cid:68)
+M +1)·τ(cid:88)
+·(cid:16)(cid:52)ψ
+M +1)·τ(cid:88)
+·(cid:16)(cid:52)ψ
+M +1)·τ(cid:88)
+(cid:16)
+M +1)·τ(cid:88)
+
+(cid:17)(cid:69)
+(cid:17) − ∇ψ
+(cid:16)
+(cid:16)
+
+(cid:16)∇ψ
+(cid:17)
+(cid:17)
+(cid:17) − (cid:52)ψ
+
+(cid:17)(cid:17)(cid:69)
+(cid:17) − (cid:52)ψ
+(cid:17) − (cid:52)ψ
+
+j − w∗
+wf
+f ,
+(cid:16)
+(cid:16)
+
+(cid:16)
+(cid:16)
+M +1)·τ(cid:88)
+
+w∗
+f , wf
+
+w∗
+f , wf
+
+w∗
+f , wf
+
+w∗
+f , wf
+
++ (cid:52)ψ
+
++ (cid:52)ψ
+
+wf
+j , wf
+
+wf
+j , wf
+
+(cid:52)ψ
+
+(cid:52)ψ
+
+w∗
+f , wf
+
+w∗
+f , wf
+
+(cid:16)
+
+(cid:17)
+
+(cid:16)
+
+j=τ +1
+
+j=τ +1
+
+j=τ +1
+
+wf
+j
+
+j+ 1
+2
+
+j+ 1
+2
+
+j+ 1
+2
+
+j+ 1
+2
+
+≤
+
+ws
+
+1
+η
+
+1
+η
+
+1
+η
+
+( T
+
+j
+
+j
+
+( T
+
+( T
+
+( T
+
+j+1
+
+j+1
+
+=
+
+=
+
+=
+
+j
+
+·
+
+≤ 1
+η
+
++
+
+·
+
+1
+η
+
+j=τ +1
+
+j=τ +1
+
+(cid:17)(cid:17)
+(cid:17) − (cid:52)ψ
+(cid:16)
+
+j , wf
+wf
+
+(cid:16)
+
+(cid:17)(cid:17)
+
+j+ 1
+2
+
+wf
+j+1, wf
+
+(cid:17) − (cid:52)ψ
+
+(cid:16)
+
+j+ 1
+2
+
+(cid:17)
+
+j+1, wf
+wf
+
+j+ 1
+2
+
+Online Learning with Local Permutations and Delayed Feedback
+
+(cid:19)
+
+M +1)·τ(cid:88)
+
+( T
+
+j=τ +1
+
+·
+
+1
+η
+
+(cid:16)
+
+(cid:17) − (cid:52)ψ
+
+(cid:16)
+
+(cid:52)ψ
+
+j , wf
+wf
+
+j+ 1
+2
+
+j+1, wf
+wf
+
+j+ 1
+2
+
+(cid:17)
+
+(cid:16)
+(cid:16)
+
+(cid:18)
+
+(cid:17) − (cid:52)ψ
+(cid:17)
+
+=
+
+1
+η
+
+· (cid:52)ψ
+
+w∗
+f , wf
+
+τ +1
+
+≤ 1
+ηf
+≤ 1
+ηf
+
+· (cid:52)ψ
+
+· B2 +
+
++
+
+τ +1
+
+1
+ηf
+
+w∗
+f , wf
+· τ · ηf · G2
+
+T
+M
+
+2
+
++
+
+w∗
+f , wf
+M +1)·τ
+( T
+· τ · (ηf · G)2
+
+· T
+M
+
+2
+
+For ws:
+
+s ,∇fT2(j)
+
+T
+
+T
+
+T
+
+=
+
+=
+
+j=1
+
+j=1
+
+(cid:11)
+
+s , gj
+
+j − w∗
+
+j − w∗
+
+M ·(M−τ )(cid:88)
+(cid:10)ws
+M ·(M−τ )(cid:88)
+(cid:10)ws
+·(cid:68)
+M ·(M−τ )(cid:88)
+·(cid:16)(cid:52)ψ
+M ·(M−τ )(cid:88)
+(cid:0)w∗
+·(cid:16)(cid:52)ψ
+M ·(M−τ )(cid:88)
+(cid:0)w∗
+M ·(M−τ )(cid:88)
+(cid:0)w∗
+
+(cid:52)ψ
+
+1
+η
+
+1
+η
+
+1
+η
+
+≤
+
+j=1
+
+j=1
+
+j=1
+
+=
+
+·
+
+T
+
+T
+
+T
+
+≤ 1
+η
+
+j − w∗
+ws
+s ,
+
+j=1
+
+· (cid:52)ψ (w∗
+
+1) − (cid:52)ψ
+
+s , ws
+
+s , ws
+j
+
+(cid:16)
+
+s , ws
+j
+
+s , ws
+j
+
+j
+
+j
+
+(cid:1)(cid:11)
+(cid:0)ws
+(cid:16)∇ψ(cid:0)ws
+(cid:1) − ∇ψ
+(cid:16)
+(cid:1) + (cid:52)ψ
+(cid:16)
+(cid:1) + (cid:52)ψ
+(cid:0)w∗
+(cid:1) − (cid:52)ψ
+
+s , ws
+
+ws
+
+ws
+
+(cid:16)
+
+ws
+
+j+ 1
+2
+
+(cid:17)(cid:17)(cid:69)
+(cid:17) − (cid:52)ψ
+(cid:17) − (cid:52)ψ
+(cid:1) +
+
+(cid:16)
+(cid:0)w∗
+(cid:16)
+M ·(M−τ )(cid:88)
+
+· (cid:52)ψ
+
+1
+η
+
+T
+
+j , ws
+
+j+ 1
+2
+
+j , ws
+
+j+ 1
+2
+
+j+1
+
+(cid:17)
+
+·
+
++
+
+1
+η
+
+w∗
+s , ws
+M +1)·τ
+( T
+· (M − τ ) · (ηs · G)2
+
+2
+
+j=1
+
+· (cid:52)ψ (w∗
+
+s , ws
+
+1) +
+
+1
+ηs
+
+· T
+M
+
+· B2 +
+
+T
+M
+
+· (M − τ ) · ηs · G2
+
+2
+
+=
+
+1
+η
+
+≤ 1
+ηs
+≤ 1
+ηs
+
+w∗
+s , ws
+
+j+ 1
+2
+
+(cid:17)(cid:17)
+(cid:16)
+(cid:1) − (cid:52)ψ
+(cid:16)
+(cid:17) − (cid:52)ψ
+(cid:17) − (cid:52)ψ
+
+ws
+
+ws
+
+j+ 1
+2
+
+s , ws
+
+j+1
+
+j+1, ws
+
+j+ 1
+2
+
+ws
+
+j , ws
+
+j+ 1
+2
+
+(cid:16)
+
+(cid:52)ψ
+
+ws
+
+j , ws
+
+j+1, ws
+
+j+ 1
+2
+
+(cid:16)
+
+ws
+
+j+1, ws
+
+j+ 1
+2
+
+(cid:17)
+
+(cid:17)(cid:17)
+(cid:17)
+
+We are after bounding the regret, which in itself is upper bounded by the sum of the regret accumulated by each sub-
+algorithm, considering iterations in the ﬁrst τ and last M −τ per block separately, as mentioned above. Using the convexity
+of ft for all t, we bound these terms:
+
+M·i+τ(cid:88)
+M·i+τ(cid:88)
+
+t=M·i+1
+
+t=M·i+1
+
+i=0
+
+ T
+M −1(cid:88)
+ T
+M −1(cid:88)
+ T
+(cid:68)
+M ·τ(cid:88)
+
+i=0
+
+E
+
+≤ E
+
+= E
+
+ft (wt) − ft
+
+(cid:10)wt − w∗
+
+T
+
+f
+
+i=0
+
+t=M·i+τ +1
+
+M·(i+1)(cid:88)
+M −1(cid:88)
+(cid:1) +
+(cid:0)w∗
+M −1(cid:88)
+M·(i+1)(cid:88)
+f ,∇ft (wt)(cid:11) +
+(cid:17)(cid:69)
+(cid:16)
+M ·(M−τ )(cid:88)
+(cid:10)ws
+
+i=0
+
++
+
+T
+
+T
+
+wf
+j
+
+t=M·i+τ +1
+
+j − w∗
+wf
+
+f ,∇fT1(j)
+
+j − w∗
+
+s ,∇fT2(j)+τ
+
+ft (wt) − ft (w∗
+s )
+
+(cid:104)wt − w∗
+
+s ,∇ft (wt)(cid:105)
+
+(cid:1)(cid:11)
+
+(cid:0)ws
+
+j
+
+
+
+
+
+j=1
+
+j=1
+
+In the last equality of the above derivation, we simply replace notations, writing the gradient ∇ft (wt) in notation of T1
+
+Online Learning with Local Permutations and Delayed Feedback
+
+and T2. T1 contains all time points in the ﬁrst τ iterations of each block, and T2 contains all time points in the ﬁrst M − τ
+iterations of each block.
+
+bound since they use the delayed gradient, and so we need to take a few more steps in order to be able to bound the regret.
+We begin with wf :
+
+M ·(M−τ )
+
+j=1
+
+Note
+
+(cid:80) T
+
+M −1(cid:88)
+
+T
+
+that what we
+j − w∗
+
+(cid:10)ws
+(cid:10)wt − w∗
+
+have
+s ,∇fT2(j)
+
+(cid:0)ws
+f ,∇ft (wt)(cid:11) =
+
+j
+
+M·i+τ(cid:88)
+
+i=0
+
+t=M·i+1
+
+is (cid:80)( T
+
+bounded
+
+T
+
+so
+
+far
+
+j=τ +1
+
+and
+
+(cid:104)wf
+
+M +1)·τ
+
+for wf
+
+j−τ )(cid:105)
+
+j − w∗
+
+f ,∇fT1(j−τ )(wf
+
+(cid:1)(cid:11) for ws, which are not the terms we need to bound in order to get a regret
+(cid:68)
+M ·τ(cid:88)
+(cid:68)
+M ·τ(cid:88)
+M +1)·τ(cid:88)
+
+j+τ − w∗
+wf
+(cid:68)
+
+j+τ ,∇fT1(j)
+
+f ,∇fT1(j)
+
+f ,∇fT1(j)
+
+j − w∗
+wf
+
+(cid:17)(cid:69)
+
+(cid:17)(cid:69)
+
+(cid:16)
+
+(cid:16)
+
+(cid:16)
+
+wf
+j
+
+wf
+j
+
+wf
+j
+
+( T
+
+j=1
+
+j=1
+
+T
+
+=
+
+=
+
+j − w∗
+wf
+
+f ,∇fT1(j−τ )
+
+j−τ − wf
+wf
+
+(cid:68)
+j − wf
+wf
+(cid:68)
+(cid:17)(cid:69)
+(cid:68)
+
++
+
++
+
+(cid:17)(cid:69)
+(cid:17)(cid:69)
+(cid:16)
+M +1)·τ(cid:88)
+M +1)·τ(cid:88)
+M +1)·τ(cid:88)
+
+j=τ +1
+
+j=τ +1
+
+j−τ
+
+wf
+
+( T
+
+( T
+
+( T
+
+j ,∇fT1(j−τ )
+(cid:16)
+
+j−τ − wf
+wf
+
+j ,∇fT1(j−τ )
+
+wf
+
+j−τ
+
+j (cid:107) · (cid:107)∇fT1(j−τ )
+
+wf
+
+(cid:107)wf
+
+j−τ − wf
+τ(cid:88)
+
+(cid:107)wf
+
+j−i − wf
+
+j−i+1(cid:107) · G
+
+j=τ +1
+
+i=1
+
+wf
+
+j−τ
+
+(cid:16)
+(cid:17)(cid:69)
+(cid:17)(cid:107)
+
+j−τ
+
+(cid:16)
+
+j=τ +1
+
+≤ 1
+ηf
+
+≤ 1
+ηf
+
+≤ 1
+ηf
+
+· B2 +
+
+· B2 +
+
+· B2 +
+
+· τ · ηf · G2
+
+2
+
+· τ · ηf · G2
+
+2
+
+· τ · ηf · G2
+
+2
+
+T
+M
+
+T
+M
+
+T
+M
+
++
+
++
+
++
+
+The last term in the above derivation, is the sum of differences between consecutive predictors. This difference, is deter-
+mined by the mirror map in use, the step size ηf , and the bound over the norm of the gradient used in the update stage of the
+algorithm, G. This is because every consecutive predictor is received by taking a gradient step from the previous predictor,
+in the dual space, with a step size ηf , and projecting back to the primal space by use of the bregman divergence with the
+speciﬁc mirror map in use. We denote the bound on this difference by Ψ(ηf ,G), i.e., ∀j, j + 1 : (cid:107)wf
+j+1(cid:107) ≤ Ψ(ηf ,G).
+Continuing our derivation, we have:
+
+j − wf
+
+Since this upper bound does not depend on the permutation,and holds for every sequence, it holds also in expectation, i.e.
+
+ft (wt) − ft
+
+· B2 +
+
+T
+M
+
+· τ · ηf · G2
+
+2
+
++
+
+T
+M
+
+· τ 2 · Ψ(ηf ,G) · G
+
+M +1)·τ(cid:88)
+
+( T
+
+τ(cid:88)
+
+j=τ +1
+
+i=1
+
+Ψ(ηf ,G) · G
+
+· τ 2 · Ψ(ηf ,G) · G
+
+T
+M
+
+≤ 1
+ηf
+≤ 1
+ηf
+
+· B2 +
+
+· B2 +
+
+T
+M
+
+T
+M
+
++
+
++
+
+2
+
+· τ · ηf · G2
+· τ · ηf · G2
+(cid:0)w∗
+
+2
+
+f
+
+(cid:1) ≤ 1
+
+ηf
+
+We now turn to ws
+
+M·i+τ(cid:88)
+
+t=M·i+1
+
+E
+
+i=0
+
+ T
+M −1(cid:88)
+M·(i+1)(cid:88)
+M −1(cid:88)
+M·(i+1)(cid:88)
+M −1(cid:88)
+
+t=M·i+τ +1
+
+i=0
+
+T
+
+T
+
+≤
+
+i=0
+
+t=M·i+τ +1
+
+ft (wt) − ft (w∗
+s )
+
+(cid:104)wt − w∗
+
+s ,∇ft (wt)(cid:105)
+
+Online Learning with Local Permutations and Delayed Feedback
+
+T
+
+M ·(M−τ )(cid:88)
+M ·(M−τ )(cid:88)
+
+j=1
+
+T
+
+=
+
+=
+
+(cid:10)ws
+(cid:10)ws
+
+j=1
+
+· B2 +
+
+T
+M
+
+≤ 1
+ηs
+
+j − w∗
+
+j − w∗
+
+T
+
+j
+
+s ,∇fT2(j)
+
+s ,∇fT2(j)+τ
+
+(cid:1)(cid:11)
+(cid:0)ws
+M ·(M−τ )(cid:88)
+(cid:0)ws
+(cid:1)(cid:11) +
+(cid:10)ws
+M ·(M−τ )(cid:88)
+(cid:10)ws
+· (M − τ ) · ηs · G2
+(cid:1) − ∇fT2(j)
+(cid:0)ws
+
+s ,∇fT2(j)+τ
+
+j − w∗
+
+j − w∗
+
+j − w∗
+
+j=1
+
+j=1
+
++
+
+2
+
+j
+
+j
+
+T
+
+We now look at the expression(cid:10)ws
+
+s ,∇fT2(j)+τ
+
+s ,∇fT2(j)+τ
+
+j
+
+j
+
+(cid:0)ws
+(cid:1) − ∇fT2(j)
+(cid:0)ws
+(cid:1)(cid:11)
+(cid:1)(cid:11)
+(cid:0)ws
+(cid:1) − ∇fT2(j)
+(cid:0)ws
+(cid:1)(cid:11) for any j.
+
+j
+
+j
+
+(cid:0)ws
+
+j
+
+j only depends on gradients of time points: T2 (1) , T2 (2) , ..., T2 (j − 1).
+
+We ﬁrst notice that for any j, ws
+We also notice that given the functions received at these time points, i.e, given fT2(1), fT2(2), ..., fT2(j−1), ws
+a random variable.
+We have that for all j, T2 (j) and T2 (j) + τ are both time points that are part of the same M-sized block. Suppose we have
+observed n functions of the block to which T2 (j) and T2 (j) + τ belong. All of these n functions are further in the past
+than both T2 (j) and T2 (j) + τ, because of the delay of size τ. We have M − n functions in the block that have not been
+observed yet, and since we performed a random permutation within each block, all remaining functions in the block have
+j , the expected value of the current and delayed gradient are the same, since we
+the same expected value. Formally, given ws
+i=1 ∇fT2(j)+i
+have: E[∇fT2(j)+τ
+j ]. As mentioned above, this stems
+from the random permutation we performed within the block - all M − n remaining functions (that were not observed yet
+in this block) have an equal (uniform) probability of being in each location, and thus the expected value of the gradients is
+equal. From the law of total expectation we have that
+
+(cid:1) = E[∇fT2(j)
+
+(cid:1)|ws
+
+(cid:1)|ws
+
+j is no longer
+
+(cid:0)ws
+
+(cid:0)ws
+
+j ] = 1
+
+j
+
+j
+
+j
+
+j ]] = E[E[∇fT2(j)
+
+j ]] = E[∇fT2(j)
+
+(cid:0)ws
+
+j
+
+(cid:1)|ws
+
+(cid:0)ws
+
+j
+
+(cid:1)]
+
+E[∇fT2(j)+τ
+
+ans thus E[∇fT2(j)+τ
+
+We get that E[(cid:10)ws
+
+j − w∗
+
+(cid:0)ws
+
+M−n ·(cid:80)M−n
+(cid:1)|ws
+(cid:0)ws
+(cid:0)ws
+(cid:1)] = E[E[∇fT2(j)+τ
+(cid:0)ws
+(cid:1) − ∇fT2(j)
+(cid:1)] = 0.
+(cid:0)ws
+(cid:1) − ∇fT2(j)
+(cid:0)ws
+(cid:1)(cid:11)] = 0
+(cid:0)ws
+s ,∇fT2(j)+τ
+ T
+ ≤ 1
+M·(i+1)(cid:88)
+M −1(cid:88)
+
+ft (wt) − ft (w∗
+s )
+
+j
+
+j
+
+j
+
+j
+
+j
+
+j
+
+E
+
+i=0
+
+t=M·i+τ +1
+
+So we have that the upper bound on the expected regret of the time point in which we predict with ws is:
+
+Summing up the regret of the two sub-algorithms, we get:
+
+(cid:34) T(cid:88)
+
+E
+
+(cid:35)
+
+ T
+M −1(cid:88)
+
+M·i+τ(cid:88)
+
+t=M·i+1
+
+ft (wt) − ft (w∗)
+
+≤ E
+
+t=1
+
+i=0
+
+ft (wt) − ft
+
+≤ B2
+ηf
+
++ ηf · T τ
+M
+
+· G2
+2
+
++
+
+T τ 2
+M
+
+· G · Ψ(ηf ,G) +
+
+· B2 +
+
+T
+M
+
+· (M − τ ) · ηs · G2
+
+2
+
+ηs
+
+(cid:0)w∗
+
+f
+
+(cid:1) +
+
+M −1(cid:88)
+
+T
+
+i=0
+
+
+
+M·(i+1)(cid:88)
++ ηs · T · (M − τ )
+
+t=M·i+τ +1
+B2
+ηs
+
+M
+
+ft (wt) − ft (w∗
+s )
+
+· G2
+2
+
+which gives us the bound.
+For Ψ(ηf ,G) ≤ c · ηf · G where c is some constant, choosing the step sizes, ηf , ηs optimally:
+
+G ·(cid:113)
+
+B · √
+T · τ ·(cid:0) 1
+
+M
+
+2 + c · τ(cid:1) , ηs =
+
+G ·(cid:112)T · (M − τ )
+B · √
+
+2M
+
+ηf =
+
+we get the bound:
+
+(cid:35)
+
+(cid:34) T(cid:88)
+(cid:114)
+(cid:114)
+
+t=1
+
+E
+
+=
+
+(cid:114) 1
+
+ft (wt) − ft (w∗)
+T · τ
+M
+2 · T · (M − τ )
+
+· B · G ·
+
+2
+
+Online Learning with Local Permutations and Delayed Feedback
+
+(cid:114)
+
+T · τ
+M
+
+· B · G ·
+
+1(cid:113) 1
+
+2 + cτ
+
+(cid:114)
+
++
+
+T · τ
+M
+
+· B · G ·
+
+cτ(cid:113) 1
+
+2 + cτ
+
++ c · τ +
+
+(cid:114)
+(cid:32)(cid:114)
+
++
+
+≤ c ·
+
+= O
+
+M
+T · τ
+M
+T · τ 2
+M
+
+· B · G ·
+
+(cid:114)
+
++
+
+(cid:114)
+
+· B · G
+
+(cid:114) 1
+
+2
+
++ c · τ +
+
+(cid:33)
+
+T · (M − τ )
+
+M
+
+2 · T · (M − τ )
+
+(cid:32)√
+
+M
+T ·
+
+(cid:32)(cid:114)
+
+· B · G
+
+(cid:33)(cid:33)
+
+τ 2
+M
+
++ 1
+
+= O
+
+T(cid:88)
+
+t=1
+
+(cid:16)√
+
+(cid:17) →
+
+A.2. Lower Bound For Algorithms With No Permutation Power
+Theorem 3. For every (possible randomized) algorithm A, there exists a choice of linear, 1-Lipschitz functions over
+[−1, 1] ⊂ R, with τ a ﬁxed size delay of feedback, such that the expected regret of A after T rounds (with respect to the
+algorithm’s randomness), is
+
+(cid:34) T(cid:88)
+
+ft (wt) − T(cid:88)
+
+t=1
+
+t=1
+
+(cid:35)
+
+(cid:16)√
+
+(cid:17)
+
+E [RA (T )] = E
+
+ft (w∗)
+
+= Ω
+
+τ T
+
+, where w∗ = argmin
+w∈W
+
+ft (w)
+
+Proof. First, we note that in order to show that for every algorithm, there exists a choice of loss functions by an oblivious
+adversary, such that the expected regret of the algorithm is bounded from below, it is enough to show that there exists a
+distribution over loss function sequences such that for any algorithm, the expected regret is bounded from below, where
+now expectation is taken over both the randomness of the algorithm and the randomness of the adversary. This is because
+if there exists such a distribution over loss function sequences, then for any algorithm, there exists some sequence of loss
+functions that can lead to a regret at least as high. To put it formally, if we mark E
+the expectation over the randomness of
+the algorithm, and
+
+the expectation over the randomness of the adversary, then:
+
+E
+
+alg
+
+f1,...,fT
+
+∃ a (randomized) adversary s.t. ∀ algorithm A,
+∀ algorithm A, ∃f1, ..., fT s.t. E
+
+alg
+
+E
+
+f1,...,fT
+
+E
+alg
+
+[RA (T )] > Ω
+
+τ T
+
+(cid:16)√
+
+(cid:17)
+
+[RA (T )] > Ω
+
+τ T
+
+Thus, we prove the ﬁrst statement above, that immediately gives us the second statement which gives the lower bound.
+We consider the setting where W = [−1, 1], and ∀t ∈ [1, T ] : ft (wt) = αt · wt where αt ∈ {1,−1}. We divide the T
+rounds to blocks of size τ. αt is chosen in the following way: if αt is the ﬁrst α in the block, it is randomly picked, i.e,
+Pr (α = ±1) = 1
+2. Following this random selection, the next τ − 1 α’s of the block will be identical to the ﬁrst α in it, so
+that we now have a block of τ consecutive functions in which α is identical. We wish to lower bound the expected regret
+of any algorithm in this setting.
+Consider a sequence of predictions by the algorithm w1, w2, ..., wT . Denote by αi,j the j’th α in the i’th block, and
+similarly for wi,j, fi,j. We denote the entire sequence of α’s by ¯α(1→T ), and the sequence of α’s until time point j in block
+i by ¯α(1→i,j). Notice that wi,j is a function of the α’s that arrive up until time point i · τ + j − τ − 1. We denote these α’s
+as ¯α(1→i,j−τ−1).
+Then the expected sum of losses is:
+
+(cid:34) T(cid:88)
+
+E
+
+(cid:35)
+
+ T
+τ(cid:88)
+
+τ(cid:88)
+
+ft (wt)
+
+= E
+
+fi,j (wi,j)
+
+t=1
+
+i=1
+
+j=1
+
+
+
+Online Learning with Local Permutations and Delayed Feedback
+
+T
+
+T
+
+T
+
+i=1
+
+i=1
+
+i=1
+
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+
+i=1
+
+i=1
+
+i=1
+
+T
+
+T
+
+T
+
+T
+
+j=1
+
+j=1
+
+j=1
+
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+τ(cid:88)
+
+j=1
+
+j=1
+
+j=1
+
+i=1
+
+j=1
+
+=
+
+=
+
+=
+
+=
+
+=
+
+=
+
+=
+
+E [fi,j (wi,j)]
+
+E ¯α(1→T ) [αi,j · wi,j]
+
+(cid:2)E ¯α(i,j−τ→T )
+(cid:2)wi,j · E ¯α(i,j−τ→T )
+(cid:2)wi,j · E ¯α(i,1→i,j)
+(cid:2)wi,j · Eαi,1 [αi,1](cid:3)
+(cid:20)
+
+(cid:18) 1
+
+· 1 +
+
+wi,j ·
+
+1
+2
+
+2
+
+E ¯α(1→i,j−τ−1)
+
+E ¯α(1→i,j−τ−1)
+
+E ¯α(1→i,j−τ−1)
+
+E ¯α(1→i,j−τ−1)
+
+E ¯α(1→i,j−τ−1)
+
+(cid:3)(cid:3)
+(cid:2)αi,j · wi,j|¯α(1→i,j−τ−1)
+(cid:3)(cid:3)
+(cid:2)αi,j|¯α(1→i,j−τ−1)
+(cid:3)(cid:3)
+(cid:2)αi,j|¯α(1→i,j−τ−1)
+
+(cid:19)(cid:21)
+
+= 0
+
+· (−1)
+
+(cid:34) T(cid:88)
+
+t=1
+
+E
+
+ft (w∗)
+
+fi,j (w∗)
+
+τ · αi,1 · w∗
+
+i=1
+
+j=1
+
+(cid:35)
+
+= E
+
+= E
+
+τ(cid:88)
+
+ T
+τ(cid:88)
+ T
+τ(cid:88)
+|
+τ(cid:88)
+(cid:118)(cid:117)(cid:117)(cid:117)(cid:116)
+ T
+ ≤ −τ · C ·
+τ(cid:88)
+
+= −τ · E
+
+i=1
+
+i=1
+
+T
+
+αi,1|
+
+12
+
+i=1
+
+j=1
+
+ T
+ = E
+τ(cid:88)
+τ(cid:88)
+ T
+ = τ · E
+τ(cid:88)
+
+ = −τ · C ·
+
+(cid:114)
+
+i=1
+
+T
+τ
+
+i=1
+
+i=1
+
+(cid:16)(cid:80)T
+
+
+αi,j · w∗
+
+
+
+αi,1 · w∗
+
+(cid:16)√
+
+τ · T
+
+(cid:17)
+
+= −Ω
+
+The last equality is true because every ﬁrst α in any block has probability 1
+We now continue to the expected sum of losses for the optimal choice of w∗ = argminw∈W
+this setting, w∗ ∈ {+1,−1} and is with opposite sign to the majority of α’s in the sequence.
+
+2 to be either +1 or −1.
+
+(cid:17)
+
+t=1 ft (w)
+
+. Note that in
+
+Using Khintchine inequality we have that:
+
+|
+
+τ(cid:88)
+
+T
+
+−τ · E
+
+αi,1 · 1|
+
+where C is some constant.
+Thus we get that for a sequence of length T the expected regret is:
+
+(cid:34) T(cid:88)
+
+E
+
+(cid:35)
+
+(cid:34) T(cid:88)
+
+ft (wt)
+
+− E
+
+ft (w∗)
+
+t=1
+
+t=1
+
+(cid:35)
+
+(cid:16)√
+
+τ · T
+
+(cid:17)
+
+= Ω
+
+Online Learning with Local Permutations and Delayed Feedback
+
+A.3. Proof of Theorem 2
+
+Proof. First, we note that to show that for every algorithm, there exists a choice of loss functions by an oblivious adversary,
+such that the expected regret of the algorithm is bounded from below, it is enough to show that there exists a distribution
+over loss function sequences such that for any algorithm, the expected regret is bounded from below, where now expectation
+is taken over both the randomness of the algorithm and the randomness of the adversary. This is because if there exists
+such a distribution over loss function sequences, then for any algorithm, there exists some sequence of loss functions that
+can lead to a regret at least as high. To put it formally, if we mark E
+the expectation over the randomness of the algorithm,
+and
+
+the expectation over the randomness of the adversary, then:
+
+E
+
+alg
+
+f1,...,fT
+
+∃ a (randomized) adversary s.t. ∀ algorithm A,
+∀ algorithm A, ∃f1, ..., fT s.t. E
+
+alg
+
+E
+
+f1,...,fT
+
+E
+alg
+
+[RA (T )] > Ω
+
+τ T
+
+(cid:16)√
+
+(cid:17)
+
+[RA (T )] > Ω
+
+τ T
+
+(cid:16)√
+
+(cid:17) →
+
+2. This choice gives us blocks of τ
+
+3 . We notice ﬁrst that since M < τ
+
+Thus, we prove the ﬁrst statement above, that immediately gives us the second statement which is indeed our lower bound.
+We consider the setting where W = [−1, 1], and ∀t ∈ [1, T ] : ft (wt) = αt · wt where αt ∈ {1,−1}. We start by
+3 . In each block, all α’s are identical, and are
+constructing our sequence of α’s. We divide the T iterations to blocks of size τ
+chosen to be +1 or −1 w.p. 1
+3 consecutive functions in which α is identical within each
+3 and the sequence of α’s is
+block. Let M be a permutation window of size smaller than τ
+3 , then even after permutation, the time difference between the ﬁrst and last time we encounter
+organized in blocks of size τ
+an α is ≤ τ, which means we will not get the feedback from the ﬁrst time we encountered this α before encountering the
+next one, and we will not be able to use it for correctly predicting α’s of this (original) block that arrive later. This is the
+main idea that stands in the basis of this lower bound.
+Formally, consider a sequence of w1, w2, ..., wT chosen by the algorithm. Denote by αi,j the j’th α in the i’th block,
+and similarly for wi,j, fi,j. We denote the entire sequence of α’s by ¯α(1→T ), and the sequence of α’s until time point
+j in block i by ¯α(1→i,j). For simplicity we will denote βt as the α that was presented at time t, after permutation, i.e.
+
+βt := ασ−1(()t). Notice that wi,j is a function of the β’s that arrive up until time point i·(cid:0) τ
+(cid:1) + j − τ − 1. We denote these
+β’s as ¯β(1→i,j−τ−1). I.e wi,j = g(cid:0) ¯β(1→i,j−τ−1)
+(cid:1).
+βi,j is independent of ¯β(1→i,j−τ−1), while wi,j is a function of it: wi,j = g(cid:0) ¯β(1→i,j−τ−1)
+
+Going back to our main idea of the construction, we can put it in this new terminology- since the delay is τ and the
+permutation window is M < τ
+3 , for any i, j, the ﬁrst time we encountered ασ−1(i,j) is less than τ iterations ago, and thus,
+
+(cid:1) where g is some function.
+
+3
+
+With this in hand, we look at the sum of losses of the predictions of the algorithm, w1, w2, ..., wT :
+
+(cid:34) T(cid:88)
+
+E
+
+(cid:35)
+
+ft (wt)
+
+= E
+
+
+
+3(cid:88)
+
+τ
+
+fi,j (wi,j)
+
+j=1
+
+E [fi,j (wi,j)]
+
+i=1
+
+T/ τ
+
+τ
+
+T/ τ
+
+τ
+
+i=1
+
+j=1
+
+T/ τ
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+3(cid:88)
+
+j=1
+
+j=1
+
+j=1
+
+i=1
+
+i=1
+
+i=1
+
+T/ τ
+
+T/ τ
+
+τ
+
+T/ τ
+
+τ
+
+τ
+
+i=1
+
+j=1
+
+t=1
+
+=
+
+=
+
+=
+
+=
+
+=
+
+E ¯β(1→T )
+
+[βi,j · wi,j]
+
+(cid:104)E ¯β(i,j−τ→T )
+(cid:104)
+wi,j · E ¯β(i,j−τ→T )
+(cid:104)
+wi,j · E ¯β(i,j−τ→T )
+
+(cid:2)βi,j · wi,j| ¯β(1→i,j−τ−1)
+(cid:2)βi,j| ¯β(1→i,j−τ−1)
+(cid:2)ασ−1(i,j)
+
+(cid:3)(cid:105)
+
+(cid:3)(cid:105)
+(cid:3)(cid:105)
+
+E ¯β(1→i,j−τ−1)
+
+E ¯β(1→i,j−τ−1)
+
+E ¯β(1→i,j−τ−1)
+
+Online Learning with Local Permutations and Delayed Feedback
+
+(cid:20)
+
+(cid:18) 1
+
+2
+
+E ¯β(1→i,j−τ−1)
+
+wi,j ·
+
+· 1 +
+
+1
+2
+
+· (−1)
+
+= 0
+
+(cid:19)(cid:21)
+
+3(cid:88)
+
+T/ τ
+
+3(cid:88)
+
+τ
+
+i=1
+
+j=1
+
+=
+
+where the last equality stems from the fact that βi,j = ασ−1(i,j) is equal to the expected value of the ﬁrst time we
+encountered the α that corresponds to ασ−1(i,j), i.e, the ﬁrst α that came from the same block of ασ−1(i,j). This expectation
+is 0 since we choose α = 1 or α = −1 with probability 1
+We now continue to the expected sum of losses for the optimal choice of w∗ = argminw∈W
+. Note that
+after permutation, the expected sum of losses of the optimal w remains the same since it is best predictor over the entire
+sequence, and so for simplicity we look at the sequence of α’s as it is chosen initially. Also, in this setting, w∗ ∈ {+1,−1}
+and is with opposite sign to the majority of α’s in the sequence.
+
+2 for each block.
+
+(cid:16)(cid:80)T
+
+t=1 ft (w)
+
+(cid:17)
+
+(cid:35)
+
+ft (w∗)
+
+(cid:34) T(cid:88)
+
+t=1
+
+E
+
+= E
+
+= E
+
+= − τ
+3
+
+3(cid:88)
+
+τ
+
+j=1
+
+T/ τ
+3(cid:88)
+T/ τ
+3(cid:88)
+
+i=1
+
+τ
+3
+
+i=1
+
+· E
+
+|
+ ≤ − τ
+
+3
+
+· αi,1 · w∗
+
+3(cid:88)
+
+T/ τ
+
+i=1
+
+τ
+3
+
+fi,j (w∗)
+
+ = E
+ =
+
+(cid:118)(cid:117)(cid:117)(cid:117)(cid:116)
+T/ τ
+3(cid:88)
+(cid:18)(cid:114) τ
+(cid:19)
+
+αi,1|
+
+· C ·
+
+i=1
+
+12
+
+τ
+
+T/ τ
+3(cid:88)
+3(cid:88)
+T/ τ
+3(cid:88)
+
+· E
+
+j=1
+
+i=1
+
+i=1
+
+
+
+
+αi,j · w∗
+
+αi,1 · w∗
+
+ = − τ
+(cid:16)√
+
+3
+
+· C ·
+
+(cid:17)
+
+(cid:115)
+
+T
+τ
+3
+
+= −Ω
+
+· T
+
+= −Ω
+
+τ · T
+
+3
+
+Using Khintchine inequality we have that:
+
+|
+
+3(cid:88)
+
+T/ τ
+
+i=1
+
+· E
+
+− τ
+3
+
+αi,1 · 1|
+
+where C is some constant.
+Thus we get that overall expected regret for any algorithm with permutation power M < τ
+
+(cid:34) T(cid:88)
+
+E
+
+(cid:35)
+
+(cid:34) T(cid:88)
+
+ft (wt)
+
+− E
+
+ft (w∗)
+
+= Ω
+
+τ · T
+
+(cid:35)
+
+3 is:
+
+(cid:16)√
+
+(cid:17)
+
+as in the adversarial case.
+
+t=1
+
+t=1
+
+

@@ -1,0 +1,268 @@
+Discovering Discrete Latent Topics with Neural Variational Inference
+
+B. Topic Diversity
+An issue that exists in both probabilistic and neural topic
+models is redundant topics. In neural models it straight-
+forward regularises the distance between each of the topic
+vectors in order to diversify the topics. Following Xie et al.
+(2015), we apply such topic diversity regularisation while
+carrying out neural variational inference. We use the co-
+sine distance to measure the distance between two topics
+|ti·βj|
+||ti||·||tj|| ). The mean angle of all pairs
+a(ti, tj) = arccos(
+of K topics is ζ = 1
+j a(ti, tj), and the variance
+K2
+j(a(ti, tj) − m)2. We add the following
+is ν = 1
+K2
+topic diversity regularisation to the variational objective:
+
+(cid:80)
+
+(cid:80)
+
+(cid:80)
+
+(cid:80)
+
+i
+
+i
+
+J = L + λ(ζ − ν),
+
+where λ is a hyper-parameter for the regularisation that is
+empirically set as 0.1. Though in practise diversity reg-
+ularisation does not provide a signiﬁcant improvement to
+perplexity (2∼5 in most cases), it helps reduce topic redun-
+dancy and can be easily applied on topic vectors instead of
+the simplex over the full vocabulary.
+
+A. Discovered Topics
+Table 1 presents the topics by the words with highest prob-
+ability (top-10 words) achieved by different neural topic
+models on 20NewsGroups dataset.
+
+Space
+space
+satellite
+
+Religion Encryption
+encryption
+
+god
+
+atheism
+
+device
+
+Sport
+player
+hall
+
+april
+
+exist
+atheist
+moral
+
+sequence
+launch
+president existence
+station marriage
+system
+radar
+training
+parent
+committee murder
+
+technology defensive
+
+protect
+
+americans
+
+chip
+use
+
+privacy
+industry
+
+enforcement
+
+team
+average
+career
+league
+play
+bob
+year
+
+Science
+science
+theory
+scientiﬁc
+universe
+experiment
+observation
+evidence
+
+exist
+god
+
+mistake
+
+(a) Topics learned by GSM.
+
+Space
+moon
+lunar
+orbit
+
+Religion
+atheist
+
+life
+
+eternal
+
+Lawsuit
+homicide
+
+Vehicle
+bike
+
+gun
+rate
+
+motorcycle
+
+dod
+
+hell
+god
+
+billion
+launch
+space
+hockey
+
+spacecraft christianity handgun
+crime
+ﬁrearm
+christian weapon
+knife
+atheism
+study
+religion
+brian
+death
+
+cost
+nasa
+
+bmw
+ride
+dealer
+
+oo
+car
+buy
+
+Science
+theory
+science
+gary
+
+sun
+orbit
+energy
+
+experiment
+mechanism
+
+star
+
+insurance
+
+scientiﬁc
+
+(b) Topics learned by GSB.
+
+gun
+
+Aerospace Crime Hardware Technology
+technology
+instruction
+spacecraft weapon
+americans
+crime
+ﬁrearm
+criminal
+
+encryption
+
+pit
+
+drive
+scsi
+ide
+scsus
+hd
+go
+
+amp
+pat
+wing
+plane
+
+algorithm control
+handgun
+
+db
+
+reduce
+orbit
+
+use
+
+law
+kill
+
+controller
+
+tape
+datum
+
+isa
+
+policy
+industry
+protect
+privacy
+product
+approach
+
+Science
+science
+
+hell
+
+scientiﬁc
+evidence
+physical
+eternal
+universe
+experiment
+
+reason
+death
+
+(c) Topics learned by RSB.
+
+Table 1. Topics learned by neural topic models on 20NewsGroups
+dataset.
+
+

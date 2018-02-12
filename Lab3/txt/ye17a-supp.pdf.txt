@@ -1,0 +1,1586 @@
+Appendix A. Some Important Lemmas
+
+In this section, we give several important lemmas which will be used in the proof of the
+theorems of this paper.
+
+Lemma 9 If A and B are d×d symmetric positive matrices, and (1−�0)B � A � (1+�0)B
+where 0 < �0 < 1, then we have
+
+where I is the identity matrix.
+
+�A1/2B−1A1/2 − I� ≤ �0,
+
+Proof Because A � (1 + �0)B, we have zT [A − (1 + �0)B]z ≤ 0 for any nonzero z ∈ Rd.
+This implies zT Az
+
+zT Bz ≤ 1 + �0 for any z �= 0. Subsequently,
+
+λmax(B−1A) =λmax(B−1/2AB−1/2)
+
+uT B−1/2AB−1/2u
+
+uT u
+
+zT Az
+zT Bz
+
+= max
+u�=0
+
+= max
+z�=0
+
+≤1 + �0,
+
+where the last equality is obtained by setting z = B−1/2u. Similarly, we have λmin(B−1A) ≥
+1 − �0. Since B−1A and A1/2B−1A1/2 are similar, the eigenvalues of A1/2B−1A1/2 are all
+between 1 − �0 and 1 + �0. Therefore, we have
+
+�A1/2B−1A1/2 − I� ≤ �0.
+
+Lemma 10 ([3]) Let X1, X2, . . . , Xk be independent, random, symmetric, real matrices of
+i=1 Xi,
+
+size d × d with 0 � Xi � LI, where I is the d × d identity matrix. Let Y = �k
+
+µmin = λmin(E[Y ]) and µmax = λmax(E[Y ]). Then,
+
+P (λmin(Y ) ≤ (1 − �)µmin) ≤ d · e−�2µmin/L
+
+Lemma 11 ([3]) Given a matrix A ∈ Rm×n, construct an m × n random matrix R such
+that
+
+Compute the per-sample second moment:
+
+E[R] = A and
+
+�R� ≤ L.
+
+Form the matrix sampling estimator
+
+M = max{�E[RRT ]�, E[RT R]�}.
+
+¯R =
+
+1
+s
+
+s�i=1
+
+Ri, where each Ri is an independent copy of R.
+
+1
+
+Then, for all t ≥ 0
+
+P�� ¯R − A� ≥ t� ≤ (m + n) exp� −st2/2
+
+M + 2Lt/3� .
+
+Lemma 12 Assume (9) and (10) hold. Let 0 < δ < 1, 0 < � < 1 and 0 < c be given. If we
+sample fi’s uniformly with the sample size |S| and construct H (t) = 1
+then we have the following results:
+(a) If |S| ≥ 16K2 log(2d/δ)
+
+|S|�j∈S ∇2fj(x(t)),
+
+, it holds that
+
+c2�2
+
+�H (t) − ∇2F (x(t))� ≤ �c.
+
+(b) If |S| ≥ K log(2d/δ)
+
+σ�2
+
+, it holds that
+
+λmin(H (t)) ≥ (1 − �)σ.
+
+j
+
+σ�2
+
+j = ∇2fi(x(t))� =
+, j = 1, . . . ,|S| such that P�H (t)
+j ) = ∇2F (x(t)) for all j = 1, . . . ,|S|. By (9)
+, we have λmax(H (t)
+j ) ≥ 0.
+, λmin(H (t)) ≥ (1− �)σ holds with probability
+j − ∇2F (x(t)) for all j = 1, . . . ,|S|. We have
+
+Proof Consider |S| i.i.d random matrces H (t)
+1/n for all i = 1, . . . , n. Then, we have E(H (t)
+and the positive semi-deﬁnite property of H (t)
+j
+By Lemma 10, we have that if |S| ≥ K log(d/δ)
+at least 1 − δ.
+We deﬁne random maxtrices Xj = H (t)
+E[Xj] = 0, �Xj� ≤ 2K and �Xj�2 ≤ 4K2. By Lemma 11, we have
+P(�H (t) − ∇2F (x(t))� ≥ �c) ≤ 2d exp− c2�2|S|
+, �H (t) − ∇2F (x(t))� ≤ �c holds with probability at least 1 − δ.
+
+When |S| ≥ 16K2 log(2d/δ)
+
+j ) ≤ K and λmin(H (t)
+
+16K2 .
+
+c2�2
+
+Appendix B. Proofs of theorems of Section 3
+
+Proof of Theorem 3 By Assumption 1 and 2, we have that F (x) is µ-strongly convex
+and ∇F (x) is L-Lipschitz continuous. Hence, we have
+
+µ ≤ λmin(∇2F (x)) ≤ λmax(∇2F (x)) ≤ L.
+
+Hence, for any x in domain, it holds that
+
+κ =
+
+L
+µ ≥ κ(∇2F (x)).
+
+2
+
+By Taylor’s theorem, we obtain
+
+0
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds
+
+∇F (x(t+1))
+=∇F (x(t)) + ∇2F (x(t))(−p(t)) +� 1
+=∇F (x(t)) − ∇2F (x(t))[H (t)]−1∇F (x(t)) + ∇2F (x(t))[H (t)]−1∇F (x(t)) − ∇2F (x(t))p(t)
++� 1
+=�∇2F (x(t))� 1
++ ∇2F (x(t))([H (t)]−1∇F (x(t)) − p(t)) +� 1
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds.
+
+2�I − [∇2F (x(t))]
+
+2��∇2F (x(t))�− 1
+
+2 [H (t)]−1[∇2F (x(t))]
+
+2 ∇F (x(t))
+
+0
+
+0
+
+1
+
+1
+
+Hence, we have the following identity
+
+1
+
+2��∇2F (x(t))�− 1
+
+2 ∇F (x(t))
+
+�∇2F (x(t))�− 1
+
+1
+
+2 ∇F (x(t+1)) =�I − [∇2F (x(t))]
+2 [H (t)]−1[∇2F (x(t))]
+2 ([H (t)]−1∇F (x(t)) − p(t))
++ [∇2F (x(t))]
+2� 1
++ [∇2F (x(t))]− 1
+
+0
+
+1
+
+can obtain
+
+For notational simplicity, we denote M =�∇2F (x(t))�−1
+�∇F (x(t+1))�M ≤���I − [∇2F (x(t))]
+2 [H (t)]−1[∇2F (x(t))]
+2��[H (t)]−1∇F (x(t)) − p(t)�
+2�� 1
+0 �∇2F (x(t) + sp(t)) − ∇2F (x(t))��p(t)�ds.
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds.
+and M∗ =�∇2F (x∗)�−1. Then we
+2����∇F (x(t))�M
+
++ �[∇2F (x(t))]
++ �[∇2F (x(t))]− 1
+
+1
+
+1
+
+1
+
+We bound the three terms on the right-hand side of the above equation respectively.
+
+For the ﬁrst term, using Lemma 9, we have
+
+���I − [∇2F (x(t))]
+
+1
+
+2 [H (t)]−1[∇2F (x(t))]
+
+1
+
+2����∇F (x(t))�M ≤ �0�∇F (x(t))�M .
+
+For the second term, by the fact that �AB� ≥ �A�σmin(B) and condition
+
+�∇F (x(t)) − H (t)p(t)� ≤
+
+�1
+κ �∇F (x(t))� ≤
+
+�1
+
+κ(∇2F (x(t)))�∇F (x(t))�,
+
+3
+
+we obtain
+
+1
+
+�[∇2F (x(t))]
+= �[∇2F (x(t))]
+2�
+λmin([∇2F (x(t))]− 1
+
+2��[H (t)]−1∇F (x(t)) − p(t)�
+λmin([∇2F (x(t))]− 1
+
+1
+
+�1
+
+2 )
+�[∇2F (x(t))]
+
+2�
+λmin([∇2F (x(t))]− 1
+
+1
+
+≤
+
+≤
+≤
+
+�1
+
+κ(∇2F (x(t)))
+κ(∇2F (x(t)))�∇2F (x(t))��[H (t)]−1��∇F (x(t))�M
+1 − �0�∇F (x(t))�M .
+
+�1
+
+2 )�[H (t)]−1��∇F (x(t)) − H (t)p(t)�
+
+2 )�[H (t)]−1�(λmin([∇2F (x(t))]− 1
+
+2 )�∇F (x(t))�)
+
+For the third term, we bound it for the case that ∇2F (x) is not Lipschitz continuous
+and the case ∇2F (x) is Lipschitz continuous respectively.
+First, we consider the case that ∇2F (x) is not Lipschitz continuous but is continuous
+close to the optimal point x∗. Because ∇2F (x) is continuous near x∗, there exists a suﬃcient
+small value γ such that it holds that
+
+and
+
+�[∇2F (x∗)]−1 − [∇2F (x(t))]−1� <
+
+ν(t)
+
+L
+
+,
+
+�∇2F (x∗) − ∇2F (x(t))� <
+
+η(t)µ
+√κ
+
+,
+
+(14)
+
+(15)
+
+when �x(t) − x∗� ≤ γ. Therefore, ν(t) and η(t) will go to 0 as x(t) goes to x∗.
+
+By µ-strong convexity, we have �[∇2F (xt)]−1� ≤ 1
+
+Because of Eqn. (2), we have
+
+µ for all x(t) suﬃciently close to x∗.
+
+�[H (t)]−1� ≤ (1 + �0)�[∇2F (xt)]−1� ≤
+
+1
+
+(1 − �0)µ
+
+.
+
+We deﬁne r(t) = ∇F (x(t)) − H (t)p(t). Then we have that the direction vector satisﬁes
+
+�p(t)� = �[H (t)]−1�(�r(t)� + �∇F (x(t))�) ≤
+
+2
+
+(1 − �0)µ�∇F (x(t))�,
+
+(16)
+
+where the second inequality is because
+
+�r(t)� = �∇F (x(t)) − H (t)p(t)� ≤
+
+�1
+κ �∇F (x(t))� ≤ �∇F (x(t))�.
+
+4
+
+Hence, with �x − x∗� ≤ γ, combining condition (15), we have
+
+2�� 1
+�[∇2F (x(t))]− 1
+0 �∇2F (x(t) + sp(t)) − ∇2F (x(t))��p(t)�ds
+2�� 1
+≤ �[∇2F (x(t))]− 1
+≤ �[∇2F (x(t))]− 1
+2�
+
+µη(t)
+√κ �p(t)�ds
+2
+
+µη(t)
+√κ �∇F (x(t))�
+
+0
+
+(1 − �0)µ
+�[∇2F (x(t))]− 1
+2�
+√κλmin([∇2F (x(t))]− 1
+
+2η(t)
+1 − �0
+2η(t)
+1 − �0�∇F (x(t))�M .
+
+2 )
+
+≤
+
+≤
+
+λmin([∇2F (x(t))]− 1
+
+2 )�∇F (x(t))�
+
+Therefore, we have
+
+�∇F (x(t+1))�M ≤�0�∇F (x(t))�M +
++
+
+=��0 +
+
+�1
+1 − �0
+
+�1
+
+1 − �0�∇F (x(t))�M +
+1 − �0��∇F (x(t))�M .
+
+2η(t)
+
+2η(t)
+
+1 − �0�∇F (x(t))�M
+
+Now, we show the relationship between � · �M and � · �M∗. By Eqn. (14), we have
+
+−
+
+ν(t)
+
+λmax(∇2F (x∗))
+
+uT u ≤ uT ([∇2F (x∗)]−1 − [∇2F (x(t))]−1)u ≤
+
+ν(t)
+
+λmax(∇2F (x∗))
+
+uT u,
+
+for any nonzero u ∈ Rd, which implies that
+
+(1 − ν(t))uT [∇2F (x(t))]−1u ≤ uT [∇2F (x∗)]−1u ≤ (1 + ν(t))uT [∇2F (x(t))]−1u.
+
+That is,
+
+(1 − ν(t))�u�M ≤ �u�M∗ ≤ (1 + ν(t))�u�M .
+
+By this relationship between � · �M and � · �M∗, we get
+
+�∇F (x(t+1))�M∗ ≤��0 +
+
+�1
+1 − �0
+
++
+
+2η(t)
+
+1 − �0� 1 + ν(t)
+
+1 − ν(t)�∇F (x(t))�M∗
+
+Second, we consider the case that ∇2F (x) is Lipschitz continuous with parameter ˆL.
+
+We have that the direction vector satisﬁes
+
+�p(t)� ≤
+
+2
+
+(1 − �0)λmin(∇2F (x(t)))�∇F (x(t))�.
+
+5
+
+Because ∇2F (x) is Lipschitz continuous with parameter ˆL, we have
+
+2�� 1
+�[∇2F (x(t))]− 1
+0 �∇2F (x(t) + sp(t)) − ∇2F (x(t))��p(t)�ds
+2�� 1
+≤ �[∇2F (x(t))]− 1
+ˆL
+2 �[∇2F (x(t))]− 1
+2�λ−2
+ˆL
+2 �[∇2F (x(t))]− 1
+2�λ−2
+
+s ˆL�p(t)�2ds
+min([∇2F (x(t))]− 1
+min([∇2F (x(t))]− 1
+2 )�
+(1 − �0)λmin(∇2F (x(t)))�2
+min([∇2F (x(t))]− 1
+
+2 )�p(t)�2
+
+2 )λ2
+
+≤
+
+=
+
+2
+
+0
+
+�∇F (x(t))�2
+
+M
+
+Thus, we have
+
+M
+
+2
+
+=
+
+≤
+
+2 ˆLλmax(∇2F (x(t)))
+min(∇2F (x(t)))�λmin(∇2F (x(t)))�∇F (x(t))�2
+ˆLκ
+µ√µ�∇F (x(t))�2
+M .
+
+(1 − �0)2λ2
+(1 − �0)2 ·
+�∇F (x(t+1))�M ≤��0 +
+By the Lipschitz continuity of ∇2F (x) and the condition
+λmin(∇2F (x∗))
+ˆLκ(∇2F (x(t)))
+
+1 − �0��∇F (x(t))�M +
+
+�x(t) − x∗� ≤
+
+µ
+ˆLκ ≤
+
+�1
+
+2
+
+,
+
+(1 − �0)2 ·
+
+ˆLκ
+µ√µ�∇F (x(t))�2
+M .
+
+we obtain
+�[∇2F (x∗)]−1 − [∇2F (x(t))]−1� ≤�[∇2F (x∗)]−1��[∇2F (x(t))]−1��∇2F (x∗) − ∇2F (x(t))�
+
+≤ ˆL�[∇2F (x∗)]−1��[∇2F (x(t))]−1��x(t) − x∗�
+≤ν(t)λmin([∇2F (x(t))]−1).
+
+Hence, we can obtain that for any u ∈ Rd,
+−ν(t)λmin([∇2F (x(t))]−1)uT y ≤ yT ([∇2F (x∗)]−1−[∇2F (x(t))]−1)y ≤ ν(t)λmin([∇2F (x(t))]−1)yT y,
+which yields
+
+(1 − ν(t))uT [∇2F (x(t))]−1u ≤ uT [∇2F (x∗)]−1u ≤ (1 + ν(t))uT [∇2F (x(t))]−1u.
+
+That is,
+
+Accordingly, we have
+
+(1 − ν(t))�u�M ≤ �u�M∗ ≤ (1 + ν(t))�u�M .
+
+�∇F (x(t+1))�M∗ ≤��0 +
+
+�1
+
+1 − �0� 1 + ν(t)
+
+1 − ν(t)�∇F (x(t))�M∗ +
+
+2
+
+(1 − �0)2 ·
+
+ˆLκ
+µ√µ
+
+6
+
+(1 + ν(t))2
+
+1 − ν(t) �∇F (x(t))�2
+
+M∗
+
+Appendix C. Proofs of theorems of Section 4
+
+Proof of Theorem 4 If S is an �0-subspace embedding matrix w.r.t. B(x(t)), then we
+have
+
+(1 − �0)∇2F (x(t)) � [B(x(t))]T ST SB(x(t)) � (1 + �0)∇2F (x(t)).
+
+(17)
+
+By simple transformation and omitting �2
+
+0, (17) can be transformed into
+
+(1 − �0)[B(x(t))]T ST S∇2B(x(t)) � ∇2F (x(t)) � (1 + �0)[B(x(t))]T ST SB(x(t)).
+
+The convergence rate can be derived directly from Theorem 3.
+
+Appendix D. Proofs of theorems of Section 5
+Proof of Theorem 5 By Lemma 12, when |S| ≥ 16K2 log(2d/δ)
+
+σ2�2
+0
+
+property:
+
+, H (t) has the following
+
+The above property implies the following:
+
+�H (t) − ∇2F (x(t))� ≤ �0σ.
+
+|yT (H (t) − ∇2F (x(t)))y| ≤ �0σyT y,
+
+⇒ − �0σyT y ≤ yT (H (t) − ∇2F (x(t)))y ≤ �0σyT y
+⇒ H (t) − �0σI � ∇2F (x(t)) � H (t) + �0σI
+⇒ (1 − �0)H (t) � ∇2F (x(t)) � (1 + �0)H (t).
+
+The convergence rate can be derived directly from Theorem 3.
+
+Proof of Theorem 6
+
+By Lemma 12, when |S| ≥ 16K2 log(2d/δ)
+
+β2
+
+, we have
+
+�∇2F (x(t)) − H (t)
+with probability at least 1 − δ. Hence, we can derive
+
+|S|� ≤ β,
+
+)y| ≤ βyT y
+
+y − βyT y ≤ yT∇2F (x(t))y ≤ yT H (t)
+|S|
+
+|yT (∇2F (x(t)) − H (t)
+|S|
+⇒yT H (t)
+|S|
+⇒yT H (t)y − αyT y − βyT y ≤ yT∇2F (x(t))y ≤ yT H (t)y − αyT y + βyT y
+⇒yT H (t)y − (α + β)yT y
+
+≤ yT H (t)y + (β − α)yT y.
+
+≤ yT∇2F (x(t))y
+
+y + βyT y
+
+(1)
+
+(2)
+
+7
+
+Now we ﬁrst consider
+
+(1)
+
+α + β
+
+≤ case, we have
+yT H (t)y − (α + β)yT y ≤ yT∇2F (x(t))y
+⇒yT H (t)y ≤ yT∇2F (x(t))y + (α + β)yT y
+⇒yT H (t)y ≤ yT∇2F (x(t))y +
+⇒yT H (t)y ≤�1 +
+σ � yT∇2F (x(t))y
+⇒�1 −
+⇒�1 −
+
+σ + α + β� yT H (t)y ≤ yT∇2F (x(t))y
+σ + α + β� H (t) � F (x(t)).
+
+α + β
+
+α + β
+
+α + β
+
+σ
+
+yT∇2F (x(t))y
+
+(2)
+
+For
+we have
+
+≤ case, we consider two cases respectively. The ﬁrst case is β − σ/2 ≤ α ≤ β, and
+
+σ
+
+yT∇2F (x(t))y ≤ yT H (t)y
+
+β − α
+
+yT∇2F (x(t))y ≤ yT H (t)y + (β − α)yT y
+⇒yT∇2F (x(t))y − (β − α)yT y ≤ yT H (t)y
+⇒yT∇2F (x(t))y −
+σ � yT∇2F (x(t))y ≤ yT H (t)y
+⇒�1 −
+σ − (β − α)� yT H (t)y
+⇒yT∇2F (x(t))y ≤�1 +
+σ + α − β� H (t).
+⇒∇2F (x(t)) ��1 +
+
+β − α
+
+β − α
+
+β − α
+
+For the case β < α, we can derive
+
+yT∇2F (x(t))y ≤ yT H (t)y + (β − α)yT y ≤ yT H (t)y
+
+Hence, for β − σ ≤ α, we have
+α + β
+
+⇒∇2F (x(t)) � (1 + 0)H (t).
+σ + α + β� H (t) � F (x(t)) ��1 +
+�1 −
+
+β − α
+
+σ + α − β� H (t).
+
+Therefore, �0 in Theorem 3 can be set as follows:
+
+�0 = max� β − α
+
+σ + α − β
+
+,
+
+α + β
+
+σ + α + β� .
+
+The convergence properties can derived from Theorem 3 directly.
+
+8
+
+Proof of Theorem 7
+We denote the SVD of H (t)
+
+S as follows
+H (t)
+S = U ˆΛU T = Ur ˆΛrU T
+
+r + U\r
+
+ˆΛ\rU T
+\r.
+
+By Lemma 12, when |S| ≥ 16K2 log(2d/δ)
+
+β2
+
+, we have
+
+�∇2F (x(t)) − H (t)
+with probability at least 1 − δ. Hence, we can derive
+
+|S|� ≤ β,
+
+y − βyT y ≤ yT∇2F (x(t))y ≤ yT H (t)
+|S|
+
+y + βyT y
+
+r+1I)U T
+
+\ry − βyT y ≤ yT∇2F (x(t))y
+
+)y| ≤ βyT y
+
+|yT (∇2F (x(t)) − H (t)
+|S|
+⇒yT H (t)
+|S|
+⇒yT H (t)y + yT U\r(ˆΛ\r − ˆλ(t)
+≤ yT H (t)y + yT U\r(ˆΛ\r − ˆλ(t)
+⇒yT H (t)y − yT U� βIr
+≤ yT H (t)y + yT U� βIr
+
+(2)
+
+(β + ˆλ(t)
+
+r+1I)U T
+
+\ry + βyT y
+
+(1)
+
+r+1)I\r − ˆΛ\r � U T y
+r+1)I\r + ˆΛ\r � U T y
+
+(β − ˆλ(t)
+
+≤ yT∇2F (x(t))y
+
+Now we ﬁrst consider
+
+(1)
+
+≤ case, we have
+
+(1)
+
+≤ yT∇2F (x(t))y
+
+r+1)I\r − ˆΛ\r � U T y
+
+r+1)yty
+
+(β + ˆλ(t)
+
+yT H (t)y − yT U� βIr
+⇒yT H (t)y ≤ yT∇2F (x(t))y + (β + ˆλ(t)
+β + ˆλ(t)
+r+1
+⇒yT H (t)y ≤ yT∇2F (x(t))y +
+⇒yT H (t)y ≤ yT∇2F (x(t))y +
+⇒�1 −
+
+2β + λ(t)
+r+1
+σ + 2β + λ(t)
+
+σ
+
+σ
+
+2β + ˆλr+1
+
+r+1� yT H (t)y ≤ yT∇2F (x(t))y.
+
+yT∇2F (x(t))y
+yT∇2F (x(t))y
+
+Hence we have
+
+�1 +
+
+β
+
+r+1 − β� H (t) � ∇2F (x).
+
+λ(t)
+
+9
+
+where the last inequality is because λ(t)
+
+r+1 − β ≤ ˆλ(t)
+
+r+1. Hence, we have
+
+≤yT H (t)y +
+≤�1 +
+
+λ(t)
+
+yT H (t)y
+
+β
+ˆλ(t)
+r+1
+
+β
+
+r+1 − β� yT H (t)y,
+
+∇2F (x) ��1 +
+
+β
+
+λ(t)
+
+r+1 − β� H (t).
+r+1� < 1,
+
+2β + λ(t)
+r+1
+σ + 2β + λ(t)
+
+Now we ﬁrst consider
+
+(2)
+
+≤ case, we have
+
+yT∇2F (x(t))y ≤yT H (t)y + yT U� βIr
+
+r+1)I\r + ˆΛ\r � U T y
+
+(β − ˆλ(t)
+
+Hence, we have
+
+�0 = max�
+
+β
+
+λ(t)
+r+1 − β
+
+,
+
+because β ≤
+
+λ(t)
+r+1
+
+2 .
+
+The convergence properties can be derived directly by Theorem 3.
+
+Appendix E. Subsampled Hessian and Gradient
+
+In fact, we can also subsample gradient to accelerate the subsampled Newton method. The
+detailed procedure is presented in Algorithm 5 [1, 2].
+
+Theorem 13 Let F (x) satisfy the properties described in Theorem 3. We also assume
+Eqn. (9) and Eqn. (10) hold and let 0 < δ < 1 and 0 < �0 < 1/2 be given. Let |SH| and |Sg|
+be set such that Eqn. (2) holds and it holds that
+
+�g(x(t)) − ∇F (x(t))� ≤
+
+�2
+κ �∇F (x(t))�.
+
+The direction vector p(t) is computed as in Algorithm 5. Then for t = 1, . . . , T , we have the
+following convergence properties:
+
+(a) There exists a suﬃcient small value γ, 0 < ν(t) < 1, and 0 < η(t) < 1 such that when
+
+�x(t) − x∗� ≤ γ, then for each iteration, it holds that
+
+�∇F (x(t+1))�M∗ ≤ (�0 + 2�2 + 4η(t))
+
+1 + ν(t)
+
+1 − ν(t)�∇F (x(t))�M∗
+
+with probability at least 1 − δ.
+
+10
+
+Algorithm 5 Subsampled Hessian and Subsampled Gradient.
+1: Input: x(0), 0 < δ < 1, 0 < �0 < 1;
+2: Set the sample size |SH| and |Sg|.
+3: for t = 0, 1, . . . until termination do
+4:
+
+Select a sample set SH , of size |S| and construct H (t) = 1
+Select a sample set Sg of size |Sg| and calculate g(x(t)) = 1
+Calculate p(t) = [H (t)]−1g(x(t));
+Update x(t+1) = x(t) − p(t);
+
+6:
+7:
+8: end for
+
+5:
+
+|S|�j∈S ∇2fj(x(t));
+|Sg|�i∈Sg ∇fi(x(t)).
+
+(b) If ∇2F (x(t)) is also Lipschitz continuous and {x(t)} satisﬁes Eqn. (6), then for each
+
+iteration, it holds that
+
+�∇F (x(t+1))�M∗ ≤(�0 + 2�2)
+with probability at least 1 − δ.
+
+1 + ν(t)
+
+1 − ν(t)�∇F (x(t))�M∗ +
+
+8 ˆLκ
+µ√µ
+
+(1 + ν(t))2
+
+1 − ν(t) �∇F (x(t))�2
+M∗.
+
+In common cases, subsampled gradient g(x(t)) needs to subsample over 80% of samples
+to guarantee convergence of the algorithm. Roosta-Khorasani and Mahoney [2] showed
+that it needs |Sg| ≥ G(x(t))2κ2/(ν2(t)�∇F (x(t))�2), where G(x(t)) = maxi �∇fi(x(t))� for
+i = 1, . . . , n. When x(t) is close to x∗, �∇F (x(t))� is close to 0. Hence |Sg| will go to n as
+iteration goes. This is the reason why the Newton method and variants of the subsampled
+Newton method are very sensitive to the accuracy of subsampled gradient.
+
+The proof of Theorem 13 is almost the same with Theorem 3. For completeness, we
+
+give the detailed proof as follows.
+Proof By Taylor’s theorem, we obtain
+
+0
+
+0
+
+2�I − [∇2F (x(t))]
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds
+
+∇F (x(t+1))
+=∇F (x(t)) + ∇2F (x(t))(−p(t)) +� 1
+=∇F (x(t)) − ∇2F (x(t))[H (t)]−1∇F (x(t)) + ∇2F (x(t))[H (t)]−1∇F (x(t)) − ∇2F (x(t))p(t)
++� 1
+=�∇2F (x(t))� 1
++ ∇2F (x(t))([H (t)]−1∇F (x(t)) − p(t)) +� 1
+2 ∇F (x(t+1)) =�I − [∇2F (x(t))]
+2 [H (t)]−1[∇2F (x(t))]
+2 ([H (t)]−1∇F (x(t)) − p(t))
++ [∇2F (x(t))]
+2� 1
++ [∇2F (x(t))]− 1
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds.
+
+2��∇2F (x(t))�− 1
+
+1
+
+2��∇2F (x(t))�− 1
+
+1
+
+2 [H (t)]−1[∇2F (x(t))]
+
+[∇2F (x(t) + sp(t)) − ∇2F (x(t))](−p(t))ds.
+
+2 ∇F (x(t))
+
+�∇2F (x(t))�− 1
+
+Hence, we have the following identity
+
+1
+
+2 ∇F (x(t))
+
+0
+
+1
+
+1
+
+0
+
+11
+
+Further more, we deﬁne M =�∇2F (x(t))�−1
+�∇F (x(t+1))�M ≤���I − [∇2F (x(t))]
+
+1
+
+1
+
++ �[∇2F (x(t))]
++ �[∇2F (x(t))]− 1
+
+1
+
+, we can obtain
+2 [H (t)]−1[∇2F (x(t))]
+2��[H (t)]−1(∇F (x(t)) − g(x(t)))�
+2�� 1
+0 �∇2F (x(t) + sp(t)) − ∇2F (x(t))��p(t)�ds.
+
+2����∇F (x(t))�M
+
+We will bound the three terms on the right hand of above equation seperately.
+
+For the ﬁrst term, using Lemma 9, we have
+2 [H (t)]−1[∇2F (x(t))]
+
+1
+
+���I − [∇2F (x(t))]
+
+∇F (x(t))� ≤ �2�∇F (x(t))�, we obtain
+
+1
+
+2����∇F (x(t))�M ≤ �0�∇F (x(t))�M .
+
+For the second term, by the fact that �AB� ≥ �A�σmin(B) and condition �g(x(t)) −
+
+2��[H (t)]−1(∇F (x(t)) − g(x(t)))�
+
+λmin([∇2F (x(t))]− 1
+
+2 )��[H (t)]−1��∇F (x(t)) − g(x(t))�
+
+1
+
+1
+
+�[∇2F (x(t))]
+= �[∇2F (x(t))]
+2�
+λmin([∇2F (x(t))]− 1
+2 )
+�[∇2F (x(t))]
+2�
+≤�2
+λmin([∇2F (x(t))]− 1
+�2
+1 − �0�∇F (x(t))�M
+≤
+≤2�2�∇F (x(t))�M
+
+1
+
+2 )�[H (t)]−1��∇F (x(t))�M
+
+For the third term, we bound it for the case that ∇2F (x) is not Lipschitz continuous
+and the case ∇2F (x) is Lipschitz continuous respectively.
+(a) Now we consider the case that ∇2F (x) is not Lipschitz continuous but is continuous
+close to the optimal point x∗. Because ∇2F (x) is continuous near x∗, there exists a suﬃcient
+small value δ such that Eqn. (14) and Eqn. (15) hold when �x(t) − x∗� ≤ δ.
+µ for all x(t) suﬃciently close to x∗.
+Then we have
+
+By µ-strong convexity, we have �[∇2F (xt)]−1� ≤ 1
+
+2
+
+(1 − �0)µ�∇F (x(t))�.
+
+1 + �2/κ
+
+(1 − �0)µ�∇F (x(t))� ≤
+Hence, with �x − x∗� ≤ δ, combining condition (15), we have
+
+�p(t)� = �[H (t)]−1��g(x(t))� ≤
+2�� 1
+0 �∇2F (x(t) + sp(t)) − ∇2F (x(t))��p(t)�ds
+2�� 1
+
+0
+
+µη(t)
+√κ �p(t)�ds
+2
+
+�[∇2F (x(t))]− 1
+≤�[∇2F (x(t))]− 1
+≤�[∇2F (x(t))]− 1
+2�
+
+µη(t)
+√κ �∇F (x(t))�
+
+λmin([∇2F (x(t))]− 1
+
+2 )�∇F (x(t))�
+
+(1 − �0)µ
+�[∇2F (x(t))]− 1
+2�
+√κλmin([∇2F (x(t))]− 1
+
+2η(t)
+≤
+1 − �0
+≤4η(t)�∇F (x(t))�M ,
+
+2 )
+
+12
+
+Therefore, we have
+
+�∇F (x(t+1))�M ≤�0�∇F (x(t))�M + 2�2�∇F (x(t))�M + 4η(t)�∇F (x(t))�M
+
+=(�0 + 2�2 + 4η(t))�∇F (x(t))�M .
+
+By Eqn. (14), we have
+
+ν(t)
+
+−
+
+λmax(∇2F (x∗))
+
+yT y ≤ yT ([∇2F (x∗)]−1 − [∇2F (x(t))]−1)y ≤
+
+ν(t)
+
+yT y,
+
+λmax(∇2F (x∗))
+
+⇒(1 − ν(t))yT [∇2F (x(t))]−1y ≤ yT [∇2F (x∗)]−1y ≤ (1 + ν(t))yT [∇2F (x(t))]−1y
+⇒(1 − ν(t))�y�M ≤ �y�M∗ ≤ (1 + ν(t))�y�M .
+
+By this relationship between � · �M and � · �M∗, we get
+
+�∇F (x(t+1))�M∗ ≤ (�0 + 2�2 + 4η(t))
+
+1 + ν(t)
+
+1 − ν(t)�∇F (x(t))�M∗
+
+(b) Now we consider the case that ∇2F (x) is Lipschitz continuous with parameter ˆL.
+
+The same to the previous proof, we have
+
+�p(t)� = �[H (t)]−1��g(x(t))� ≤
+
+1 + �2/κ
+
+(1 − �0)µ�∇F (x(t))� ≤
+
+2
+
+(1 − �0)µ�∇F (x(t))�.
+
+Because ∇2F (x) is Lipschitz continuous with parameter ˆL, we have
+2�� 1
+�[∇2F (x(t))]− 1
+0 �∇2F (x(t) + sp(t)) − ∇2F (x(t))��p(t)�ds
+2�� 1
+≤�[∇2F (x(t))]− 1
+ˆL
+2 �[∇2F (x(t))]− 1
+2�λ−2
+ˆL
+2 �[∇2F (x(t))]− 1
+2�λ−2
+
+sL�p(t)�2ds
+min([∇2F (x(t))]− 1
+min([∇2F (x(t))]− 1
+(1 − �0)λmin(∇2F (x(t)))�2
+2 )�
+min([∇2F (x(t))]− 1
+
+2 )�p(t)�2
+
+2 )λ2
+
+=
+
+2
+
+0
+
+2 ˆLλmax(∇2F (x(t)))
+min(∇2F (x(t)))�λmin(∇2F (x(t)))�∇F (x(t))�2
+
+M
+
+(1 − �0)2λ2
+8 ˆLκ
+µ√µ�∇F (x(t))�2
+M ,
+
+≤
+
+=
+
+≤
+
+�∇F (x(t))�2
+
+M
+
+where the last inequality is because �0 ≤ 1/2. Hence, we have
+8 ˆLκ
+µ√µ�∇F (x(t))�2
+M .
+
+�∇F (x(t+1))�M ≤(�0 + 2�2)�∇F (x(t))�M +
+
+By the Lipschitz continuity of ∇2F (x) and the condition
+λmin(∇2F (x∗))
+ˆLκ(∇2F (x(t)))
+
+�x(t) − x∗� ≤
+
+µ
+ˆLκ ≤
+
+,
+
+13
+
+we obtain
+
+�[∇2F (x∗)]−1 − [∇2F (x(t))]−1� ≤�[∇2F (x∗)]−1��[∇2F (x(t))]−1��∇2F (x∗) − ∇2F (x(t))�
+
+≤ ˆL�[∇2F (x∗)]−1��[∇2F (x(t))]−1��x(t) − x∗�
+≤ν(t)λmin([∇2F (x(t))]−1).
+
+Hence, we can derive
+
+− ν(t)λmin([∇2F (x(t))]−1)yT y ≤ yT ([∇2F (x∗)]−1 − [∇2F (x(t))]−1)y ≤ ν(t)λmin([∇2F (x(t))]−1)yT y,
+
+⇒(1 − ν(t))yT [∇2F (x(t))]−1y ≤ yT [∇2F (x∗)]−1y ≤ (1 + ν(t))yT [∇2F (x(t))]−1y
+⇒(1 − ν(t))�y�M ≤ �y�M∗ ≤ (1 + ν(t))�y�M .
+Hence, we have
+
+�∇F (x(t+1))�M∗ ≤(�0 + 2�2)
+
+1 + ν(t)
+
+1 − ν(t)�∇F (x(t))�M∗ +
+
+8 ˆLκ
+µ√µ
+
+(1 + ν(t))2
+
+1 − ν(t) �∇F (x(t))�2
+
+M∗
+
+Table 2: Datasets Description
+Dataset
+
+n
+
+mushrooms
+
+a9a
+
+Covertype
+
+8124
+32561
+581012
+
+d
+112
+123
+54
+
+source
+UCI
+UCI
+UCI
+
+Appendix F. Unnecessity of Lipschitz continuity of Hessian
+
+In this section, we validate our theoretical results about unnecessity of the Lipschitz con-
+tinuity condition of ∇2F (x). We conduct experiment on the primal problem for the linear
+SVM which can be written as
+
+min
+
+x
+
+F (x) =
+
+1
+2�x�2 +
+
+C
+2n
+
+n�i=1
+
+�(bi,�x, ai�)
+
+where (ai, bi) denotes the training data, x deﬁnes the separating hyperplane, C > 0, and
+�(·) is the loss function.
+In our experiment, we choose Hinge-2 loss as our loss function
+whose deﬁnition is
+
+�(b,�x, a�) = max(0, 1 − b�x, a�)2.
+
+Let SV (t) denote the set of indices of all the support vectors at iteration t, i.e.,
+
+SV (t) = {i : bi�x(t), ai� < 1}.
+
+14
+
+Then the Hessian matrix of F (x(t)) can be written as
+
+∇2F (x(t)) = I +
+
+1
+
+n �i∈SV (t)
+
+aiaT
+i .
+
+From the above equation, we can see that ∇2F (x) is not Lipschitz continuous.
+Without loss of generality, we use the Subsampled Newton method (Algorithm 2) in our
+experiment. We sample 5% support vectors in each iteration. Our experiments on three
+datasets whose detailed description is in Table 2 and report our results in Figure 3.
+
+From Figure 3, we can see that Subsampled Newton converges linearly and the Newton
+method converges superlinearly. This matches our theory that the Lipschitz continuity of
+∇2F (x) is not necessary to achieve a linear or superlinear convergence rate.
+
+)
+r
+r
+e
+(
+g
+o
+
+l
+
+5
+
+0
+
+-5
+
+-10
+
+-15
+
+-20
+
+-25
+
+-30
+
+-35
+
+mushrooms
+
+a9a
+
+Subsampled Newton
+Newton
+
+)
+r
+r
+e
+(
+g
+o
+
+l
+
+5
+
+0
+
+-5
+
+-10
+
+-15
+
+-20
+
+-25
+
+-30
+
+-35
+
+Subsampled Newton
+Newton
+
+)
+r
+r
+e
+(
+g
+o
+
+l
+
+160
+
+140
+
+120
+
+100
+
+80
+
+60
+
+40
+
+20
+
+0
+
+-20
+
+-40
+
+covtype
+
+Subsampled Newton
+Newton
+
+5
+
+10
+
+15
+
+20
+
+25
+
+2
+
+4
+
+6
+
+8
+
+10
+
+12
+
+14
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+iteration
+
+(a) mushrooms.
+
+iteration
+
+(b) a9a.
+
+iteration
+
+(c) covtype.
+
+Figure 3: Convergence properties on diﬀerent datasets.
+
+References
+
+[1] Richard H Byrd, Gillian M Chin, Will Neveitt, and Jorge Nocedal. On the use of
+stochastic hessian information in optimization methods for machine learning. SIAM
+Journal on Optimization, 21(3):977–995, 2011.
+
+[2] Farbod Roosta-Khorasani and Michael W Mahoney. Sub-sampled newton methods ii:
+
+Local convergence rates. arXiv preprint arXiv:1601.04738, 2016.
+
+[3] Joel A Tropp et al. An introduction to matrix concentration inequalities. Foundations
+
+and Trends R� in Machine Learning, 8(1-2):1–230, 2015.
+
+15
+
+

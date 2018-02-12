@@ -1,0 +1,688 @@
+Identify the Nash Equilibrium in Static Games with Random Payoffs
+
+A. Proof of Lemma 2
+The proof of Lemma 2 relies on the folloing lemma:
+Lemma 7. For positive measurable functions fi, we have:
+
+(cid:18)(cid:90) K(cid:89)
+
+(cid:19)K ≤ K(cid:89)
+
+(cid:90)
+
+f K
+i (x)dx.
+
+(4)
+
+fi(x)dx
+
+i=1
+
+i=1
+
+Proof. By Cauchy-Schwarz inequality, Eq. (4) is correct for K = 2. We use mathematical induction to prove that it still
+holds for K > 2. Speciﬁcally, assume InEq. (4) is true for K − 1, considering case K, by Holder’s inequality we have:
+
+(cid:18)(cid:90) K(cid:89)
+
+i=1
+
+fi(x)dx
+
+fK(x)
+
+(cid:19)K
+
+=
+
+≤
+
+(cid:18)(cid:90)
+(cid:18)(cid:16)(cid:90)
+(cid:16)(cid:90)
+≤ K(cid:89)
+
+=
+
+(cid:90)
+
+i=1
+
+fi(x)dx
+
+(cid:19)K
+K−1(cid:89)
+K(cid:16)(cid:90)
+(cid:17) 1
+K−1(cid:89)
+(cid:17)(cid:16)(cid:90)
+K−1(cid:89)
+
+i=1
+
+(
+
+f K
+K (x)dx
+
+fi(x))
+
+K
+
+K−1 dx
+
+f K
+K (x)dx
+
+(
+
+fi(x))
+
+K
+
+K−1 dx
+
+i=1
+
+f K
+i (x)dx.
+
+K (cid:19)K
+(cid:17) K−1
+(cid:17)K−1
+
+i=1
+
+Now we present the proof of Lemma 2.
+
+Proof. With straight-forward computations, we have:
+
+Because we need a bound for any measurable function ψ, we need to construct the ψ that minimizes the last expression.
+Obviously, the last expression is minimized for ψ(x) = arg mink≤K
+
+(x), so that
+
+(cid:90)
+
+ψ=k
+
+dPk =
+
+(cid:90)
+
+ψ=k
+
+K(cid:88)
+
+k=1
+
+dPk
+dP1
+
+dP1.
+
+Pk(ψ = k) =
+
+K(cid:88)
+(cid:90)
+
+k=1
+
+(cid:90)
+
+dPk
+dP1
+
+=
+
+dPk
+dP1
+
+k
+
+K(cid:88)
+
+k=1
+
+K(cid:88)
+(cid:16)(cid:90)
+
+k=1
+
+=
+
+Pk(ψ = k) ≥
+
+k
+
+1
+K
+
+(
+
+k
+
+(
+
+k
+
+(cid:90)
+
+dPk)
+
+1
+K
+
+min
+
+k
+
+min
+
+k
+
+dP1 min
+
+rk( ¯P ))
+
+(cid:17)K
+
+(cid:89)
+
+(cid:89)
+
+rk( ¯P ) =
+
+(cid:16)(cid:90)
+
+K(cid:88)
+
+Jensen’s inequality, it yields that:
+
+dPk.
+For vector ¯P = {dP1,··· , dPK}, deﬁne ri( ¯P ) be the i-th smallest value in ¯P , we have
+
+(cid:90)
+(cid:17)K ≤(cid:89)
+(cid:82) dPk ≤ K, so(cid:81)
+The above inequality is proven by Lemma 7.Note that(cid:80)
+(cid:16)(cid:90)
+(cid:89)
+(cid:26)
+(cid:26)
+(cid:26)(cid:88)
+(cid:90)
+(cid:26)
+− K(cid:88)
+
+Pk(ψ = k) ≥ 1
+e
+
+(cid:17)K
+(cid:89)
+(cid:89)
+
+1
+e
+≥ 1
+e
+
+(cid:27)
+(cid:27)
+
+dPk
+dP1
+
+dPk
+dP1
+
+(cid:90)
+(cid:90)
+
+dP1 log
+
+1
+
+)
+
+K dP1
+
+(cid:27)
+
+KL(P1, Pk)
+
+.
+
+exp
+
+K log
+
+exp
+
+K log
+
+dPk)
+
+1
+K
+
+dPk)
+
+1
+K
+
+k≥2
+
+k
+
+k
+
+(
+
+(
+
+=
+
+exp
+
+exp
+
+=
+
+=
+
+(
+
+k
+
+1
+e
+
+k=1
+
+k
+
+k
+
+(cid:27)
+
+1
+e
+
+k=2
+
+(cid:89)
+
+(cid:90)
+(cid:82) rk( ¯P ) ≤ ( K
+
+k≥2
+
+dPk
+
+rk( ¯P ).
+
+K−1 )K−1 < e. With
+
+Identify the Nash Equilibrium in Static Games with Random Payoffs
+
+B. Proof of Lemma 3
+Proof. With Hoeffding’s inequality and InEq. (2) in the main text, we have
+u(cid:48)
+
+i :
+
+P
+
+i(cid:88)
+
+u(cid:48)
+
+i=1
+
+1
+u(cid:48)
+
+i
+
+i − µs > β(ui, ti)
+Y s
+
+i − µs > β(ui, ti)
+Y s
+
+
+
+ ≤(cid:88)
+≤(cid:88)
+≤(cid:88)
+
+i≥1
+
+i≥1
+
+P
+
+u(cid:48)
+
+ 1
+i(cid:88)
+iβ(ui, ti)2(cid:9)
+exp(cid:8)−2u(cid:48)
+exp(cid:8)−2uiβ(ui, ti)2(cid:9)
+
+i=1
+
+i
+
+i≥1
+≤ δ
+2K
+
+.
+
+Then, applying the union bound, we complete the proof.
+
+C. Proof of Lemma 4
+In this section, we are going to show that E[γ − T (tγ)] ≤ O(Hc(j) log γ) to complete the proof of Lemma 4. The proof is
+the same as that of Theorem 1 in (Auer et al., 2002), except some constants.
+Proof. For simplicity, let s1 denote s∗
+c (j). Considering s : µs < µs1, let ev(s, γ) be the event that s is pulled at line 22 by
+Alg. 1 at round γ. Let Ts(tγ) denote the number of pulls on arm s in line 22 Alg. 1 when Alg. 1 selects column j for the
+γ-th time. Then, E[Ts(tγ)] can be bounded as follows:
+
+E [Ts(tγ)] =
+
+1[The algorithm pulls arm s in line 22 when Alg. 1 selects column j for the γ-th round ]
+
+By Hoeffding’s inequality, the probability that the ﬁrst and the second events happen is at most 2γ(cid:48)−4, and for l ≥
+(µs−µs1 )2 log γ, the third event will not happen. So we have E[Ts(tγ)] = O
+. Then, with straight-
+forward computations we complete the proof.
+
+(µs−µs1 )2 log γ
+
+8
+
+1
+
+(cid:16)
+
+(cid:17)
+
+γ(cid:88)
+
+γ(cid:48)=1
+≤ l +
+
+≤ l +
+
+≤ l +
+
+≤ l +
+
+γ(cid:48)=1
+
+γ(cid:88)
+γ(cid:88)
+γ(cid:88)
+γ(cid:88)
+
+γ(cid:48)=1
+
+γ(cid:48)=1
+
+1
+
+Ts(t(cid:48)
+
+1(cid:2)Ts(t(cid:48)
+(cid:34)
+(cid:34)
+γ−1(cid:88)
+(cid:113)
+
+γ1=0
+
+Ts(t(cid:48)
+
+1
+
+γ2=l
+
+2 log γ(cid:48)
+
+γ2
+
+γ(cid:48)=1
+≤ ¯µs +
+
+γ − 1) ≥ l, ev(s, γ(cid:48))(cid:3)
+(cid:115)
+
+γ − 1) ≥ l, ¯µs1 +
+
+γ − 1) ≥ l, min
+(cid:34)
+γ−1(cid:88)
+
+(cid:115)
+
+γ1∈[1,γ(cid:48)−1]
+log γ(cid:48)
+γ1
+
+¯µs1 +
+
+2
+
+1
+
+Since ¯µs1 +
+
+γ1
+
+2 log γ(cid:48)
+
+(cid:113)
+• ¯µs1 ≤ µs1 −(cid:113)
+• ¯µs ≤ µs −(cid:113)
+(cid:113)
+
+• µs1 ≤ µs + 2
+
+2 log γ(cid:48)
+
+γ1
+
+2 log γ(cid:48)
+
+γ2
+
+;
+
+2 log γ(cid:48)
+
+γ2
+
+;
+
+.
+
+(cid:115)
+
+2
+
+≤ ¯µs +
+
+(cid:35)
+log γ(cid:48)
+(cid:115)
+γ − 1)
+
+Ts(t(cid:48)
+
+≤ max
+
+γ2∈[l,γ−1]
+
+¯µs +
+
+2
+
+(cid:35)
+
+log γ
+γ2
+
+2
+
+Ts1 (t(cid:48)
+
+log t
+(cid:115)
+γ − 1)
+(cid:115)
+
+2
+
+¯µs1 +
+
+≤ ¯µs +
+
+(cid:35)
+
+log γ
+γ1
+log γ(cid:48)
+γ2
+
+2
+
+.
+
+, at least one of the following three events happens:
+
+Identify the Nash Equilibrium in Static Games with Random Payoffs
+
+D. Proof of Lemma 5
+Proof. Suppose s∗ (cid:54)= none. If at round γ, Alg.1 does not select Rs∗[1] or Cs∗[2], then at least one of following events
+happens:
+
+• ∃s /∈ {none, s∗}, s = N E( ¯Mt);
+• N E( ¯Mt) = none.
+
+2((cid:80)
+i Λ(Hr(i)) +(cid:80)
+
+j λ(Hc(j))).
+
+For the ﬁrst part, it is easy to see that s (cid:54)= s∗
+
+r(s[1]) or s (cid:54)= s∗
+
+c (s[2]). So by Lemma 4, the size of this part is at most
+
+Similarly, if the second case happens, then s∗ (cid:54)= arg mins(cid:48)∈row(s∗) ¯µs(cid:48) or s∗ (cid:54)= arg maxs(cid:48)∈col(s∗) ¯µs(cid:48). When the second
+case happens for the γ-th round, due to Alg.1, we selected Rs∗[1] for at least (cid:98)γ/m(cid:99) times and Cs∗[2] for at least (cid:98)γ/n(cid:99)
+times. So by Lemma 4, the size of the second part is at most (cid:100)(m + n)(Λ(Hr(s∗[1])) + Λ(Hc(s∗[2])))(cid:101).
+
+E. Proof of Lemma 6
+This proof is the same as the proof of Theorem 6 in Kalyanakrishnan et al. (2012), except the statement and some constants.
+
+Proof. Without loss of generality, consider a bandit model v = {s1,··· , sk}. Suppose µsi > µsi+1. At each round, we
+(µs1−µsi )2 . Let s1(γ) = arg maxs∈v ¯µs after round
+γ, and s2(γ) = arg maxs∈v\s1(γ) U (s,|Ts(τ )|,|τ|). Denote τ (γ) be the set of time steps t in the ﬁrst γ round. If after γv
+round, we have L(s1(γ),|Ts1(γ)(τ )|,|τ|) > U (s2(γ),|Ts2(γ)(τ )|,|τ|), we now show that Eγv = O(Hv log Hv
+δ ).
+Now let us introduce some notations. Deﬁne c = µs1 +µs2
+
+pull arms in v as from line 21 to line 23 in Alg. 1. Let H =(cid:80)
+µs1 − µs2
+
+µs1 − µsi
+
+i = 1,
+i ≥ 2
+
+∆i :=
+
+and
+
+2
+
+1
+
+i=2
+
+During round γ, we partition the set of arms into three subsets:
+
+• Aboveγ := {s ∈ v : ¯µs − β(Ts(γ), γ) > c}.
+• Belowγ := {s ∈ v : ¯µs + β(Ts(γ), γ) < c}.
+• M iddleγ := v\(Aboveγ ∪ Belowγ).
+
+And by Lemma 2 in Kalyanakrishnan et al. (2012), if we cannot identify arg maxs∈v µ(s) after round γ, then s1(γ) ∈
+M iddleγ or s2(γ) ∈ M iddleγ. And with similar computation to Lemma 4 in Kalyanakrishnan et al. (2012), if for all arm
+si, we pulled at least 4(cid:100) 1
+mnγ4 . The rest is all the
+same as Theorem 6 in Kalyanakrishnan et al. (2012).
+
+4δ (cid:101) times, then ∀s, s /∈ M iddleγ with probability at least 1 − 3δHv
+
+ln mnγ4
+
+2∆i
+
+F. Proof of Theorem 5
+Proof. With the same argument as Theorem 8 in Even-Dar et al. (2006), for s1, s2, suppose µs1 − µs2 = ∆ > 0. Then
+with probability at least 1− δ/(mn), after round γ = O( ln(mn/δ∆)
+), we have ¯µs1 − ¯µs2 > 2β1(γ). So by the union bound,
+the racing algorithm stops after ﬁnite time with probability at least 1 − δ.
+Then we show that Alg. 2 is δ-PAC.
+According to Lemma 3, the probability that there is an arm s such that |¯µs − µs| > β1(γ) for some γ is at most δ. Suppose
+∀s, γ, |¯µs − µs| > β1(γ).
+
+∆2
+
+Identify the Nash Equilibrium in Static Games with Random Payoffs
+
+c (s[2])}, clearly, it will be eliminated when its conﬁdence
+c (s[2])}, without
+c (s[2]). Otherwise, if s ∈ {s∗
+r(s[1]). Obviously, there is a sequence S = {s1, s2,··· , s2k} such that (1) s = s1;
+c (s2i[2]) for all i, where sj = s(j−1)%(2k)+1; (3) s2i+1 ∈ col(s2i) and s2i+2 ∈
+
+For the case N E(M) = none, consider arm s. If s /∈ {s∗
+bounds are disjoint with the conﬁdence bounds of s∗
+loss of generality, suppose s = s∗
+(2) s2i+1 = s∗
+row(s2i+1). And according to Alg.2, all the arms in S will be eliminated when their conﬁdence bounds are disjoint.
+For the case s∗ = N E(M) (cid:54)= none, obviously, it won’t be eliminated by our elimination rule, so Algorithm is δ-PAC.
+Up to now we have proven the two statements about Alg. 2 in Theorem 5.
+
+r(s2i+1[1]) and s2i = s∗
+
+r(s[1]), s∗
+r(s[1]) and s∗
+
+r(s[1]), s∗
+
+G. Correctness of baseline
+Here, We present the stopping and recommendation rules of our baseline algorithm in detail.
+
+Stopping and recommendation rules: In each round, we pull all arms. Let β2(γ) =(cid:112)log(5mnγ2/4δ)/γ. After the t-th
+
+round, if one of the following event happens, the algorithm stops:
+
+• For some arm s, if for all s(cid:48) ∈ row(s)\s,∃γs(cid:48), after γs(cid:48) rounds, ¯µs + 2β2(γs(cid:48), δ) ≤ ¯µs(cid:48) and for all s(cid:48) ∈
+col(s)\s,∃γ(s(cid:48)), after γs(cid:48) rounds, ¯µs ≥ ¯µs(cid:48) + 2β2(γs(cid:48), δ), then the recommendation rule recommends s as the
+NE.
+
+• For all arm s, if ∃s(cid:48) ∈ row(s), ¯µs(cid:48) + β2(t, δ) ≤ ¯µs − β2(t, δ) or ∃s(cid:48) ∈ col(s), ¯µs(cid:48) − β2(t, δ) ≥ ¯µs + β2(t, δ), then
+
+the recommendation rule determines that the underlying game does not have a NE.
+
+Obviously, this algorithm is δ-PAC and the proof for this statement is the same as the proof for Theorem 5.
+
+

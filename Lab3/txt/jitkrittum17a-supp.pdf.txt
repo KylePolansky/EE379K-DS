@@ -1,0 +1,2489 @@
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+Supplementary Material
+
+A. Type-I Errors
+In this section, we show that all the tests have correct type-I errors (i.e., the probability of reject H0 when it is true) in real
+problems. We permute the joint sample so that the dependency is broken to simulate cases in which H0 holds. The results
+are shown in Figure 5.
+
+(a) MSD problem (permuted sample).
+
+(b) Videos & Captions problem (permuted
+sample).
+
+Figure 5: Probability of rejecting H0 as n increases. α = 0.01.
+
+B. Redundant Test Locations
+Here, we provide a simple illustration to show that two locations t1 = (v1, w1) and t2 = (v2, w2) which are too close
+to each other will reduce the optimization objective. We consider the Sinusoid problem described in Section 3.1 with
+ω = 1, and use J = 2 test locations. In Figure 6, t1 is ﬁxed at the red star, while t2 is varied along the horizontal line. The
+objective value ˆλn as a function of t2 is shown in the bottom ﬁgure. It can be seen that ˆλn decreases sharply when t2 is
+in the neighborhood of t1. This property implies that two locations which are too close will not maximize the objective
+function (i.e., the second feature contains no additional information when it matches the ﬁrst). For J > 2, the objective
+sharply decreases if any two locations are in the same neighborhood.
+
+Figure 6: Plot of optimization objective values as location t2 moves along the green line. The objective sharply drops when
+the two locations are in the same neighborhood.
+
+C. Test Power vs. J
+It might seem intuitive that as the number of locations J increases, the test power should also increase. Here, we empirically
+show that this statement is not always true. Consider the Sinusoid toy example described in Section 3.1 with ω = 2 (also see
+the left ﬁgure of Figure 7). By construction, X and Y are dependent in this problem. We run NFSIC test with a sample size
+of n = 800, varying J from 1 to 600. For each value of J, the test is repeated for 500 times. In each trial, the sample is
+redrawn and the J test locations are drawn from Uniform((−π, π)2). There is no optimization of the test locations. We use
+Gaussian kernels for both X and Y , and use the median heuristic to set the Gaussian widths to 1.8. Figure 7 shows the test
+power as J increases.
+
+500100015002000Samplesizen0.000.010.02Type-IerrorNFSIC-optNFSIC-medQHSICNyHSICFHSICRDC500100015002000Samplesizen0.000.010.02Type-Ierror2000400060008000Samplesizen0.010.02Type-Ierror−2.50.02.5x−2.50.02.5yω=1.000.000.250.500.751.001.251.501.752.00x−202y−202t2175200225250ˆλn(t1,t2)An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+Figure 7: The Sinusoid problem and the plot of test power vs. the number of test locations.
+
+We observe that the test power does not monotonically increase as J increases. When J = 1, the difference of pxy and pxpy
+cannot be adequately captured, resulting in a low power. The power increases rapidly to roughly 0.6 at J = 10, and stays at
+1 until about J = 100. Then, the power starts to drop sharply when J is higher than 400 in this problem.
+Unlike random Fourier features, the number of test locations in NFSIC is not the number of Monte Carlo particles used to
+approximate an expectation. There is a tradeoff: if the test locations are in key regions (i.e., regions in which there is a big
+difference between pxy and pxpy), then they increase power; yet the statistic gains in variance (thus reducing test power) as
+J increases. As can be seen in Figure 7, there are eight key regions (in blue) that can reveal the difference of pxy and pxpy.
+Using an unnecessarily high J not only makes the covariance matrix ˆΣ harder to estimate accurately, it also increases the
+computation as the complexity on J is O(J 3).
+We note that NFSIC is not intended to be used with a large J. In practice, it should be set to be large enough so as to capture
+the key regions as stated. As a practical guide, with optimization of the test locations, a good starting point is J = 5 or 10.
+
+D. Proof of Proposition 3
+Recall Proposition 3,
+
+−(x − x(cid:48))(cid:62)A(x − x(cid:48))(cid:1) and
+−(y − y(cid:48))(cid:62)B(y − y(cid:48))(cid:1) be Gaussian kernels on Rdx×Rdx and Rdy ×Rdy respectively, for positive deﬁnite
+
+Proposition (A product of Gaussian kernels is characteristic and analytic). Let k(x, x(cid:48)) = exp(cid:0)
+l(y, y(cid:48)) = exp(cid:0)
+matrices A and B. Then, g((x, y), (x(cid:48), y(cid:48))) = k(x, x(cid:48))l(y, y(cid:48)) is characteristic and analytic on (Rdx×Rdy )×(Rdx×Rdy ).
+(cid:19)
+Gaussian kernel with g(z, z(cid:48)) = exp(cid:0)
+Proof. Let z := (x(cid:62), y(cid:62))(cid:62) and z(cid:48) := (x(cid:48)(cid:62), y(cid:48)(cid:62))(cid:62) be vectors in Rdx+dy. We prove by reducing the product kernel to one
+Ψ(t) := exp(cid:0)
+. Write g(z, z(cid:48)) = Ψ(z− z(cid:48)) where
+Lemma 12 has support everywhere in Rdx+dy. Thus, Sriperumbudur et al. (2010, Theorem 9) implies that g is characteristic.
+functions is analytic, we see that z (cid:55)→ exp(cid:0)
+To see that g is analytic, we observe that for each z(cid:48)
+∈ Rdx+dy, z (cid:55)→ −(z − z(cid:48))(cid:62)C(z − z(cid:48)) is a multivariate polynomial
+in z, which is known to be analytic. Using the fact that t (cid:55)→ exp(t) is analytic on R, and that a composition of analytic
+
+−(z − z(cid:48))(cid:62)C(z − z(cid:48))(cid:1) is analytic on Rdx+dy for each z(cid:48).
+
+(cid:18) A 0
+
+−(z − z(cid:48))(cid:62)C(z − z(cid:48))(cid:1) where C :=
+
+−t(cid:62)Ct(cid:1). Since C is positive deﬁnite, we see that the ﬁnite measure ζ corresponding to Ψ as deﬁned in
+
+0 B
+
+E. Proof of Theorem 5
+Recall Theorem 5,
+Theorem 5 (Independence test based on (cid:92)NFSIC2 is consistent). Let ˆΣ be a consistent estimate of Σ based on the joint
+the Lebesgue measure. The (cid:92)NFSIC2 statistic is deﬁned as ˆλn := nˆu(cid:62)(cid:16) ˆΣ + γnI
+(cid:17)−1
+i=1 ∼ η where η is absolutely continuous wrt
+sample Zn, where Σ is deﬁned in Proposition 4. Assume that VJ = {(vi, wi)}J
+ˆu where γn ≥ 0 is a regularization
+
+parameter. Assume that
+
+1. Assumption A holds.
+2. Σ is invertible η-almost surely.
+
+−2.50.02.5x−2.50.02.5yω=2.000.000.250.500.751.001.251.501.752.0010200400600J0.51.0TestpowerAn Adaptive Test of Independence with Analytic Kernel Embeddings
+
+3. limn→∞ γn = 0.
+
+Then, for any k, l and VJ satisfying the assumptions,
+
+d
+
+d
+
+√nˆu,
+
+d
+
+→
+
+(cid:17)
+
+(cid:18)
+
+√nˆu,
+
+is consistent.
+
+(cid:17)−1(cid:21)
+
+1. Under H0, ˆλn
+
+→ χ2(J) as n → ∞.
+
+(cid:16) ˆΣ + γnI
+
+= 1 η-almost surely. That is, the independence test based on (cid:92)NFSIC2
+
+2. Under H1, for any r ∈ R, limn→∞ P(cid:16)ˆλn ≥ r
+→ Σ−1
+(cid:20)
+Proof. Assume that H0 holds. The consistency of ˆΣ and the continuous mapping theorem imply that
+which is a constant. Let a be a random vector in RJ following N (0, Σ). By van der Vaart (2000, Theorem 2.7 (v)), it follows
+(cid:17)−1
+that
+→ N (0, Σ) by Proposition
+ˆu d
+→
+
+(cid:16) ˆΣ + γnI
+(cid:17)−1 p
+→ f (a, Σ−1). Equivalently, nˆu(cid:62)(cid:16) ˆΣ + γnI
+
+(cid:2)a, Σ−1(cid:3) where u = 0 almost surely by Proposition 2, and √nˆu d
+
+4. Since f (x, S) := x(cid:62)Sx is continuous, f
+a(cid:62)Σ−1a ∼ χ2(J) by Anderson (2003, Theorem 3.3.3). This proves the ﬁrst claim.
+The proof of the second claim has a very similar structure to the proof of Proposition 2 of Chwialkowski et al. (2015).
+ˆu(cid:62)(cid:16) ˆΣ + γnI
+Assume that H1 holds. Then, u (cid:54)= 0 almost surely by Proposition 2. Since k and l are bounded, it follows that
+|ht(z, z(cid:48))| ≤ 2BkBl for any z, z(cid:48) (see (8)), and we have that ˆu a.s.
+→ u by Serﬂing (2009, Section 5.4, Theorem A). Thus,
+P(cid:16)ˆλn ≥ r
+(cid:17)
+(cid:18)
+ˆu(cid:62)(cid:16) ˆΣ + γnI
+= 1 − P(cid:0)u(cid:62)Σ−1u < 0(cid:1) (b)
+
+→ u(cid:62)Σ−1u by the continuous mapping theorem, and the consistency of ˆΣ. Consequently,
+
+(cid:16) ˆΣ + γnI
+
+(cid:17)−1(cid:19)
+
+= 1 − lim
+n→∞
+
+(cid:17)−1
+
+r
+n
+
+ˆu −
+
+d
+
+ˆu − r
+
+n
+
+(cid:19)
+
+< 0
+
+lim
+n→∞
+
+(a)
+
+(cid:17)−1
+
+P
+
+= 1,
+
+d
+
+where at (a) we use the Portmanteau theorem (van der Vaart, 2000, Lemma 2.2 (i)) guaranteeing that xn
+→ x if and only if
+P(xn < t) → P(x < t) for all continuity points of t (cid:55)→ P(x < t). Step (b) is justiﬁed by noting that the covariance matrix
+Σ is positive deﬁnite so that u(cid:62)Σ−1u > 0, and t (cid:55)→ P(u(cid:62)Σ−1u < t) (a step function) is continuous at 0.
+F. Proof of Theorem 7
+Recall Theorem 7,
+
+Theorem 7 (A lower bound on the test power). Let NFSIC2(X, Y ) := λn := nu(cid:62)Σ−1u. Let K be a kernel class for k, L
+be a kernel class for l, and V be a collection with each element being a set of J locations. Assume that
+1. There exist ﬁnite Bk and Bl such that supk∈K supx,x(cid:48)∈X |k(x, x(cid:48))| ≤ Bk and supl∈L supy,y(cid:48)∈Y |l(y, y(cid:48))| ≤ Bl.
+2. ˜c := supk∈K supl∈L supVJ∈V (cid:107)Σ−1(cid:107)F < ∞.
+
+Then, for any k ∈ K, l ∈ L, VJ ∈ V, and λn ≥ r, the test power satisﬁes P(cid:16)ˆλn ≥ r
+
+≥ L(λn) where
+
+(cid:17)
+
+L(λn) = 1 − 62e−ξ1γ2
+
+n(λn−r)2/n − 2e−(cid:98)0.5n(cid:99)(λn−r)2/[ξ2n2]
+/[ξ4n2(n−1)],
+
+nn(n−1)]2
+
+− 2e−[(λn−r)γn(n−1)/3−ξ3n−c3γ2
+1J 2B∗ , B∗ is a constant depending on only Bk and Bl, ξ2 := 72c2
+
+2JB2, B := BkBl,
+1, c1 := 4B2J√J ˜c, and c2 := 4B√J ˜c. Moreover, for sufﬁciently large
+
+(cid:98)·(cid:99) is the ﬂoor function, ξ1 :=
+ξ3 := 8c1B2J, c3 := 4B2J ˜c2, ξ4 := 28B4J 2c2
+ﬁxed n, L(λn) is increasing in λn.
+
+32c2
+
+1
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+Overview of the proof We ﬁrst derive a probabilistic bound for |ˆλn − λn|/n. The bound is in turn upper bounded by
+an expression involving (cid:107)ˆu − u(cid:107)2 and (cid:107) ˆΣ − Σ(cid:107)F . The difference (cid:107)ˆu − u(cid:107)2 can be bounded by applying the bound for
+U-statistics given in Serﬂing (2009, Theorem A, p. 201). For (cid:107) ˆΣ− Σ(cid:107)F , we decompose it into a sum of smaller components,
+and bound each term with a product variant of the Hoeffding’s inequality (Lemma 9). L(λn) is obtained by combining all
+the bounds with the union bound.
+
+F.1. Notations
+
+Let (cid:104)A, B(cid:105)F := tr(A(cid:62)B) denote the Frobenius inner product, and (cid:107)A(cid:107)F :=(cid:112)tr(A(cid:62)A) be the Frobenius norm. Write
+
+z := (x, y) to denote a pair of points from X × Y. We write t := (v, w) to denote a pair of test locations from X × Y. For
+brevity, an expectation over (x, y) (i.e., E(x,y)∼Pxy) will be written as Ez or Exy. Deﬁne ˜k(x, v) := k(x, v)− Ex(cid:48)k(x(cid:48), v),
+and ˜l(y, w) := l(y, w) − Ey(cid:48)l(y(cid:48), w). Let B2(r) := {x | (cid:107)x(cid:107)2 ≤ r} be a closed ball with radius r centered at the origin.
+Similarly, deﬁne BF (r) := {A | (cid:107)A(cid:107)F ≤ r} to be a closed ball with radius r of J × J matrices under the Frobenius norm.
+Denote the max operation by (x1, . . . , xm)+ = max(x1, . . . , xm).
+For a product of marginal mean embeddings µx(v)µy(w), we write (cid:91)µxµy(v, w) := 1
+to denote the unbiased plug-in estimator, and write ˆµx(v)ˆµy(w) := 1
+i=1 k(xi, v) 1
+n
+n
+
+(cid:80)n
+(cid:80)n
+estimator. Deﬁne ˆub(v, w) := ˆµxy(v, w) − ˆµx(v)ˆµy(w) so that ˆub :=(cid:0)ˆub(t1), . . . , ˆub(tJ )(cid:1)(cid:62)
+
+j(cid:54)=i k(xi, v)l(yj, w)
+j=1 l(yj, w) which is a biased
+where the superscript b
+
+stands for “biased”. To avoid confusing with a positive deﬁnite kernel, we will refer to a U-statistic kernel as a core.
+
+(cid:80)n
+
+(cid:80)
+
+n(n−1)
+
+i=1
+
+F.2. Proof
+We will ﬁrst derive a bound for P(|ˆλn − λn| ≥ t), which will then be reparametrized to get a bound for the target quantity
+P(ˆλn ≥ r). We closely follow the proof in Jitkrittum et al. (2016, Section C.1) up to (12), then we diverge. We start by
+considering |ˆλn − λn|/n.
+|ˆλn − λn|/n =
+
+(cid:12)(cid:12)(cid:12)ˆu(cid:62)( ˆΣ + γnI)−1 ˆu − u(cid:62)Σ−1u
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12)ˆu(cid:62)(cid:16) ˆΣ + γnI
+(cid:17)−1
+(cid:12)(cid:12)(cid:12)(cid:12)ˆu(cid:62)(cid:16) ˆΣ + γnI
+(cid:17)−1
+≤
+:= ((cid:70))1 + ((cid:70))2 .
+We next bound ((cid:70)1) and ((cid:70)2) separately.
+
+ˆu − u(cid:62) (Σ + γnI)
+ˆu − u(cid:62) (Σ + γnI)
+
+=
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+−1 u + u(cid:62) (Σ + γnI)
+
+(cid:12)(cid:12)(cid:12)u(cid:62) (Σ + γnI)
+
+−1 u − u(cid:62)Σ−1u
+(cid:12)(cid:12)(cid:12)
+−1 u − u(cid:62)Σ−1u
+
+(cid:12)(cid:12)(cid:12)(cid:12) +
+
+−1 u
+
+((cid:70))1 =
+
+=
+
+≤
+
+=
+
+−1 u
+
+−1 ˆu + ˆu(cid:62) (Σ + γnI)
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)(cid:12) +
+
+ˆu − u(cid:62) (Σ + γnI)
+ˆu − ˆu(cid:62) (Σ + γnI)
+ˆu − ˆu(cid:62) (Σ + γnI)
+(cid:17)−1
+− (Σ + γnI)
+
+(cid:12)(cid:12)(cid:12)(cid:12)ˆu(cid:62)(cid:16) ˆΣ + γnI
+(cid:17)−1
+(cid:12)(cid:12)(cid:12)(cid:12)ˆu(cid:62)(cid:16) ˆΣ + γnI
+(cid:17)−1
+(cid:12)(cid:12)(cid:12)(cid:12)ˆu(cid:62)(cid:16) ˆΣ + γnI
+(cid:17)−1
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:28)
+(cid:16) ˆΣ + γnI
+ˆuˆu(cid:62)
+(cid:107)F(cid:107)( ˆΣ + γnI)−1 − (Σ + γnI)−1(cid:107)F + (cid:107)ˆuˆu(cid:62)
+(cid:107)F(cid:107)( ˆΣ + γnI)−1[(Σ + γnI) − ( ˆΣ + γnI)](Σ + γnI)−1(cid:107)F + (cid:107)ˆuˆu(cid:62)
+2(cid:107)Σ − ˆΣ(cid:107)F(cid:107)Σ−1(cid:107)F +(cid:0)
+(cid:1)
+(cid:107)F(cid:107)( ˆΣ + γnI)−1(cid:107)F(cid:107)Σ − ˆΣ(cid:107)F(cid:107)Σ−1(cid:107)F + (cid:107)ˆuˆu(cid:62)
+− ˆuu(cid:62) + ˆuu(cid:62)
+
+(cid:12)(cid:12)(cid:12)ˆu(cid:62) (Σ + γnI)
+(cid:12)(cid:12)(cid:12)(cid:68)
+
+−1 ˆu − u(cid:62) (Σ + γnI)
+−1 u
+−1 ˆu − u(cid:62) (Σ + γnI)
+(cid:12)(cid:12)(cid:12)
+−1(cid:69)
+− uu(cid:62), (Σ + γnI)
+(cid:107)F(cid:107)(Σ + γnI)−1(cid:107)F
+− uu(cid:62)
+
+ˆuˆu(cid:62),
+≤ (cid:107)ˆuˆu(cid:62)
+= (cid:107)ˆuˆu(cid:62)
+≤ (cid:107)ˆuˆu(cid:62)
+√J
+γn (cid:107)ˆu(cid:107)2
+≤
+
+− ˆuu(cid:62) + ˆuu(cid:62)
+(cid:107)F(cid:107)Σ−1(cid:107)F
+− uu(cid:62)
+(cid:107)Σ−1(cid:107)F
+
+(cid:107)F + (cid:107)(ˆu − u)u(cid:62)
+
+(cid:107)ˆu(ˆu − u)(cid:62)
+
+−1 u
+
+−1 ˆu
+
+(cid:29)
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+(cid:107)F
+
+(cid:12)(cid:12)(cid:12)
+
+(a)
+
+(b)
+
+−1
+
+F
+
+F
+
+− uu(cid:62)
+
+(cid:107)F(cid:107)(Σ + γnI)−1(cid:107)F
+
+where at (a) we used (cid:107)(Σ + γnI)−1(cid:107)F ≤ (cid:107)Σ−1(cid:107)F , at (b) we used (cid:107)( ˆΣ + γnI)−1(cid:107)F ≤ √J(cid:107)( ˆΣ + γnI)−1(cid:107)2 ≤ √J/γn.
+For ((cid:70))2, we have
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+√J
+γn (cid:107)ˆu(cid:107)2
+
+≤
+
+((cid:70))2 =
+
+2(cid:107)Σ − ˆΣ(cid:107)F(cid:107)Σ−1(cid:107)F + ((cid:107)ˆu(cid:107)2 + (cid:107)u(cid:107)2)(cid:107)ˆu − u(cid:107)2(cid:107)Σ−1(cid:107)F ,
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)u(cid:62) (Σ + γnI)
+=(cid:12)(cid:12)(cid:10)uu(cid:62), (Σ + γnI)−1 − Σ−1(cid:11)
+(cid:12)(cid:12)
+−1 u − u(cid:62)Σ−1u
+(cid:107)F(cid:107)(Σ + γnI)−1 − Σ−1(cid:107)F
+2(cid:107)(Σ + γnI)−1 [Σ − (Σ + γnI)] Σ−1(cid:107)F
+2(cid:107)(Σ + γnI)−1(cid:107)F(cid:107)Σ−1(cid:107)F
+2(cid:107)Σ−1(cid:107)2
+
+F ,
+
+F
+
+≤ (cid:107)uu(cid:62)
+= (cid:107)u(cid:107)2
+≤ γn(cid:107)u(cid:107)2
+≤ γn(cid:107)u(cid:107)2
+where at (a) we used (cid:107)(Σ + γnI)−1(cid:107)F ≤ (cid:107)Σ−1(cid:107)F .
+(cid:12)(cid:12)(cid:12)ˆu(cid:62)( ˆΣ + γnI)−1 ˆu − u(cid:62)Σ−1u
+(cid:12)(cid:12)(cid:12)
+
+Combining (5) and (6), we have
+
+(a)
+
+√J
+γn (cid:107)ˆu(cid:107)2(cid:107)Σ − ˆΣ(cid:107)F(cid:107)Σ−1(cid:107)F + ((cid:107)ˆu(cid:107)2 + (cid:107)u(cid:107)2)(cid:107)ˆu − u(cid:107)2(cid:107)Σ−1(cid:107)F + γn(cid:107)u(cid:107)2
+
+≤
+Bounding (cid:107)ˆu(cid:107)2
+2 and (cid:107)u(cid:107)2
+2 is bounded.
+Recall that supx,x(cid:48)∈X |k(x, x(cid:48))| ≤ Bk, supy,y(cid:48) |l(y, y(cid:48))| ≤ Bl, our notation t = (v, w) for the test locations, and
+zi := (xi, yi). We ﬁrst show that the U-statistic core h is bounded.
+
+2 Here, we show that by the boundedness of the kernels k and l, it follows that (cid:107)ˆu(cid:107)2
+
+2(cid:107)Σ−1(cid:107)2
+
+(7)
+
+F .
+
+(cid:12)(cid:12)(cid:12)(cid:12) 1
+
+|ht((x, y), (x(cid:48), y(cid:48)))| =
+≤
+≤ 2BkBl := 2B,
+
+2
+1
+2
+
+(k(x, v) − k(x(cid:48), v))(l(y, w) − l(y(cid:48), w))
+(|k(x, v)| + |k(x(cid:48), v)|) (|l(y, w)| + |l(y(cid:48), w)|)
+
+(cid:12)(cid:12)(cid:12)(cid:12)
+
+where we deﬁne B := BkBl. It follows that
+
+(5)
+
+(6)
+
+(8)
+
+(9)
+
+(10)
+
+(11)
+
+(12)
+
+J(cid:88)
+
+m=1
+
+≤
+
+[2BkBl]2 = 4B2J,
+
+(cid:107)ˆu(cid:107)2
+
+2 =
+
+(cid:107)u(cid:107)2
+
+2 =
+
+2
+
+
+
+2
+
+i<j
+
+m=1
+
+htm (zi, zj)
+
+(cid:88)
+
+n(n − 1)
+[EzEz(cid:48)htm (z, z(cid:48))]2 ≤ 4B2J.
+
+J(cid:88)
+J(cid:88)
+(cid:12)(cid:12)(cid:12)ˆu(cid:62)( ˆΣ + γnI)−1 ˆu − u(cid:62)Σ−1u
+(cid:12)(cid:12)(cid:12)
+
+2, (cid:107)u(cid:107)2
+
+m=1
+
+Using the upper bounds on (cid:107)ˆu(cid:107)2
+
+2 ,(7) and the deﬁnition of ˜c, we have
+
+4B2J ˜c(cid:107)Σ − ˆΣ(cid:107)F + 4B√J ˜c(cid:107)ˆu − u(cid:107)2 + 4B2J ˜c2γn
+
+√J
+γn
+c1
+γn(cid:107)Σ − ˆΣ(cid:107)F + c2(cid:107)ˆu − u(cid:107)2 + c3γn,
+
+≤
+=:
+
+where we deﬁne c1 := 4B2J√J ˜c, c2 := 4B√J ˜c, and c3 := 4B2J ˜c2. This upper bound implies that
+
+|ˆλn − λn| ≤
+
+c1
+γn
+
+n(cid:107)Σ − ˆΣ(cid:107)F + c2n(cid:107)ˆu − u(cid:107)2 + c3nγn.
+
+We will separately upper bound (cid:107)Σ − ˆΣ(cid:107)F and (cid:107)ˆu − u(cid:107)2, and combine them with a union bound.
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+F.2.1. BOUNDING (cid:107)ˆu − u(cid:107)2
+Let t∗ = arg maxt∈{t1,...,tJ} |ˆu(t) − u(t)|. Recall that u = (u(t1), . . . , u(tJ ))(cid:62) = (u1, . . . , uJ )(cid:62).
+
+J(cid:88)
+
+j=1
+
+|bj||ˆu(tj) − u(tj)|
+
+(cid:107)ˆu − u(cid:107)2 = sup
+
+b∈B2(1)(cid:104)b, ˆu − u(cid:105)2 ≤ sup
+J(cid:88)
+b∈B2(1)
+≤ |ˆu(t∗) − u(t∗)|
+
+b∈B2(1)
+
+sup
+
+|bj|
+
+j=1
+
+(a)
+
+√J|ˆu(t∗) − u(t∗)|
+≤
+= √J|ˆu(t∗) − u(t∗)|,
+
+b∈B2(1)(cid:107)b(cid:107)2
+sup
+
+(13)
+
+where at (a) we used (cid:107)a(cid:107)1 ≤ √J(cid:107)a(cid:107)2 for any a ∈ RJ. From (13), it can be seen that bounding (cid:107)ˆu − u(cid:107)2 amounts to
+bounding the difference of a U-statistic ˆu(t∗) (see (4)) to its expectation u(t∗). Combining (13) and (12), we have
+
+|ˆλn − λn| ≤
+
+c1
+γn
+
+n(cid:107)Σ − ˆΣ(cid:107)F + c2n√J|ˆu(t∗) − u(t∗)| + c3nγn.
+
+(14)
+
+(cid:107)F .
+
+− uu(cid:62)
+
+(cid:107)F and bound
+
+Recall that Σij = η(ti, tj), η(t, t(cid:48)) = Exy[(cid:0)˜k(x, v)˜l(y, w) − u(v, w)(cid:1)(cid:0)˜k(x, v(cid:48))˜l(y, w(cid:48)) − u(v(cid:48), w(cid:48))(cid:1)] where ˜k(x, v) =
+
+F.2.2. BOUNDING (cid:107) ˆΣ − Σ(cid:107)F
+The plan is to write ˆΣ = ˆS − ˆub ˆub(cid:62), Σ = S − uu(cid:62), so that (cid:107) ˆΣ − Σ(cid:107)F ≤ (cid:107)ˆS − S(cid:107)F + (cid:107)ˆub ˆub(cid:62)
+separately (cid:107)ˆS − S(cid:107)F and (cid:107)ˆub ˆub(cid:62)
+− uu(cid:62)
+k(x, v) − Ex(cid:48)k(x(cid:48), v), and ˜l(y, w) = l(y, w) − Ey(cid:48)l(y(cid:48), w). Its empirical estimator (see Proposition 6) is ˆΣij = ˆη(ti, tj)
+n(cid:88)
+[(cid:0)k(xi, v)l(yi, w) − ˆub(v, w)(cid:1)(cid:0)k(xi, v(cid:48))l(yi, w(cid:48)) − ˆub(v(cid:48), w(cid:48))(cid:1)]
+where
+n(cid:88)
+k(xi, v)l(yi, w)k(xi, v(cid:48))l(yi, w(cid:48)) − ˆub(v, w)ˆub(v(cid:48), w(cid:48)),
+(cid:80)n
+(cid:80)n
+i=1 k(xi, v),
+l(y, w) − 1
+RJ×J
+ˆS
+
+We
+:=
+m=1 k(xm, vi)l(ym, wi)k(xm, vj)l(yi, wj), and deﬁne similarly its population counterpart S such that
+
+k(x, v) − 1
+i=1 k(xi, v)l(yi, w)
+
+i=1 l(yi, w).
+such that
+
+:=
+We deﬁne
+
+(cid:80)n
+
+k(x, v)
+note
+1
+n
+
+and
+ˆub(v, w).
+
+ˆη(t, t(cid:48)) =
+
+(cid:80)n
+
+l(y, w)
+
+:=
+1
+n
+
+1
+n
+
+1
+n
+
+that
+
+ˆSij
+
+i=1
+
+n
+
+∈
+
+i=1
+
+=
+
+=
+
+n
+
+Sij := Exy[˜k(x, v)˜l(y, w)˜k(x, v(cid:48))˜l(y, w(cid:48))]. We have
+
+ˆΣ = ˆS − ˆub ˆub(cid:62),
+Σ = S − uu(cid:62),
+≤ (cid:107)ˆS − S(cid:107)F + (cid:107)ˆub ˆub(cid:62)
+
+(cid:107) ˆΣ − Σ(cid:107)F = (cid:107)ˆS − S − (ˆub ˆub(cid:62)
+
+− uu(cid:62))(cid:107)F
+− uu(cid:62)
+
+(cid:107)F .
+
+With (16), (14) becomes
+
+c1n
+
+|ˆλn − λn| ≤
+
+c1n
+γn (cid:107)ˆS − S(cid:107)F +
+
+γn (cid:107)ˆub ˆub(cid:62)
+We will further separately bound (cid:107)ˆS − S(cid:107)F and (cid:107)ˆub ˆub(cid:62)
+F.2.3. BOUNDING (cid:107)ˆub ˆub(cid:62)
+
+− uu(cid:62)
+
+(cid:107)F
+
+(cid:107)F + c2n√J|ˆu(t∗) − u(t∗)| + c3nγn.
+− uu(cid:62)
+− uu(cid:62)
+(cid:107)F .
+
+(cid:107)ˆub ˆub(cid:62)
+
+− uu(cid:62)
+
+(cid:107)F = (cid:107)ˆub ˆub(cid:62)
+
+− ˆubu(cid:62) + ˆubu(cid:62)
+
+− uu(cid:62)
+
+(cid:107)F
+
+(15)
+(16)
+
+(17)
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+where we used (10) and the fact that (cid:107)ˆub(cid:107)2 ≤ 2B√J which can be shown similarly to (9) as
+
+J(cid:88)
+
+m=1
+
+(cid:107)ˆub(cid:107)2
+
+2 =
+
+[ˆµxy(vm, wm) − ˆµx(vm)ˆµy(wm)]2 =
+
+J(cid:88)
+
+m=1
+
+[2BkBl]2 = 4B2J.
+
+≤
+
+≤ (cid:107)ˆub(ˆub − u)(cid:62)
+(cid:107)F + (cid:107)(ˆub − u)u(cid:62)
+(cid:107)F
+= (cid:107)ˆub(cid:107)2(cid:107)ˆub − u(cid:107)2 + (cid:107)ˆub − u(cid:107)2(cid:107)u(cid:107)2
+≤ 4B√J(cid:107)ˆub − u(cid:107)2,
+n(cid:88)
+
+n(cid:88)
+
+J(cid:88)
+
+htm(zi, zj)
+
+2
+
+ 1
+
+n2
+
+m=1
+
+i=1
+
+j=1
+
+Let (˜v, ˜w) := ˜t = arg maxt∈{t1,...,tJ} |ˆub(t) − u(t)|. We bound (cid:107)ˆub − u(cid:107)2 by
+
+where at (a) we used the same reasoning as in (13). The bias(cid:12)(cid:12)(cid:91)µxµy(˜t) − ˆµx(˜v)ˆµy( ˜w)(cid:12)(cid:12) in the second term can be bounded
+
+(18)
+
+as
+
+(cid:107)ˆub − u(cid:107)2
+
+(a)
+
+≤
+
+≤
+
+= √J(cid:12)(cid:12)ˆµxy(˜t) − ˆµx(˜v)ˆµy( ˜w) − u(˜t)(cid:12)(cid:12)
+√J|ˆub(˜t) − u(˜t)|
+= √J(cid:12)(cid:12)ˆµxy(˜t) − (cid:91)µxµy(˜t) + (cid:91)µxµy(˜t) − ˆµx(˜v)ˆµy( ˜w) − u(˜t)(cid:12)(cid:12)
+√J(cid:12)(cid:12)ˆµxy(˜t) − (cid:91)µxµy(˜t) − u(˜t)(cid:12)(cid:12) + √J(cid:12)(cid:12)(cid:91)µxµy(˜t) − ˆµx(˜v)ˆµy( ˜w)(cid:12)(cid:12)
+= √J(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12) + √J(cid:12)(cid:12)(cid:91)µxµy(˜t) − ˆµx(˜v)ˆµy( ˜w)(cid:12)(cid:12) ,
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+k(xi, ˜v)l(yj, ˜w)
+
+n(cid:88)
+
+1
+n2
+
+i=1
+
+k(xi, ˜v)l(yj, ˜w) −
+
+n(cid:88)
+n(cid:88)
+
+j=1
+
+k(xi, ˜v)l(yj, ˜w) −
+
+1
+
+n(n − 1)
+
+i=1
+
+k(xi, ˜v)l(yi, ˜w) −
+
+1
+n2
+
+k(xi, ˜v)l(yj, ˜w)
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+1
+
+1
+
+=
+
+=
+
+i=1
+
+j(cid:54)=i
+
+n(n − 1)
+
+(cid:12)(cid:12)(cid:91)µxµy(˜t) − ˆµx(˜v)ˆµy( ˜w)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+n(cid:88)
+(cid:88)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+n(cid:88)
+n(cid:88)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:19) 1
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:19) 1
+
+n(n − 1)
+n
+n − 1
+n
+n − 1
+B
++
+n − 1
+
+1 −
+B
+n − 1
+
+n(cid:88)
+n(cid:88)
+
+(cid:18)
+(cid:18)
+
+1 −
+
+≤
+
+≤
+
+n2
+
+n2
+
+j=1
+
+i=1
+
+i=1
+
+i=1
+
+=
+
+=
+
+n(cid:88)
+n(cid:88)
+
+j=1
+
+j=1
+
+2B
+n − 1
+
+.
+
+n(cid:88)
+
+j=1
+
+n(cid:88)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+i=1
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+k(xi, ˜v)l(yj, ˜w) +
+
+k(xi, ˜v)l(yi, ˜w)
+
+k(xi, ˜v)l(yj, ˜w)
+
+k(xi, ˜v)l(yi, ˜w)
+
+n(cid:88)
+n(cid:88)
+
+i=1
+
+1
+
+1
+
+i=1
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+n(n − 1)
+
+n(n − 1)
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) +
+(cid:107)F ≤ 4BJ(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12) +
+(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12) +
+(cid:80)n
+
+8B2J
+n − 1
+
+c1n
+γn
+
+Combining this upper bound with (18), we have
+
+With (19), (17) becomes
+
+|ˆλn − λn| ≤
+
+c1n
+γn (cid:107)ˆS − S(cid:107)F +
+
+4BJc1n
+
+γn
+
+(cid:107)ˆub ˆub(cid:62)
+
+− uu(cid:62)
+
+8B2J
+n − 1
+
+.
+
+(19)
+
+(20)
+
++ c2n√J|ˆu(t∗) − u(t∗)| + c3nγn.
+
+F.2.4. BOUNDING (cid:107)ˆS − S(cid:107)F
+Recall that VJ = {t1, . . . , tJ}, ˆSij = ˆS(ti, tj) = 1
+S(ti, tj) = Exy[˜k(x, vi)˜l(y, wi)˜k(x, vj)˜l(y, wj)]. Let (t(1), t(2)) = arg max(s,t)∈VJ×VJ | ˆS(s, t) − S(s, t)|.
+
+m=1 k(xm, vi)l(ym, wi)k(xm, vj)l(ym, wj), and Sij =
+
+n
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+(cid:107)ˆS − S(cid:107)F = sup
+B∈BF (1)
+
+(cid:68)
+(cid:69)
+B, ˆS − S
+J(cid:88)
+J(cid:88)
+
+F
+
+≤ sup
+
+B∈BF (1)
+
+|Bij|| ˆSij − Sij|
+
+sup
+
+= J
+
+≤
+
+(a)
+
+i=1
+
+j=1
+
+i=1
+
+j=1
+
+≤ J
+
+|Bij|
+
+B∈BF (1)
+
+J(cid:88)
+
+J(cid:88)
+
+(cid:80)J
+j=1 |Aij| ≤ J(cid:107)A(cid:107)F for any matrix A ∈ RJ×J. We arrive at
+|ˆλn − λn| ≤
+
+4BJc1n
+
+sup
+B∈BF (1)(cid:107)B(cid:107)F
+
+(cid:12)(cid:12)(cid:12) ˆS(t(1), t(2)) − S(t(1), t(2))
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12) ˆS(t(1), t(2)) − S(t(1), t(2))
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12) ˆS(t(1), t(2)) − S(t(1), t(2))
+(cid:12)(cid:12)(cid:12) ,
+(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12) ˆS(t(1), t(2)) − S(t(1), t(2))
++ c2n√J|ˆu(t∗) − u(t∗)| + c3nγn.
+(cid:12)(cid:12)(cid:12) will allow us to bound (22). To keep the notations uncluttered, we will
+
+(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12)
+
+(cid:12)(cid:12)(cid:12) ˆS(t, t(cid:48)) − S(t, t(cid:48))
+
+c1Jn
+γn
+c1n
+γn
+
+8B2J
+n − 1
+
++
+
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12) ˆS(t, t(cid:48)) − S(t, t(cid:48))
+
+(21)
+
+(22)
+
+γn
+
+where at (a) we used(cid:80)J
+
+i=1
+
+F.2.5. BOUNDING
+
+Having an upper bound for
+deﬁne the following shorthands.
+
+Expression
+
+Shorthand
+
+Expression
+
+Shorthand
+
+k(x, v)
+k(x, v(cid:48))
+k(xi, v)
+k(xi, v(cid:48))
+
+Ex∼Px k(x, v)
+(cid:80)n
+Ex∼Pxk(x, v(cid:48))
+(cid:80)n
+i=1 k(xi, v)
+i=1 k(xi, v(cid:48))
+
+1
+n
+1
+n
+
+a
+a(cid:48)
+ai
+a(cid:48)
+i
+˜a
+˜a(cid:48)
+a
+a(cid:48)
+
+l(y, w)
+l(y, w(cid:48))
+l(yi, w)
+l(yi, w(cid:48))
+
+Ey∼Py l(y, w)
+(cid:80)n
+Ey∼Py l(y, w(cid:48))
+(cid:80)n
+i=1 l(yi, w)
+i=1 l(yi, w(cid:48))
+
+1
+n
+
+1
+n
+
+b
+b(cid:48)
+bi
+b(cid:48)
+i
+˜b
+˜b(cid:48)
+b
+(cid:48)
+b
+
+(cid:80)n
+to denote a empirical expectation over x, or y, or (x, y). The argument under · will deter-
+i=1 k(xi, v)k(xi, v(cid:48)) and aba(cid:48) =
+
+(cid:80)n
+We will also use ·
+i=1 k(xi, v)l(yi, w)k(xi, v(cid:48)), and so on. We deﬁne in the same way for the population expectation using(cid:101)· i.e.,
+mine the variable over which we take the expectation. For instance, aa(cid:48) = 1
+(cid:102)aa(cid:48) = Ex [k(x, v)k(x, v(cid:48))] and (cid:103)aba(cid:48) = Exy [k(x, v)l(y, w)k(x, v(cid:48))].
+
+1
+n
+
+n
+
+With these shorthands, we can rewrite ˆS(t, t(cid:48)) and S(t, t(cid:48)) as
+
+ˆS(t, t(cid:48)) =
+
+1
+n
+
+S(t, t(cid:48)) = Exy
+
+S(t, t(cid:48)) = Exy
+
+i=1
+
+n(cid:88)
+(ai − a)(bi − b)(a(cid:48)
+(cid:104)
+(a − ˜a)(b − ˜b)(a(cid:48)
+(cid:2) + aba(cid:48)b(cid:48)
+
+− aba(cid:48)˜b(cid:48)
+
+i − a(cid:48))(b(cid:48)
+− ˜a(cid:48))(b(cid:48)
+
+(cid:48)
+(cid:105)
+i − b
+− ˜b(cid:48))
+
+),
+
+.
+
+− ab˜a(cid:48)b(cid:48) + ab˜a(cid:48)˜b(cid:48)
+
+By expanding S(t, t(cid:48)), we have
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+The expansion of ˆS(t, t(cid:48)) can be done in the same way. By the triangle inequality, we have
+
+−
+
+−
+
+(cid:48)
+
+(cid:48)
+
+(cid:48)
+
+(cid:93)aa(cid:48)b(cid:48)˜b
+
+− a˜b˜a(cid:48)˜b(cid:48)
+− ˜ab˜a(cid:48)˜b(cid:48)
+
+− a˜ba(cid:48)b(cid:48) + a˜ba(cid:48)˜b(cid:48) + a˜b˜a(cid:48)b(cid:48)
+− ˜a˜b˜a(cid:48)˜b(cid:48) + ˜a˜b˜a(cid:48)˜b(cid:48)(cid:3)
+− ˜aba(cid:48)b(cid:48) + ˜aba(cid:48)˜b(cid:48) + ˜ab˜a(cid:48)b(cid:48)
+= +(cid:94)aba(cid:48)b(cid:48) − (cid:103)aba(cid:48)˜b(cid:48)
+−(cid:103)abb(cid:48)˜a(cid:48) + (cid:101)ab˜a(cid:48)˜b(cid:48)
++ ˜a˜ba(cid:48)b(cid:48)
+− ˜a˜ba(cid:48)˜b(cid:48)
+(cid:93)aa(cid:48)b(cid:48)˜b + (cid:102)aa(cid:48)˜b˜b(cid:48) +(cid:102)ab(cid:48)˜a(cid:48)˜b − ˜a˜b˜a(cid:48)˜b(cid:48)
+− (cid:103)a(cid:48)bb(cid:48)˜a +(cid:102)a(cid:48)b˜a˜b(cid:48) + ˜a˜a(cid:48)(cid:102)bb(cid:48) − ˜a˜b˜a(cid:48)˜b(cid:48)
++(cid:103)a(cid:48)b(cid:48)˜a˜b − ˜a˜b˜a(cid:48)˜b(cid:48)
+−(cid:103)abb(cid:48)˜a(cid:48) + (cid:101)ab˜a(cid:48)˜b(cid:48)
+= +(cid:94)aba(cid:48)b(cid:48) − (cid:103)aba(cid:48)˜b(cid:48)
+− ˜a˜b˜a(cid:48)˜b(cid:48) + ˜a˜b˜a(cid:48)˜b(cid:48)
+(cid:93)aa(cid:48)b(cid:48)˜b + (cid:102)aa(cid:48)˜b˜b(cid:48) +(cid:102)ab(cid:48)˜a(cid:48)˜b +(cid:103)a(cid:48)b(cid:48)˜a˜b
+− (cid:103)a(cid:48)bb(cid:48)˜a +(cid:102)a(cid:48)b˜a˜b(cid:48) + ˜a˜a(cid:48)(cid:102)bb(cid:48) − 3˜a˜b˜a(cid:48)˜b(cid:48).
+(cid:12)(cid:12)(cid:12) ≤
+(cid:12)(cid:12)(cid:12)aba(cid:48)b(cid:48) −
+(cid:12)(cid:12)(cid:12)abb(cid:48)a(cid:48)
+(cid:12)(cid:12)(cid:12)aba(cid:48)b
+− (cid:103)aba(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)aba(cid:48) b
+−(cid:103)abb(cid:48)˜a(cid:48)(cid:12)(cid:12)(cid:12) +
+− (cid:101)ab˜a(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12)
+(cid:94)aba(cid:48)b(cid:48)(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)aa(cid:48)b(cid:48) b −
+(cid:12)(cid:12)(cid:12)a(cid:48)b(cid:48)ab −(cid:103)a(cid:48)b(cid:48)˜a˜b
+(cid:12)(cid:12)(cid:12)ab(cid:48)a(cid:48)b −(cid:102)ab(cid:48)˜a(cid:48)˜b
+− (cid:102)aa(cid:48)˜b˜b(cid:48)(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)aa(cid:48) b b
+(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)a(cid:48)bb(cid:48)a − (cid:103)a(cid:48)bb(cid:48)˜a
+(cid:12)(cid:12)(cid:12)a a(cid:48)bb(cid:48) − ˜a˜a(cid:48)(cid:102)bb(cid:48)(cid:12)(cid:12)(cid:12) + 3
+−(cid:102)a(cid:48)b˜a˜b(cid:48)(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)a(cid:48)bab
+(cid:12)(cid:12)(cid:12) +
+(cid:12)(cid:12)(cid:12)aba(cid:48)b
+− ˜a˜b˜a(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) .
+(cid:94)aba(cid:48)b(cid:48)(cid:12)(cid:12)(cid:12) can be bounded by applying the Hoeffding’s inequality. Other terms can be bounded by
+(cid:94)aba(cid:48)b(cid:48)(cid:12)(cid:12)(cid:12) (1st term). Since −B2 ≤ aba(cid:48)b(cid:48)
+P(cid:16)(cid:12)(cid:12)(cid:12)aba(cid:48)b(cid:48) −
+(cid:94)aba(cid:48)b(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+− (cid:103)aba(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) (2nd term). Let f1(x, y) = aba(cid:48) = k(x, v)l(y, w)k(x, v(cid:48)) and f2(y) = b(cid:48) = l(y, w(cid:48)). We
+P(cid:16)(cid:12)(cid:12)(cid:12)aba(cid:48) b
+− (cid:103)aba(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+− (cid:101)ab˜a(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) (4th term). Let f1(x, y) = ab = k(x, v)l(y, w), f2(x) = a(cid:48) = k(x, v(cid:48)) and f3(y) = b(cid:48) =
+− (cid:101)ab˜a(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+− ˜a˜b˜a(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) (last term). Let f1(x) = a = k(x, v), f2(y) = b = l(y, w), f3(x) = a(cid:48) = k(x, v(cid:48)) and
+
+≤ B2, by the Hoeffding’s inequality (Lemma 14), we have
+
+P(cid:16)(cid:12)(cid:12)(cid:12)aba(cid:48)b
+
+≥ 1 − 4 exp
+
+≥ 1 − 2 exp
+
+≥ 1 − 6 exp
+
+18(B, Bk, Bl)6
++
+
+8(BBk, Bl)4
++
+
+nt2
+2B4
+
+(cid:18)
+
+(cid:19)
+
+(cid:18)
+
+(cid:19)
+
+.
+
+(cid:19)
+
+.
+
+(cid:18)
+
+nt2
+
+(cid:48)
+
+(cid:48)
+
+nt2
+
+(cid:48)
+
+(cid:48)
+
+−
+
+−
+
+(cid:12)(cid:12)(cid:12) ˆS(t, t(cid:48)) − S(t, t(cid:48))
+(cid:12)(cid:12)(cid:12)aba(cid:48)b(cid:48) −
+(cid:12)(cid:12)(cid:12)aba(cid:48)b(cid:48) −
+(cid:12)(cid:12)(cid:12)aba(cid:48) b
+
+(cid:48)
+
+(cid:12)(cid:12)(cid:12)aba(cid:48)b
+
+(cid:48)
+
+(cid:12)(cid:12)(cid:12)aba(cid:48)b
+
+(cid:48)
+
+Bounding
+l(y, w(cid:48)). We can see that |f1(x, y)|,|f2(x)|,|f3(y)| ≤ (B, Bk, Bl)+. Thus, by Lemma 9 with E = 3, we have
+
+Bounding
+note that |f1(x, y)| ≤ (BBk, Bl)+ and |f2(y)| ≤ (BBk, Bl)+. Thus, by Lemma 9 with E = 2, we have
+
+Bounding
+f4(y) = b(cid:48) = l(y, w(cid:48)). It can be seen that |f1(x)|,|f2(y)|,|f3(x)|,|f4(y)| ≤ (Bk, Bl)+. Thus, by Lemma 9 with E = 4,
+we have
+
+The ﬁrst term
+applying Lemma 9. Recall that we write (x1, . . . , xm)+ for max(x1, . . . , xm).
+
+Bounding
+
+−
+
+(cid:18)
+
+.
+
+(cid:19)
+
+.
+
+(cid:48)
+
+3
+
+(cid:12)(cid:12)(cid:12)aba(cid:48)b
+
+P(cid:16)
+(3rd term) P(cid:16)(cid:12)(cid:12)(cid:12)abb(cid:48)a(cid:48)
+
+− ˜a˜b˜a(cid:48)˜b(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+−(cid:103)abb(cid:48)˜a(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+
+≥ 1 − 8 exp
+
+−
+
+nt2
+
++
+
+32 · 32(Bk, Bl)8
+(cid:18)
+
+nt2
+
+(cid:19)
+
+,
+
+≥ 1 − 4 exp
+
+−
+
+8(BBl, Bk)4
++
+
+Bounds for other terms can be derived in a similar way to yield
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+(cid:18)
+(cid:18)
+(cid:18)
+(cid:18)
+(cid:18)
+(cid:18)
+(cid:18)
+
+−
+
+−
+
+−
+
+−
+
+−
+
+−
+
+−
+
+(cid:19)
+(cid:19)
+
+,
+
+,
+
+(cid:19)
+(cid:19)
+
+,
+
+(cid:19)
+
+,
+
+,
+
+,
+
+nt2
+
+8(BBk, Bl)4
++
+
+18(B2
+
+nt2
+k, Bl)6
++
+nt2
+
+18(B, Bk, Bl)6
++
+
+nt2
+
+(cid:19)
+
+(cid:19)
+
+.
+
+18(B, Bk, Bl)6
++
+
+nt2
+
+8(BBl, Bk)4
++
+
+nt2
+
+18(B, Bk, Bl)6
++
+
+nt2
+
+18(Bk, B2
+
+l )6
++
+
+≥ 1 − 4 exp
+
+≥ 1 − 6 exp
+
+≥ 1 − 6 exp
+
+≥ 1 − 6 exp
+
+≥ 1 − 4 exp
+
+≥ 1 − 6 exp
+
+≥ 1 − 6 exp
+
+(cid:48)
+
+(cid:93)aa(cid:48)b(cid:48)˜b
+
+(5th term) P(cid:16)(cid:12)(cid:12)(cid:12)aa(cid:48)b(cid:48) b −
+(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+− (cid:102)aa(cid:48)˜b˜b(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(6th term) P(cid:16)(cid:12)(cid:12)(cid:12)aa(cid:48) b b
+(cid:17)
+(7th term) P(cid:16)(cid:12)(cid:12)(cid:12)ab(cid:48)a(cid:48)b −(cid:102)ab(cid:48)˜a(cid:48)˜b
+(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+(8th term) P(cid:16)(cid:12)(cid:12)(cid:12)a(cid:48)b(cid:48)ab −(cid:103)a(cid:48)b(cid:48)˜a˜b
+(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+(9th term) P(cid:16)(cid:12)(cid:12)(cid:12)a(cid:48)bb(cid:48)a − (cid:103)a(cid:48)bb(cid:48)˜a
+(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+(10th term) P(cid:16)(cid:12)(cid:12)(cid:12)a(cid:48)bab
+−(cid:102)a(cid:48)b˜a˜b(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+(11th term) P(cid:16)(cid:12)(cid:12)(cid:12)a a(cid:48)bb(cid:48) − ˜a˜a(cid:48)(cid:102)bb(cid:48)(cid:12)(cid:12)(cid:12) ≤ t
+(cid:17)
+(cid:12)(cid:12)(cid:12) ≤ 12t
+(cid:17)
+(cid:18)
+(cid:19)
+
+(cid:19)
+
+(cid:48)
+
++ 4 exp
+
+−
+
+8(BBk, Bl)4
++
+
+8(BBl, Bk)4
++
+
+18(B, Bk, Bl)6
++
+
+nt2
+
+(cid:18)
+(cid:18)
+
+−
+
+−
+
++ 4 exp
+
+(cid:19)
+
+18(B2
+
+nt2
+k, Bl)6
++
+nt2
+
+18(B, Bk, Bl)6
++
+
+(cid:19)
+
++ 8 exp
+
+−
+
+(cid:19)
+(cid:18)
+(cid:19)
+
+−
+
++ 6 exp
+
++ 6 exp
+
+nt2
+
+(cid:18)
+
+−
+
+(cid:18)
+
+nt2
+
+(cid:18)
+
+(cid:19)
+
+nt2
+
+(cid:19)
+(cid:19)(cid:21)
+
+18(B, Bk, Bl)6
++
+−
+
+32 · 32(Bk, Bl)8
+
+nt2
+
++
+
+(cid:19)
+
+nt2
+
+(cid:19)
+
++ 6 exp
+
+nt2
+
+18(B, Bk, Bl)6
++
+−
+
+nt2
+
+18(Bk, B2
+
+l )6
++
+
+(cid:19)
+
++ 24 exp
+
+−
+
+(cid:18)
+(cid:19)
+(cid:19)
+(cid:18)
+
+nt2
+
+(cid:18)
+(cid:18)
+
+−
+
++ 6 exp
+
++ 8 exp
+
+−
+
+(cid:19)(cid:21)
+(cid:19)
+
+8(BBl, Bk)4
++
+
+18(B, Bk, Bl)6
++
+
+nt2
+
+18(Bk, B2
+
+(cid:19)
+
++ 8 exp
+
+(cid:19)
+
+(cid:19)
+
+(cid:18)
+
++ 8 exp
+
+l )6
++
+− 122nt2
+B∗
+− 122nt2
+B∗
+
+(cid:18)
+
++ 8 exp
+
+−
+
+nt2
+
+(cid:18)
+
+32 · 32(Bk, Bl)8
+− 122nt2
+B∗
+
++
+
++ 24 exp
+
+(cid:19)(cid:21)
+
+(cid:18)
+(cid:19)
+(cid:19)
+(cid:18)
+(cid:19)
+
++ 6 exp
+
++ 6 exp
+
+By the union bound, we have
+
+P(cid:16)(cid:12)(cid:12)(cid:12) ˆS(t, t
+(cid:20)
+
+≥ 1 −
+
+(cid:48)
+
+) − S(t, t
+(cid:48)
+)
+− nt2
+2B4
+
+2 exp
+
+4 exp
+
+4 exp
+
+(cid:20)
+
+2 exp
+
+= 1 −
+
+(cid:20)
+
+≥ 1 −
+
++ 6 exp
+
+2 exp
+
++ 6 exp
+
+−
+
+−
+
+nt2
+
+8(BBk, Bl)4
++
+
+nt2
+
+(cid:19)
+
+8(BBl, Bk)4
++
+− nt2
+2B4
+−
+
+(cid:18)
+
++ 8 exp
+
+18(B2
+
+nt2
+k, Bl)6
++
+
+(cid:19)
+
+(cid:18)
+
+− 122nt2
+B∗
+− 122nt2
+B∗
+− 122nt2
+B∗
+
+(cid:19)
+
+,
+
+= 1 − 62 exp
+
+where
+
+(cid:18)
+(cid:18)
+(cid:18)
+(cid:18)
+
+(cid:18)
+
+(cid:18)
+
+−
+
+nt2
+
+(cid:18)
+
+8(BBk, Bl)4
++
+−
+
++ 6 exp
+
+(cid:18)
+
++ 8 exp
+
+(cid:19)
+
++ 6 exp
+
+(cid:18)
+
+− 122nt2
+B∗
+− 122nt2
+B∗
+
+B∗ :=
+
+1
+122 max(2B4, 8(BBk, Bl)4
+By reparameterization, it follows that
+
++, 8(BBl, Bk)4
+
++, 18(B, Bk, Bl)6
+
++, 18(B2
+
+k, Bl)6
+
++, 18(Bk, B2
+
+l )6
++, 32 · 32(Bk, Bl)8
++).
+
+.
+
+(23)
+
+P
+
+F.2.6. UNION BOUND FOR
+
+Recall from (22) that
+
+(cid:18) c1Jn
+(cid:12)(cid:12)(cid:12)ˆλn − λn
+
+γn
+
+−
+
+(cid:18)
+
+≥ 1 − 62 exp
+
+(cid:12)(cid:12)(cid:12) ≤ t
+
+(cid:19)
+(cid:12)(cid:12)(cid:12) ˆS(t, t(cid:48)) − S(t, t(cid:48))
+(cid:12)(cid:12)(cid:12) AND FINAL LOWER BOUND
+(cid:12)(cid:12)(cid:12) ˆS(t(1), t(2)) − S(t(1), t(2))
++ c2n√J|ˆu(t∗) − u(t∗)| + c3nγn.
+
+c1Jn
+γn
+c1n
+γn
+
+(cid:12)(cid:12)(cid:12) +
+
+γn
+
+4BJc1n
+
+8B2J
+n − 1
+
+|ˆλn − λn| ≤
+
++
+
+(cid:19)
+
+γ2
+nt2
+1J 2nB∗
+c2
+
+(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12)
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+We will bound terms in (22) separately and combine all the bounds with the union bound. As shown in (8), the U-statistic
+core h is bounded between −2B and 2B. Thus, by Lemma 13 (with m = 2), we have
+
+Bounding c1n
+γn
+
+8B2J
+n−1 + c3nγn + 4BJc1n
+
+γn
+
+(24)
+
+(25)
+
+where at (a) we used (cid:98)0.5n(cid:99) ≥ (n − 1)/2. Combining (23), (24), and (25) with the union bound (set T = 3t), we can
+bound (22) with
+
+(cid:17)
+
+8B2J
+
+γn
+
+27B4J 2c2
+
+(cid:19)
+
+.
+
+8c2
+
+2n2JB2
+
++ c3nγn +
+
+4BJc1n
+
+P
+
+γn
+
+(cid:98)0.5n(cid:99)γ2
+
+n
+
+8B2J
+n − 1
+
+= 1 − 2 exp
+
+≥ 1 − 2 exp
+
+≥ 1 − 2 exp
+
+n−1 − c3nγn
+1n2
+
+P(cid:16)
+(cid:18) c1n
+
+c2n√J|ˆu(t∗) − u(t∗)| ≤ t
+
+(cid:104)
+γn
+t − c1n
+(cid:2)tγn(n − 1) − 8c1B2nJ − c3n(n − 1)γ2
+27B4J 2c2
+(cid:33)
+(cid:3)2
+
+(cid:18)
+− (cid:98)0.5n(cid:99)t2
+(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12). By Lemma 13 (with m = 2), it follows that
+(cid:19)
+(cid:12)(cid:12)ˆu(˜t) − u(˜t)(cid:12)(cid:12) ≤ t
+−
+
+(cid:105)2
+(cid:32)
+−(cid:98)0.5n(cid:99)
+(cid:32)
+(cid:2)tγn(n − 1) − 8c1B2nJ − c3n(n − 1)γ2
+(cid:19)
+(cid:18)
+(cid:18)
+P(cid:16)(cid:12)(cid:12)(cid:12)ˆλn − λn
+− (cid:98)0.5n(cid:99)T 2
+nn(n − 1)(cid:3)2
+(cid:2)T γn(n − 1)/3 − 8c1B2nJ − c3γ2
+(cid:12)(cid:12)(cid:12) ≤ T implies ˆλn ≥ λn − T , a reparametrization with r = λn − T gives
+(cid:18)
+(cid:19)
+(cid:18)
+P(cid:16)ˆλn ≥ r
+−(cid:98)0.5n(cid:99)(λn − r)2
+nn(n − 1)(cid:3)2
+(cid:2)(λn − r)γn(n − 1)/3 − 8c1B2nJ − c3γ2
+
+n(λn − r)2
+γ2
+1J 2nB∗
+32c2
+
+γ2
+nT 2
+1J 2nB∗
+32c2
+
+(cid:12)(cid:12)(cid:12) ≤ T
+
+≥ 1 − 62 exp
+
+≥ 1 − 62 exp
+
+1n2(n − 1)2
+
+≥ 1 − 2 exp
+
+−
+
+− 2 exp
+
+−
+
+28B4J 2c2
+
+1n2(n − 1)
+
+28B4J 2c2
+
+1n2(n − 1)
+
+(cid:3)2
+
+(cid:33)
+
+− 2 exp
+
+72c2
+
+2n2JB2
+
+72c2
+
+2n2JB2
+
+(cid:32)
+
+−
+
+n
+
+,
+
+n
+
+(cid:19)
+
+− 2 exp
+
+(cid:19)
+
+−
+
+(a)
+
+(cid:17)
+
+(cid:17)
+
+(cid:32)
+
+− 2 exp
+−
+:= L(λn).
+
+(cid:33)
+
+.
+
+(cid:33)
+
+(cid:12)(cid:12)(cid:12)ˆλn − λn
+
+Since
+
+28B4J 2c2
+
+1n2(n − 1)
+
+Grouping constants into ξ1, . . . ξ5 gives the result.
+The lower bound L(λn) takes the form
+
+1 − 62 exp(cid:0)
+
+−C1(λn − Tα)2(cid:1)
+
+− 2 exp(cid:0)
+
+−C2(λn − Tα)2(cid:1)
+
+(cid:18)
+
+− 2 exp
+
+−
+
+[(λn − Tα)C3 − C4]2
+
+C5
+
+(cid:19)
+
+,
+
+where C1, . . . , C5 are positive constants. For ﬁxed large enough n such that λn > Tα, and ﬁxed signiﬁcance level α,
+increasing λn will increase L(λn). Speciﬁcally, since n is ﬁxed, increasing u(cid:62)Σ−1u in λn = nu(cid:62)Σ−1u will increase
+L(λn).
+
+G. Helper Lemmas
+This section contains lemmas used to prove the main results in this work.
+BE−1(cid:80)E
+Lemma 8 (Product to sum). Assume that |ai| ≤ B, |bi| ≤ B for i = 1, . . . , E. Then
+
+j=1 |aj − bj|.
+
+(cid:12)(cid:12)(cid:12)(cid:81)E
+
+i=1 ai −
+
+(cid:81)E
+
+i=1 bi
+
+(cid:12)(cid:12)(cid:12) ≤
+
+Proof.
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) E(cid:89)
+
+i=1
+
+ai −
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) E(cid:89)
+
+i=1
+
+E(cid:89)
+
+j=1
+
+bj
+
+ai −
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+aibE
+
+E−1(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)E−1(cid:89)
+
+i=1
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)E−1(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) +
+E−2(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) + |aE−1 − bE−1|
+(cid:32)E−2(cid:89)
+
+aibE −
+
+i=1
+
+i=1
+
+aibE−1bE
+
+(cid:33)
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)a1
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) + . . . +
+E(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) + . . . + |a1 − b1|
+
+j=2
+
+bj −
+
+E(cid:89)
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) E(cid:89)
+
+j=2
+
+j=1
+
+bj
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+bj
+
+ai
+
+i=1
+
+≤ |aE − bE|
+≤ |aE − bE|BE−1 + |aE−1 − bE−1| BE−1 + . . . + |a1 − b1| BE−1
+= BE−1
+
+E(cid:88)
+
+bE
+
+i=1
+
+ai
+
+|aj − bj|
+
+j=1
+
+applying triangle inequality, and the boundedness of ai and bi-s.
+Lemma 9 (Product variant of the Hoeffding’s inequality). For i = 1, . . . , E, let {x(i)
+j=1 ⊂ Xi be an i.i.d. sample from
+a distribution Pi, and fi : Xi (cid:55)→ R be a measurable function. Note that it is possible that P1 = P2 = ··· = PE and
+{x(1)
+j=1. Assume that |fi(x)| ≤ B < ∞ for all x ∈ Xi and i = 1, . . . , E. Write ˆPi to denote an
+j }n1
+empirical distribution based on the sample {x(i)
+
+j=1 = ··· = {x(E)
+
+j=1. Then,
+
+j }nE
+
+j }ni
+
+P
+
+i=1
+
+(cid:35)
+
+(cid:33)
+
+fi(x(i))
+
+E
+x(i)∼ ˆPi
+
+(cid:32)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+(cid:34) E(cid:89)
+
+(cid:34) E(cid:89)
+
+j }ni
+E
+x(i)∼Pifi(x(i))
+
+(cid:35)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ T
+(cid:35)(cid:12)(cid:12)(cid:12)(cid:12)(cid:12) ≤ BE−1
+(cid:12)(cid:12)(cid:12)E
+E(cid:88)
+By applying the Hoeffding’s inequality to each term in the sum, we have P(cid:16)(cid:12)(cid:12)(cid:12)E
+
+Proof. By Lemma 8, we have
+
+E
+x(i)∼Pifi(x(i))
+
+(cid:34) E(cid:89)
+
+E
+x(i)∼ ˆPi
+
+fi(x(i))
+
+(cid:35)
+
+(cid:12)(cid:12)(cid:12)(cid:12)(cid:12)
+
+−
+
+−
+
+i=1
+
+i=1
+
+i=1
+
+(cid:34) E(cid:89)
+(cid:16)
+
+i=1
+
+(cid:17)
+
+(cid:18)
+
+E(cid:88)
+
+i=1
+
+≥ 1 − 2
+
+exp
+
+niT 2
+
+2E2B2E
+
+−
+
+(cid:19)
+
+.
+
+x(i)∼ ˆPi
+
+x(i)∼ ˆPi
+
+fi(x(i)) − E
+fi(x(i)) − E
+
+x(i)∼Pifi(x(i))
+
+x(i)∼Pifi(x(i))
+
+(cid:12)(cid:12)(cid:12) .
+(cid:12)(cid:12)(cid:12) ≤ t
+
+(cid:17)
+
+≥
+
+− 2nit2
+
+4B2
+
+. The result is obtained with a union bound.
+
+1 − 2 exp
+H. External Lemmas
+In this section, we provide known results referred to in this work.
+Lemma 10 (Chwialkowski et al. (2015, Lemma 1)). If k is a bounded, analytic kernel (in the sense given in Deﬁnition 1) on
+Rd × Rd, then all functions in the RKHS deﬁned by k are analytic.
+Lemma 11 (Chwialkowski et al. (2015, Lemma 3)). Let Λ be an injective mapping from the space of probability measures
+into a space of analytic functions on Rd. Deﬁne
+
+J(cid:88)
+
+j=1
+
+d2
+VJ
+
+(P, Q) =
+
+|[ΛP ](vj) − [ΛQ](vj)|2 ,
+
+where VJ = {vi}J
+i=1 are vector-valued i.i.d. random variables from a distribution which is absolutely continuous with
+the Fourier transform of a ﬁnite nonnegative Borel measure ζ on Rd, that is, Ψ(x) =(cid:82)
+respect to the Lebesgue measure. Then, dVJ (P, Q) is almost surely (w.r.t. VJ) a metric.
+Lemma 12 (Bochner’s theorem (Rudin, 2011)). A continuous function Ψ : Rd → R is positive deﬁnite if and only if it is
+Rd e−ix(cid:62)ω dζ(ω), x ∈ Rd.
+(cid:1)−1(cid:80)
+an m-order U-statistic such that h(x1, . . . , xm) ∈ [a, b] where a ≤ b < ∞. Let Un =(cid:0) n
+(cid:1) combinations of m distinct elements
+be a U-statistic computed with a sample of size n, where the summation is over the(cid:0) n
+Lemma 13 (A bound for U-statistics (Serﬂing, 2009, Theorem A, p. 201)). Let h(x1, . . . , xm) be a U-statistic kernel for
+h(xi1 , . . . , xim )
+−2(cid:98)n/m(cid:99)t2/(b − a)2(cid:1) ,
+
+P(Un − Eh(x1, . . . , xm) ≥ t) ≤ exp(cid:0)
+
+{i1, . . . , im} from {1, . . . , n}. Then, for t > 0 and n ≥ m,
+
+i1<···<im
+
+m
+
+m
+
+An Adaptive Test of Independence with Analytic Kernel Embeddings
+
+P(|Un − Eh(x1, . . . , xm)| ≥ t) ≤ 2 exp(cid:0)
+
+−2(cid:98)n/m(cid:99)t2/(b − a)2(cid:1) ,
+
+where (cid:98)x(cid:99) denotes the greatest integer which is smaller than or equal to x. Hoefﬁnd’s inequality is a special case when
+m = 1.
+Lemma 14 (Hoeffding’s inequality). Let X1, . . . , Xn be i.i.d. random variables such that a ≤ Xi ≤ b almost surely.
+Deﬁne X := 1
+n
+
+i=1 Xi. Then,
+
+(cid:80)n
+
+(cid:18)
+
+(cid:19)
+
+.
+
+P(cid:0)(cid:12)(cid:12)X − E[X](cid:12)(cid:12) ≤ α(cid:1)
+
+≥ 1 − 2 exp
+
+−
+
+2nα2
+(b − a)2
+
+References
+
+[sup4] K. P. Chwialkowski, A. Ramdas, D. Sejdinovic, and A. Gretton. Fast Two-Sample Testing with Analytic Representations
+
+of Probability Measures. In Advances in Neural Information Processing Systems (NIPS), pages 1981–1989. 2015.
+
+[sup14] W. Jitkrittum, Z. Szabó, K. Chwialkowski, and A. Gretton. Interpretable Distribution Features with Maximum Testing
+
+Power. 2016. URL http://arxiv.org/abs/1605.06796.
+
+[sup3] W. Rudin. Fourier analysis on groups. John Wiley & Sons, 2011.
+
+[sup20] R. J. Serﬂing. Approximation Theorems of Mathematical Statistics. John Wiley & Sons, 2009.
+
+

@@ -1,0 +1,383 @@
+Supplementary Material for
+
+“Efﬁcient Regret Minimization in Non-Convex Games”
+
+Elad Hazan 1 Karan Singh 1 Cyril Zhang 1
+
+η
+
+A. Proof of Theorem 4.4
+Since each ft is β-smooth, it follows that each Ft is β-
+. Note that since the it-
+erates (xt : t ∈ [T ]) depend on the gradient estimates,
+
+smooth. Deﬁne (cid:100)∇ft = xt−xt+1
+the iterates are stochastic variables, as are (cid:100)∇ft. By β-
+
+smoothness of Ft, we have
+Ft,w(xt+1) − Ft,w(xt)
+≤(cid:104)∇Ft,w(xt), xt+1 − xt(cid:105) +
+= − η
+= − η(cid:107)∇Ft,w(xt)(cid:107)2 − η
+
+(cid:107)xt+1 − xt(cid:107)2
+
+(cid:107)(cid:100)∇ft(cid:107)2
+
+β
+2
++ η2 β
+2
+
+(cid:68)∇Ft,w(xt),(cid:100)∇ft
+(cid:69)
+(cid:68)∇Ft,w(xt),(cid:100)∇ft − ∇Ft,w(xt)
+(cid:69)
+(cid:0)(cid:107)∇Ft,w(xt)(cid:107)2(cid:1)
+(cid:68)∇Ft,w(xt),(cid:100)∇ft − ∇Ft,w(xt)
+(cid:16)
+(cid:69)(cid:17)
+(cid:16)(cid:107)(cid:100)∇ft − ∇Ft,w(xt)(cid:107)2(cid:17)
+(cid:19)
+(cid:68)∇Ft,w(xt),(cid:100)∇ft − ∇Ft,w(xt)
+(cid:69)
+
+(cid:107)∇Ft,w(xt)(cid:107)2
+
++ η2 β
+2
++ η2 β
+2
++ η2 β
+2
+η − β
+2
+
+(cid:18)
+
+= −
+
+2
+
+η2
+− (η − βη2)
++ η2 β
+2
+
+(cid:107)(cid:100)∇ft − ∇f (xt)(cid:107)2.
+
+Additionally, we each observe that (cid:100)∇ft is an average of
+
+w independently sampled unbiased gradient estimates of
+variance σ2 each. It follows as a consequence that
+
+(cid:12)(cid:12)xt
+
+E(cid:2)(cid:100)∇ft
+(cid:3) = ∇Ft,w(xt)
+E(cid:2)(cid:107)(cid:100)∇ft − ∇Ft,w(xt)(cid:107)2(cid:12)(cid:12)xt
+
+(cid:3) ≤ σ2
+
+w
+
+1Computer Science,
+
+Princeton University.
+
+Corre-
+Elad Hazan <ehazan@princeton.edu>,
+Zhang
+
+Cyril
+
+Singh <karans@princeton.edu>,
+
+spondence
+Karan
+<cyril.zhang@princeton.edu>.
+
+to:
+
+Now, applying E [·|xt] on both sides, it follows that
+
+· E(cid:107)∇Ft,w(xt)(cid:107)2
+
+≤ E [Ft,w(xt) − Ft,w(xt+1)] + η2 β
+2
+
+σ2
+w
+
+.
+
+(cid:19)
+
+(cid:18)
+
+η − β
+2
+
+η2
+
+Also, we note that
+
+=
+
+=
+
+=
+
+(cid:34) T(cid:88)
+
+t=1
+
+Ft+1,w(xt+1) − Ft,w(xt+1)
+1
+w
+
+ft+1−i(xt+1) − 1
+w
+
+w−1(cid:88)
+w−2(cid:88)
+
+i=0
+
+ft−i(xt+1) − 1
+w
+
+1
+w
+ft+1(xt+1) − ft−w+1(xt+1)
+
+i=−1
+
+i=0
+
+w−1(cid:88)
+w−1(cid:88)
+
+i=0
+
+ft−i(xt+1)
+
+ft−i(xt+1)
+
+≤ 2M
+w
+
+w
+
+(cid:35)
+
+Adding the last two inequalities, we proceed to sum the
+above inequality over all time steps:
+
+E
+
+(cid:107)∇Ft,w(xt)(cid:107)2
+
+≤ 2M + 2M T
+
+w + T βη2
+η − βη2
+
+2w σ2
+
+.
+
+2
+
+Setting η = 1/β yields the claim from the theorem.
+Finally, note that for each round the number of stochastic
+gradient oracle calls required is w. Therefore, across all T
+rounds, the number of noisy oracle calls is T w.
+
+B. Proof of Theorem 5.1 (ii)
+Following the technique from Theorem 3.1, for 2 ≤ t ≤ T ,
+let τt be the number of iterations of the inner loop during
+the execution of Algorithm 3 during round t − 1 (in order
+to generate the iterate xt). Then, we have the following
+lemma:
+Lemma B.1. For any 2 ≤ t ≤ T ,
+
+Ft−1(xt) − Ft−1(xt−1) ≤ −τt ·
+
+δ3
+2βw3 .
+
+Proceedings of the 34 th International Conference on Machine
+Learning, Sydney, Australia, PMLR 70, 2017. Copyright 2017
+by the author(s).
+
+Proof. This follows by summing the inequality Lemma 5.3
+for across all pairs of consecutive iterates of the inner loop
+
+Efﬁcient Regret Minimization in Non-Convex Games
+
+within the same epoch, and noting that each term Φ(z) is
+at least δ3
+
+w3 before the inner loop has terminated.
+
+Finally, we write (understanding F0(x0) := 0):
+
+T(cid:88)
+
+FT (xT ) =
+
+Ft(xt) − Ft−1(xt−1)
+
+=
+
+T(cid:88)
+≤ T(cid:88)
+
+t=1
+
+t=2
+
+t=1
+
+Ft−1(xt) − Ft−1(xt−1) + ft(xt) − ft−w(xt)
+
+[Ft−1(xt) − Ft−1(xt−1)] +
+
+2M T
+
+w
+
+.
+
+Using Lemma B.1, we have
+
+FT (xT ) ≤ 2M T
+w
+
+whence
+
+T(cid:88)
+
+t=1
+
+τ =
+
+t=1
+
+− δ3
+
+2βw3 · T(cid:88)
+(cid:18) 2M T
+·(cid:0)2T w2 + w3(cid:1)
+
+w
+
+·
+
+τt,
+
+(cid:19)
+
+− FT (xT )
+
+τt ≤ 2βw3
+δ3
+≤ 2βM
+δ3
+≤ 6M
+
+β2 · T w2,
+
+as claimed (recalling that we chose δ = β for this analysis).
+
+C. Proof of Theorem 6.2
+Summing up the deﬁnitions of w-regret bounds achieved
+by each A, and truncating the ﬁrst w − 1 terms, we get
+
+(cid:107)∇K,ηF i
+
+t (xi
+
+Rw,Ai(T ).
+
+(cid:107)∇K,ηF i
+
+t)(cid:107)2
+
+t (xi
+
+Thus, for some t between w and T inclusive, it holds that
+
+i=1
+
+t)(cid:107)2 ≤ k(cid:88)
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)2
+(cid:35)
+k(cid:88)
+
+(xi
+t)
+
+=
+
+i=1
+
+Rw,Ai(T )
+T − w
+
+.
+
+k(cid:88)
+
+i=1
+
+i=1
+
+t=w
+
+k(cid:88)
+T(cid:88)
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)∇K,η
+(cid:34)(cid:80)w−1
+≤ k(cid:88)
+(cid:34)(cid:80)w−1
+
+j=0
+
+i=1
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13)∇K,η
+
+j=0
+
+˜fi,t−j
+w
+
+max
+i∈[k]
+
+as claimed.
+
+Thus, for the same t we have
+
+(cid:35)
+
+(cid:13)(cid:13)(cid:13)(cid:13)(cid:13) ≤
+
+(xi
+t)
+
+(cid:118)(cid:117)(cid:117)(cid:116) k(cid:88)
+
+i=1
+
+Rw,Ai(T )
+T − w
+
+,
+
+˜fi,t−j
+w
+
+
